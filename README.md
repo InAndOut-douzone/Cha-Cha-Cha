@@ -46,7 +46,7 @@ Think different
 
 ## 개발환경
 
-React, Spring, PostgreSQL, Socket
+React, Spring, MySQL, Socket
 
 ## 사용 기술
 
