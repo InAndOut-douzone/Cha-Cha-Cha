@@ -3,7 +3,7 @@
 <mapper namespace="user">
 	<select id="findByNo" parameterType="Integer" resultType="uservo">
 		<![CDATA[
-		select name
+		select name, address
 		from user 
 		where no =#{no }
 		]]>
