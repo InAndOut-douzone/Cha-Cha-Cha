@@ -1,9 +1,10 @@
 import React from 'react';
+import ApiTest from './ApiTest';
 
 function App() {
   return (
     <div className="App">
-      test
+        <ApiTest />
     </div>
   );
 }

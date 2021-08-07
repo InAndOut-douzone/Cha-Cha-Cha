@@ -9,4 +9,11 @@
 		where no =#{no }
 		]]>
 	</select>
+	
+	<select id="findAll" resultType="uservo">
+		<![CDATA[
+		select name, address, birth, hire_date as hireDate, leave_date as leaveDate, m_leave as mLeave, a_leave as aLeave 
+		from user 
+		]]>
+	</select>
 </mapper>
