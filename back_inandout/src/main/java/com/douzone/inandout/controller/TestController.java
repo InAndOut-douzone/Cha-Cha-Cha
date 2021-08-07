@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.douzone.inandout.model.User;
 import com.douzone.inandout.repository.UserRepository;
+import com.douzone.inandout.vo.UserVo;
 
 @RestController
 public class TestController {
@@ -15,7 +15,7 @@ public class TestController {
 	
 	@GetMapping("/test")
 	public String home() {
-		User user = userRepository.findByNo(1);
+		UserVo user = userRepository.findByNo(1);
 		System.out.println("user" + user);
 		return "test"; 
 	}
