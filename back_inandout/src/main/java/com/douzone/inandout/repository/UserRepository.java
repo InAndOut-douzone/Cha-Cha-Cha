@@ -15,7 +15,6 @@ public class UserRepository {
 	private SqlSession sqlSession;
 	
 	public UserVo findByNo(int no) {
-		System.out.println("no:" + no);
 		return sqlSession.selectOne("user.findByNo", no);	
 	}
 	
