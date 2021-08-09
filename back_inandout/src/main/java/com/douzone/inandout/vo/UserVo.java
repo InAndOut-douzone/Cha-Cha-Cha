@@ -25,6 +25,7 @@ public class UserVo {
 	private Float aLeave;		// 연차
 	private String address;
 	private String email;
+	
 	public int getNo() {
 		return no;
 	}
@@ -109,7 +110,4 @@ public class UserVo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-
 }
