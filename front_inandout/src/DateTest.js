@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, DatePicker, Input } from 'antd'
+import { Form, DatePicker } from 'antd'
 const { RangePicker } = DatePicker
 
 const DateTest = () => {
