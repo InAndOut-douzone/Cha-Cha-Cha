@@ -13,15 +13,6 @@ spring:
     url: jdbc:mysql://fifo.cotmbfsm8hs9.ap-northeast-2.rds.amazonaws.com:3306/inandout?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
     username: admin
     password: inandout1!
-  
-# jpa
-  jpa: 
-    open-in-view: true  
-    hibernate:
-      ddl-auto: update # 테이블 만들 때는 create, 그 이후는 update
-      naming: 
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
 
 mybatis: 
    config-location: classpath:mybatis/configuration.xml

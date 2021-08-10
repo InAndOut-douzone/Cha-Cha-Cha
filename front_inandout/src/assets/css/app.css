@@ -1,0 +1,13 @@
+.site-layout-background2 {
+    background-color: #fff;
+    overflow-x:hidden; overflow-y:auto;
+}
+
+.profile_name {
+    background-color: #fff;
+    text-align: center;
+}
+
+.header {
+    text-align: right;
+}
