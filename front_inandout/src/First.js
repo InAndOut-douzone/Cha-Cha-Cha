@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Checkbox} from 'antd';
+import { Layout, Menu, Checkbox, Button } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import profile from './assets/images/profile.jpg';
 import './assets/css/app.css';
@@ -12,18 +12,22 @@ function onChange(e) {
 }
 
 export default function First() {
-  
   return (
     
     <Layout>
     <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1">프로필</Menu.Item>
-        {/* <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item> */}
-      </Menu>
-      ㅋㅋㅁㄴㅇㅁㄴㅇㅁㄴ
+        <div className="logo" />
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+        </Menu>
+        <Button className="button" type="primary" shape="circle">
+          A
+        </Button>
+        <Button className="button" type="primary" shape="circle">
+          B
+        </Button>
+        <Button className="button" type="primary" shape="circle">
+          C
+        </Button>
     </Header>
     <Layout>
       <Sider width={200} className="site-layout-background2">
@@ -34,7 +38,7 @@ export default function First() {
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
-        >
+          >
           <SubMenu key="sub1" icon={<UserOutlined />} title="보기 설정">
             <Menu.Item key="1"><Checkbox onChange={onChange}>내 일정</Checkbox></Menu.Item>
             <Menu.Item key="2"><Checkbox onChange={onChange}>휴가</Checkbox></Menu.Item>
@@ -59,7 +63,7 @@ export default function First() {
             height: 600
             // minHeight: 280,
           }}
-        >
+          >
           캘린더
         </Content>
       </Layout>

@@ -7,9 +7,9 @@ import First from './First';
 export default function App() {
   return (
     <div className="App">
-      <ApiTest />
+      {/* <ApiTest />
       <ApiTest2 />
-      <DateTest />
+      <DateTest /> */}
       <First />
     </div>
   );
