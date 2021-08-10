@@ -1,6 +1,8 @@
 import React from 'react';
 import { Layout, Menu, Checkbox} from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import profile from './assets/images/profile.jpg';
+import './assets/css/app.css';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -8,6 +10,7 @@ const { Header, Content, Sider } = Layout;
 function onChange(e) {
   console.log(`checked = ${e.target.checked}`);
 }
+
 export default function First() {
   
   return (
@@ -23,7 +26,9 @@ export default function First() {
       ㅋㅋㅁㄴㅇㅁㄴㅇㅁㄴ
     </Header>
     <Layout>
-      <Sider width={200} className="site-layout-background">
+      <Sider width={200} className="site-layout-background2">
+        <img src={profile} alt="profile" width={200}/>
+        <div className="profile_name">이재성</div>
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
