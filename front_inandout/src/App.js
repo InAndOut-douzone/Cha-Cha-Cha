@@ -2,15 +2,15 @@ import React from 'react';
 import ApiTest from './ApiTest';
 import ApiTest2 from './ApiTest2';
 import DateTest from './DateTest';
+import First from './First';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-        <ApiTest />
-        <ApiTest2 />
-        <DateTest />
+      <ApiTest />
+      <ApiTest2 />
+      <DateTest />
+      <First />
     </div>
   );
 }
-
-export default App;
