@@ -1,10 +1,10 @@
+import { Calendar } from 'antd';
 import React from 'react';
-import Cal from './Cal';
 
 function App() {
   return (
     <div className="App">
-      
+      <Calendar />
     </div>
   );
 }
