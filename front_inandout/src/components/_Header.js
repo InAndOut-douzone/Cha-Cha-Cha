@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button, Modal } from 'antd';
+import { HomeOutlined, NotificationOutlined, LogoutOutlined } from '@ant-design/icons';
 import Clock from 'react-live-clock';
+import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
 
@@ -52,13 +54,13 @@ const _Header = () => {
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
                 <Button className="button" type="primary" shape="circle">
-                    A
+                    <Link to="/"><HomeOutlined/></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    B
+                    <LogoutOutlined/>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    C
+                    <NotificationOutlined/>
                 </Button>
             </Header>
         </div>
