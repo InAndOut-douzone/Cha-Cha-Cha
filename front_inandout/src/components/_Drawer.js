@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Option } = Select;
 
@@ -21,7 +22,7 @@ const _Drawer = () => {
   return (
     <div>
       <div type="primary" onClick={showDrawer}>
-      휴가 등록
+      <Link to="/">휴가 등록</Link>
       </div>
       <Drawer
           title="휴가 등록"
