@@ -1,33 +1,24 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
-import styles from './assets/css/loginForm.css';
+import { UserOutlined } from '@ant-design/icons';
+import './assets/css/loginForm.css'
 
 const LoginForm = ({ onChange, fields }) => (
-    <div className={styles.loginForm}>
-    <Form
-      name="global_state"
-      layout="inline"
-      fields={fields}
-      onFieldsChange={(_, allFields) => {
-        onChange(allFields);
-      }}
-    >
-      <Form.Item
-        name="username"
-        label="사원 번호"
-        /* rules={[
-          {
-            required: true,
-            message: 'Username is required!',
-          },
-        ]}
-        */
-      >
-        <Input />
-      </Form.Item>
-      <Button type='Primary' value='login'>LOGIN</Button>
-    </Form>
-    </div>
-  ); 
+  <Form
+    name="global_state"
+    layout="inline"
+    fields={fields}
+    onFieldsChange={(_, allFields) => {
+      onChange(allFields);
+    }}
+    action=''
+    method='post'
+  >
+    <Form.Item>
+      <Input name='userno' placeholder="사원번호"prefix={<UserOutlined />}  />
+      <Button type='Primary' htmlType="submit" value='LOGIN'>LOGIN</Button>
+    </Form.Item>
+  </Form>
+); 
 
   export default LoginForm;
