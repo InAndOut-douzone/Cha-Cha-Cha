@@ -16,7 +16,7 @@ export default function App() {
   return (
     <>
       {
-        true ?
+        1 ?
           <Layout>
             <Header />
             <Layout>
@@ -28,7 +28,7 @@ export default function App() {
             </Layout>
             <Footer />
           </Layout> :
-          <Route path="/login" exact={true} component={Demo} />
+          <Route path="/" exact={true} component={Demo} />
       }
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Checkbox } from 'antd';
+import { Layout, Menu, Checkbox, Image } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import profile from '../assets/images/profile.jpg';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,10 @@ function onChange(e) {
 const Navigation = () => {
     return (
         <Sider width={200} className="site-layout-background2">
-            <img src={profile} alt="profile" width={200} />
+            <Image
+                width={200}
+                src={profile}
+            />
             <div className="profile_name">이재성</div>
             <Menu
                 mode="inline"
