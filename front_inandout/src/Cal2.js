@@ -77,7 +77,7 @@ function getListData(value) {
         {
           listData && listData.map(item => (
             <li onClick={select} key={item.no}>
-              <Badge style={{backgroundColor:item.color}} status={item.type} text={item.content} />
+              <Badge style={{}} status={item.type} text={item.content} />
             </li>
           ))
         }

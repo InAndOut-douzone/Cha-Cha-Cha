@@ -1,5 +1,5 @@
-import React from 'react';
-import { Layout, Menu, Checkbox, Image } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Menu, Checkbox, Image, Modal } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import profile from '../assets/images/profile.jpg';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,20 @@ function onChange(e) {
 }
 
 const Navigation = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <Sider width={200} className="site-layout-background2">
             <Image
@@ -36,6 +50,12 @@ const Navigation = () => {
                 </SubMenu>
                 <SubMenu key="sub3" icon={<NotificationOutlined />} title="내 근무">
                     <Menu.Item key="6"><Link to="/leave">휴가 등록</Link></Menu.Item>
+                    <Menu.Item key="61" onClick={showModal}>
+                            휴가 등록 팝업
+                        <Modal title="휴가 등록 팝업" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                            <p>휴가 등록화면</p>
+                        </Modal>
+                    </Menu.Item>
                     <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
                 </SubMenu>
             </Menu>

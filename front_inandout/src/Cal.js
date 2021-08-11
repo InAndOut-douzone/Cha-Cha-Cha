@@ -64,7 +64,7 @@ const Cal = () => {
             
             {
                 state &&    
-                    <div style={{backgroundColor: 'blue', width: '700px'}}>
+                    <div style={{backgroundColor: 'blue', width: '3000px'}}>
                         일정 등록창 
                     </div>
             }
