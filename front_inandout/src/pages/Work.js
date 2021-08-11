@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Footer = () => {
+const Work = () => {
     return (
         <div>
-            푸터입니다.
+            [근무 현황 화면]
         </div>
     );
 };
 
-export default Footer;
+export default Work;

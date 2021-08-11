@@ -3,7 +3,7 @@ import React from 'react';
 const MyPage = () => {
     return (
         <div>
-            마이페이지입니다.
+            [프로필 수정 화면]
         </div>
     );
 };

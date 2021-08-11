@@ -3,26 +3,33 @@ import { Route } from 'react-router-dom'
 import First from './First';
 import Demo from './Demo';
 import MyPage from './pages/MyPage';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Cal from './Cal'
-import Cal2 from './Cal2'
-import Cal3 from './Cal3'
+import Leave from './pages/Leave'
+import Work from './pages/Work'
+import Header from './components/_Header';
+import Navigation from './components/Navigation';
+import Footer from './components/_Footer'
+import { Layout } from 'antd';
 import './assets/css/app.css';
 import './assets/css/loginForm.css';
 
-
 export default function App() {
   return (
-    <div className="App">
-      <Header />
-      <Route path="/" exact={true} component={First}/>  
-      <Route path="/login" exact={true} component={Demo}/>
-      <Route path="/mypage" exact={true} component={MyPage}/>
-      <Route path="/cal" exact={true} component={Cal}/>
-      <Route path="/cal2" exact={true} component={Cal2}/>
-      <Route path="/cal3" exact={true} component={Cal3}/>
-      <Footer />
-    </div>
+    <>
+      {
+        1 ?
+          <Layout>
+            <Header />
+            <Layout>
+              <Navigation />
+              <Route path="/" exact={true} component={First} />
+              <Route path="/mypage" exact={true} component={MyPage} />
+              <Route path="/leave" exact={true} component={Leave} />
+              <Route path="/work" exact={true} component={Work} />
+            </Layout>
+            <Footer />
+          </Layout> :
+          <Route path="/" exact={true} component={Demo} />
+      }
+    </>
   );
 }
