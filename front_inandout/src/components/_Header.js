@@ -39,7 +39,7 @@ const _Header = () => {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
                 <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'US/Pacific'}/>
-                <Button className="button1" type="primary" onClick={showModal}>
+                <Button className="button" type="primary" onClick={showModal}>
                     출근
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
