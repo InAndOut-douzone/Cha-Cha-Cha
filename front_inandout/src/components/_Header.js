@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button, Modal } from 'antd';
-import { Link } from 'react-router-dom';
+import Clock from 'react-live-clock';
 
 const { Header } = Layout;
 
@@ -38,14 +38,14 @@ const _Header = () => {
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
-
-                <Button type="primary" onClick={showModal}>
+                <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'US/Pacific'}/>
+                <Button className="button1" type="primary" onClick={showModal}>
                     출근
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p>정말 출근하시겠습니까?</p>
                 </Modal>
-                <Button type="primary" onClick={showModal2}>
+                <Button className="button" type="primary" onClick={showModal2}>
                     퇴근
                 </Button>
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
