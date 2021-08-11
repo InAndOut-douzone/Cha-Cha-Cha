@@ -15,7 +15,7 @@ const LoginForm = ({ onChange, fields }) => (
   >
     <Form.Item>
       <Input name='userno' placeholder="사원번호"prefix={<UserOutlined />}  />
-      <Button type='Primary' htmlType="submit" value='LOGIN'>LOGIN</Button>
+      <Button className="btn1" type='Primary' htmlType="submit" value='LOGIN'>LOGIN</Button>
     </Form.Item>
   </Form>
 ); 
