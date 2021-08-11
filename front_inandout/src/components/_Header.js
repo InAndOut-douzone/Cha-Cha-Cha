@@ -38,7 +38,7 @@ const _Header = () => {
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
-                <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'US/Pacific'}/>
+                <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/>
                 <Button className="button" type="primary" onClick={showModal}>
                     출근
                 </Button>
