@@ -19,3 +19,22 @@
 .button {
     margin-left: 10px;
 }
+
+.ant-row ant-form-item {
+    position:relative;
+    left:50%; top:50%;
+    text-align: right;
+}
+
+.ant-form ant-form-inline {
+    position:relative;
+    left:50%; top:50%;
+    text-align: center;
+}
+
+#global_state {
+    position:absolute;
+    left:50%; top:50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
