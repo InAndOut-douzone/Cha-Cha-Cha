@@ -11,7 +11,7 @@ import Footer from './components/_Footer'
 import { Layout } from 'antd';
 import './assets/css/app.css';
 import styled from 'styled-components';
-// import './assets/css/loginForm.css';
+import img from './assets/images/hospital.jpg';
 
 export default function App() {
   return (
@@ -41,6 +41,6 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(https://source.unsplash.com/user/erondu/1600x900);
+  background-image: url(${img});
   background-size: cover;
 `;
