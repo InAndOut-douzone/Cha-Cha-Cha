@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu, Checkbox, Image } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import profile from '../assets/images/profile.jpg';
 import { Link } from 'react-router-dom';
+import Drawer from './_Drawer';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -12,6 +13,19 @@ function onChange(e) {
 }
 
 const Navigation = () => {
+    const [state, setState] = useState(false);
+
+    const showDrawer = () => {
+        setState({
+            visible: true,
+        });
+    };
+
+    const onClose = () => {
+        setState({
+            visible: false,
+        });
+    };
 
     return (
         <Sider width={200} className="site-layout-background2">
@@ -36,7 +50,7 @@ const Navigation = () => {
                     <Menu.Item key="5"><Link to="/mypage">프로필 수정</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub3" icon={<NotificationOutlined />} title="내 근무">
-                    <Menu.Item key="6"><Link to="/leave">휴가 등록</Link></Menu.Item>
+                    <Menu.Item key="6"><Drawer /></Menu.Item>
                     <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
                 </SubMenu>
             </Menu>
