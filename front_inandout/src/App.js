@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom'
 import First from './First';
 import Login from './Login';
-import Demo from './Demo';
 import MyPage from './pages/MyPage';
 import Leave from './pages/Leave'
 import Work from './pages/Work'
@@ -11,7 +10,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/_Footer'
 import { Layout } from 'antd';
 import './assets/css/app.css';
-import './assets/css/loginForm.css';
+// import './assets/css/loginForm.css';
 
 export default function App() {
   return (
@@ -29,7 +28,7 @@ export default function App() {
             </Layout>
             <Footer />
           </Layout> :
-          <Route path="/" exact={true} component={Demo} />
+          <Route path="/" exact={true} component={Login} />
       }
     </>
   );
