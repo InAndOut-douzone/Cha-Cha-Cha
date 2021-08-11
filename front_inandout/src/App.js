@@ -10,13 +10,14 @@ import Navigation from './components/Navigation';
 import Footer from './components/_Footer'
 import { Layout } from 'antd';
 import './assets/css/app.css';
+import styled from 'styled-components';
 // import './assets/css/loginForm.css';
 
 export default function App() {
   return (
     <>
       {
-        1 ?
+        0 ?
           <Layout>
             <Header />
             <Layout>
@@ -28,8 +29,18 @@ export default function App() {
             </Layout>
             <Footer />
           </Layout> :
-          <Route path="/" exact={true} component={Login} />
+          <Container><Route path="/" exact={true} component={Login} /></Container>
       }
     </>
   );
 }
+
+const Container = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(https://source.unsplash.com/user/erondu/1600x900);
+  background-size: cover;
+`;
