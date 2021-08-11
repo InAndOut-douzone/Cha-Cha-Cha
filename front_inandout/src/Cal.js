@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar } from 'antd';
-import './CalCss.css';
+import './assets/css/Cal.css';
 
 const Cal = () => {
 

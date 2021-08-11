@@ -4,10 +4,10 @@
 - npm i antd @types/antd
 - npm i @ant-design/icons
 - npm i axios
+- npm i react-router-dom
 
 ### 📀 설치할 것
 
 - npm i styled-component
-- npm i react-router-dom
 - npm i redux
 - npm i react-redux
