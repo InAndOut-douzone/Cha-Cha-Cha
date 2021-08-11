@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import './assets/css/app.css';
+import Cal from './Cal2';
 
 const { Content } = Layout;
 
@@ -16,7 +17,8 @@ export default function First() {
             // minHeight: 280,
           }}
           >
-          캘린더
+          [캘린더]
+          <Cal />
         </Content>
       </Layout>
   );
