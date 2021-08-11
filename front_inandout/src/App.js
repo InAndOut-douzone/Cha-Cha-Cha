@@ -17,7 +17,7 @@ export default function App() {
   return (
     <>
       {
-        1 ?
+        0 ?
           <Layout>
             <Header />
             <Layout>
