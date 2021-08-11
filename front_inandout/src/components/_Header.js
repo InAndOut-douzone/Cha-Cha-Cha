@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button, Modal } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
+import { HomeOutlined, NotificationOutlined, LogoutOutlined } from '@ant-design/icons';
 import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 
@@ -57,10 +57,10 @@ const _Header = () => {
                     <Link to="/"><HomeOutlined/></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    B
+                    <LogoutOutlined/>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    C
+                    <NotificationOutlined/>
                 </Button>
             </Header>
         </div>
