@@ -11,7 +11,6 @@ import Footer from './components/_Footer'
 import { Layout } from 'antd';
 import './assets/css/app.css';
 import styled from 'styled-components';
-// import './assets/css/loginForm.css';
 
 export default function App() {
   return (
