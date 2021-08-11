@@ -1,10 +1,37 @@
-import React from 'react';
-import { Layout, Menu, Button } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Menu, Button, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
 
 const _Header = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisible2, setIsModalVisible2] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const showModal2 = () => {
+        setIsModalVisible2(true);
+    };
+
+    const handleOk2 = () => {
+        setIsModalVisible2(false);
+    };
+
+    const handleCancel2 = () => {
+        setIsModalVisible2(false);
+    };
+
     return (
         <div>
             헤더입니다.
@@ -18,12 +45,18 @@ const _Header = () => {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
 
-                <Button className="button" type="primary" shape="round">
+                <Button type="primary" onClick={showModal}>
                     출근
                 </Button>
-                <Button className="button" type="primary" shape="round">
+                <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <p>정말 출근하시겠습니까?</p>
+                </Modal>
+                <Button type="primary" onClick={showModal2}>
                     퇴근
                 </Button>
+                <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
+                    <p>정말 퇴근하시겠습니까?</p>
+                </Modal>
                 <Button className="button" type="primary" shape="circle">
                     A
                 </Button>
