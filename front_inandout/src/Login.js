@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import LoginForm from './LoginForm';
+import './assets/css/loginForm.css';
 
-export default function Demo(){
+export default function Login(){
     const [fields, setFields] = useState([
       {
         name: ['username'],
@@ -10,7 +11,7 @@ export default function Demo(){
     ]);
 
     return (
-      <>
+      <div>
         <LoginForm
           fields={fields}
           onChange={(newFields) => {
@@ -18,6 +19,6 @@ export default function Demo(){
           }}
         />
         <pre className="language-bash"></pre>
-      </>
+      </div>
     );
   };
