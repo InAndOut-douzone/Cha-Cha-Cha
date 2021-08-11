@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import './assets/css/loginForm.css'
 
 const LoginForm = ({ onChange, fields }) => (
   <Form
