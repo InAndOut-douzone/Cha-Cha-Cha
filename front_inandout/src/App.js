@@ -29,7 +29,8 @@ export default function App() {
         // exact는 정확히 일치하는, 부분적으로 일치하는 것이 아닌 정확하게 일치하는 path의 컴포넌트를 렌더링, default true
         <Switch>  
           <PrivateRoute component={First} path="/" exact={true} />
-          <PrivateRoute component={MyPage} path="/mypage" exact={true} />
+          <PrivateRoute component={MyPage} path="/mypage" exact={true} /> 
+          <PrivateRoute component={Work} path="/work" exact={true} />
           <LogoutRoute component={Login} path="/logout" exact={true} />
           <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
           
