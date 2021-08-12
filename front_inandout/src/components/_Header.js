@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button, Modal } from 'antd';
+import { HomeOutlined, NotificationOutlined, LogoutOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
+import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
 
