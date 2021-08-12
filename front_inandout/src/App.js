@@ -24,21 +24,14 @@ import styled from 'styled-components'
 
 export default function App() {
   return (
-        <Switch>
+        // 스위치는 첫번째로 매칭되는 path를 가진 컴포넌트를 렌더링
+        <Switch>  
           <PrivateRoute component={First} path="/" exact={true} />
           <PrivateRoute component={MyPage} path="/mypage" exact={true} />
           <LogoutRoute component={Login} path="/logout" exact={true} />
-          <Container><PublicRoute restricted={true} component={Login} path="/login" exact={true} /></Container>
+          <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
+          <Route component={PageNotFount}/>
+          {/* <PrivateRoute component={First} path="/*" exact={true} /> */}
         </Switch>
   )
 }
-
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(${img});
-  background-size: cover;
-`;

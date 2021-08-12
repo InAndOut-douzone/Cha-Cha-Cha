@@ -4,6 +4,18 @@ import { Button, Form, Input, LoginForm } from 'antd';
 import { HeartFilled, UserOutlined } from '@ant-design/icons';
 import "../assets/css/loginForm.css"
 import { Redirect, Link } from 'react-router-dom';
+import styled from 'styled-components'
+import img from '../assets/images/hospital.jpg';
+
+const Container = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(${img});
+  background-size: cover;
+`;
 
 export default function Login({ history, location }){
 
@@ -32,6 +44,7 @@ export default function Login({ history, location }){
 
   
     return (
+      <Container>
     <Form
       name="global_state"
       layout="inline"
@@ -42,6 +55,9 @@ export default function Login({ history, location }){
       </Form.Item>
       <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
     </Form>
+    </Container>
     
   )
 }
+
+
