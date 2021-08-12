@@ -5,12 +5,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.douzone.inandout.dto.LoginRepDto;
 import com.douzone.inandout.service.UserService;
+import com.douzone.inandout.vo.UserVo;
 
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
 	@Autowired
@@ -25,5 +31,15 @@ public class UserController {
 	@GetMapping("/user/list")
 	public ResponseEntity<?> list() { 
 		return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);	//200
+	}	
+	
+	@PostMapping("/user/login")
+	public ResponseEntity<?> login(@RequestBody LoginRepDto loginReqDto) {
+		UserVo userVo = userService.findByNo(loginReqDto.getNo());
+		if(userVo == null) {
+			return new ResponseEntity<>(userService.findByNo(loginReqDto.getNo()), HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>(userService.findByNo(loginReqDto.getNo()), HttpStatus.OK);	//200
+		}
 	}	
 }

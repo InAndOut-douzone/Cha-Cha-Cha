@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer{
 	public void addCorsMappings(CorsRegistry registry) {
 		registry
 			.addMapping("/**") 							// 어떤 요청을 허락 해줄것이냐, 모든 경로 /**
-			.allowedOrigins("http://localhost:3000") 	// 특정경로 3000만 허락
+			.allowedOrigins("*") 	// 특정경로 3000만 허락
 			.allowedMethods(							// 어떤 메서드를 허락할 것이냐
 					HttpMethod.GET.name(),
 					HttpMethod.POST.name(),

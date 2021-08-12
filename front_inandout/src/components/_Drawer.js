@@ -1,142 +1,147 @@
 import React, { useState } from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Option } = Select;
 
 const _Drawer = () => {
-  const [state, setState] = useState(false);
+  const [state1, setState1] = useState(false);
 
   const showDrawer = () => {
-    setState({
+    setState1({
       visible: true,
     });
   };
 
   const onClose = () => {
-    setState({
+    setState1({
       visible: false,
     });
   };
+
   return (
-    <div type="primary" onClick={showDrawer}>
-      휴가 등록
+    <div>
+      <div type="primary" onClick={showDrawer}>
+      <Link to="/">휴가 등록</Link>
+      </div>
       <Drawer
-        title="Create a new account"
-        width={720}
-        onClose={onClose}
-        visible={state.visible}
-        bodyStyle={{ paddingBottom: 80 }}
-        footer={
-          <div
-            style={{
-              textAlign: 'right',
-            }}
-          >
-            <Button onClick={onClose} style={{ marginRight: 8 }}>
-              Cancel
-            </Button>
-            <Button onClick={onClose} type="primary">
-              Submit
-            </Button>
-          </div>
-        }
-      >
-        <Form layout="vertical" hideRequiredMark>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="name"
-                label="Name"
-                rules={[{ required: true, message: 'Please enter user name' }]}
-              >
-                <Input placeholder="Please enter user name" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="url"
-                label="Url"
-                rules={[{ required: true, message: 'Please enter url' }]}
-              >
-                <Input
-                  style={{ width: '100%' }}
-                  addonBefore="http://"
-                  addonAfter=".com"
-                  placeholder="Please enter url"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="owner"
-                label="Owner"
-                rules={[{ required: true, message: 'Please select an owner' }]}
-              >
-                <Select placeholder="Please select an owner">
-                  <Option value="xiao">Xiaoxiao Fu</Option>
-                  <Option value="mao">Maomao Zhou</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="type"
-                label="Type"
-                rules={[{ required: true, message: 'Please choose the type' }]}
-              >
-                <Select placeholder="Please choose the type">
-                  <Option value="private">Private</Option>
-                  <Option value="public">Public</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="approver"
-                label="Approver"
-                rules={[{ required: true, message: 'Please choose the approver' }]}
-              >
-                <Select placeholder="Please choose the approver">
-                  <Option value="jack">Jack Ma</Option>
-                  <Option value="tom">Tom Liu</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="dateTime"
-                label="DateTime"
-                rules={[{ required: true, message: 'Please choose the dateTime' }]}
-              >
-                <DatePicker.RangePicker
-                  style={{ width: '100%' }}
-                  getPopupContainer={trigger => trigger.parentElement}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="description"
-                label="Description"
-                rules={[
-                  {
-                    required: true,
-                    message: 'please enter url description',
-                  },
-                ]}
-              >
-                <Input.TextArea rows={4} placeholder="please enter url description" />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-      </Drawer>
+          title="휴가 등록"
+          width="40%"
+          onClose={onClose}
+          visible={state1.visible}
+          bodyStyle={{ paddingBottom: 80 }}
+          footer={
+            <div
+              style={{
+                textAlign: 'right',
+              }}
+            >
+              <Button onClick={onClose} style={{ marginRight: 8 }}>
+                취소
+              </Button>
+              <Button onClick={onClose} type="primary">
+                등록
+              </Button>
+            </div>
+          }
+        >
+          <Form layout="vertical" hideRequiredMark>
+            {/* <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="name"
+                  label="Name"
+                  rules={[{ required: true, message: 'Please enter user name' }]}
+                >
+                  <Input placeholder="Please enter user name" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="url"
+                  label="Url"
+                  rules={[{ required: true, message: 'Please enter url' }]}
+                >
+                  <Input
+                    style={{ width: '100%' }}
+                    addonBefore="http://"
+                    addonAfter=".com"
+                    placeholder="Please enter url"
+                  />
+                </Form.Item>
+              </Col>
+            </Row> */}
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="owner"
+                  label="구분"
+                  rules={[{ required: true, message: 'Please select an owner' }]}
+                >
+                  <Select placeholder="Please select an owner">
+                    <Option value="xiao">휴가</Option>
+                    <Option value="mao">출장</Option>
+                    <Option value="mao">외출</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="type"
+                  label="구분2"
+                  rules={[{ required: true, message: 'Please choose the type' }]}
+                >
+                  <Select placeholder="Please choose the type">
+                    <Option value="private">A</Option>
+                    <Option value="public">B</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="approver"
+                  label="구분3"
+                  rules={[{ required: true, message: 'Please choose the approver' }]}
+                >
+                  <Select placeholder="Please choose the approver">
+                    <Option value="jack">A</Option>
+                    <Option value="tom">B</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="dateTime"
+                  label="기간 선택"
+                  rules={[{ required: true, message: 'Please choose the dateTime' }]}
+                >
+                  <DatePicker.RangePicker
+                    style={{ width: '100%' }}
+                    getPopupContainer={trigger => trigger.parentElement}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={24}>
+                <Form.Item
+                  name="description"
+                  label="사유?"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'please enter url description',
+                    },
+                  ]}
+                >
+                  <Input.TextArea rows={4} placeholder="please enter url description" />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </Drawer>
     </div>
   );
 };

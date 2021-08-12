@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, Badge } from 'antd';
 import './assets/css/Cal.css';
-
+import { useHistory } from "react-router-dom";
 
 function getListData(value) {
     let listData;
@@ -66,24 +66,8 @@ function getListData(value) {
     // return listData || [];
   }
 
-  const select = () => {
-    console.log(1111);
-  }
 
-  function dateCellRender(value) {
-    const listData = getListData(value);
-    return (
-      <ul className="events">
-        {
-          listData && listData.map(item => (
-            <li onClick={select} key={item.no}>
-              <Badge style={{}} status={item.type} text={item.content} />
-            </li>
-          ))
-        }
-      </ul>
-    );
-  }
+  
 
   function getMonthData(value) {
     if (value.month() === 8) {
@@ -103,9 +87,35 @@ function getListData(value) {
   }
 
 const Cal2 = () => {
+
+  const select = () => {
+
+    history.replace("/");
+    console.log(1111);
+  }
+
+  function dateCellRender(value) {
+    const listData = getListData(value);
+    
+    return (
+      <ul className="events">
+        {
+          listData && listData.map(item => (
+            <li onClick={select} key={item.no}>
+              <Badge style={{}} status={item.type} text={item.content} />
+            </li>
+          ))
+        }
+      </ul>
+    );
+  }
+  
+  const history = useHistory();
     return (
         <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
     );
 };
+
+
 
 export default Cal2;

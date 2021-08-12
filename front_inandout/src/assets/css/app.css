@@ -1,14 +1,15 @@
 .site-layout-background2 {
     background-color: #fff;
     /* overflow-x:hidden; overflow-y:auto; */
+    /* overflow-x:hidden; overflow-y:scroll; */
 }
 
 .profile_name {
     background-color: #fff;
-    text-align: center;
 }
 
-.header {
+.header{
+    /* display: block; */
     text-align: right;
 }
 
@@ -18,6 +19,7 @@
 
 .button {
     margin-left: 10px;
+    transform: translate(0%, -70%);
 }
 
 #global_state {
