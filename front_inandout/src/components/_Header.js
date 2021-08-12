@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button, Modal } from 'antd';
 import { HomeOutlined, NotificationOutlined, LogoutOutlined } from '@ant-design/icons';
-import Clock from 'react-live-clock';
+// import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
@@ -40,7 +40,7 @@ const _Header = () => {
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
-                <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/>
+                {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
                 <Button className="button" type="primary" onClick={showModal}>
                     출근
                 </Button>
