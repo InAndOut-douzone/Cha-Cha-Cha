@@ -1,13 +1,11 @@
 import React from 'react';
-import { Progress } from 'antd';
+import { Layout, Progress } from 'antd';
 
 const Work = () => {
     return (
-        <div>
+        <Layout style={{ padding: '0 24px 24px' }}>
             [근무 현황 화면]
             <br />
-            {/* <Progress type="circle" percent={25} format={percent => `${percent} Days`} />
-            <Progress type="circle" percent={100} format={() => 'Done'} /> */}
             <Progress
                 strokeColor={{
                     '0%': '#108ee9',
@@ -39,7 +37,7 @@ const Work = () => {
                 }}
                 percent={100}
             />
-        </div>
+        </Layout>
     );
 };
 
