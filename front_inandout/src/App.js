@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import First from './First';
 import Login from './Login';
 import MyPage from './pages/MyPage';
@@ -12,27 +12,20 @@ import { Layout } from 'antd';
 import './assets/css/app.css';
 import styled from 'styled-components';
 import img from './assets/images/hospital.jpg';
+import PrivateRoute from './components/routes/PrivateRoute';
+import PublicRoute from './components/routes/PublicRoute';
 
 export default function App() {
   return (
-    <>
-      {
-        1 ?
-          <Layout>
-            <Header />
-            <Layout>
-              <Navigation />
-              <Route path="/" exact={true} component={First} />
-              <Route path="/mypage" exact={true} component={MyPage} />
-              <Route path="/leave" exact={true} component={Leave} />
-              <Route path="/work" exact={true} component={Work} />
-            </Layout>
-            <Footer />
-          </Layout> :
-          <Container><Route path="/" exact={true} component={Login} /></Container>
-      }
-    </>
-  );
+        <Switch>
+          <PrivateRoute component={First} path="/" exact={true} />
+          <PrivateRoute component={MyPage} path="/mypage" exact={true} />
+          <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
+          
+          {/* <PublicRoute restricted={true} component={Login} path="/login" exact /> */}
+          {/* <PublicRoute restricted={false} component={First} path="/" exact /> */}
+        </Switch>
+  )
 }
 
 const Container = styled.div`

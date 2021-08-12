@@ -4,7 +4,7 @@
 	<!-- No로 유저 찾기 -->
 	<select id="findByNo" parameterType="Integer" resultType="uservo">
 		<![CDATA[
-		select name, address, birth, hire_date as hireDate, leave_date as leaveDate, m_leave as mLeave, a_leave as aLeave 
+		select no, name, address, birth, hire_date as hireDate, leave_date as leaveDate, m_leave as mLeave, a_leave as aLeave, phone, position, profile, role 
 		from user 
 		where no =#{no }
 		]]>

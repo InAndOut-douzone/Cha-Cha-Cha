@@ -7,8 +7,10 @@
 - npm i react-router-dom
 - npm i react-live-clock
 - npm i styled-component
+- npm i react-redux
+- npm i redux
 
 ### 📀 설치할 것
 
-- npm i redux
-- npm i react-redux
+
+
