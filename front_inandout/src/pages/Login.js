@@ -42,7 +42,12 @@ export default function Login({ history, location }){
       } 
     }
 
-  
+    const inNumber = (e) => {
+      if(e.keyCode<48 || e.keyCode>57){
+        e.returnValue=false;
+     }
+    }
+
     return (
       <Container>
     <Form
@@ -51,7 +56,7 @@ export default function Login({ history, location }){
       onFinish={onfinish}
     >
       <Form.Item name="no">
-        <Input name='userno' placeholder="사원번호" prefix={<UserOutlined />} value={value}/> 
+        <Input onKeyPress={inNumber} maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} value={value}/> 
       </Form.Item>
       <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
     </Form>
