@@ -1,0 +1,35 @@
+.ant-card{
+    text-align: left;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.ant-card-body{
+    padding: 5px;
+    height: 39px;
+    overflow: hidden;
+}
+.animation{
+    animation:text-scroll 5s linear infinite;
+}
+.animation a {
+    color:black;
+    margin-bottom: 10px;
+}
+
+@keyframes text-scroll{
+    from{
+      transform:translateY(30%);
+      -moz-transform:translateY(30%);
+      -webkit-transform:translateY(30%);
+      -o-transform:translateY(30%);
+      -ms-transform:translateY(30%);
+    }
+    to{
+      transform:translateY(-100%);
+      -moz-transform:translateY(-100%);
+      -webkit-transform:translateY(-100%);
+      -o-transform:translateY(-100%);
+      -ms-transform:translateY(-100%);
+    }
+}

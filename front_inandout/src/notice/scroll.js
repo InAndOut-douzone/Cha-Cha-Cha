@@ -1,17 +1,25 @@
-import { Alert } from 'antd';
-import TextLoop from 'react-text-loop';
+import React from 'react';
+import { Card } from 'antd';
+import '../assets/css/scroll.css';
 
-ReactDOM.render(
-  <Alert
-    banner
-    message={
-      <TextLoop mask>
-        <div>Notice message one</div>
-        <div>Notice message two</div>
-        <div>Notice message three</div>
-        <div>Notice message four</div>
-      </TextLoop>
-    }
-  />,
-  mountNode,
-);
+const Scroll = () => {
+  return (
+    <div>
+      <Card style={{ width: 450, height:40 }}>
+        <div className='animation'>
+          <ul>
+            <li>
+              <p>11111111111</p>
+            </li>
+
+            <li>
+              <p>222222222222</p>
+            </li>
+          </ul>
+        </div>
+      </Card>
+    </div>
+  );
+};
+
+export default Scroll;

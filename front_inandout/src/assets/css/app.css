@@ -8,8 +8,8 @@
     text-align: center;
 }
 
-.header {
-    text-align: right;
+.header{
+    display: block;
 }
 
 .clock {

@@ -5,6 +5,7 @@ import Login from './Login';
 import MyPage from './pages/MyPage';
 import Leave from './pages/Leave'
 import Work from './pages/Work'
+import Scroll from './notice/Scroll';
 import Header from './components/_Header';
 import Navigation from './components/Navigation';
 import Footer from './components/_Footer'
@@ -26,6 +27,7 @@ export default function App() {
               <Route path="/mypage" exact={true} component={MyPage} />
               <Route path="/leave" exact={true} component={Leave} />
               <Route path="/work" exact={true} component={Work} />
+              <Route path="/scroll" exact={true} component={Scroll} />
             </Layout>
             <Footer />
           </Layout> :
