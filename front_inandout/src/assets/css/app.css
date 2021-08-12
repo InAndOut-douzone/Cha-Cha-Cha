@@ -6,11 +6,11 @@
 
 .profile_name {
     background-color: #fff;
-    text-align: center;
 }
 
 .header{
-    display: block;
+    /* display: block; */
+    text-align: right;
 }
 
 .clock {
@@ -19,6 +19,7 @@
 
 .button {
     margin-left: 10px;
+    transform: translate(0%, -70%);
 }
 
 #global_state {

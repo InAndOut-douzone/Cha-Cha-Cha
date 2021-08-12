@@ -38,11 +38,11 @@ const _Header = () => {
     return (
         <div>
             <Header className="header">
-                <div className="logo" />
+                {/* <div className="logo" /> */}
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
-                <Card style={{width:450,height:40,margin:'10px'}}>
+                <Card style={{ width: 450, height: 40, marginTop: 12 }}>
                     <div className='animation'>
                         <p><a href="aa">11111111ㅁㄴㅇㄹㅁㄴ리ㅗㅁㅈㄷㄹㅁㄴㅇㄹㅁㄴㅁㄴㅇㄹ111</a></p>
                         <p><a href="bb">222222222222</a></p>
@@ -61,13 +61,13 @@ const _Header = () => {
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
                 <Button className="button" type="primary" shape="circle">
-                    <Link to="/"><HomeOutlined/></Link>
+                    <Link to="/"><HomeOutlined /></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    <LogoutOutlined/>
+                    <LogoutOutlined />
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    <NotificationOutlined/>
+                    <NotificationOutlined />
                 </Button>
             </Header>
         </div>
