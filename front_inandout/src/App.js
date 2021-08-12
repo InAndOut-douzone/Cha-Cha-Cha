@@ -19,13 +19,14 @@ import Leave_Management from './pages/Leave_Management';
 import img from './assets/images/hospital.jpg';
 import PrivateRoute from './components/routes/PrivateRoute';
 import PublicRoute from './components/routes/PublicRoute';
+import styled from 'styled-components'
 
 export default function App() {
   return (
         <Switch>
           <PrivateRoute component={First} path="/" exact={true} />
           <PrivateRoute component={MyPage} path="/mypage" exact={true} />
-          <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
+          <Container><PublicRoute restricted={true} component={Login} path="/login" exact={true} /></Container>
           
           {/* <PublicRoute restricted={true} component={Login} path="/login" exact /> */}
           {/* <PublicRoute restricted={false} component={First} path="/" exact /> */}
