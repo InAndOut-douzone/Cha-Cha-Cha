@@ -1,13 +1,9 @@
 import React from 'react';
-<<<<<<< HEAD
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-=======
-import { Route } from 'react-router-dom'
 import { Layout } from 'antd';
 import Header from './components/_Header';
 import Navigation from './components/Navigation';
 import Footer from './components/_Footer';
->>>>>>> f7b61987d70e352bdde9326a2a8e3a125ec59a80
 import First from './First';
 import Login from './Login';
 import MyPage from './pages/MyPage';
@@ -36,12 +32,12 @@ export default function App() {
   )
 }
 
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(${img});
-  background-size: cover;
-`;
+// const Container = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-image: url(${img});
+//   background-size: cover;
+// `;
