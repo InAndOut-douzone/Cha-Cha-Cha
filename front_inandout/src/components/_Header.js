@@ -52,13 +52,13 @@ const _Header = () => {
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
                 <Button className="button" type="primary" shape="circle">
-                    A
+                    <Link to="/"><HomeOutlined/></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    B
+                    <LogoutOutlined/>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    C
+                    <NotificationOutlined/>
                 </Button>
             </Header>
         </div>

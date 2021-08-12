@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Checkbox, Image, Modal } from 'antd';
+import { Layout, Menu, Checkbox, Image } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import profile from '../assets/images/profile.jpg';
 import { Link } from 'react-router-dom';
+import Drawer from './_Drawer';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -12,18 +13,18 @@ function onChange(e) {
 }
 
 const Navigation = () => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [state, setState] = useState(false);
 
-    const showModal = () => {
-        setIsModalVisible(true);
+    const showDrawer = () => {
+        setState({
+            visible: true,
+        });
     };
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
+    const onClose = () => {
+        setState({
+            visible: false,
+        });
     };
 
     return (
@@ -49,13 +50,7 @@ const Navigation = () => {
                     <Menu.Item key="5"><Link to="/mypage">프로필 수정</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub3" icon={<NotificationOutlined />} title="내 근무">
-                    <Menu.Item key="6"><Link to="/leave">휴가 등록</Link></Menu.Item>
-                    <Menu.Item key="61" onClick={showModal}>
-                            휴가 등록 팝업
-                        <Modal title="휴가 등록 팝업" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                            <p>휴가 등록화면</p>
-                        </Modal>
-                    </Menu.Item>
+                    <Menu.Item key="6"><Drawer /></Menu.Item>
                     <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
                 </SubMenu>
             </Menu>
