@@ -34,12 +34,12 @@ export default function App() {
   )
 }
 
-// const Container = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-image: url(${img});
-//   background-size: cover;
-// `;
+const Container = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(${img});
+  background-size: cover;
+`;
