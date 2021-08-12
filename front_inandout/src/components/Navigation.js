@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layout, Menu, Checkbox, Image } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import profile from '../assets/images/profile.jpg';
 import { Link } from 'react-router-dom';
+import profile from '../assets/images/profile.jpg';
 import Drawer from './_Drawer';
 
 const { SubMenu } = Menu;
@@ -13,19 +13,6 @@ function onChange(e) {
 }
 
 const Navigation = () => {
-    const [state, setState] = useState(false);
-
-    const showDrawer = () => {
-        setState({
-            visible: true,
-        });
-    };
-
-    const onClose = () => {
-        setState({
-            visible: false,
-        });
-    };
 
     return (
         <Sider width={200} className="site-layout-background2">
@@ -52,6 +39,19 @@ const Navigation = () => {
                 <SubMenu key="sub3" icon={<NotificationOutlined />} title="내 근무">
                     <Menu.Item key="6"><Drawer /></Menu.Item>
                     <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
+                </SubMenu>
+                {/* admin일 경우 */}
+                <SubMenu key="sub4" icon={<NotificationOutlined />} title="병원 관리">
+                    <Menu.Item key="8"><Link to="/him">병원 정보 관리</Link></Menu.Item>
+                    <Menu.Item key="9"><Link to="/wtm">근무시간 관리</Link></Menu.Item>
+                </SubMenu>
+                <SubMenu key="sub5" icon={<NotificationOutlined />} title="사원 관리">
+                    <Menu.Item key="10"><Link to="/addEmployee">사원등록</Link></Menu.Item>
+                    <Menu.Item key="11"><Link to="/employeeManagement">사원관리</Link></Menu.Item>
+                    <Menu.Item key="12"><Link to="/leaveManagement">휴가관리</Link></Menu.Item>
+                </SubMenu>
+                <SubMenu key="sub6" icon={<NotificationOutlined />} title="공지사항 관리">
+                    <Menu.Item key="13"><Link to="/addNotice">공지사항 등록</Link></Menu.Item>
                 </SubMenu>
             </Menu>
         </Sider>
