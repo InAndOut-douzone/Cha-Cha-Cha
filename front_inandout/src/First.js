@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import './assets/css/app.css';
-import Cal from './Cal2';
+import Cal from './components/cal/Cal2';
 import Header from './components/_Header';
 import Navigation from './components/Navigation';
 import Footer from './components/_Footer'
