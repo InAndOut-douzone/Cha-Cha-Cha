@@ -6,7 +6,7 @@ import Header from './components/_Header';
 import Navigation from './components/Navigation';
 import Footer from './components/_Footer';
 import First from './First';
-import Login from './Login';
+import Login from './pages/Login';
 import MyPage from './pages/MyPage';
 import Leave from './pages/Leave';
 import Work from './pages/Work';
@@ -19,6 +19,7 @@ import Leave_Management from './pages/Leave_Management';
 import img from './assets/images/hospital.jpg';
 import PrivateRoute from './components/routes/PrivateRoute';
 import PublicRoute from './components/routes/PublicRoute';
+import LogoutRoute from './components/routes/LogoutRoute';
 import styled from 'styled-components'
 
 export default function App() {
@@ -26,10 +27,8 @@ export default function App() {
         <Switch>
           <PrivateRoute component={First} path="/" exact={true} />
           <PrivateRoute component={MyPage} path="/mypage" exact={true} />
+          <LogoutRoute component={Login} path="/logout" exact={true} />
           <Container><PublicRoute restricted={true} component={Login} path="/login" exact={true} /></Container>
-          
-          {/* <PublicRoute restricted={true} component={Login} path="/login" exact /> */}
-          {/* <PublicRoute restricted={false} component={First} path="/" exact /> */}
         </Switch>
   )
 }

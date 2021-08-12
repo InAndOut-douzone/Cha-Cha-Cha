@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar } from 'antd';
-import './assets/css/Cal.css';
+import '../../assets/css/Cal.css';
 import locale from "antd/es/calendar/locale/ko_KR";
 
 const Cal = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, Badge } from 'antd';
-import './assets/css/Cal.css';
+import '../../assets/css/Cal.css';
 import { useHistory } from "react-router-dom";
 
 function getListData(value) {

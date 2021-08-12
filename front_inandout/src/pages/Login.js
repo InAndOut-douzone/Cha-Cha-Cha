@@ -2,16 +2,12 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { Button, Form, Input, LoginForm } from 'antd';
 import { HeartFilled, UserOutlined } from '@ant-design/icons';
-import './assets/css/loginForm.css';
+import "../assets/css/loginForm.css"
 import { Redirect, Link } from 'react-router-dom';
 
 export default function Login({ history, location }){
 
   const [value, setValue] = useState();
-
-  const asd = window.sessionStorage.getItem('userRole');
-
-  const va = window.localStorage.getItem('userId');
 
   const onfinish = (value) => {
     if(!value.no){
@@ -19,18 +15,17 @@ export default function Login({ history, location }){
     } else {
         axios.post("http://localhost:8080/api/user/login", value).then( res => {
           console.log(1,res);
-          if(res.status === 201) {
+          if(res.status === 200) {  // ID가 존재 시
+            window.sessionStorage.setItem('userNo', res.data.no);
+            window.sessionStorage.setItem('userRole', res.data.role);
+            // window.localStorage.setItem('userNo', res.data.no);
+            // window.localStorage.setItem('userRole', res.data.role);
+    
+            window.location.replace("/")  
+          }
+          else { // 존재하지 않을 시
             alert("없는 사원번호 입니다.");
-          } 
-
-          window.sessionStorage.setItem('userNo', res.data.no);
-          window.sessionStorage.setItem('userRole', res.data.role);
-  
-          window.location.replace("/")
-
-          // window.localStorage.setItem('userNo', res.data.no);
-          // window.localStorage.setItem('userRole', res.data.role);
-          
+          }
         });
       } 
     }
