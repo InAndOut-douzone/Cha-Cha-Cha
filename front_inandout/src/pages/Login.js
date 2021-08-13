@@ -19,8 +19,6 @@ const Container = styled.div`
 
 export default function Login({ history, location }){
 
-  const [value, setValue] = useState();
-
   const onfinish = (value) => {
     if(!value.no){
       alert("사원번호를 입력해주세요");
@@ -56,7 +54,7 @@ export default function Login({ history, location }){
       onFinish={onfinish}
     >
       <Form.Item name="no">
-        <Input onKeyPress={inNumber} maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} value={value}/> 
+        <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> 
       </Form.Item>
       <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
     </Form>

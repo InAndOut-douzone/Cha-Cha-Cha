@@ -28,3 +28,12 @@
     transform: translate(-50%, -50%);
     text-align: center;
 }
+/* ant-menu-inline ant-menu-light */
+
+.ant-menu-light{
+    height: 90% !important;
+}
+
+.ant-layout{
+    background-color: white !important;
+}
