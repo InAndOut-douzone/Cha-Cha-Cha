@@ -28,7 +28,7 @@ const Navigation = () => {
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1', 'sub2', 'sub3']}
+                    // defaultOpenKeys={['sub1', 'sub2', 'sub3']}
                     style={{ height: '100%', borderRight: 0 }}
                 >
                     <Menu.Item key="1" icon={<LaptopOutlined />}>
@@ -67,13 +67,16 @@ const Navigation = () => {
                     width={200}
                     src={profile}
                 />
-                <div className="profile_name">이재성</div>
+                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1', 'sub2', 'sub3']}
+                    // defaultOpenKeys={['sub1', 'sub2', 'sub3']}
                     style={{ height: '100%', borderRight: 0 }}
                 >
+                    <Menu.Item key="1" icon={<LaptopOutlined />}>
+                        <Link to="/">홈화면</Link>
+                    </Menu.Item>
                     <SubMenu key="sub1" icon={<LaptopOutlined />} title="보기 설정">
                         <Menu.Item key="1"><Checkbox onChange={onChange}>내 일정</Checkbox></Menu.Item>
                         <Menu.Item key="2"><Checkbox onChange={onChange}>휴가</Checkbox></Menu.Item>

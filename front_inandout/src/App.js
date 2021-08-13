@@ -23,14 +23,17 @@ import Add_Notice from './pages/Add_Notice';
 
 export default function App() {
   return (
+
     // Switch는 첫번째로 매칭되는 path를 가진 컴포넌트를 렌더링
     // exact는 정확히 일치하는, 부분적으로 일치하는 것이 아닌 정확하게 일치하는 path의 컴포넌트를 렌더링, default true
-    <Layout >
-      <Header />
-      <Layout>
+    <>
+      <Layout >
+          <Header />
+        <Layout>
         <Navigation />
-        <Layout style={{ padding: '0 24px 24px' }}>
+          <Layout style={{ padding: '0 24px 24px' }}>
           <Switch>
+            <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
             <PrivateRoute component={First} path="/" exact={true} />
             <PrivateRoute component={MyPage} path="/mypage" exact={true} />
             <PrivateRoute component={Work} path="/work" exact={true} />
@@ -41,15 +44,14 @@ export default function App() {
             <PrivateRoute component={Leave_Management} path="/leavemanagement" exact={true} />
             <PrivateRoute component={Add_Notice} path="/addnotice" exact={true} />
             <LogoutRoute component={Login} path="/logout" exact={true} />
-            <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
 
             {/* 매칭되는 페이지가 없을 때 실행됨 switch가 있기에 가능 */}
             <Route component={PageNotFound} />
-
           </Switch>
+          {/* <Footer /> */}
+          </Layout>
         </Layout>
       </Layout>
-      <Footer />
-    </Layout>
+    </>
   )
 }
