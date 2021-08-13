@@ -1,6 +1,9 @@
 package com.douzone.inandout.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -109,5 +112,12 @@ public class UserVo {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public List<String> getRoleList(){
+		if(this.role.length() > 0) {
+			return Arrays.asList(this.role.split(","));
+		}
+		return new ArrayList<>();
 	}
 }
