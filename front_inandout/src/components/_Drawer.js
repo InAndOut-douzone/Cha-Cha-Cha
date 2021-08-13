@@ -28,7 +28,7 @@ const _Drawer = () => {
           title="휴가 등록"
           width="40%"
           onClose={onClose}
-          visible={state1.visible}
+          visible={state1.visible} 
           bodyStyle={{ paddingBottom: 80 }}
           footer={
             <div
@@ -46,31 +46,6 @@ const _Drawer = () => {
           }
         >
           <Form layout="vertical" hideRequiredMark>
-            {/* <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item
-                  name="name"
-                  label="Name"
-                  rules={[{ required: true, message: 'Please enter user name' }]}
-                >
-                  <Input placeholder="Please enter user name" />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="url"
-                  label="Url"
-                  rules={[{ required: true, message: 'Please enter url' }]}
-                >
-                  <Input
-                    style={{ width: '100%' }}
-                    addonBefore="http://"
-                    addonAfter=".com"
-                    placeholder="Please enter url"
-                  />
-                </Form.Item>
-              </Col>
-            </Row> */}
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item

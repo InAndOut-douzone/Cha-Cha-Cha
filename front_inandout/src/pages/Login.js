@@ -56,7 +56,7 @@ export default function Login({ history, location }){
       onFinish={onfinish}
     >
       <Form.Item name="no">
-        <Input onKeyPress={inNumber} maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} value={value}/> 
+        <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} value={value}/> 
       </Form.Item>
       <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
     </Form>
