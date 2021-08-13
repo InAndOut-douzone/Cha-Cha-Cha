@@ -42,10 +42,10 @@ const _Header = () => {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
-                <Card style={{ width: 450, height: 40, marginTop: 12 }}>
+                <Card style={{ width: 450, height: 40, marginTop: 12, backgroundColor:"blue" }}>
                     <div className='animation'>
-                        <p><a href="aa">11111111ㅁㄴㅇㄹㅁㄴ리ㅗㅁㅈㄷㄹㅁㄴㅇㄹㅁㄴㅁㄴㅇㄹ111</a></p>
-                        <p><a href="bb">222222222222</a></p>
+                        <p><a style={{color:"white"}} href="aa">11111111ㅁㄴㅇㄹㅁㄴ리ㅗㅁㅈㄷㄹㅁㄴㅇㄹㅁㄴㅁㄴㅇㄹ111</a></p>
+                        <p><a style={{color:"white"}} href="bb">222222222222</a></p>
                     </div>
                 </Card>
                 <Button className="button" type="primary" onClick={showModal}>
