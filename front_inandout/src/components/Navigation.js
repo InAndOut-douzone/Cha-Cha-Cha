@@ -46,9 +46,9 @@ const Navigation = () => {
                     <Menu.Item key="9"><Link to="/wtm">근무시간 관리</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub5" icon={<NotificationOutlined />} title="사원 관리">
-                    <Menu.Item key="10"><Link to="/addEmployee">사원등록</Link></Menu.Item>
-                    <Menu.Item key="11"><Link to="/employeeManagement">사원관리</Link></Menu.Item>
-                    <Menu.Item key="12"><Link to="/leaveManagement">휴가관리</Link></Menu.Item>
+                    <Menu.Item key="10"><Link to="/addEmployee">사원 등록</Link></Menu.Item>
+                    <Menu.Item key="11"><Link to="/employeeManagement">사원 관리</Link></Menu.Item>
+                    <Menu.Item key="12"><Link to="/leaveManagement">휴가 관리</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub6" icon={<NotificationOutlined />} title="공지사항 관리">
                     <Menu.Item key="13"><Link to="/addNotice">공지사항 등록</Link></Menu.Item>

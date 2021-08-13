@@ -27,12 +27,6 @@ const MyPage = () => {
                         <Descriptions.Item label="근무 상태" span={3}>
                             <Badge status="processing" text="근무 중" />
                         </Descriptions.Item>
-                        <Descriptions.Item label="1">1</Descriptions.Item>
-                        <Descriptions.Item label="2">2</Descriptions.Item>
-                        <Descriptions.Item label="3">3</Descriptions.Item>
-                        <Descriptions.Item label="4">
-                            4
-                        </Descriptions.Item>
                     </Descriptions>
                 </Layout>
             </Layout>
