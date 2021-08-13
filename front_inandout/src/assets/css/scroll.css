@@ -10,7 +10,7 @@
     overflow: hidden;
 }
 .animation{
-    animation:text-scroll 5s linear infinite;
+    animation:text-scroll 1s linear infinite;
 }
 .animation a {
     color:black;
