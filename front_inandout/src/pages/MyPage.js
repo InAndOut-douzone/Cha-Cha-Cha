@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Descriptions, Badge } from 'antd';
+import { Layout, Descriptions, Badge, Breadcrumb } from 'antd';
 import Header from '../components/_Header';
 import Navigation from '../components/Navigation';
 import Footer from '../components/_Footer'
@@ -11,7 +11,11 @@ const MyPage = () => {
             <Layout>
                 <Navigation />
                 <Layout style={{ padding: '0 24px 24px' }}>
-                    [프로필 수정 화면]
+                    <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item>홈</Breadcrumb.Item>
+                        <Breadcrumb.Item>내 정보</Breadcrumb.Item>
+                        <Breadcrumb.Item>프로필 수정</Breadcrumb.Item>
+                    </Breadcrumb>
                     <Descriptions title="사용자 정보" layout="vertical" bordered>
                         <Descriptions.Item label="이름">[이재성]</Descriptions.Item>
                         <Descriptions.Item label="직급">[의사]</Descriptions.Item>

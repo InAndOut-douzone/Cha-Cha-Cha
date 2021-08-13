@@ -67,7 +67,7 @@ const _Header = () => {
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    <LogoutOutlined />
+                    <Link to="/logout"><LogoutOutlined /></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
                     <NotificationOutlined />
