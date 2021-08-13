@@ -6,6 +6,9 @@
 	</section>
 	<section name="WORKBENCH_SETTINGS">
 		<list key="ENABLED_TRANSFERS">
+			<item value="org.eclipse.ui.preferences"/>
+			<item value=""/>
+			<item value=""/>
 		</list>
 	</section>
 	<section name="SmartImportWizard">
@@ -14,6 +17,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back_inandout"/>
 			<item value="C:\Users\Administrator\Desktop\inandout\Cha-Cha-Cha"/>
 			<item value="C:\Users\Administrator\Desktop\inandout\Cha-Cha-Cha\back_inandout"/>
 		</list>
