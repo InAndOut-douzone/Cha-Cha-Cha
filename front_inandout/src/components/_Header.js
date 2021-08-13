@@ -42,10 +42,11 @@ const _Header = () => {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
-                <Card style={{ width: 450, height: 40, marginTop: 12, backgroundColor:"blue" }}>
+                <Card style={{ width: 450, height: 40, marginTop: 12, backgroundColor:"#001528" }}>
                     <div className='animation'>
-                        <p><a style={{color:"white"}} href="aa">11111111ㅁㄴㅇㄹㅁㄴ리ㅗㅁㅈㄷㄹㅁㄴㅇㄹㅁㄴㅁㄴㅇㄹ111</a></p>
-                        <p><a style={{color:"white"}} href="bb">222222222222</a></p>
+                        <p><a style={{color:"white"}} href="aa">[공지사항 1]</a></p>
+                        <p><a style={{color:"white"}} href="aa">[공지사항 2]</a></p>
+                        <p><a style={{color:"white"}} href="aa">[공지사항 3]</a></p>
                     </div>
                 </Card>
                 <Button className="button" type="primary" onClick={showModal}>
@@ -67,7 +68,7 @@ const _Header = () => {
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    <LogoutOutlined />
+                    <Link to="/logout"><LogoutOutlined /></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
                     <NotificationOutlined />
