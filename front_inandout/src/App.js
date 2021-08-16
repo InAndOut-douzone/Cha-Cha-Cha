@@ -3,7 +3,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import Header from './components/_Header';
 import Navigation from './components/Navigation';
-import Footer from './components/_Footer'
+// import Footer from './components/_Footer'
 
 import { Route, Switch } from 'react-router-dom'
 import First from './pages/First';
