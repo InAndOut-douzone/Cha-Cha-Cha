@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import { Descriptions, Layout, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 
@@ -11,7 +11,18 @@ const HIM = () => {
                 <Breadcrumb.Item>의원 관리</Breadcrumb.Item>
                 <Breadcrumb.Item>의원 정보 관리</Breadcrumb.Item>
             </Breadcrumb>
-            [의원 정보 관리 화면]
+            <Descriptions
+                title="의원 정보 관리"
+                bordered
+                column={{ xxl: 4, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+            >
+                <Descriptions.Item label="의원 번호">[데이터]</Descriptions.Item>
+                <Descriptions.Item label="의원명">[데이터]</Descriptions.Item>
+                <Descriptions.Item label="의원 로고">[데이터]</Descriptions.Item>
+                <Descriptions.Item label="의원 연락처">[데이터]</Descriptions.Item>
+                <Descriptions.Item label="의원 주소">[데이터]</Descriptions.Item>
+                <Descriptions.Item label="대표자명">[데이터]</Descriptions.Item>
+            </Descriptions>
         </Layout>
     );
 };
