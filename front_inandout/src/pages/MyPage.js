@@ -1,11 +1,13 @@
 import React from 'react';
 import { Layout, Descriptions, Badge, Breadcrumb } from 'antd';
+import { Link } from 'react-router-dom';
+import { HomeOutlined } from '@ant-design/icons';
 
 const MyPage = () => {
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>홈</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                 <Breadcrumb.Item>내 정보</Breadcrumb.Item>
                 <Breadcrumb.Item>프로필 수정</Breadcrumb.Item>
             </Breadcrumb>
