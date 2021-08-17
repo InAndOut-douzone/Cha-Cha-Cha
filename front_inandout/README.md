@@ -9,6 +9,7 @@
 - npm i styled-component
 - npm i react-redux
 - npm i redux
+- npm i react-highlight-words
 
 ### 📀 설치할 것
 
