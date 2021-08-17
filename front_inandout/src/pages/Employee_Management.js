@@ -55,6 +55,7 @@ const columns = [
         title: 'Details',
         dataIndex: 'details',
         key: 'details',
+        render: ({ details }) => (<Link to={'/employeedetails'}>자세히</Link>),
     },
 ];
 
