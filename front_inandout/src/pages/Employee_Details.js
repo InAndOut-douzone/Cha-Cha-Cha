@@ -46,12 +46,14 @@ const columns = [
 const Employee_Details = () => {
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
+            <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                 <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
                 <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
                 <Breadcrumb.Item>자세히</Breadcrumb.Item>
             </Breadcrumb>
+            <br />
             <Descriptions title="[사원 이름]" bordered>
                 <Descriptions.Item label="이름">[데이터]</Descriptions.Item>
                 <Descriptions.Item label="생년월일">[데이터]</Descriptions.Item>
