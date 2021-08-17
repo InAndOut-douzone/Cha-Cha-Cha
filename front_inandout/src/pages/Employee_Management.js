@@ -1,7 +1,62 @@
-import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Breadcrumb, Table, Input, Button, Space } from 'antd';
 import { Link } from 'react-router-dom';
-import { HomeOutlined } from '@ant-design/icons';
+import { HomeOutlined, SearchOutlined } from '@ant-design/icons';
+import Highlighter from 'react-highlight-words';
+
+const dataSource = [
+    {
+        key: '1',
+        no: 1,
+        name: 'Mike',
+        rank: '간호사',
+        birthday: '0000-00-00',
+        hire_date: '0000-00-00',
+        details: '자세히',
+    },
+    {
+        key: '2',
+        no: 2,
+        name: 'Jone',
+        rank: '간호사',
+        birthday: '0000-00-00',
+        hire_date: '0000-00-00',
+        details: '자세히',
+    },
+];
+
+const columns = [
+    {
+        title: 'No',
+        dataIndex: 'no',
+        key: 'no',
+    },
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+    },
+    {
+        title: 'Rank',
+        dataIndex: 'rank',
+        key: 'rank',
+    },
+    {
+        title: 'Birthday',
+        dataIndex: 'birthday',
+        key: 'birthday',
+    },
+    {
+        title: 'Hire_date',
+        dataIndex: 'hire_date',
+        key: 'hire_date',
+    },
+    {
+        title: 'Details',
+        dataIndex: 'details',
+        key: 'details',
+    },
+];
 
 const Employee_Management = () => {
     return (
@@ -11,7 +66,7 @@ const Employee_Management = () => {
                 <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
                 <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
             </Breadcrumb>
-            [사원 관리 화면]
+            <Table dataSource={dataSource} columns={columns} />
         </Layout>
     );
 };
