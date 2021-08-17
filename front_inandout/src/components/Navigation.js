@@ -43,8 +43,8 @@ const Navigation = () => {
                         <Menu.Item key="6"><Drawer /></Menu.Item>
                         <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub4" icon={<NotificationOutlined />} title="병원 관리">
-                        <Menu.Item key="8"><Link to="/him">병원 정보 관리</Link></Menu.Item>
+                    <SubMenu key="sub4" icon={<NotificationOutlined />} title="의원 관리">
+                        <Menu.Item key="8"><Link to="/him">의원 정보 관리</Link></Menu.Item>
                         <Menu.Item key="9"><Link to="/wtm">근무시간 관리</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub5" icon={<NotificationOutlined />} title="사원 관리">
