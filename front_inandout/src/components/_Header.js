@@ -61,9 +61,9 @@ const _Header = () => {
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
-                <Button className="button" type="primary">
+                {/* <Button className="button" type="primary">
                     <Link to="/logout">로그아웃</Link>
-                </Button>
+                </Button> */}
                 <Button className="button" type="primary" shape="circle">
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
