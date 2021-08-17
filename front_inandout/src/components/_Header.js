@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button, Modal, Card } from 'antd';
-import { HomeOutlined, NotificationOutlined, LogoutOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import '../assets/css/scroll.css';
@@ -71,7 +71,7 @@ const _Header = () => {
                     <Link to="/logout"><LogoutOutlined /></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    <NotificationOutlined />
+                    <BellOutlined />
                 </Button>
             </Header>
         </div>
