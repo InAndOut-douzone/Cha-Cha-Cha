@@ -9,10 +9,10 @@
 		<version>2.5.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cos</groupId>
-	<artifactId>facebook-backend</artifactId>
+	<groupId>com.douzone</groupId>
+	<artifactId>inandout</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>facebook-backend</name>
+	<name>inandout</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
