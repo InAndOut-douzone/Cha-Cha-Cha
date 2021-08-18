@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Checkbox, Image } from 'antd';
+import { Layout, Menu, Image } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import profile from '../assets/images/doctor.jpg';
@@ -30,12 +30,6 @@ const Navigation = () => {
                     <Menu.Item key="1" icon={<HomeOutlined />}>
                         <Link to="/">홈화면</Link>
                     </Menu.Item>
-                    {/* <SubMenu key="sub1" icon={<LaptopOutlined />} title="보기 설정">
-                        <Menu.Item key="1"><Checkbox onChange={onChange}>내 일정</Checkbox></Menu.Item>
-                        <Menu.Item key="2"><Checkbox onChange={onChange}>휴가</Checkbox></Menu.Item>
-                        <Menu.Item key="3"><Checkbox onChange={onChange}>출장</Checkbox></Menu.Item>
-                        <Menu.Item key="4"><Checkbox onChange={onChange}>외근</Checkbox></Menu.Item>
-                    </SubMenu> */}
                     <SubMenu key="sub2" icon={<UserOutlined />} title="내 정보">
                         <Menu.Item key="5"><Link to="/mypage">프로필 수정</Link></Menu.Item>
                     </SubMenu>
@@ -73,12 +67,6 @@ const Navigation = () => {
                     <Menu.Item key="1" icon={<LaptopOutlined />}>
                         <Link to="/">홈화면</Link>
                     </Menu.Item>
-                    {/* <SubMenu key="sub1" icon={<LaptopOutlined />} title="보기 설정">
-                        <Menu.Item key="1"><Checkbox onChange={onChange}>내 일정</Checkbox></Menu.Item>
-                        <Menu.Item key="2"><Checkbox onChange={onChange}>휴가</Checkbox></Menu.Item>
-                        <Menu.Item key="3"><Checkbox onChange={onChange}>출장</Checkbox></Menu.Item>
-                        <Menu.Item key="4"><Checkbox onChange={onChange}>외근</Checkbox></Menu.Item>
-                    </SubMenu> */}
                     <SubMenu key="sub2" icon={<UserOutlined />} title="내 정보">
                         <Menu.Item key="5"><Link to="/mypage">프로필 수정</Link></Menu.Item>
                     </SubMenu>
