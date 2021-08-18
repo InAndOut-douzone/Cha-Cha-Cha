@@ -49,26 +49,26 @@ const _Drawer = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="owner"
-                label="구분"
-                rules={[{ required: true, message: 'Please select an owner' }]}
+                name="leave_type"
+                label="휴가 구분"
+                rules={[{ required: true, message: '휴가 구분을 선택해주세요' }]}
               >
-                <Select placeholder="Please select an owner">
-                  <Option value="xiao">휴가</Option>
-                  <Option value="mao">출장</Option>
-                  <Option value="mao">외출</Option>
+                <Select placeholder="휴가 구분을 선택해주세요">
+                  <Option value="a_leave">연차</Option>
+                  <Option value="a_h_leave">오전 반차</Option>
+                  <Option value="p_h_leave">오후 반차</Option>
                 </Select>
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name="type"
-                label="구분2"
-                rules={[{ required: true, message: 'Please choose the type' }]}
+                label="담당의사"
+                rules={[{ required: true, message: '담당의사를 선택해주세요' }]}
               >
-                <Select placeholder="Please choose the type">
-                  <Option value="private">A</Option>
-                  <Option value="public">B</Option>
+                <Select placeholder="담당의사를 선택해주세요">
+                  <Option value="private">의사 1</Option>
+                  <Option value="public">의사 2</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -76,21 +76,29 @@ const _Drawer = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="approver"
-                label="구분3"
-                rules={[{ required: true, message: 'Please choose the approver' }]}
+                name="user"
+                label="대상"
+                // rules={[{ required: true, message: 'Please choose the user' }]}
               >
-                <Select placeholder="Please choose the approver">
-                  <Option value="jack">A</Option>
-                  <Option value="tom">B</Option>
-                </Select>
+                {/* 로그인 한사람 이름, 직책 받아오기 */}
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
+                name="Number_of_days"
+                label="남은 휴가 일수"
+                rules={[{ required: true, message: 'Please choose the Number of days' }]}
+              >
+                {/* 로그인 한사람 이름, 직책 받아오기 */}
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
                 name="dateTime"
                 label="기간 선택"
-                rules={[{ required: true, message: 'Please choose the dateTime' }]}
+                rules={[{ required: true, message: '기간을 입력해주세요' }]}
               >
                 <DatePicker.RangePicker
                   style={{ width: '100%' }}
@@ -103,15 +111,15 @@ const _Drawer = () => {
             <Col span={24}>
               <Form.Item
                 name="description"
-                label="사유?"
+                label="휴가 사유"
                 rules={[
                   {
                     required: true,
-                    message: 'please enter url description',
+                    message: '휴가 사유를 입력해주세요',
                   },
                 ]}
               >
-                <Input.TextArea rows={4} placeholder="please enter url description" />
+                <Input.TextArea rows={4} placeholder="휴가 사유를 입력해주세요" />
               </Form.Item>
             </Col>
           </Row>

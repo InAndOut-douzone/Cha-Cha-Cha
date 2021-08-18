@@ -21,11 +21,14 @@ const MyPage = () => {
     
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
+            <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                 <Breadcrumb.Item>내 정보</Breadcrumb.Item>
                 <Breadcrumb.Item>프로필 수정</Breadcrumb.Item>
             </Breadcrumb>
+            <div style={{ borderTop: "1px solid #eee" }}/>
+            <br /><br />
             <Form style={{width:'90%'}}>
             <Descriptions title="사용자 정보" layout="vertical" bordered>
                 <Descriptions.Item label="이름">{user.name}</Descriptions.Item>
