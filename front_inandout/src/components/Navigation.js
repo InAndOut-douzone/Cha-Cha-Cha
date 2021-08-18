@@ -14,7 +14,7 @@ const Navigation = () => {
 
     return (
         // admin일 경우
-        role === "admin" ?
+        role === "ROLE_ADMIN" ?
             <Sider width={200} className="site-layout-background2">
                 <Image style={{ borderRadius: "0%", width: '100%', height: '100%' }}
                     width={200}
