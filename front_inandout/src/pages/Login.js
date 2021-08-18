@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form, Input, LoginForm } from 'antd';
 import { HeartFilled, UserOutlined } from '@ant-design/icons';
@@ -37,8 +37,9 @@ export default function Login({ history, location }){
       username:value.no,
       password:"1"
     }
+  }
 
-    await axios.post(
+    axios.post(
       "http://localhost:8080/login",
       JSON.stringify(data),
       config
@@ -72,6 +73,5 @@ export default function Login({ history, location }){
       <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
     </Form>
     </Container>
-    
   )
 }

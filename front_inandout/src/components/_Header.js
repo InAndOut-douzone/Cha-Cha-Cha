@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Button, Modal, Card } from 'antd';
-import { HomeOutlined, NotificationOutlined, LogoutOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import '../assets/css/scroll.css';
@@ -42,11 +42,11 @@ const _Header = () => {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                 </Menu>
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
-                <Card style={{ width: 450, height: 40, marginTop: 12, backgroundColor:"#001528" }}>
+                <Card style={{ width: 450, height: 40, marginTop: 12, backgroundColor: "#001528" }}>
                     <div className='animation'>
-                        <p><a style={{color:"white"}} href="aa">[공지사항 1]</a></p>
-                        <p><a style={{color:"white"}} href="aa">[공지사항 2]</a></p>
-                        <p><a style={{color:"white"}} href="aa">[공지사항 3]</a></p>
+                        <p><a style={{ color: "white" }} href="aa">[공지사항 1]</a></p>
+                        <p><a style={{ color: "white" }} href="aa">[공지사항 2]</a></p>
+                        <p><a style={{ color: "white" }} href="aa">[공지사항 3]</a></p>
                     </div>
                 </Card>
                 <Button className="button" type="primary" onClick={showModal}>
@@ -61,9 +61,9 @@ const _Header = () => {
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
-                <Button className="button" type="primary">
+                {/* <Button className="button" type="primary">
                     <Link to="/logout">로그아웃</Link>
-                </Button>
+                </Button> */}
                 <Button className="button" type="primary" shape="circle">
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
@@ -71,7 +71,7 @@ const _Header = () => {
                     <Link to="/logout"><LogoutOutlined /></Link>
                 </Button>
                 <Button className="button" type="primary" shape="circle">
-                    <NotificationOutlined />
+                    <BellOutlined />
                 </Button>
             </Header>
         </div>
