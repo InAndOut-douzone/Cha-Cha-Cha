@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FacebookBackendApplication {
+public class InAndOutApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FacebookBackendApplication.class, args);
+		SpringApplication.run(InAndOutApplication.class, args);
 	}
 
 }
