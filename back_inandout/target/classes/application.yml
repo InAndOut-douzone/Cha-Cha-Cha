@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
+spring:
+  # DB 연결
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://fifo.cotmbfsm8hs9.ap-northeast-2.rds.amazonaws.com:3306/inandout?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+    username: admin
+    password: inandout1!
+
+mybatis: 
+   config-location: classpath:mybatis/configuration.xml
