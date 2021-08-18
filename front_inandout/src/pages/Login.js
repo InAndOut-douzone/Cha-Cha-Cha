@@ -37,9 +37,7 @@ export default function Login({ history, location }){
       username:value.no,
       password:"1"
     }
-  }
-
-    axios.post(
+    await axios.post(
       "http://localhost:8080/login",
       JSON.stringify(data),
       config
