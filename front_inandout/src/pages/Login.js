@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
-import { Button, Form, Input, LoginForm } from 'antd';
-import { HeartFilled, UserOutlined } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import "../assets/css/loginForm.css"
-import { Redirect, Link } from 'react-router-dom';
 import styled from 'styled-components'
 import img from '../assets/images/hospital.jpg';
 
@@ -47,8 +46,8 @@ export default function Login({ history, location }){
       localStorage.setItem("Authorization", res.headers.authorization);
       axios.get("http://localhost:8080/api/user",header).then(res => {
         console.log(123,res);
-        window.sessionStorage.setItem('userNo', res.data.no);
-        window.sessionStorage.setItem('userRole', res.data.roles);
+        localStorage.setItem('userNo', res.data.no);
+        localStorage.setItem('userRole', res.data.roles);
         window.location.replace("/")  
       }).catch (err => {
         console.log(err);
