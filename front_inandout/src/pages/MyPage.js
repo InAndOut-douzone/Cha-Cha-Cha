@@ -7,17 +7,27 @@ import { HomeOutlined } from '@ant-design/icons';
 const MyPage = () => {
     
     const [user,setUser] = useState({});
+    const [fileUrl, setFileUrl] = useState({});
+    const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
 
     useEffect(() => {
-        const data = axios.get("http://localhost:8080/api/user/1").then((res)=>{
-            console.log(123,res);
-            console.log(12344,res.data.name);
-            setUser(res.data);
+        axios.get("http://localhost:8080/api/user/1",header).then((res)=>{
+        console.log(res);
+        setUser(res.data);
+        setFileUrl(res.data.profile)
         });
-        
-        console.log(data.data);
-    });
+    },[]);
 
+    const processImage = (event) => {
+        const imageFile = event.target.files[0];
+        const imageUrl = URL.createObjectURL(imageFile);
+        setFileUrl(imageUrl)
+     }
+    
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -26,15 +36,18 @@ const MyPage = () => {
                 <Breadcrumb.Item>프로필 수정</Breadcrumb.Item>
             </Breadcrumb>
             <Form style={{width:'90%'}}>
-            <Descriptions title="사용자 정보" layout="vertical" bordered>
+            <h2>사용자 정보</h2>
+            <img style={{width:'30%', height:'30%'}} src={fileUrl}></img>
+            <input type="file" accept="image/*" onChange={processImage}></input>
+            <br/>
+            <Descriptions title="" layout="vertical" bordered>
                 <Descriptions.Item label="이름">{user.name}</Descriptions.Item>
                 <Descriptions.Item label="직급">{user.position}</Descriptions.Item>
                 <Descriptions.Item label="생년월일">{user.birth}</Descriptions.Item>
                 
                 <Descriptions.Item label="이메일">
-                    <Form.Item name="email" 
-                        rules={[{type:'email', message:'이메일형식을 맞게 입력하세요.'}]}>
-                        <Input value={user.email} style={{width:'350px'}} />
+                    <Form.Item rules={[{type:'email', message:'이메일형식을 맞게 입력하세요.'}]}>
+                        <Input value={user.email} />
                     </Form.Item>
                 </Descriptions.Item>
 
