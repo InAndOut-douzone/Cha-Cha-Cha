@@ -46,6 +46,11 @@ public class UserController {
 		return new ResponseEntity<>(user,HttpStatus.OK);
 	}
 	
+	@GetMapping("/user/{no}")
+	public ResponseEntity<?> user(@PathVariable long no){
+		return new ResponseEntity<>(userRepository.findById(no),HttpStatus.OK);
+	}
+	
 	// @CrossOrigin : 메서드에 @CrossOrigin을 사용해서 cors정책을 풀 수 있다 .WebConfig에서 설정했기때문에 생략
 //	@GetMapping("/user/{no}")
 //	public ResponseEntity<?> test(@PathVariable long no) {
