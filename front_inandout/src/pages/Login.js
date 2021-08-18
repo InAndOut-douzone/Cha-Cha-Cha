@@ -17,35 +17,48 @@ const Container = styled.div`
   background-size: cover;
 `;
 
+const config = {
+  headers: {
+    "Content-Type": "application/json; charset=utf-8",
+  },
+};
+
+const header = {
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("Authorization"),
+  },
+};
+
+
 export default function Login({ history, location }){
 
-  const onfinish = (value) => {
-    if(!value.no){
-      alert("사원번호를 입력해주세요");
-    } else {
-        axios.post("http://localhost:8080/api/user/login", value).then( res => {
-          console.log(1,res);
-          if(res.status === 200) {  // ID가 존재 시
-            window.sessionStorage.setItem('userNo', res.data.no);
-            window.sessionStorage.setItem('userRole', res.data.role);
-            // window.localStorage.setItem('userNo', res.data.no);
-            // window.localStorage.setItem('userRole', res.data.role);
-    
-            window.location.replace("/")  
-          }
-          else { // 존재하지 않을 시
-            alert("없는 사원번호 입니다.");
-          }
-        });
-      } 
+  const onfinish = async (value) => {
+    let data = {
+      username:value.no,
+      password:"1"
     }
 
-    const inNumber = (e) => {
-      if(e.keyCode<48 || e.keyCode>57){
-        e.returnValue=false;
-     }
+    await axios.post(
+      "http://localhost:8080/login",
+      JSON.stringify(data),
+      config
+    ).then(res => {
+    if(res.status === 200) {
+      console.log("Authorization:" + res.headers.authorization);
+      localStorage.setItem("Authorization", res.headers.authorization);
+      axios.get("http://localhost:8080/api/user",header).then(res => {
+        console.log(123,res);
+        window.sessionStorage.setItem('userNo', res.data.no);
+        window.sessionStorage.setItem('userRole', res.data.role);
+        window.location.replace("/")  
+      }).catch (err => {
+        console.log(err);
+      })
     }
-
+  }).catch(err => {
+    alert('a');
+  });
+}
     return (
       <Container>
     <Form

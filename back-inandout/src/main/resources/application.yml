@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      
+spring:
+  # DB 연결
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://fifo.cotmbfsm8hs9.ap-northeast-2.rds.amazonaws.com:3306/inandout?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+    username: admin
+    password: inandout1!     
+    
+  jpa:
+    hibernate:
+      ddl-auto: create #create update none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
