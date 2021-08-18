@@ -165,16 +165,19 @@ export default class Add_Notice extends React.Component {
       },
     ];
     return (
-        <Layout style={{ padding: '0 24px 24px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
-                <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
-                <Breadcrumb.Item>휴가 관리</Breadcrumb.Item>
-            </Breadcrumb>
-            [휴가 관리 화면]
-            <br />
+      <Layout style={{ padding: '0 24px 24px' }}>
+        <br />
+        <Breadcrumb style={{ margin: '16px 0' }}>
+          <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
+          <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
+          <Breadcrumb.Item>휴가 관리</Breadcrumb.Item>
+        </Breadcrumb>
+        <div style={{ borderTop: "1px solid #eee" }} />
+        <br /><br />
+        [휴가 관리 화면]
+        <br />
         <Table columns={columns} dataSource={data} />
-        </Layout>
+      </Layout>
     );
   }
 }
