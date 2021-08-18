@@ -43,11 +43,12 @@ const Add_Notice = () => {
                 <Form.Item
                     name={['notice', 'title']}
                     label="제목"
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}>
+                    // rules={[
+                    //     {
+                    //         required: true,
+                    //     },
+                    // ]}
+                    >
                     <Input placeholder="제목"/>
                 </Form.Item>
                 <Form.Item name={['notice', 'content']} label="내용" >
