@@ -14,9 +14,9 @@ const _Header = () => {
 
     
     const buttonStyle = {
-        transform: "translate(0%, -43%)"
+        transform: "translate(0%, -40%)"
     }
-    
+
     const showModal = () => {
         setIsModalVisible(true);
     };
