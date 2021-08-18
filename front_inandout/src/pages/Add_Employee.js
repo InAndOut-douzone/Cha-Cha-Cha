@@ -37,7 +37,7 @@ const Add_Employee = () => {
             <div style={{ borderTop: "1px solid #eee" }}/>
             <br /><br />
             <Form
-                style={{ width: "500px", alignSelf: "center" }}
+                style={{ width: "350px", alignSelf: "center" }}
                 form={form}
                 name="register"
                 onFinish={onFinish}
