@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form, Input, LoginForm } from 'antd';
 import { HeartFilled, UserOutlined } from '@ant-design/icons';
@@ -17,48 +17,47 @@ const Container = styled.div`
   background-size: cover;
 `;
 
-export default function Login({ history, location }){
+export default function Login({ history, location }) {
 
   const onfinish = (value) => {
-    if(!value.no){
+    if (!value.no) {
       alert("사원번호를 입력해주세요");
     } else {
-        axios.post("http://localhost:8080/api/user/login", value).then( res => {
-          console.log(1,res);
-          if(res.status === 200) {  // ID가 존재 시
-            window.sessionStorage.setItem('userNo', res.data.no);
-            window.sessionStorage.setItem('userRole', res.data.role);
-            // window.localStorage.setItem('userNo', res.data.no);
-            // window.localStorage.setItem('userRole', res.data.role);
-    
-            window.location.replace("/")  
-          }
-          else { // 존재하지 않을 시
-            alert("없는 사원번호 입니다.");
-          }
-        });
-      } 
-    }
+      axios.post("http://localhost:8080/api/user/login", value).then(res => {
+        console.log(1, res);
+        if (res.status === 200) {  // ID가 존재 시
+          window.sessionStorage.setItem('userNo', res.data.no);
+          window.sessionStorage.setItem('userRole', res.data.role);
+          // window.localStorage.setItem('userNo', res.data.no);
+          // window.localStorage.setItem('userRole', res.data.role);
 
-    const inNumber = (e) => {
-      if(e.keyCode<48 || e.keyCode>57){
-        e.returnValue=false;
-     }
+          window.location.replace("/")
+        }
+        else { // 존재하지 않을 시
+          alert("없는 사원번호 입니다.");
+        }
+      });
     }
+  }
 
-    return (
-      <Container>
-    <Form
-      name="global_state"
-      layout="inline"
-      onFinish={onfinish}
-    >
-      <Form.Item name="no">
-        <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> 
-      </Form.Item>
-      <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
-    </Form>
+  const inNumber = (e) => {
+    if (e.keyCode < 48 || e.keyCode > 57) {
+      e.returnValue = false;
+    }
+  }
+
+  return (
+    <Container>
+      <Form
+        name="global_state"
+        layout="inline"
+        onFinish={onfinish}
+      >
+        <Form.Item name="no">
+          <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} />
+        </Form.Item>
+        <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
+      </Form>
     </Container>
-    
   )
 }

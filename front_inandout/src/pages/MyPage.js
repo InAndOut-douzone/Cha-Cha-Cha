@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Layout, Descriptions, Badge, Breadcrumb, Input,Form,Button } from 'antd';
 import { Link } from 'react-router-dom';
@@ -8,19 +8,17 @@ const MyPage = () => {
 
     const [user,setUser] = useState({});
 
-    const data = axios.get("http://localhost:8080/api/user/1").then((res)=>{
-        console.log(123,res);
-        console.log(12344,res.data.name);
-        setUser(res.data);
-    });
-
     // useEffect 써서 처음 한번만 실행되게 하기
+    useEffect(() => {
+        const data = axios.get("http://localhost:8080/api/user/1").then((res)=>{
+            console.log(123,res);
+            console.log(12344,res.data.name);
+            setUser(res.data);
+            
+            console.log(data.data);
+        });
+      }, []);
     
-    console.log(data.data);
-    
-
- 
-
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
