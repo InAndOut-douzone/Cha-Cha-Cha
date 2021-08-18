@@ -32,6 +32,7 @@ Binding(COMMAND+SHIFT+T,
 
 !ENTRY org.eclipse.ui.navigator 2 0 2021-08-13 09:54:45.820
 !MESSAGE Can't find Navigator Content Descriptor with id: org.eclipse.jst.servlet.ui.EnhancedJavaRendering
+<<<<<<< HEAD
 !SESSION 2021-08-18 09:35:36.361 -----------------------------------------------
 eclipse.buildId=4.20.0.I20210611-1600
 java.version=15.0.2
@@ -131,12 +132,215 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springfr
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:09:08.355
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2021-08-18 12:09:08.355
+=======
+!SESSION 2021-08-18 12:04:54.764 -----------------------------------------------
+eclipse.buildId=4.11.0.202106180608
+java.version=16.0.1
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=ko_KR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaes/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -data /Users/jaes/project/inandout/Cha-Cha-Cha -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaes/.eclipse_keyring
+
+!ENTRY org.eclipse.core.resources 2 10035 2021-08-18 12:04:56.343
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.core.resources 4 567 2021-08-18 12:04:56.381
+!MESSAGE Workspace restored, but some problems occurred.
+!SUBENTRY 1 org.eclipse.core.resources 4 567 2021-08-18 12:04:56.381
+!MESSAGE Could not read metadata for '.org.eclipse.egit.core.cmp'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException(/.org.eclipse.egit.core.cmp)[567]: java.lang.Exception: The project description file (.project) for '.org.eclipse.egit.core.cmp' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:908)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:888)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:868)
+	at org.eclipse.core.internal.resources.SaveManager.restore(SaveManager.java:724)
+	at org.eclipse.core.internal.resources.SaveManager.startup(SaveManager.java:1555)
+	at org.eclipse.core.internal.resources.Workspace.startup(Workspace.java:2480)
+	at org.eclipse.core.internal.resources.Workspace.open(Workspace.java:2231)
+	at org.eclipse.core.resources.ResourcesPlugin.start(ResourcesPlugin.java:475)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:814)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:554)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:806)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:763)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1028)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:371)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:605)
+	at org.eclipse.osgi.container.Module.start(Module.java:468)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:511)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:117)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:572)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:345)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:401)
+	at org.eclipse.osgi.internal.loader.sources.SingleSourcePackage.loadClass(SingleSourcePackage.java:41)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:476)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:170)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:519)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:153)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:654)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
+!SUBENTRY 2 org.eclipse.core.resources 4 567 2021-08-18 12:04:56.382
+!MESSAGE The project description file (.project) for '.org.eclipse.egit.core.cmp' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+!STACK 0
+java.lang.Exception: The project description file (.project) for '.org.eclipse.egit.core.cmp' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:908)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:888)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:868)
+	at org.eclipse.core.internal.resources.SaveManager.restore(SaveManager.java:724)
+	at org.eclipse.core.internal.resources.SaveManager.startup(SaveManager.java:1555)
+	at org.eclipse.core.internal.resources.Workspace.startup(Workspace.java:2480)
+	at org.eclipse.core.internal.resources.Workspace.open(Workspace.java:2231)
+	at org.eclipse.core.resources.ResourcesPlugin.start(ResourcesPlugin.java:475)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:814)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:554)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:806)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:763)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1028)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:371)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:605)
+	at org.eclipse.osgi.container.Module.start(Module.java:468)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:511)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:117)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:572)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:345)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:401)
+	at org.eclipse.osgi.internal.loader.sources.SingleSourcePackage.loadClass(SingleSourcePackage.java:41)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:476)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:170)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:519)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:153)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:654)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
+!SUBENTRY 1 org.eclipse.core.resources 4 567 2021-08-18 12:04:56.383
+!MESSAGE Could not read metadata for 'back_inandout'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException(/back_inandout)[567]: java.lang.Exception: The project description file (.project) for 'back_inandout' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:908)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:888)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:868)
+	at org.eclipse.core.internal.resources.SaveManager.restore(SaveManager.java:724)
+	at org.eclipse.core.internal.resources.SaveManager.startup(SaveManager.java:1555)
+	at org.eclipse.core.internal.resources.Workspace.startup(Workspace.java:2480)
+	at org.eclipse.core.internal.resources.Workspace.open(Workspace.java:2231)
+	at org.eclipse.core.resources.ResourcesPlugin.start(ResourcesPlugin.java:475)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:814)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:554)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:806)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:763)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1028)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:371)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:605)
+	at org.eclipse.osgi.container.Module.start(Module.java:468)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:511)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:117)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:572)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:345)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:401)
+	at org.eclipse.osgi.internal.loader.sources.SingleSourcePackage.loadClass(SingleSourcePackage.java:41)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:476)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:170)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:519)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:153)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:654)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
+!SUBENTRY 2 org.eclipse.core.resources 4 567 2021-08-18 12:04:56.383
+!MESSAGE The project description file (.project) for 'back_inandout' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+!STACK 0
+java.lang.Exception: The project description file (.project) for 'back_inandout' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:908)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:888)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:868)
+	at org.eclipse.core.internal.resources.SaveManager.restore(SaveManager.java:724)
+	at org.eclipse.core.internal.resources.SaveManager.startup(SaveManager.java:1555)
+	at org.eclipse.core.internal.resources.Workspace.startup(Workspace.java:2480)
+	at org.eclipse.core.internal.resources.Workspace.open(Workspace.java:2231)
+	at org.eclipse.core.resources.ResourcesPlugin.start(ResourcesPlugin.java:475)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:814)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:554)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:806)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:763)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1028)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:371)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:605)
+	at org.eclipse.osgi.container.Module.start(Module.java:468)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:511)
+	at org.eclipse.osgi.internal.hooks.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:117)
+	at org.eclipse.osgi.internal.loader.classpath.ClasspathManager.findLocalClass(ClasspathManager.java:572)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.findLocalClass(ModuleClassLoader.java:345)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:401)
+	at org.eclipse.osgi.internal.loader.sources.SingleSourcePackage.loadClass(SingleSourcePackage.java:41)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:476)
+	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:170)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:519)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:153)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:654)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
+
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:04:58.739
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-08-18 12:04:58.739
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE A conflict occurred for COMMAND+SHIFT+T:
 Binding(COMMAND+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@55c20a91,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@61d8a491,
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
@@ -144,15 +348,38 @@ Binding(COMMAND+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4a3516fd,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6065bcb7,
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.ui 2 2 2021-08-18 12:09:12.463
 !MESSAGE Perspective with name 'Java EE' and id 'org.eclipse.jst.j2ee.J2EEPerspective' has been made into a local copy
 
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:09:13.232
+=======
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:01.197
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:01.198
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@3ddff126[org.springframework.tooling.boot.ls:1.26.0.202106150606(id=552)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:01.200
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:01.240
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.eclipse.ui 2 2 2021-08-18 12:05:01.769
+!MESSAGE Perspective with name 'Java EE' and id 'org.eclipse.jst.j2ee.J2EEPerspective' has been made into a local copy
+
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:05:02.086
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -264,7 +491,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:09:13.236
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:05:02.088
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.wst.common.snippets".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -380,7 +611,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:09:13.247
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:05:02.089
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -493,7 +728,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:09:13.251
+=======
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:05:02.090
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE The image could not be loaded: URLImageDescriptor(platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif)
 !STACK 0
 org.eclipse.jface.resource.DeviceResourceException: Unable to create resource URLImageDescriptor(platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif)
@@ -597,7 +836,11 @@ org.eclipse.jface.resource.DeviceResourceException: Unable to create resource UR
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:09:13.258
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:05:02.097
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -709,7 +952,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:09:13.265
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:05:02.098
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -825,7 +1072,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:09:13.269
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:05:02.099
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -938,7 +1189,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:09:13.270
+=======
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:05:02.099
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE The image could not be loaded: URLImageDescriptor(platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif)
 !STACK 0
 org.eclipse.jface.resource.DeviceResourceException: Unable to create resource URLImageDescriptor(platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif)
@@ -1042,6 +1297,7 @@ org.eclipse.jface.resource.DeviceResourceException: Unable to create resource UR
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:09:13.800
 !MESSAGE Removing PartDescriptorImpl with the "org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" id and the "Data Source Explorer" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
 
@@ -1141,22 +1397,277 @@ org.eclipse.jface.resource.DeviceResourceException: Unable to create resource UR
 !ENTRY org.eclipse.ui 2 2 2021-08-18 12:19:23.900
 !MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
 !SESSION 2021-08-18 12:19:28.156 -----------------------------------------------
+=======
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.770
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" id and the "Data Source Explorer" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.770
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.datatools.sqltools.plan.planView" id and the "Execution Plan" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.771
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.datatools.sqltools.result.resultView" id and the "SQL Results" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.774
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.eclemma.ui.CoverageView" id and the "Coverage" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.776
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.gef.ui.palette_view" id and the "Palette" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.780
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.jpt.ui.jpaStructureView" id and the "JPA Structure" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.781
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.jpt.ui.jpaDetailsView" id and the "JPA Details" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.782
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.jst.jsf.ui.component.ComponentTreeView" id and the "JSF Component Tree" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.782
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.jst.jsf.ui.tagregistry.TagRegistryView" id and the "Tag Registry" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.785
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.jst.ws.jaxws.ui.views.AnnotationsView" id and the "Annotation Properties" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.787
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.mylyn.commons.repositories.ui.navigator.Repositories" id and the "Team Repositories" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.787
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.mylyn.tasks.ui.views.tasks" id and the "Task List" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.787
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.mylyn.tasks.ui.views.repositories" id and the "Task Repositories" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.788
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.oomph.p2.ui.RepositoryExplorer" id and the "Repository Explorer" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.796
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.wst.common.snippets.internal.ui.SnippetsView" id and the "Snippets" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.797
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.wst.jsdt.callhierarchy.view" id and the "Call Hierarchy" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.797
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.wst.jsdt.ui.SourceView" id and the "Declaration" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.798
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.wst.jsdt.ui.JavadocView" id and the "Documentation" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.799
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.wst.xml.views.XPathView" id and the "XPath" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.799
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.wst.xsl.jaxp.debug.ui.resultview" id and the "Result" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.800
+!MESSAGE Removing PartDescriptorImpl with the "org.eclipse.wst.xsl.ui.view.outline" id and the "Stylesheet Model" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.800
+!MESSAGE Removing PartDescriptorImpl with the "com.tomato.exerd.ui.views.thumbnail" id and the "썸네일" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.800
+!MESSAGE Removing PartDescriptorImpl with the "com.tomato.exerd.ui.views.domain" id and the "도메인" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.801
+!MESSAGE Removing PartDescriptorImpl with the "com.tomato.exerd.validate.ui.ValidateView" id and the "검토" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.801
+!MESSAGE Removing PartDescriptorImpl with the "com.tomato.exerd.modelview3.ModelView3" id and the "모델" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-08-18 12:05:02.801
+!MESSAGE Removing PartDescriptorImpl with the "com.tomato.exerd.xscript.ScriptView" id and the "XScript" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:03.755
+!MESSAGE Boot LS startup time from start to initialized: 2546ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:03.886
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.cAEHxNMsisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:03.889
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:03.890
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:03.891
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:03.891
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.cAEHxNMs => OK
+
+!ENTRY org.eclipse.core.resources 4 567 2021-08-18 12:05:09.453
+!MESSAGE The project description file (.project) for 'back_inandout' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+!STACK 0
+java.lang.Exception: The project description file (.project) for 'back_inandout' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:908)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:888)
+	at org.eclipse.core.internal.resources.SaveManager.restore(SaveManager.java:763)
+	at org.eclipse.core.internal.resources.Project.open(Project.java:1060)
+	at org.eclipse.ui.actions.OpenResourceAction$1.doOpenWithReferences(OpenResourceAction.java:233)
+	at org.eclipse.ui.actions.OpenResourceAction$1.runInWorkspace(OpenResourceAction.java:279)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:30.919
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:30.922
+!MESSAGE classpath=19 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:30.923
+!MESSAGE buffering callback sts4.classpath.cAEHxNMs back-inandout false 19
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:30.923
+!MESSAGE executing callback sts4.classpath.cAEHxNMs 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.239
+!MESSAGE executing callback sts4.classpath.cAEHxNMs SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.240
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.241
+!MESSAGE classpath=19 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.242
+!MESSAGE buffering callback sts4.classpath.cAEHxNMs back-inandout false 19
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.242
+!MESSAGE executing callback sts4.classpath.cAEHxNMs 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.250
+!MESSAGE executing callback sts4.classpath.cAEHxNMs SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.459
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.460
+!MESSAGE classpath=19 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.461
+!MESSAGE buffering callback sts4.classpath.cAEHxNMs back-inandout false 19
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.461
+!MESSAGE executing callback sts4.classpath.cAEHxNMs 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:31.469
+!MESSAGE executing callback sts4.classpath.cAEHxNMs SUCCESS [done]
+
+!ENTRY Activator 1 0 2021-08-18 12:05:34.516
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:34.516
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:34.520
+!MESSAGE classpath=115 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:34.521
+!MESSAGE buffering callback sts4.classpath.cAEHxNMs back-inandout false 115
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:34.521
+!MESSAGE executing callback sts4.classpath.cAEHxNMs 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:05:34.577
+!MESSAGE executing callback sts4.classpath.cAEHxNMs SUCCESS [done]
+
+!ENTRY Activator 1 0 2021-08-18 12:05:37.412
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY org.eclipse.ui 2 2 2021-08-18 12:05:49.199
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY Activator 1 0 2021-08-18 12:06:02.831
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY Activator 1 0 2021-08-18 12:06:02.872
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY Activator 1 0 2021-08-18 12:14:10.896
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:10.897
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:10.901
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:10.903
+!MESSAGE buffering callback sts4.classpath.cAEHxNMs back-inandout false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:10.904
+!MESSAGE executing callback sts4.classpath.cAEHxNMs 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:10.934
+!MESSAGE executing callback sts4.classpath.cAEHxNMs SUCCESS [done]
+
+!ENTRY Activator 1 0 2021-08-18 12:14:11.740
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY Activator 1 0 2021-08-18 12:14:29.227
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY Activator 1 0 2021-08-18 12:14:50.709
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY Activator 1 0 2021-08-18 12:14:51.483
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY Activator 1 0 2021-08-18 12:14:53.200
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:53.200
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:53.202
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:53.203
+!MESSAGE buffering callback sts4.classpath.cAEHxNMs back-inandout false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:53.204
+!MESSAGE executing callback sts4.classpath.cAEHxNMs 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:14:53.214
+!MESSAGE executing callback sts4.classpath.cAEHxNMs SUCCESS [done]
+
+!ENTRY Activator 1 0 2021-08-18 12:14:53.369
+!MESSAGE Has main method computation for project 'back-inandout'
+
+!ENTRY Activator 1 0 2021-08-18 12:14:54.614
+!MESSAGE Has main method computation for project 'back-inandout'
+!SESSION 2021-08-18 12:16:27.140 -----------------------------------------------
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 eclipse.buildId=4.11.0.202106180608
 java.version=16.0.1
 java.vendor=Oracle Corporation
 BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=ko_KR
+<<<<<<< HEAD
 Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jeongin/.eclipse_keyring
 Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jeongin/.eclipse_keyring
 
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:19:38.342
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2021-08-18 12:19:38.342
+=======
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaes/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaes/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:16:35.720
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-08-18 12:16:35.720
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE A conflict occurred for COMMAND+SHIFT+T:
 Binding(COMMAND+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4229b92c,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2c451c4a,
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
@@ -1164,12 +1675,20 @@ Binding(COMMAND+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@47c356e,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@38ad86b1,
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:19:38.910
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:16:36.359
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.jst.j2ee.ui/icons/full/cview16/j2ee_perspective.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
@@ -1344,7 +1863,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:19:38.915
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:16:36.361
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
@@ -1523,7 +2046,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:19:38.917
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:16:36.362
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.jst.j2ee.ui/icons/full/cview16/j2ee_perspective.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
@@ -1699,7 +2226,23 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:19:41.202
+=======
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:39.803
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:39.804
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@1b472450[org.springframework.tooling.boot.ls:1.26.0.202106150606(id=552)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:39.806
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:39.844
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:16:39.967
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -1811,7 +2354,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:19:41.204
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:16:39.968
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.wst.common.snippets".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -1927,7 +2474,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:19:41.206
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:16:39.969
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -2040,7 +2591,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:19:41.208
+=======
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:16:39.970
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE The image could not be loaded: URLImageDescriptor(platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif)
 !STACK 0
 org.eclipse.jface.resource.DeviceResourceException: Unable to create resource URLImageDescriptor(platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif)
@@ -2144,7 +2699,11 @@ org.eclipse.jface.resource.DeviceResourceException: Unable to create resource UR
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:19:41.219
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:16:39.975
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -2256,7 +2815,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:19:41.220
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:16:39.976
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -2372,7 +2935,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:19:41.221
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:16:39.977
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -2485,7 +3052,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:19:41.221
+=======
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:16:39.977
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE The image could not be loaded: URLImageDescriptor(platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif)
 !STACK 0
 org.eclipse.jface.resource.DeviceResourceException: Unable to create resource URLImageDescriptor(platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif)
@@ -2589,6 +3160,7 @@ org.eclipse.jface.resource.DeviceResourceException: Unable to create resource UR
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.ui 2 2 2021-08-18 12:20:09.937
 !MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
 
@@ -2704,22 +3276,94 @@ java.io.EOFException: input contained no data
 	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:244)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 !SESSION 2021-08-18 12:23:35.270 -----------------------------------------------
+=======
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:42.995
+!MESSAGE Boot LS startup time from start to initialized: 3172ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.270
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.QJIkyPeUisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.273
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.276
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.276
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.277
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.277
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.QJIkyPeU => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.282
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.284
+!MESSAGE buffering callback sts4.classpath.QJIkyPeU back-inandout false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.284
+!MESSAGE executing callback sts4.classpath.QJIkyPeU 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:16:43.660
+!MESSAGE executing callback sts4.classpath.QJIkyPeU SUCCESS [done]
+
+!ENTRY org.eclipse.ui 2 2 2021-08-18 12:17:00.576
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.eclipse.jdt.launching 4 150 2021-08-18 12:19:26.896
+!MESSAGE The archive: /Applications/lombok.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.eclipse.jdt.launching 4 150 2021-08-18 12:19:32.799
+!MESSAGE The archive: /Applications/lombok.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.eclipse.jdt.launching 4 150 2021-08-18 12:21:30.347
+!MESSAGE The archive: /Applications/lombok.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:33.418
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.QJIkyPeU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:33.419
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.QJIkyPeU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:33.420
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:33.420
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.QJIkyPeU => OK
+!SESSION 2021-08-18 12:21:38.604 -----------------------------------------------
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 eclipse.buildId=4.11.0.202106180608
 java.version=16.0.1
 java.vendor=Oracle Corporation
 BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=ko_KR
+<<<<<<< HEAD
 Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jeongin/.eclipse_keyring
 Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jeongin/.eclipse_keyring
 
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:23:47.607
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2021-08-18 12:23:47.607
+=======
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaes/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaes/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:21:45.712
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-08-18 12:21:45.712
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE A conflict occurred for COMMAND+SHIFT+T:
 Binding(COMMAND+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1fa44f66,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@240df292,
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
@@ -2727,12 +3371,20 @@ Binding(COMMAND+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4229b92c,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@333efb51,
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:23:48.221
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:21:46.276
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.jst.j2ee.ui/icons/full/cview16/j2ee_perspective.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
@@ -2907,7 +3559,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:23:48.228
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:21:46.278
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
@@ -3086,7 +3742,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:23:48.233
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:21:46.280
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.jst.j2ee.ui/icons/full/cview16/j2ee_perspective.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
@@ -3262,7 +3922,23 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.jst.j2ee.ui".
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:23:50.524
+=======
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:49.406
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:49.407
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@684c8f55[org.springframework.tooling.boot.ls:1.26.0.202106150606(id=552)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:49.410
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:49.445
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:21:49.529
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -3374,7 +4050,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:23:50.532
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:21:49.530
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.wst.common.snippets".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -3490,7 +4170,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:23:50.533
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:21:49.531
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets".
@@ -3603,7 +4287,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.wst.common.snippets"
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:23:50.535
+=======
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:21:49.532
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE The image could not be loaded: URLImageDescriptor(platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif)
 !STACK 0
 org.eclipse.jface.resource.DeviceResourceException: Unable to create resource URLImageDescriptor(platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif)
@@ -3707,7 +4395,11 @@ org.eclipse.jface.resource.DeviceResourceException: Unable to create resource UR
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:23:50.540
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:21:49.538
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -3819,7 +4511,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 4 0 2021-08-18 12:23:50.541
+=======
+!ENTRY org.eclipse.jface 4 0 2021-08-18 12:21:49.539
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -3935,7 +4631,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:23:50.541
+=======
+!ENTRY org.eclipse.core.runtime 4 0 2021-08-18 12:21:49.540
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE Invalid input url:platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif
 !STACK 0
 java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivity.ui.dse".
@@ -4048,7 +4748,11 @@ java.io.IOException: Unable to resolve plug-in "org.eclipse.datatools.connectivi
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2021-08-18 12:23:50.542
+=======
+!ENTRY org.eclipse.jface 2 0 2021-08-18 12:21:49.541
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695
 !MESSAGE The image could not be loaded: URLImageDescriptor(platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif)
 !STACK 0
 org.eclipse.jface.resource.DeviceResourceException: Unable to create resource URLImageDescriptor(platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif)
@@ -4152,6 +4856,7 @@ org.eclipse.jface.resource.DeviceResourceException: Unable to create resource UR
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1462)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.ui 2 2 2021-08-18 12:24:06.820
 !MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
 
@@ -4265,3 +4970,295 @@ java.lang.InterruptedException
 	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
 	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
 	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+=======
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:51.895
+!MESSAGE Boot LS startup time from start to initialized: 2470ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.169
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mIueHCkRisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.173
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.176
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.176
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.176
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.177
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mIueHCkR => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.181
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.183
+!MESSAGE buffering callback sts4.classpath.mIueHCkR back-inandout false 115
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.183
+!MESSAGE executing callback sts4.classpath.mIueHCkR 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 12:21:52.515
+!MESSAGE executing callback sts4.classpath.mIueHCkR SUCCESS [done]
+
+!ENTRY org.eclipse.jdt.launching 4 150 2021-08-18 12:22:08.183
+!MESSAGE The archive: /Applications/lombok.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.eclipse.ui 2 2 2021-08-18 12:22:12.553
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.eclipse.jdt.launching 4 150 2021-08-18 12:22:17.807
+!MESSAGE The archive: /Applications/lombok.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:05:50.908
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.mIueHCkR
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:05:50.910
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.mIueHCkR
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:05:50.910
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:05:50.910
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.mIueHCkR => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:02.395
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:02.396
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@684c8f55[org.springframework.tooling.boot.ls:1.26.0.202106150606(id=552)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:02.396
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.eclipse.jface 2 0 2021-08-18 13:06:02.522
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-08-18 13:06:02.522
+!MESSAGE A conflict occurred for COMMAND+SHIFT+C:
+Binding(COMMAND+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.tm4e.languageconfiguration.togglelinecommentcommand,Toggle Line Comment,
+		,
+		Category(org.eclipse.tm4e.languageconfiguration.category,TM4E Language Configuration,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6cebeb7d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(COMMAND+SHIFT+C,
+	ParameterizedCommand(Command(org.springframework.tooling.boot.ls.ToggleComment,Toggle Comment,
+		,
+		Category(org.springframework.ide.eclipse.commands,Spring Generic Text Editor,Spring Language Server Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4d881407,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.557
+!MESSAGE Boot LS startup time from start to initialized: 2159ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.647
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.izyXQjOzisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.647
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.648
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.649
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.649
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.649
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.izyXQjOz => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.652
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.653
+!MESSAGE buffering callback sts4.classpath.izyXQjOz back-inandout false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:04.653
+!MESSAGE executing callback sts4.classpath.izyXQjOz 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:06:06.441
+!MESSAGE executing callback sts4.classpath.izyXQjOz SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:09.981
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.izyXQjOz
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:09.982
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.izyXQjOz
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:09.983
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:09.983
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.izyXQjOz => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:15.810
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:15.811
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@684c8f55[org.springframework.tooling.boot.ls:1.26.0.202106150606(id=552)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:15.811
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:17.951
+!MESSAGE Boot LS startup time from start to initialized: 2140ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.041
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.YZnDXgzyisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.041
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.041
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.042
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.042
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.042
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.YZnDXgzy => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.044
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.046
+!MESSAGE buffering callback sts4.classpath.YZnDXgzy back-inandout false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.046
+!MESSAGE executing callback sts4.classpath.YZnDXgzy 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.322
+!MESSAGE executing callback sts4.classpath.YZnDXgzy SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.323
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.YZnDXgzy
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.323
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.YZnDXgzy
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.323
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:08:18.323
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.YZnDXgzy => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:44.237
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:44.238
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@684c8f55[org.springframework.tooling.boot.ls:1.26.0.202106150606(id=552)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:44.238
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.451
+!MESSAGE Boot LS startup time from start to initialized: 2212ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.534
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.qUNNfDbuisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.535
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.535
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.535
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.536
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.536
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.qUNNfDbu => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.537
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.538
+!MESSAGE buffering callback sts4.classpath.qUNNfDbu back-inandout false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.539
+!MESSAGE executing callback sts4.classpath.qUNNfDbu 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:46.872
+!MESSAGE executing callback sts4.classpath.qUNNfDbu SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:51.338
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.qUNNfDbu
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:51.339
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.qUNNfDbu
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:51.340
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:51.340
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.qUNNfDbu => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:59.898
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:59.899
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@684c8f55[org.springframework.tooling.boot.ls:1.26.0.202106150606(id=552)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:11:59.899
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.692
+!MESSAGE Boot LS startup time from start to initialized: 1793ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.770
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.YHxbTcmXisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.771
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.771
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.771
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.772
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.772
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.YHxbTcmX => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.773
+!MESSAGE classpath=116 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.774
+!MESSAGE buffering callback sts4.classpath.YHxbTcmX back-inandout false 116
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:01.775
+!MESSAGE executing callback sts4.classpath.YHxbTcmX 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:02.095
+!MESSAGE executing callback sts4.classpath.YHxbTcmX SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:03.483
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.YHxbTcmX
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:03.484
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.YHxbTcmX
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:03.484
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-18 13:12:03.485
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.YHxbTcmX => OK
+>>>>>>> 245f15d3e62632a12d7b464dcde7ae9dd9789695

@@ -48,7 +48,7 @@ export default function Login({ history, location }){
       axios.get("http://localhost:8080/api/user",header).then(res => {
         console.log(123,res);
         window.sessionStorage.setItem('userNo', res.data.no);
-        window.sessionStorage.setItem('userRole', res.data.role);
+        window.sessionStorage.setItem('userRole', res.data.roles);
         window.location.replace("/")  
       }).catch (err => {
         console.log(err);
