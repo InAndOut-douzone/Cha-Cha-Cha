@@ -45,9 +45,9 @@ const _Header = () => {
         <div>
             <Header className="header">
                 {/* <div className="logo" /> */}
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                </Menu>
+                <div style={{display: "inline-block", background: "#001529", color: "silver", fontSize: "25px"}}>IN-N-OUT</div>
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
+               <div style={{textAlign:"right", width:"200px"}}>
                 <Card style={{ width: 450, height: 40, marginTop: 12, backgroundColor: "#001528" }}>
                     <div className='animation'>
                         <p><a style={{ color: "white" }} href="aa">[공지사항 1]</a></p>
@@ -55,6 +55,8 @@ const _Header = () => {
                         <p><a style={{ color: "white" }} href="aa">[공지사항 3]</a></p>
                     </div>
                 </Card>
+                </div>
+                <div>
                 <Button style={buttonStyle} className="button" type="primary" onClick={showModal}>
                     출근
                 </Button>
@@ -70,6 +72,7 @@ const _Header = () => {
                 {/* <Button className="button" type="primary">
                     <Link to="/logout">로그아웃</Link>
                 </Button> */}
+
                 <Button style={buttonStyle} className="button" type="primary" shape="circle">
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
@@ -79,6 +82,7 @@ const _Header = () => {
                 <Button style={buttonStyle} className="button" type="primary" shape="circle">
                     <BellOutlined />
                 </Button>
+                </div>
             </Header>
         </div>
     );

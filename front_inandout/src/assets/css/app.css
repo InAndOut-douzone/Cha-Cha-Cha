@@ -10,7 +10,8 @@
 
 .header{
     /* display: block; */
-    text-align: right;
+    display: flex;
+    /* text-align: right; */
 }
 
 .clock {
