@@ -6,11 +6,11 @@
 
 .ant-card-body{
     padding: 5px !important;
-    height: 45px;
+    height: 38px;
     overflow: hidden;
 }
 .animation{
-    animation:text-scroll 1s linear infinite;
+    animation:text-scroll 5s linear infinite;
 }
 .animation a {
     color:black;

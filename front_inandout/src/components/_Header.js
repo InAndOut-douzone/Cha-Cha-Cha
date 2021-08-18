@@ -7,10 +7,16 @@ import '../assets/css/scroll.css';
 
 const { Header } = Layout;
 
+
 const _Header = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);
 
+    
+    const buttonStyle = {
+        transform: "translate(0%, -43%)"
+    }
+    
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -49,13 +55,13 @@ const _Header = () => {
                         <p><a style={{ color: "white" }} href="aa">[공지사항 3]</a></p>
                     </div>
                 </Card>
-                <Button className="button" type="primary" onClick={showModal}>
+                <Button style={buttonStyle} className="button" type="primary" onClick={showModal}>
                     출근
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p>정말 출근하시겠습니까?</p>
                 </Modal>
-                <Button className="button" type="primary" onClick={showModal2}>
+                <Button style={buttonStyle} className="button" type="primary" onClick={showModal2}>
                     퇴근
                 </Button>
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
@@ -64,13 +70,13 @@ const _Header = () => {
                 {/* <Button className="button" type="primary">
                     <Link to="/logout">로그아웃</Link>
                 </Button> */}
-                <Button className="button" type="primary" shape="circle">
+                <Button style={buttonStyle} className="button" type="primary" shape="circle">
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
-                <Button className="button" type="primary" shape="circle">
+                <Button style={buttonStyle} className="button" type="primary" shape="circle">
                     <Link to="/logout"><LogoutOutlined /></Link>
                 </Button>
-                <Button className="button" type="primary" shape="circle">
+                <Button style={buttonStyle} className="button" type="primary" shape="circle">
                     <BellOutlined />
                 </Button>
             </Header>
