@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Button, Modal, Card } from 'antd';
+import { Layout, Button, Modal, Card } from 'antd';
 import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
@@ -44,7 +44,6 @@ const _Header = () => {
     return (
         <div>
             <Header className="header">
-                {/* <div className="logo" /> */}
                 <div style={{display: "inline-block", background: "#001529", color: "silver", fontSize: "25px"}}>IN-N-OUT</div>
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
                <div style={{textAlign:"right", width:"200px"}}>
@@ -69,10 +68,6 @@ const _Header = () => {
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
-                {/* <Button className="button" type="primary">
-                    <Link to="/logout">로그아웃</Link>
-                </Button> */}
-
                 <Button style={buttonStyle} className="button" type="primary" shape="circle">
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
