@@ -6,12 +6,14 @@ import { HomeOutlined } from '@ant-design/icons';
 const Work = () => {
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
+            <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                 <Breadcrumb.Item>내 근무</Breadcrumb.Item>
                 <Breadcrumb.Item>근무 현황</Breadcrumb.Item>
             </Breadcrumb>
-            <br />
+            <div style={{ borderTop: "1px solid #eee" }}/>
+            <br /><br />
             <Progress
                 strokeColor={{
                     '0%': '#108ee9',

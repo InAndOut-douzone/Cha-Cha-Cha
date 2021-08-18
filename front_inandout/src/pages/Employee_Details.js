@@ -53,7 +53,8 @@ const Employee_Details = () => {
                 <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
                 <Breadcrumb.Item>자세히</Breadcrumb.Item>
             </Breadcrumb>
-            <br />
+            <div style={{ borderTop: "1px solid #eee" }}/>
+            <br /><br />
             <Descriptions title="[사원 이름]" bordered>
                 <Descriptions.Item label="이름">[데이터]</Descriptions.Item>
                 <Descriptions.Item label="생년월일">[데이터]</Descriptions.Item>

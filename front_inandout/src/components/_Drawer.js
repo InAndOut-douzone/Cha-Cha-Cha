@@ -86,7 +86,7 @@ const _Drawer = () => {
             <Col span={12}>
               <Form.Item
                 name="Number_of_days"
-                label="신청 일수"
+                label="남은 휴가 일수"
                 rules={[{ required: true, message: 'Please choose the Number of days' }]}
               >
                 {/* 로그인 한사람 이름, 직책 받아오기 */}

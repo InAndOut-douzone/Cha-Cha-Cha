@@ -6,11 +6,14 @@ import { HomeOutlined } from '@ant-design/icons';
 const HIM = () => {
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
+            <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                 <Breadcrumb.Item>의원 관리</Breadcrumb.Item>
                 <Breadcrumb.Item>의원 정보 관리</Breadcrumb.Item>
             </Breadcrumb>
+            <div style={{ borderTop: "1px solid #eee" }}/>
+            <br /><br />
             <Descriptions title="의원 정보 관리" bordered>
                 <Descriptions.Item label="의원 번호" span={3}>[데이터]</Descriptions.Item>
                 <Descriptions.Item label="의원명" span={3}>[데이터]</Descriptions.Item>
