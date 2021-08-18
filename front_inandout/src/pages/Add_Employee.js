@@ -34,6 +34,7 @@ const Add_Employee = () => {
                 <Breadcrumb.Item>사원 등록</Breadcrumb.Item>
             </Breadcrumb>
             <Form
+                style={{width:"300px", alignSelf:"center"}}
                 form={form}
                 name="register"
                 onFinish={onFinish}
