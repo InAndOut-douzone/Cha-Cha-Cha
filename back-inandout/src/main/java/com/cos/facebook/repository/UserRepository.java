@@ -7,5 +7,8 @@ import com.cos.facebook.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 	public User findByUsername(String username);
+	
+//	@Query(value = "select asdfsadf", nativeQuery = true)
+//	public User findzxcv(String name);
 
 }
