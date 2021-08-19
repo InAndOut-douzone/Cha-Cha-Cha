@@ -9,6 +9,11 @@
     height: 38px;
     overflow: hidden;
 }
+
+.ant-card-bordered {
+    border: 0px solid !important;
+}
+
 .animation{
     animation:text-scroll 5s linear infinite;
 }
