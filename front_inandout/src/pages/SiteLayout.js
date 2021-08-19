@@ -5,7 +5,6 @@ import Navigation from '../components/Navigation';
 
 export default function SiteLayout({ children }) {
     return (
-        <SiteLayout>
         <Layout >
             <Header />
             <Layout>
@@ -17,6 +16,5 @@ export default function SiteLayout({ children }) {
                 </Layout>
             </Layout>
         </Layout>
-        </SiteLayout>
     );
 }

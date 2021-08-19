@@ -44,7 +44,7 @@ export default function App() {
             {/* 매칭되는 페이지가 없을 때 실행됨 switch가 있기에 가능 */}
             <Route component={PageNotFound} />
           </Switch>
-    //       {/* <Footer /> */}
+          // {/* <Footer /> */}
     //     </Layout>
     //   </Layout>
     // </Layout>
