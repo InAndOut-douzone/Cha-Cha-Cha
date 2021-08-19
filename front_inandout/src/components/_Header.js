@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Button, Modal, Card } from 'antd';
+import { Layout, Button, Modal, Card } from 'antd';
 import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
@@ -16,7 +16,7 @@ const _Header = () => {
         transform: "translate(0%, 2%)",
         backgroundColor: "#001529",
         border:"1px solid white",
-        borderRadius:"5px"
+        borderRadius:"5px",
     }
 
     const showModal = () => {
@@ -60,21 +60,17 @@ const _Header = () => {
                 </div>
                 <div style={{width:"40%", textAlign:"right"}}>
                 <Button style={buttonStyle} className="button" type="primary" onClick={showModal}>
-                    출근
+                    <div>출 근</div>
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p>정말 출근하시겠습니까?</p>
                 </Modal>
                 <Button style={buttonStyle} className="button" type="primary" onClick={showModal2}>
-                    퇴근
+                <div>퇴 근</div>
                 </Button>
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
-                {/* <Button className="button" type="primary">
-                    <Link to="/logout">로그아웃</Link>
-                </Button> */}
-
                 <Button style={buttonStyle} className="button" type="primary" shape="circle">
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
