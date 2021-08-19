@@ -8,14 +8,15 @@ import SiteLayout from './SiteLayout';
 const MyPage = () => {
     
     const [user,setUser] = useState({});
-    const [fileUrl, setFileUrl] = useState({});
+    const [profile, setProfile] = useState({});
     const [email, setEmail]=useState({});
     const [phone, setPhone]=useState({});
 
-    const processImage = (event) => {
-        const imageFile = event.target.files[0];
+    const profileHandler = (e) => {
+        e.preventDefault();
+        const imageFile = e.target.files[0];
         const imageUrl = URL.createObjectURL(imageFile);
-        setFileUrl(imageUrl)
+        setProfile(imageUrl)
      };
 
     const emailHandler = (e) => {
@@ -40,7 +41,7 @@ const MyPage = () => {
         setUser(res.data);
         setEmail(res.data.email);
         setPhone(res.data.phone);
-        setFileUrl(res.data.profile);
+        setProfile(res.data.profile);
         });
     },[]);
 
@@ -48,7 +49,7 @@ const MyPage = () => {
 
         let user = {
         headers:{"Content-Type": "application/json; charset=utf-8"},
-        profile:fileUrl,
+        profile:profile,
         email:email,
         phone:phone
         };
@@ -71,8 +72,8 @@ const MyPage = () => {
             <br /><br />
             <Form style={{width:'90%'}} onFinish={dataUpdate}>
             <h2>사용자 정보</h2>
-            <img style={{width:'25%', height:'35%'}} src={fileUrl}></img>
-            <input type="file" accept="image/*" onChange={processImage}></input>
+            <img style={{width:'25%', height:'35%'}} src={profile}></img>
+            <input type="file" accept="image/*" onChange={profileHandler}></input>
             <br/>
             <Descriptions title="" layout="vertical" bordered>
                 <Descriptions.Item label="이름">{user.name}</Descriptions.Item>

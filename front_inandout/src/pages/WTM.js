@@ -29,6 +29,9 @@ const WTM = () => {
             </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }} />
             <br /><br />
+            <strong>현재 근무시간</strong>
+            하루 근무 시간은 8 시간 입니다.<br/><br/>
+            주간 근무 시간은 40시간 입니다. 초과 근무 시간은 최대 12시간이고, 주 52시간제를 적용하고 있습니다.
             <strong>근무시간 등록</strong>
             <Form name="time_related_controls" onFinish={onFinish}>
                 <Form.Item id="f" name="time-picker" label="TimePicker" {...config}>
