@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.facebook.config.auth.PrincipalDetails;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
+import com.cos.facebook.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	private final UserRepository userRepository;
+	private final UserService userService;
 	
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -50,6 +52,11 @@ public class UserController {
 	@GetMapping("/user/{id}")
 	public ResponseEntity<?> user(@PathVariable long id){
 		return new ResponseEntity<>(userRepository.findById(id),HttpStatus.OK);
+	}
+	
+	@PostMapping("/user/update")
+	public void userUpdate(@RequestBody User user){
+		userService.userUpdate(user);
 	}
 	
 	// @CrossOrigin : 메서드에 @CrossOrigin을 사용해서 cors정책을 풀 수 있다 .WebConfig에서 설정했기때문에 생략
