@@ -10,7 +10,7 @@ const { Sider } = Layout;
 
 const Navigation = () => {
 
-    const role = window.sessionStorage.getItem('userRole');
+    const role = localStorage.getItem('userRole');
 
     return (
         // admin일 경우

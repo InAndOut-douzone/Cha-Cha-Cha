@@ -7,7 +7,7 @@ const { Content } = Layout;
 
 export default function First() {
 
-  const role = window.sessionStorage.getItem('userRole');
+  const role = localStorage.getItem('userRole');
   return (
         <Content
           className="site-layout-background"
