@@ -15,8 +15,16 @@ const _Header = () => {
     const buttonStyle = {
         transform: "translate(0%, 2%)",
         backgroundColor: "#001529",
-        border:"1px solid white",
+        border:"1px solid silver",
         borderRadius:"5px",
+        marginLeft:"-1px"
+    }
+
+    const buttonStyle2 = {
+        transform: "translate(0%, 2%)",
+        backgroundColor: "#001529",
+        border:"1px solid silver",
+        //borderRadius:"5px",
     }
 
     const showModal = () => {
@@ -71,13 +79,13 @@ const _Header = () => {
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
                     <p>정말 퇴근하시겠습니까?</p>
                 </Modal>
-                <Button style={buttonStyle} className="button" type="primary" shape="circle">
+                <Button style={buttonStyle2} className="button" type="primary" shape="circle">
                     <Link to="/"><HomeOutlined /></Link>
                 </Button>
-                <Button style={buttonStyle} className="button" type="primary" shape="circle">
+                <Button style={buttonStyle2} className="button" type="primary" shape="circle">
                     <Link to="/logout"><LogoutOutlined /></Link>
                 </Button>
-                <Button style={buttonStyle} className="button" type="primary" shape="circle">
+                <Button style={buttonStyle2} className="button" type="primary" shape="circle">
                     <BellOutlined />
                 </Button>
                 </div>
