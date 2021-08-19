@@ -15,15 +15,15 @@ const _Header = () => {
     const buttonStyle = {
         transform: "translate(0%, 2%)",
         backgroundColor: "#001529",
-        border:"1px solid silver",
+        border:"0px solid silver",
         borderRadius:"5px",
-        marginLeft:"-1px"
+        marginLeft:"-1px",
     }
 
     const buttonStyle2 = {
         transform: "translate(0%, 2%)",
         backgroundColor: "#001529",
-        border:"1px solid silver",
+        border:"0px solid silver",
         //borderRadius:"5px",
     }
 
@@ -67,14 +67,14 @@ const _Header = () => {
                 </Card>
                 </div>
                 <div style={{width:"40%", textAlign:"right"}}>
-                <Button style={buttonStyle} className="button" type="primary" onClick={showModal}>
-                    <div>출 근</div>
+                <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModal}>
+                    <div>IN</div>
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p>정말 출근하시겠습니까?</p>
                 </Modal>
                 <Button style={buttonStyle} className="button" type="primary" onClick={showModal2}>
-                <div>퇴 근</div>
+                <div>OUT</div>
                 </Button>
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
                     <p>정말 퇴근하시겠습니까?</p>
