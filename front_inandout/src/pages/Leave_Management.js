@@ -3,6 +3,7 @@ import Highlighter from 'react-highlight-words';
 import { HomeOutlined, SearchOutlined } from '@ant-design/icons';
 import { Layout, Breadcrumb, Input, Button, Space, Table } from 'antd';
 import { Link } from 'react-router-dom';
+import SiteLayout from './SiteLayout';
 
 const data = [
   {
@@ -165,6 +166,7 @@ export default class Add_Notice extends React.Component {
       },
     ];
     return (
+      <SiteLayout>
       <Layout style={{ padding: '0 24px 24px' }}>
         <br />
         <Breadcrumb style={{ margin: '16px 0' }}>
@@ -178,6 +180,7 @@ export default class Add_Notice extends React.Component {
         <br />
         <Table columns={columns} dataSource={data} />
       </Layout>
+      </SiteLayout>
     );
   }
 }

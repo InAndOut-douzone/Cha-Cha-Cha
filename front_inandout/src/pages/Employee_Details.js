@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Descriptions, Table, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
+import SiteLayout from './SiteLayout';
 
 const dataSource = [
     {
@@ -45,6 +46,7 @@ const columns = [
 
 const Employee_Details = () => {
     return (
+        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -73,6 +75,7 @@ const Employee_Details = () => {
             [근무 현황]
             <Table dataSource={dataSource} columns={columns} /> 
         </Layout>
+        </SiteLayout>
     );
 };
 
