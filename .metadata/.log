@@ -9195,3 +9195,18 @@ java.lang.IllegalArgumentException: Cannot set lower sequence number for root (p
 
 !ENTRY org.eclipse.jdt.launching 4 150 2021-08-19 15:03:52.210
 !MESSAGE The archive: /Users/jeongin/Downloads/lombok.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 15:50:28.007
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 15:50:28.012
+!MESSAGE classpath=118 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 15:50:28.014
+!MESSAGE buffering callback sts4.classpath.xBoEhXkt back-inandout false 118
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 15:50:28.014
+!MESSAGE executing callback sts4.classpath.xBoEhXkt 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 15:50:28.034
+!MESSAGE executing callback sts4.classpath.xBoEhXkt SUCCESS [done]
