@@ -1,48 +1,52 @@
 import React from 'react';
-import { Layout, Breadcrumb, Form, Input, Button } from 'antd';
+import { Form, Input, Select, Button, DatePicker } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 
-const layout = {
-    labelCol: {
-        span: 1,
-    },
-    wrapperCol: {
-        span: 22,
-    },
-};
+const { Option } = Select;
 
-// const validateMessages = {
-//     required: '${label} is required!',
-//     types: {
-//         email: '${label} is not a valid email!',
-//         number: '${label} is not a valid number!',
-//     },
-//     number: {
-//         range: '${label} must be between ${min} and ${max}',
-//     },
-// };
+const Add_Employee = () => {
+    const [form] = Form.useForm();
 
-const Add_Notice = () => {
     const onFinish = (values) => {
-        console.log(values);
+        console.log('값 : ', values);
     };
+
+    const prefixSelector = (
+        <Form.Item name="prefix" noStyle>
+            <Select
+                style={{
+                    width: 70,
+                }}
+            >
+                <Option value="86">+86</Option>
+                <Option value="87">+87</Option>
+            </Select>
+        </Form.Item>
+    );
 
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
-                <Breadcrumb.Item>공지사항 관리</Breadcrumb.Item>
-                <Breadcrumb.Item>공지사항 등록</Breadcrumb.Item>
+                <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
+                <Breadcrumb.Item>사원 등록</Breadcrumb.Item>
             </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }}/>
             <br /><br />
-            [공지사항 등록 화면]
-            <br /><br />
-
-            {/* <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}> */}
-            <Form {...layout} name="nest-messages" onFinish={onFinish} >
+            <Form
+                style={{ width: "350px", alignSelf: "center" }}
+                form={form}
+                name="register"
+                onFinish={onFinish}
+                initialValues={{
+                    residence: ['zhejiang', 'hangzhou', 'xihu'],
+                    prefix: '86',
+                }}
+                scrollToFirstError
+            >
                 <Form.Item
                     name={['notice', 'title']}
                     label="제목"
@@ -57,7 +61,7 @@ const Add_Notice = () => {
                 <Form.Item name={['notice', 'content']} label="내용" >
                     <Input.TextArea placeholder="내용"/>
                 </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 22 }}>
+                <Form.Item>
                     <Button type="primary" htmlType="submit">
                         등록
                     </Button>
@@ -67,4 +71,4 @@ const Add_Notice = () => {
     );
 };
 
-export default Add_Notice;
+export default Add_Employee;
