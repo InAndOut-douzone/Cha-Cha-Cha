@@ -12,7 +12,7 @@ const WTM = () => {
                 <Breadcrumb.Item>병원 관리</Breadcrumb.Item>
                 <Breadcrumb.Item>근무시간 관리</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ borderTop: "1px solid #eee" }}/>
+            <div style={{ borderTop: "1px solid #eee" }} />
             <br /><br />
             [근무시간 관리 화면]
         </Layout>
