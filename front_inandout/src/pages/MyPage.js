@@ -14,6 +14,12 @@ const MyPage = () => {
         },
       };
 
+      const config = {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      };
+
     useEffect(() => {
         axios.get("http://localhost:8080/api/user/1",header).then((res)=>{
         console.log(res);
@@ -29,7 +35,7 @@ const MyPage = () => {
      }
 
     const dataUpdate = () => {
-        axios.post("http://localhost:8080/api/user/update",header).then((res)=>{
+        axios.post("http://localhost:8080/api/user/update",config,header).then((res)=>{
             console.log(res);
             });
     }

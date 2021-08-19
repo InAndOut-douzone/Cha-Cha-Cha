@@ -56,6 +56,7 @@ public class UserController {
 	
 	@PostMapping("/user/update")
 	public void userUpdate(@RequestBody User user){
+		System.out.println("asdasd");
 		userService.userUpdate(user);
 	}
 	

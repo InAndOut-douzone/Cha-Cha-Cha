@@ -12,13 +12,11 @@ const _Header = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);
 
-
     const buttonStyle = {
-        transform: "translate(0%, -40%)",
-        border: "1px solid #e6f6ff",
-        backgroundColor: "rgba(0,0,0,0)",
-        color: "#e6f6ff",
-        padding: "5px"
+        transform: "translate(0%, 2%)",
+        backgroundColor: "#001529",
+        border:"1px solid white",
+        borderRadius:"5px",
     }
 
     const showModal = () => {
@@ -48,40 +46,40 @@ const _Header = () => {
     return (
         <div>
             <Header className="header">
-                <div style={{ display: "inline-block", background: "#001529", color: "silver", fontSize: "25px" }}>IN-N-OUT</div>
+                {/* <div className="logo" /> */}
+                <div style={{width:"20%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle:"oblique"}}>IN-N-OUT</div>
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
-                {/* <div style={{textAlign:"right", width:"200px"}}> */}
-                <div style={{ textAlign: "right" }}>
-                    <Card style={{ width: 450, height: 40, marginTop: 12, backgroundColor: "#001528" }}>
-                        <div className='animation'>
-                            <p><a style={{ color: "white" }} href="aa">[공지사항 1]</a></p>
-                            <p><a style={{ color: "white" }} href="aa">[공지사항 2]</a></p>
-                            <p><a style={{ color: "white" }} href="aa">[공지사항 3]</a></p>
-                        </div>
-                    </Card>
+               <div style={{textAlign:"right", width:"40%"}}>
+                <Card style={{ width: "100%", height: 40, marginTop: 12, backgroundColor: "#001528" }}>
+                    <div className='animation'>
+                        <p><a style={{ color: "white" }} href="aa">[공지사항 1]</a></p>
+                        <p><a style={{ color: "white" }} href="aa">[공지사항 2]</a></p>
+                        <p><a style={{ color: "white" }} href="aa">[공지사항 3]</a></p>
+                    </div>
+                </Card>
                 </div>
-                <div>
-                    <Button style={buttonStyle} className="button" type="primary" onClick={showModal}>
-                        <strong>출 근</strong>
-                    </Button>
-                    <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                        <p>정말 출근하시겠습니까?</p>
-                    </Modal>
-                    <Button style={buttonStyle} className="button" type="primary" onClick={showModal2}>
-                        <strong>퇴 근</strong>
-                    </Button>
-                    <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
-                        <p>정말 퇴근하시겠습니까?</p>
-                    </Modal>
-                    <Button style={buttonStyle} className="button" type="primary" shape="circle">
-                        <Link to="/"><HomeOutlined /></Link>
-                    </Button>
-                    <Button style={buttonStyle} className="button" type="primary" shape="circle">
-                        <Link to="/logout"><LogoutOutlined /></Link>
-                    </Button>
-                    <Button style={buttonStyle} className="button" type="primary" shape="circle">
-                        <BellOutlined />
-                    </Button>
+                <div style={{width:"40%", textAlign:"right"}}>
+                <Button style={buttonStyle} className="button" type="primary" onClick={showModal}>
+                    <div>출 근</div>
+                </Button>
+                <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <p>정말 출근하시겠습니까?</p>
+                </Modal>
+                <Button style={buttonStyle} className="button" type="primary" onClick={showModal2}>
+                <div>퇴 근</div>
+                </Button>
+                <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
+                    <p>정말 퇴근하시겠습니까?</p>
+                </Modal>
+                <Button style={buttonStyle} className="button" type="primary" shape="circle">
+                    <Link to="/"><HomeOutlined /></Link>
+                </Button>
+                <Button style={buttonStyle} className="button" type="primary" shape="circle">
+                    <Link to="/logout"><LogoutOutlined /></Link>
+                </Button>
+                <Button style={buttonStyle} className="button" type="primary" shape="circle">
+                    <BellOutlined />
+                </Button>
                 </div>
             </Header>
         </div>
