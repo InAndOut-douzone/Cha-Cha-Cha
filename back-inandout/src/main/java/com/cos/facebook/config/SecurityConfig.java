@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin().disable() 
 			.httpBasic().disable() //
 			
+			
 			.addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager
 			.addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
 			

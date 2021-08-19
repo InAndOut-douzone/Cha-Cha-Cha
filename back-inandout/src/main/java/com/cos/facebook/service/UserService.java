@@ -16,7 +16,7 @@ public class UserService {
 	
 	public void userUpdate(User user) {
 		
-		long id = user.getId();
+		 long id = 1; // 여기서 현재 로그인 한 유저의 id를 얻어온다.
 		User user1 = userRepository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("없");
 		});

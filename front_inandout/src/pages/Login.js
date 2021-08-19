@@ -11,7 +11,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url(${img});
   background-size: cover;
 `;

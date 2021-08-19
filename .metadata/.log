@@ -9175,6 +9175,7 @@ java.lang.IllegalArgumentException: Cannot set lower sequence number for root (p
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.lsp4e 2 0 2021-08-19 12:03:52.168
 !MESSAGE Javadoc unavailable. Failed to obtain it.
 !STACK 0
@@ -9469,3 +9470,25 @@ java.lang.IllegalArgumentException: Cannot set lower sequence number for root (p
 	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1143)
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+=======
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 14:14:03.094
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 14:14:03.115
+!MESSAGE classpath=118 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 14:14:03.117
+!MESSAGE buffering callback sts4.classpath.xBoEhXkt back-inandout false 117
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 14:14:03.119
+!MESSAGE executing callback sts4.classpath.xBoEhXkt 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-08-19 14:14:03.187
+!MESSAGE executing callback sts4.classpath.xBoEhXkt SUCCESS [done]
+
+!ENTRY org.eclipse.jdt.launching 4 150 2021-08-19 15:03:29.403
+!MESSAGE The archive: /Users/jeongin/Downloads/lombok.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.eclipse.jdt.launching 4 150 2021-08-19 15:03:52.210
+!MESSAGE The archive: /Users/jeongin/Downloads/lombok.jar which is referenced by the classpath, does not exist.
+>>>>>>> a617d2b38ca34d271e966a2accaf9d8608e4d464
