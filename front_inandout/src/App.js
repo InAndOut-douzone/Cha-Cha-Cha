@@ -17,6 +17,7 @@ import First from './pages/First';
 import Login from './pages/Login';
 import Work from './pages/Work';
 import HIM from './pages/HIM';
+import HI from './pages/HI';
 import WTM from './pages/WTM';
 
 export default function App() {
@@ -27,14 +28,15 @@ export default function App() {
     <Layout >
       <Header />
       <Layout>
-        <Navigation /> 
+        <Navigation />
         <Layout style={{ padding: '0 24px 24px' }}>
-          <Switch>
+        <Switch>
             <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
             <PrivateRoute component={First} path="/" exact={true} />
             <PrivateRoute component={MyPage} path="/mypage" exact={true} />
             <PrivateRoute component={Work} path="/work" exact={true} />
             <PrivateRoute component={HIM} path="/him" exact={true} />
+            <PrivateRoute component={HI} path="/hi" exact={true} />
             <PrivateRoute component={WTM} path="/wtm" exact={true} />
             <PrivateRoute component={Add_Employee} path="/addemployee" exact={true} />
             <PrivateRoute component={Employee_Management} path="/employeemanagement" exact={true} />

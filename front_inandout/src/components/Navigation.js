@@ -75,7 +75,7 @@ const Navigation = () => {
                         <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub4" icon={<FileSearchOutlined />} title="의원 정보">
-                        <Menu.Item key="8"><Link to="/him">의원 정보</Link></Menu.Item>
+                        <Menu.Item key="8"><Link to="/hi">의원 정보</Link></Menu.Item>
                         <Menu.Item key="9"><Link to="/wtm">근무 시간</Link></Menu.Item>
                     </SubMenu>
                 </Menu>
