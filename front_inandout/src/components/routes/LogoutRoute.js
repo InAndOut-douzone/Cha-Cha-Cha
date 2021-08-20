@@ -6,7 +6,7 @@ const LogoutRoute = ({component: Component, ...rest}) => {
     localStorage.removeItem('userNo');
     localStorage.removeItem('userRole');
     localStorage.removeItem('Authorization');
-    console.log("로그앗웃ㅇㅁ 시랳ㅇ됨?");
+
     return ( 
         <Route {...rest} render={props => (     
             isLogin() ? 

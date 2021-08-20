@@ -39,7 +39,6 @@ const columns = [
 
 const Work = () => {
     return (
-        <SiteLayout>
             <Layout style={{ padding: '0 24px 24px' }}>
                 <br />
                 <Breadcrumb style={{ margin: '16px 0' }}>
@@ -82,7 +81,6 @@ const Work = () => {
                 /> */}
                 <Table dataSource={dataSource} columns={columns} />
             </Layout>
-        </SiteLayout>
     );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd';
 import Header from './components/_Header';
@@ -19,16 +19,19 @@ import Work from './pages/Work';
 import HIM from './pages/HIM';
 import HI from './pages/HI';
 import WTM from './pages/WTM';
+import isLogin from './utils/isLogin'
+
 
 export default function App() {
+
   return (
     // Switch는 첫번째로 매칭되는 path를 가진 컴포넌트를 렌더링
     // exact는 정확히 일치하는, 부분적으로 일치하는 것이 아닌 정확하게 일치하는 path의 컴포넌트를 렌더링, default true
-    // <Layout >
-    //   <Header />
-    //   <Layout>
-    //     <Navigation />
-    //     <Layout style={{ padding: '0 24px 24px' }}>
+    <Layout >
+      <Header />
+      <Layout>
+        <Navigation /> 
+        <Layout style={{ padding: '0 24px 24px' }}>
           <Switch>
             <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
             <PrivateRoute component={First} path="/" exact={true} />
@@ -46,9 +49,9 @@ export default function App() {
             {/* 매칭되는 페이지가 없을 때 실행됨 switch가 있기에 가능 */}
             <Route component={PageNotFound} />
           </Switch>
-          // {/* <Footer /> */}
-    //     </Layout>
-    //   </Layout>
-    // </Layout>
+           {/* <Footer /> */}
+         </Layout>
+       </Layout>
+     </Layout>
   )
 }

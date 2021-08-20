@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -11,7 +11,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 850px;
   background-image: url(${img});
   background-size: cover;
 `;
@@ -43,7 +43,6 @@ export default function Login({ history, location }){
       config
     ).then(res => {
     if(res.status === 200) {
-      console.log("Authorization:" + res.headers.authorization);
       localStorage.setItem("Authorization", res.headers.authorization);
       axios.get("http://localhost:8080/api/user",header).then(res => {
         console.log(123,res);
