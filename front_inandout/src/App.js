@@ -30,9 +30,9 @@ export default function App() {
     <Layout >
       <Header />
       <Layout>
-        <Navigation /> 
+        <Navigation />
         <Layout style={{ padding: '0 24px 24px' }}>
-          <Switch>
+        <Switch>
             <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
             <PrivateRoute component={First} path="/" exact={true} />
             <PrivateRoute component={MyPage} path="/mypage" exact={true} />

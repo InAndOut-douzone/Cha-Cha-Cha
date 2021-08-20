@@ -14,7 +14,7 @@ const Container = styled.div`
   height: 850px;
   background-image: url(${img});
   background-size: cover;
-`;
+  `;
 
 const config = {
   headers: {
