@@ -29,7 +29,6 @@ const HIM = () => {
     }, []);
 
     return (
-        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -53,7 +52,6 @@ const HIM = () => {
                 <Descriptions.Item label="대표자명" span={3}>{hospital.ceoName}</Descriptions.Item>
             </Descriptions>
         </Layout>
-        </SiteLayout>
     );
 };
 
