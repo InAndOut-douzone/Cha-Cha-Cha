@@ -21,6 +21,6 @@ public class Hospital {
 	private String telNum;
 	private String logo;
 	private String ceoName;
-	private Date onTime;			// 여는시간
-	private Date offTime;			// 닫는시간
+	private String onTime;			// 여는시간
+	private String offTime;			// 닫는시간
 }

@@ -1,75 +1,31 @@
-import React, { useState } from 'react';
-import { Layout, Breadcrumb, Form, DatePicker, TimePicker, Button, Image } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Layout, Breadcrumb, Form, TimePicker, Button, Image } from 'antd';
 import { Link } from 'react-router-dom';
-import { CaretRightOutlined, HomeOutlined } from '@ant-design/icons';
+import { HomeOutlined } from '@ant-design/icons';
 import image from "../assets/images/double-right.jpg";
 import "../assets/css/wtm.css";
 import moment from 'moment';
+import { Typography } from 'antd';
+import axios from 'axios';
 
-const dataSource = [
-    {
-        key: '1',
-        no: 1,
-        name: 'Mike',
-        rank: '간호사',
-        birthday: '0000-00-00',
-        hire_date: '0000-00-00',
-        details: '자세히',
-    },
-    {
-        key: '2',
-        no: 2,
-        name: 'Jone',
-        rank: '간호사',
-        birthday: '0000-00-00',
-        hire_date: '0000-00-00',
-        details: '자세히',
-    },
-];
+const { Title, Text } = Typography;
 
-const columns = [
-    {
-        title: 'No',
-        dataIndex: 'no',
-        key: 'no',
-    },
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: 'Rank',
-        dataIndex: 'rank',
-        key: 'rank',
-    },
-    {
-        title: 'Birthday',
-        dataIndex: 'birthday',
-        key: 'birthday',
-    },
-    {
-        title: 'Hire_date',
-        dataIndex: 'hire_date',
-        key: 'hire_date',
-    },
-    {
-        title: 'Details',
-        dataIndex: 'details',
-        key: 'details',
-        render: ({ details }) => (<Link to={'/employeedetails'}>자세히</Link>),
-    },
-];
+  const config = {
+      rules: [
+          {
+              type: 'object',
+              required: true,
+              message: 'Please select time!',
+          },
+      ],
+  };
 
-const config = {
-    rules: [
-        {
-            type: 'object',
-            required: true,
-            message: 'Please select time!',
-        },
-    ],
-};
+  const header = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      "Content-Type": "application/json; charset=utf-8"
+    },
+  };
 
   const formItemLayout = {
     labelCol: {
@@ -84,8 +40,17 @@ const config = {
 
 const WTM = () => {
 
-    const [open,setOpen] = useState("00:00");
-    const [close,setClose] = useState("00:00");
+    const [open,setOpen] = useState();
+    const [close,setClose] = useState();
+
+    useEffect(()=>{
+      axios.get("http://localhost:8080/api/hospital", header).then(res=> {
+        setOpen(res.data.onTime);
+        setClose(res.data.offTime);
+      }).catch(err => {
+        console.log("err :" + err);
+      });
+    },[])
 
     const openTime = (value) => {
       const timeString = moment(value).format("HH:mm");
@@ -99,18 +64,22 @@ const WTM = () => {
       console.log("updateTime value" + timeString);
     }
 
-    const onFinish = (value) => {
+    const onFinish = async () => {
       let data = {
         onTime: open,
         offTime: close
       }
 
-      console.log("data" + data.onTime + data.closeTime);
-      
+      console.log("123",data);
 
+      await axios.put("http://localhost:8080/api/hospital",JSON.stringify(data), header).then(res => {
+        console.log("res" + res)
+      }).catch(error => {
+        console.log("error" + error);
+      })
     };
     return (      
-        <Layout style={{ padding: '0 24px 24px', maxWidth: "960px", marginLeft:"10%", marginRight:"10%"}}>
+        <Layout style={{ padding: '0 24px 24px', maxWidth: "960px"}}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
@@ -121,9 +90,11 @@ const WTM = () => {
             <br/><br/>
 
             <div style={{textAlign:"center"}}>
-              <h2>현재 근무 시간</h2>
-              하루 근무 시간은 {open} 시간 입니다.<br/><br/>
-              주간 근무 시간은 {close} 시간 입니다. 초과 근무 시간은 최대 12 시간이고, <span style={{color:"red"}}>주 52시간제</span>를 적용하고 있습니다.<br/>
+            <Title level={2}>현재 근무 시간</Title>
+            <Text>근무 시간은 {open} ~ {close} 입니다.</Text>
+             <br/>
+             <Text type="danger">주 52시간제</Text>
+             <Text>를 적용하고 있습니다.</Text>
             </div>
 
             <section id="about-fifty-two-hours-work-week">

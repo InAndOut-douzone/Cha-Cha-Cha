@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd';
 import Header from './components/_Header';
@@ -18,8 +18,6 @@ import Login from './pages/Login';
 import Work from './pages/Work';
 import HIM from './pages/HIM';
 import WTM from './pages/WTM';
-import isLogin from './utils/isLogin'
-
 
 export default function App() {
 
