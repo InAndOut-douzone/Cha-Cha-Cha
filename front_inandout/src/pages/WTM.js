@@ -6,17 +6,70 @@ import image from "../assets/images/double-right.jpg";
 import "../assets/css/wtm.css";
 import moment from 'moment';
 
+const dataSource = [
+    {
+        key: '1',
+        no: 1,
+        name: 'Mike',
+        rank: '간호사',
+        birthday: '0000-00-00',
+        hire_date: '0000-00-00',
+        details: '자세히',
+    },
+    {
+        key: '2',
+        no: 2,
+        name: 'Jone',
+        rank: '간호사',
+        birthday: '0000-00-00',
+        hire_date: '0000-00-00',
+        details: '자세히',
+    },
+];
 
+const columns = [
+    {
+        title: 'No',
+        dataIndex: 'no',
+        key: 'no',
+    },
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+    },
+    {
+        title: 'Rank',
+        dataIndex: 'rank',
+        key: 'rank',
+    },
+    {
+        title: 'Birthday',
+        dataIndex: 'birthday',
+        key: 'birthday',
+    },
+    {
+        title: 'Hire_date',
+        dataIndex: 'hire_date',
+        key: 'hire_date',
+    },
+    {
+        title: 'Details',
+        dataIndex: 'details',
+        key: 'details',
+        render: ({ details }) => (<Link to={'/employeedetails'}>자세히</Link>),
+    },
+];
 
-  const config = {
+const config = {
     rules: [
-      {
-        type: 'object',
-        required: true,
-        message: 'Please select time!',
-      },
+        {
+            type: 'object',
+            required: true,
+            message: 'Please select time!',
+        },
     ],
-  };
+};
 
   const formItemLayout = {
     labelCol: {

@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.cos.facebook.service.UserService"/>
-    <fullyQualifiedTypeName name="com.cos.facebook.model.User"/>
-    <fullyQualifiedTypeName name="com.cos.facebook.repository.UserRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>

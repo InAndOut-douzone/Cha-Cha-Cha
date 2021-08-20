@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Layout, Descriptions, Badge, Breadcrumb, Form,Button,Input  } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
+import SiteLayout from './SiteLayout';
 
 const MyPage = () => {
     
@@ -45,7 +46,6 @@ const MyPage = () => {
     },[]);
 
     const dataUpdate = (e) => {
-
         let user = {
         headers:{"Content-Type": "application/json; charset=utf-8"},
         profile:profile,
@@ -59,6 +59,7 @@ const MyPage = () => {
     }
     
     return (
+        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -99,6 +100,7 @@ const MyPage = () => {
             </Form.Item>
             </Form>
         </Layout>
+        </SiteLayout>
     );
 };
 
