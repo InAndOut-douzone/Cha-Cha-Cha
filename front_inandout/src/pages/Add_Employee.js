@@ -3,6 +3,7 @@ import { Form, Input, Select, Button, DatePicker } from 'antd';
 import { Layout, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
+import SiteLayout from './SiteLayout';
 
 const { Option } = Select;
 
@@ -27,6 +28,7 @@ const Add_Employee = () => {
     );
 
     return (
+        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -182,6 +184,7 @@ const Add_Employee = () => {
                 </Form.Item>
             </Form>
         </Layout>
+        </SiteLayout>
     );
 };
 

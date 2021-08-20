@@ -7,7 +7,6 @@ import '../assets/css/scroll.css';
 
 const { Header } = Layout;
 
-
 const _Header = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);

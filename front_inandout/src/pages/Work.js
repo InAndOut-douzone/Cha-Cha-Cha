@@ -2,9 +2,11 @@ import React from 'react';
 import { Layout, Progress, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
+import SiteLayout from './SiteLayout';
 
 const Work = () => {
     return (
+        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -46,6 +48,7 @@ const Work = () => {
                 percent={100}
             />
         </Layout>
+        </SiteLayout>
     );
 };
 
