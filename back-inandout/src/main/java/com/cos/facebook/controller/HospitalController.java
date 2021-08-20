@@ -35,7 +35,7 @@ public class HospitalController {
 		// String -> Date 변환
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 //		Date date = sdf.parse(hospitalReqDto.getOnTime());
-		
+		 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
