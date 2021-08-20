@@ -3,7 +3,6 @@ import { Form, Input, Select, Button, DatePicker } from 'antd';
 import { Layout, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from './SiteLayout';
 
 const { Option } = Select;
 

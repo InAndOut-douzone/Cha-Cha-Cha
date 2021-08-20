@@ -4,7 +4,6 @@ import { Descriptions, Layout, Breadcrumb, Image, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import logo from '../assets/images/logo.png';
-import SiteLayout from './SiteLayout';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
@@ -29,7 +28,6 @@ const HIM = () => {
     }, []);
 
     return (
-        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -50,10 +48,9 @@ const HIM = () => {
                 </Descriptions.Item>
                 <Descriptions.Item label="의원 연락처" span={3}>{hospital.telNum}</Descriptions.Item>
                 <Descriptions.Item label="의원 주소" span={3}>{hospital.address}</Descriptions.Item>
-                <Descriptions.Item label="대표자명" span={3}>{hospital.ceoName}</Descriptions.Item>
+                <Descriptions.Item label="대표자+명" span={3}>{hospital.ceoName}</Descriptions.Item>
             </Descriptions>
         </Layout>
-        </SiteLayout>
     );
 };
 

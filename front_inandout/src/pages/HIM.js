@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Form, Layout, Breadcrumb, Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from './SiteLayout';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
@@ -33,9 +32,9 @@ const HIM = () => {
     }, []);
 
     return (
-        <SiteLayout>
             <Layout style={{ padding: '0 24px 24px' }}>
                 <br />
+                {hospital.no}
                 <Breadcrumb style={{ margin: '16px 0' }}>
                     <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                     <Breadcrumb.Item>의원 관리</Breadcrumb.Item>
@@ -56,9 +55,22 @@ const HIM = () => {
                     }}
                     scrollToFirstError
                 >
+                    {/* <Form.Item
+                        name="no"
+                        label="의원 번호"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your no!',
+                                whitespace: true,
+                            },
+                        ]}
+                    >
+                        <Input placeholder="의원명을 입력해주세요" />
+                    </Form.Item> */}
                     <Form.Item
                         name="name"
-                        label="이름"
+                        label="의원명"
                         rules={[
                             {
                                 required: true,
@@ -67,32 +79,32 @@ const HIM = () => {
                             },
                         ]}
                     >
-                        <Input placeholder="이름을 입력해주세요" />
+                        <input defaultValue={hospital.name} />
                     </Form.Item>
                     <Form.Item
-                        name="username"
-                        label="사원번호"
+                        name="logo"
+                        label="기업로고"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your username!',
+                                message: 'Please input your logo!',
                                 whitespace: true,
                             },
                         ]}
                     >
-                        <Input placeholder="사원번호를 입력해주세요" />
+                        <Input placeholder="기업로고를 입력해주세요" />
                     </Form.Item>
                     <Form.Item
-                        name="email"
-                        label="E-mail"
+                        name="telNum"
+                        label="의원 연락처"
                         rules={[
                             {
-                                type: 'email',
-                                message: 'The input is not valid E-mail!',
+                                type: 'telNum',
+                                message: 'The input is not valid telNum',
                             },
                             {
                                 required: true,
-                                message: 'Please input your E-mail!',
+                                message: 'Please input your telNum',
                             },
                         ]}
                     >
@@ -100,7 +112,7 @@ const HIM = () => {
                     </Form.Item>
                     <Form.Item
                         name="address"
-                        label="주소"
+                        label="의원 주소"
                         rules={[
                             {
                                 required: true,
@@ -112,12 +124,12 @@ const HIM = () => {
                         <Input placeholder="주소를 입력해주세요" />
                     </Form.Item>
                     <Form.Item
-                        name="position"
-                        label="직급"
+                        name="ceoName"
+                        label="대표자명"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your position!',
+                                message: 'Please input your ceoName!',
                                 whitespace: true,
                             },
                         ]}
@@ -137,7 +149,6 @@ const HIM = () => {
 
 
             </Layout>
-        </SiteLayout>
     );
 };
 
