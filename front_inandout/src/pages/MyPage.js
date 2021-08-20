@@ -45,7 +45,6 @@ const MyPage = () => {
     },[]);
 
     const dataUpdate = (e) => {
-
         let user = {
         headers:{"Content-Type": "application/json; charset=utf-8"},
         profile:profile,
