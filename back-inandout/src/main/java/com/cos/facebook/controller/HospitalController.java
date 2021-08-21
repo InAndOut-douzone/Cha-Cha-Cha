@@ -37,10 +37,10 @@ public class HospitalController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-//	@PutMapping("/hospital2")
-//	public ResponseEntity<?> updateHospital2(@RequestBody HospitalReqDto2 hospitalReqDto2) {
-//		hospitalService.update2(hospitalReqDto2);
-//	
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+	@PutMapping("/hospital2")
+	public ResponseEntity<?> updateHospital2(@RequestBody HospitalReqDto2 hospitalReqDto2) {
+		hospitalService.update2(hospitalReqDto2);
+	
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

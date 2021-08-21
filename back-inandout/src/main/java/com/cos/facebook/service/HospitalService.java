@@ -21,7 +21,20 @@ public class HospitalService {
 
 	public void update(HospitalReqDto hospitalReqDto) {
 		Hospital hospitalEntity = hospitalRepository.findById(1);
-
+//		hospitalEntity.setOnTime(hospitalReqDto.getOnTime());
+//		hospitalEntity.setOffTime(hospitalReqDto.getOffTime());
+		
+		Hospital result = hospitalRepository.save(hospitalEntity);
+		System.out.println("result" + result);
+	}
+	
+	public void update2(HospitalReqDto2 hospitalReqDto2) {
+		Hospital hospitalEntity = hospitalRepository.findById(1);
+		hospitalEntity.setName(hospitalReqDto2.getName());
+		hospitalEntity.setAddress(hospitalReqDto2.getAddress());
+		hospitalEntity.setCeoName(hospitalReqDto2.getCeoName());
+		hospitalEntity.setLogo(hospitalReqDto2.getLogo());
+		hospitalEntity.setTelNum(hospitalReqDto2.getTelNum());
 		
 		Hospital result = hospitalRepository.save(hospitalEntity);
 		System.out.println("result" + result);

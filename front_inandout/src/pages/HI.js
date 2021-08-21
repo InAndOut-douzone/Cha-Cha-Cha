@@ -40,12 +40,7 @@ const HIM = () => {
             <Descriptions title="의원 정보 관리" bordered>
                 <Descriptions.Item label="의원 번호" span={3}>{hospital.no}</Descriptions.Item>
                 <Descriptions.Item label="의원명" span={3}>{hospital.name}</Descriptions.Item>
-                <Descriptions.Item label="의원 로고" span={3}>
-                    <Image style={{ borderRadius: "0%", width: '100%', height: '100%' }}
-                        width={180}
-                        src={logo}
-                    />    
-                </Descriptions.Item>
+                <Descriptions.Item label="의원 로고" span={3}>{hospital.logo}</Descriptions.Item>
                 <Descriptions.Item label="의원 연락처" span={3}>{hospital.telNum}</Descriptions.Item>
                 <Descriptions.Item label="의원 주소" span={3}>{hospital.address}</Descriptions.Item>
                 <Descriptions.Item label="대표자+명" span={3}>{hospital.ceoName}</Descriptions.Item>

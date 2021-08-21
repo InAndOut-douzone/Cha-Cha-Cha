@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Layout, Breadcrumb, Input, Button } from 'antd';
+import { Form, Layout, Breadcrumb, Button, Input, Descriptions, Badge } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-
+import { InputGroup, FormControl, Image, Container, Row, Col } from 'react-bootstrap';
 const HIM = () => {
     const [hospital, setHospital] = useState({});
     const [form] = Form.useForm();
 
     const [name, setName] = useState();
     const [address, setAddress] = useState();
-    const [ceoName, setCeoName] = useState();
     const [logo, setLogo] = useState();
     const [telNum, setTelNum] = useState();
-
-    // const config = {
-    //     headers: {
-    //         "Content-Type": "application/json; charset=utf-8",
-    //     },
-    // };
+    const [ceoName, setCeoName] = useState();
 
     const HIM_name = (e) => {
         e.preventDefault();
@@ -28,6 +22,21 @@ const HIM = () => {
     const HIM_address = (e) => {
         e.preventDefault();
         setAddress(e.target.value);
+    };
+
+    const HIM_logo = (e) => {
+        e.preventDefault();
+        setLogo(e.target.value);
+    };
+
+    const HIM_telNum = (e) => {
+        e.preventDefault();
+        setTelNum(e.target.value);
+    };
+
+    const HIM_ceoName = (e) => {
+        e.preventDefault();
+        setCeoName(e.target.value);
     };
 
     const header = {
@@ -41,6 +50,10 @@ const HIM = () => {
             console.log(res);
             setHospital(res.data);
             setName(res.data.name);
+            setAddress(res.data.address);
+            setLogo(res.data.logo);
+            setTelNum(res.data.telNum);
+            setCeoName(res.data.ceoName);
         });
     }, []);
 
@@ -48,15 +61,16 @@ const HIM = () => {
         let hospital = {
             headers: { "Content-Type": "application/json; charset=utf-8" },
             name: name,
-            address: address
+            address: address,
+            logo: logo,
+            telNum: telNum,
+            ceoName: ceoName
         };
 
-        axios.post("http://localhost:8080/api/hospital2", hospital, header).then((res) => {
+        axios.put("http://localhost:8080/api/hospital2", hospital, header).then((res) => {
             console.log(res)
         });
     }
-
-
 
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
@@ -69,62 +83,50 @@ const HIM = () => {
             <div style={{ borderTop: "1px solid #eee" }} />
             <br /><br />
 
-            <Form
-                style={{ width: "350px", alignSelf: "center" }}
-                // form={form}
-                // name="register"
-                onFinish={dataUpdate}
-                // scrollToFirstError
-            >
-                {hospital.no}{hospital.name}
-                <Form.Item
-                    name="no"
-                    label="의원 번호"
-                >
-                    {hospital.no}
-                </Form.Item>
-                <Form.Item
-                    name="name"
-                    label="의원명"
-                >
-                    <input defaultValue={hospital.name} onChange={HIM_name} />
-                </Form.Item>
-                <Form.Item
-                    name="address"
-                    label="의원 주소"
-                >
-                    <Input defaultValue={hospital.address} onChange={HIM_address}/>
-                </Form.Item>
-                {/* <Form.Item
-                    name="logo"
-                    label="기업로고"
-                >
-                    <Input defaultValue={hospital.logo} />
-                </Form.Item>
-                <Form.Item
-                    name="telNum"
-                    label="의원 연락처"
-                >
-                    <Input defaultValue={hospital.telNum} />
-                </Form.Item>
-                <Form.Item
-                    name="ceoName"
-                    label="대표자명"
-                >
-                    <Input defaultValue={hospital.ceoName} />
-                </Form.Item> */}
+            <Container>
+                <Row>
+                    <Col xs={6} md={4}>
+                        <Image src={hospital.logo} rounded />
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src="holder.js/171x180" roundedCircle />
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src="holder.js/171x180" thumbnail />
+                    </Col>
+                </Row>
+            </Container>
+
+            <Form style={{ width: "350px", alignSelf: "center" }} onFinish={dataUpdate}>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 번호</InputGroup.Text>
+                    <FormControl aria-label="의원 번호" aria-describedby="inputGroup-sizing-sm" value={hospital.no} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원명</InputGroup.Text>
+                    <FormControl aria-label="의원명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.name} onChange={HIM_name} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 주소</InputGroup.Text>
+                    <FormControl aria-label="의원 주소" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.address} onChange={HIM_address} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 로고</InputGroup.Text>
+                    <FormControl aria-label="의원 로고" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.logo} onChange={HIM_logo} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 전화번호</InputGroup.Text>
+                    <FormControl aria-label="의원 전화번호" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.telNum} onChange={HIM_telNum} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">대표자명</InputGroup.Text>
+                    <FormControl aria-label="대표자명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.ceoName} onChange={HIM_ceoName} />
+                </InputGroup>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        등록
-                    </Button>
+                    {/* <Button variant="dark" type='Primary' htmlType="submit">수정</Button> */}
+                    <Button type='Primary' htmlType="submit">수정</Button>
                 </Form.Item>
             </Form>
-
-
-
-
-
-
         </Layout>
     );
 };
