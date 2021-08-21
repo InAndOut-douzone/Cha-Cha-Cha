@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cos.facebook.config.dto.HospitalReqDto;
+import com.cos.facebook.config.dto.HospitalReqDto2;
 import com.cos.facebook.model.Hospital;
 import com.cos.facebook.repository.HospitalRepository;
 
