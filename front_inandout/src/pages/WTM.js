@@ -43,7 +43,6 @@ const WTM = () => {
   };
 
   const [time, setTime] = useState([]);
-  const [week,setWeek] = useState();
 
     const updateApi = async (week, moment) => {
       let data = {
