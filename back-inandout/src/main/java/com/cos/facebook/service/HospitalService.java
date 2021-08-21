@@ -21,8 +21,7 @@ public class HospitalService {
 
 	public void update(HospitalReqDto hospitalReqDto) {
 		Hospital hospitalEntity = hospitalRepository.findById(1);
-		hospitalEntity.setOnTime(hospitalReqDto.getOnTime());
-		hospitalEntity.setOffTime(hospitalReqDto.getOffTime());
+
 		
 		Hospital result = hospitalRepository.save(hospitalEntity);
 		System.out.println("result" + result);

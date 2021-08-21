@@ -22,13 +22,6 @@ const config = {
   },
 };
 
-const header = {
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("Authorization"),
-  },
-};
-
-
 export default function Login({ history, location }){
 
   const onfinish = async (value) => {
@@ -41,11 +34,15 @@ export default function Login({ history, location }){
       "http://localhost:8080/login",
       JSON.stringify(data),
       config
-    ).then(res => {
+    ).then(async res => {
     if(res.status === 200) {
       localStorage.setItem("Authorization", res.headers.authorization);
-      axios.get("http://localhost:8080/api/user",header).then(res => {
-        console.log(123,res);
+      const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
+      await axios.get("http://localhost:8080/api/user",header).then(res => {
         localStorage.setItem('userNo', res.data.no);
         localStorage.setItem('userRole', res.data.roles);
         window.location.replace("/")  

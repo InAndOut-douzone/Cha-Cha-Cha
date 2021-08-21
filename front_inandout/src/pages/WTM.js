@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Breadcrumb, Form, TimePicker, Button, Image } from 'antd';
 import { Link } from 'react-router-dom';
-import { HomeOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, HomeOutlined, RightOutlined } from '@ant-design/icons';
 import image from "../assets/images/double-right.jpg";
 import "../assets/css/wtm.css";
 import moment from 'moment';
@@ -42,42 +42,55 @@ const WTM = () => {
 
     const [open,setOpen] = useState();
     const [close,setClose] = useState();
+    const [times,setTimes] = useState({
+      Monday : { onTime: "12:00", offTime: "13:00" },
+      Tuesday : { onTime: "12:00", offTime: "13:00" },
+    })
 
-    useEffect(()=>{
-      axios.get("http://localhost:8080/api/hospital", header).then(res=> {
-        setOpen(res.data.onTime);
-        setClose(res.data.offTime);
-      }).catch(err => {
-        console.log("err :" + err);
-      });
-    },[])
 
-    const openTime = (value) => {
-      const timeString = moment(value).format("HH:mm");
-      setOpen(timeString);
-      console.log("updateTime value" + timeString);
-    }
+    // useEffect(()=>{
+    //   axios.get("http://localhost:8080/api/hospital", header).then(res=> {
+    //     setOpen(res.data.onTime);
+    //     setClose(res.data.offTime);
+    //   }).catch(err => {
+    //     console.log("err :" + err);
+    //   });
+    // },[])
 
-    const closeTime = (value) => {
-      const timeString = moment(value).format("HH:mm");
-      setClose(timeString);
-      console.log("updateTime value" + timeString);
-    }
+    // const openTime = (value) => {
+    //   const timeString = moment(value).format("HH:mm");
+    //   setOpen(timeString);
+    //   console.log("updateTime value" + timeString);
+    // }
 
-    const onFinish = async () => {
-      let data = {
-        onTime: open,
-        offTime: close
-      }
+    // const closeTime = (value) => {
+    //   const timeString = moment(value).format("HH:mm");
+    //   setClose(timeString);
+    //   console.log("updateTime value" + timeString);
+    // }
 
-      console.log("123",data);
+    const onFinish = async (value) => {
+      // let data = {
+      //   onTime: open,
+      //   offTime: close
+      // }
 
-      await axios.put("http://localhost:8080/api/hospital",JSON.stringify(data), header).then(res => {
-        console.log("res" + res)
-      }).catch(error => {
-        console.log("error" + error);
-      })
+      console.log("value : " + value);
+
+
+
+      // await axios.put("http://localhost:8080/api/hospital",JSON.stringify(data), header).then(res => {
+      //   console.log("res" + res)
+      // }).catch(error => {
+      //   console.log("error" + error);
+      // })
     };
+
+    const onClick = (value, moment) => {
+      console.log(123, value);
+      console.log(121123, moment[0]);
+    }
+
     return (      
         <Layout style={{ padding: '0 24px 24px', maxWidth: "960px"}}>
             <br />
@@ -160,15 +173,89 @@ const WTM = () => {
                 localStorage.getItem("userRole") === "ROLE_ADMIN" 
                   ? 
                   <Form name="time_related_controls" {...formItemLayout} onFinish={onFinish}>
-                    <Form.Item name="t" label="open" {...config}>
+                    <TimePicker.RangePicker id="date" name= "date" onChange={onClick} bordered={true} format="HH:mm"/>
+                    {/* <Form.Item name="Monday" label="Monday" {...config}>
+                      <TimePicker
+                        placeholder="Open Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ArrowRightOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <TimePicker 
+                        placeholder="Close Time" 
                         format="HH:mm" 
                         onSelect={openTime} />
                     </Form.Item>
-                    <Form.Item name="f" label="close" {...config}>
-                      <TimePicker 
+                    
+                    <Form.Item name="Tuesday" label="Tuesday" {...config}>
+                    <TimePicker
+                        placeholder="Open Time" 
                         format="HH:mm" 
-                        onSelect={closeTime} />
+                        onSelect={openTime} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ArrowRightOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <TimePicker 
+                        placeholder="Close Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />
+                    </Form.Item>
+                    
+                    <Form.Item name="Wednesday" label="Wednesday" {...config}>
+                      <TimePicker
+                        placeholder="Open Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ArrowRightOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <TimePicker 
+                        placeholder="Close Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />
+                    </Form.Item>
+                    
+                    <Form.Item name="Thursday" label="Thursday" {...config}>
+                      <TimePicker
+                        placeholder="Open Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ArrowRightOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <TimePicker 
+                        placeholder="Close Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />
+                    </Form.Item>
+
+                    <Form.Item name="Friday" label="Friday" {...config}>
+                      <TimePicker
+                        placeholder="Open Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ArrowRightOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <TimePicker 
+                        placeholder="Close Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />
+                    </Form.Item>
+
+                    <Form.Item name="Saturday" label="Saturday" {...config}>
+                      <TimePicker
+                        placeholder="Open Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ArrowRightOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <TimePicker 
+                        placeholder="Close Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />
+                    </Form.Item>
+
+                    <Form.Item name="Sunday" label="Sunday" {...config}>
+                      <TimePicker
+                        placeholder="Open Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ArrowRightOutlined />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <TimePicker 
+                        placeholder="Close Time" 
+                        format="HH:mm" 
+                        onSelect={openTime} />
                     </Form.Item>
                     <Form.Item
                         wrapperCol={{
@@ -185,7 +272,7 @@ const WTM = () => {
                         <Button type="primary" htmlType="submit">
                         Submit
                         </Button>
-                    </Form.Item>
+                    </Form.Item> */}
                   </Form>
                   : 12
               }
