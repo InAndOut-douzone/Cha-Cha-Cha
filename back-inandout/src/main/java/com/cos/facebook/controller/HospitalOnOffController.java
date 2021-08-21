@@ -19,7 +19,7 @@ public class HospitalOnOffController {
 
 	private final HospitalOnOffService hospitalOnOffService;
 	
-	@PutMapping("/hospital")
+	@PutMapping("/hospitalOnOff")
 	public ResponseEntity<?> updateHospital(@RequestBody HospitalOnOffReqDto hospitalOnOffReqDto) {
 		hospitalOnOffService.update(hospitalOnOffReqDto);
 		// String -> Date 변환

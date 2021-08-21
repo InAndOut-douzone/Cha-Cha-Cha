@@ -63,7 +63,7 @@ const WTM = () => {
         offTime: moment[1].format("HH:mm")
       }
 
-      await axios.put("http://localhost:8080/api/hospital",JSON.stringify(data), header).then(res => {
+      await axios.put("http://localhost:8080/api/hospitalOnOff",JSON.stringify(data), header).then(res => {
         console.log(res)
       }).catch(error => {
         console.log("error" + error);
