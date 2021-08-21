@@ -20,13 +20,6 @@ const { Title, Text } = Typography;
       ],
   };
 
-  const header = {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("Authorization"),
-      "Content-Type": "application/json; charset=utf-8"
-    },
-  };
-
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -40,21 +33,22 @@ const { Title, Text } = Typography;
 
 const WTM = () => {
 
-    const [open,setOpen] = useState();
-    const [close,setClose] = useState();
-    const [times,setTimes] = useState({
-      Monday : { onTime: "12:00", offTime: "13:00" },
-      Tuesday : { onTime: "12:00", offTime: "13:00" },
-    })
+  const header = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      "Content-Type": "application/json; charset=utf-8"
+    },
+  };
 
-    // useEffect(()=>{
-    //   axios.get("http://localhost:8080/api/hospital", header).then(res=> {
-    //     setOpen(res.data.onTime);
-    //     setClose(res.data.offTime);
-    //   }).catch(err => {
-    //     console.log("err :" + err);
-    //   });
-    // },[])
+  const [time, setTime] = useState([]);
+
+    useEffect(()=>{
+      axios.get("http://localhost:8080/api/hospitalOnOff", header).then(res=> {
+        setTime(res.data);
+      }).catch(err => {
+        console.log("err :" + err);
+      });
+    },[])
 
     const updateApi = async (week, moment) => {
       let data = {
@@ -91,7 +85,7 @@ const WTM = () => {
 
             <div style={{textAlign:"center"}}>
             <Title level={2}>현재 근무 시간</Title>
-            <Text>근무 시간은 {open} ~ {close} 입니다.</Text>
+            <Text>근무 시간은 입니다.</Text>
              <br/>
              <Text type="danger">주 52시간제</Text>
              <Text>를 적용하고 있습니다.</Text>

@@ -1,5 +1,7 @@
 package com.cos.facebook.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cos.facebook.dto.HospitalOnOffReqDto;
@@ -19,5 +21,9 @@ public class HospitalOnOffService {
 		hospitalOnOffEntity.setOnTime(hospitalOnOffReqDto.getOnTime());
 		hospitalOnOffEntity.setOffTime(hospitalOnOffReqDto.getOffTime());
 		hospitalOnOffRepository.save(hospitalOnOffEntity);
+	}
+
+	public List<HospitalOnOff> findAll() {
+		return hospitalOnOffRepository.findAll();
 	}
 }

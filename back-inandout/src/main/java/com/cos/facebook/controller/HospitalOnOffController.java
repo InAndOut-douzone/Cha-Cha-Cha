@@ -2,6 +2,7 @@ package com.cos.facebook.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,11 @@ import lombok.RequiredArgsConstructor;
 public class HospitalOnOffController {
 
 	private final HospitalOnOffService hospitalOnOffService;
+	
+	@GetMapping("/hospitalOnOff")
+	public ResponseEntity<?> getHospitalOnOff() {
+		return new ResponseEntity<>(hospitalOnOffService.findAll(),HttpStatus.OK);
+	}
 	
 	@PutMapping("/hospitalOnOff")
 	public ResponseEntity<?> updateHospital(@RequestBody HospitalOnOffReqDto hospitalOnOffReqDto) {
