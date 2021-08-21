@@ -10,8 +10,7 @@
 - npm i react-redux
 - npm i redux
 - npm i react-highlight-words
+- npm i bootstrap
+- npm i react-bootstrap
 
 ### 📀 설치할 것
-
-
-

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/_Header';
 import Navigation from './components/Navigation';
 import PrivateRoute from './components/routes/PrivateRoute';
