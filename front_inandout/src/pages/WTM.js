@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Layout, Breadcrumb, Form, TimePicker, Button, Image } from 'antd';
 import { Link } from 'react-router-dom';
-import { ArrowRightOutlined, HomeOutlined, RightOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, ConsoleSqlOutlined, HomeOutlined, RightOutlined } from '@ant-design/icons';
 import image from "../assets/images/double-right.jpg";
 import "../assets/css/wtm.css";
 import moment from 'moment';
 import { Typography } from 'antd';
 import axios from 'axios';
+import TimeItem from '../components/HospitalOnOff/TimeItem'
+import FormItem from '../components/HospitalOnOff/FormItem'
 
 const { Title, Text } = Typography;
 
@@ -32,7 +34,7 @@ const { Title, Text } = Typography;
   };
 
 const WTM = () => {
-
+  
   const header = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("Authorization"),
@@ -41,14 +43,7 @@ const WTM = () => {
   };
 
   const [time, setTime] = useState([]);
-
-    useEffect(()=>{
-      axios.get("http://localhost:8080/api/hospitalOnOff", header).then(res=> {
-        setTime(res.data);
-      }).catch(err => {
-        console.log("err :" + err);
-      });
-    },[])
+  const [week,setWeek] = useState();
 
     const updateApi = async (week, moment) => {
       let data = {
@@ -56,21 +51,35 @@ const WTM = () => {
         onTime: moment[0].format("HH:mm"),
         offTime: moment[1].format("HH:mm")
       }
-
+      
       await axios.put("http://localhost:8080/api/hospitalOnOff",JSON.stringify(data), header).then(res => {
-        console.log(res)
+        console.log(res);
+        fetch();
       }).catch(error => {
         console.log("error" + error);
       })
     }
 
-    const Monday = (moment) => { updateApi("Monday", moment); }
-    const Tuesday = (moment) => { updateApi("Tuesday", moment); }
-    const Wednesday = (moment) => { updateApi("Wednesday", moment); }
-    const Thursday = (moment) => { updateApi("Thursday", moment); }
-    const Friday = (moment) => { updateApi("Friday", moment); }
-    const Saturday = (moment) => { updateApi("Saturday", moment); }
-    const Sunday = (moment) => { updateApi("Sunday", moment); }
+    const fetch= () => {
+      axios.get("http://localhost:8080/api/hospitalOnOff", header).then(res=> {
+        setTime(res.data);
+        console.log(res);
+      }).catch(err => {
+        console.log("err :" + err);
+      });
+    }
+
+    useEffect(() => {
+      fetch();
+    },[])
+
+    const Monday = (moment,week) => { updateApi(week, moment); }
+    // const Tuesday = (moment) => { updateApi("Tuesday", moment); }
+    // const Wednesday = (moment) => { updateApi("Wednesday", moment); }
+    // const Thursday = (moment) => { updateApi("Thursday", moment); }
+    // const Friday = (moment) => { updateApi("Friday", moment); }
+    // const Saturday = (moment) => { updateApi("Saturday", moment); }
+    // const Sunday = (moment) => { updateApi("Sunday", moment); }
 
     return (      
         <Layout style={{ padding: '0 24px 24px', maxWidth: "960px"}}>
@@ -85,7 +94,7 @@ const WTM = () => {
 
             <div style={{textAlign:"center"}}>
             <Title level={2}>현재 근무 시간</Title>
-            <Text>근무 시간은 입니다.</Text>
+            {time.map((time) => (<TimeItem key={time.no} time={time} />))}
              <br/>
              <Text type="danger">주 52시간제</Text>
              <Text>를 적용하고 있습니다.</Text>
@@ -148,13 +157,16 @@ const WTM = () => {
             </section>
 
             <div style={{textAlign:"center"}}>
-              <h2>근무 시간 수정</h2>
+            <Title level={3}>현재 근무 시간</Title>
+            <Text>시간 선택 시</Text> <Text type="danger">자동 저장</Text> <Text>됩니다 .</Text>
               <br/><br/>
               {
                 localStorage.getItem("userRole") === "ROLE_ADMIN" 
                   ? 
                   <Form name="time_related_controls" {...formItemLayout}>
-                    <Form.Item name="Monday" label="Monday">
+                  {time.map((time) => (<FormItem key={time.no} time={time} onChange={Monday}/>))}
+                  
+                    {/* <Form.Item name="Monday" label="Monday">
                     <TimePicker.RangePicker onChange={Monday} bordered={true} format="HH:mm"/>
                     </Form.Item>
 
@@ -180,7 +192,7 @@ const WTM = () => {
 
                     <Form.Item name="Sunday" label="Sunday">
                     <TimePicker.RangePicker onChange={Sunday} bordered={true} format="HH:mm"/>
-                    </Form.Item>
+                    </Form.Item> */}
                   </Form>
                   : 12
               }
