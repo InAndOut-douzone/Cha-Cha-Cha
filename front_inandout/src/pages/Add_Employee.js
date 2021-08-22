@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Form, Input, Select, Button, DatePicker } from 'antd';
 import { Layout, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
-import { HomeOutlined } from '@ant-design/icons';
+import { HomeOutlined, CloseOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+import axios from 'axios';
+import styled from 'styled-components';
 
 const { Option } = Select;
 
@@ -11,7 +13,38 @@ const Add_Employee = () => {
 
     const onFinish = (values) => {
         console.log('값 : ', values);
+        console.log(values.birthday.format('YYYY MM DD'));
+        console.log('값 : ', values);
     };
+
+    const [username, setUsername] = useState();
+    const [usernameCheckState, setUsernameCheckState] = useState(false);
+    const inputRef = useRef(null);
+
+    const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
+
+    const usernameCheck = async (event) => {
+        setUsername(event.target.value);
+        if(event.target.value === "") {
+            setUsernameCheckState(false);
+            inputRef.current.focus();
+        }
+        await axios.get("http://localhost:8080/api/user/usernameCheck/"+event.target.value, header).then( res => {
+            if(res.data === "") {
+                setUsernameCheckState(true);
+                inputRef.current.focus();
+            } else {
+                setUsernameCheckState(false);
+                inputRef.current.focus();
+            }
+        }).catch( err => {
+            console.log(err);
+        });
+    }
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -26,7 +59,15 @@ const Add_Employee = () => {
         </Form.Item>
     );
 
+    const DIV = styled.div`
+        .ant-form-item-control-input-content {
+        display: flex;
+        align-items: center;
+        }
+    `
+
     return (
+        <DIV>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -71,7 +112,13 @@ const Add_Employee = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="사원번호를 입력해주세요"/>
+                    <Input ref={inputRef} value={username} style={{display:"flex"}} onChange={usernameCheck} placeholder="사원번호를 입력해주세요" /> 
+                    {
+                        usernameCheckState ?
+                        <CheckCircleTwoTone style={{marginLeft:"10px"}} twoToneColor="#52c41a" /> :
+                         <CloseOutlined style={{marginLeft:"10px", color:"red"}}/>
+                    }
+                    
                 </Form.Item>
                 <Form.Item
                     name="birthday"
@@ -182,6 +229,7 @@ const Add_Employee = () => {
                 </Form.Item>
             </Form>
         </Layout>
+        </DIV>
     );
 };
 

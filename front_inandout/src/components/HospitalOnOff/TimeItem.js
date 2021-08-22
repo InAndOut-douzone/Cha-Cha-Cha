@@ -3,7 +3,7 @@ import React from 'react';
 
 const TimeComponent = (props) => {
 
-    const { week, onTime, offTime } = props.time;
+  const { week, onTime, offTime } = props.time;
 
   const formItemLayout = {
     labelCol: {
