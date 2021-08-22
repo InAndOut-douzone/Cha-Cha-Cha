@@ -12,9 +12,16 @@ const Add_Employee = () => {
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
-        console.log('값 : ', values);
-        console.log(values.birthday.format('YYYY MM DD'));
-        console.log('값 : ', values);
+        if(usernameCheckState === false) {
+            alert("사원번호가 중복되었습니다. ")
+            return;
+        } else {
+            console.log('값 : ', values);
+            console.log(values.birthday);
+            console.log(values.birthday.format('YYYY MM DD'));
+            console.log(values.birthday.toDate());
+            console.log('값 : ', values);
+        }
     };
 
     const [username, setUsername] = useState();
@@ -64,6 +71,9 @@ const Add_Employee = () => {
         display: flex;
         align-items: center;
         }
+        label {
+            width: 100px;
+        }
     `
 
     return (
@@ -101,6 +111,7 @@ const Add_Employee = () => {
                 >
                     <Input placeholder="이름을 입력해주세요"/>
                 </Form.Item>
+                <div style={{ display: "flex", alignItems: "baseline"}}>
                 <Form.Item
                     name="username"
                     label="사원번호"
@@ -112,14 +123,14 @@ const Add_Employee = () => {
                         },
                     ]}
                 >
-                    <Input ref={inputRef} value={username} style={{display:"flex"}} onChange={usernameCheck} placeholder="사원번호를 입력해주세요" /> 
-                    {
+                    <Input ref={inputRef} value={username} defaultValue={username} onChange={usernameCheck}  style={{display:"flex"}} placeholder="사원번호를 입력해주세요" />                     
+                </Form.Item>
+                {
                         usernameCheckState ?
                         <CheckCircleTwoTone style={{marginLeft:"10px"}} twoToneColor="#52c41a" /> :
                          <CloseOutlined style={{marginLeft:"10px", color:"red"}}/>
-                    }
-                    
-                </Form.Item>
+                }
+                </div>
                 <Form.Item
                     name="birthday"
                     label="생년월일"

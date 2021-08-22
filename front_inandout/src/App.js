@@ -11,7 +11,7 @@ import PageNotFound from './pages/error/PageNotFound';
 import Employee_Management from './pages/Employee_Management';
 import Employee_Details from './pages/Employee_Details';
 import Leave_Management from './pages/Leave_Management';
-import Add_Employee from './pages/Add_Employee';
+import Add_Employee from './pages/user/Add_Employee';
 import Add_Notice from './pages/Add_Notice';
 import MyPage from './pages/MyPage';
 import First from './pages/First';
