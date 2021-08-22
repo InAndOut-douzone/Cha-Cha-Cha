@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Layout, Breadcrumb, Form, TimePicker, Button, Image } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Layout, Breadcrumb, Form, Image } from 'antd';
 import { Link } from 'react-router-dom';
-import { ArrowRightOutlined, ConsoleSqlOutlined, HomeOutlined, RightOutlined } from '@ant-design/icons';
-import image from "../assets/images/double-right.jpg";
-import "../assets/css/wtm.css";
-import moment from 'moment';
+import { HomeOutlined } from '@ant-design/icons';
+import image from "../../assets/images/double-right.jpg";
+import "../../assets/css/wtm.css"
 import { Typography } from 'antd';
 import axios from 'axios';
-import TimeItem from '../components/HospitalOnOff/TimeItem'
-import FormItem from '../components/HospitalOnOff/FormItem'
+import TimeItem from '../../components/HospitalOnOff/TimeItem'
+import FormItem from '../../components/HospitalOnOff/FormItem'
 
 const { Title, Text } = Typography;
 
@@ -157,7 +156,7 @@ const WTM = () => {
 
             <div style={{textAlign:"center"}}>
             <Title level={3}>현재 근무 시간</Title>
-            <Text>시간 선택 시</Text> <Text type="danger">자동 저장</Text> <Text>됩니다 .</Text>
+            <Text>* 시간 선택 시</Text> <Text type="danger">자동 저장</Text> <Text>됩니다 .</Text>
               <br/><br/>
               {
                 localStorage.getItem("userRole") === "ROLE_ADMIN" 

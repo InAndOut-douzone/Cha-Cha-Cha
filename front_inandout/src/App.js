@@ -19,7 +19,7 @@ import Login from './pages/Login';
 import Work from './pages/Work';
 import HIM from './pages/HIM';
 import HI from './pages/HI';
-import WTM from './pages/WTM';
+import WTM from './pages/hospital/WTM';
 
 export default function App() {
 
