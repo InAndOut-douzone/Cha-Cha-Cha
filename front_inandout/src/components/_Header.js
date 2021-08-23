@@ -4,12 +4,20 @@ import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import '../assets/css/scroll.css';
+import axios from 'axios';
+import moment from 'moment';
 
 const { Header } = Layout;
 
 const _Header = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);
+
+    const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
 
     const buttonStyle = {
         transform: "translate(0%, 2%)",
@@ -30,7 +38,14 @@ const _Header = () => {
         setIsModalVisible(true);
     };
 
+    const [onTime, setOnTime] = useState("IN");
+    const [offTime, setOffTime] = useState("");
+
     const handleOk = () => {
+        axios.get("http://localhost:8080/api/onoff/"+localStorage.getItem("username"), header).then(res=>{
+            // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
+            setOnTime(moment(res.data.onTime).format("HH mm"));
+        }).catch();
         setIsModalVisible(false);
     };
 
@@ -43,6 +58,10 @@ const _Header = () => {
     };
 
     const handleOk2 = () => {
+        axios.put("http://localhost:8080/api/onoff", header).then(res=>{
+            // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
+            setOffTime(moment(res.data.offTime).format("HH mm"));
+        }).catch();
         setIsModalVisible2(false);
     };
 
@@ -55,6 +74,7 @@ const _Header = () => {
             <Header className="header">
                 {/* <div className="logo" /> */}
                 <div style={{width:"20%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle:"oblique"}}>IN-N-OUT</div>
+                
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
                <div style={{textAlign:"right", width:"40%"}}>
                 <Card style={{ width: "100%", height: 40, marginTop: 12, backgroundColor: "#001528" }}>
@@ -66,12 +86,14 @@ const _Header = () => {
                 </Card>
                 </div>
                 <div style={{width:"40%", textAlign:"right"}}>
+
                 <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModal}>
-                    <div>IN</div>
+                    <div>{onTime}</div>
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p>정말 출근하시겠습니까?</p>
-                </Modal>
+                </Modal>  
+                
                 <Button style={buttonStyle} className="button" type="primary" onClick={showModal2}>
                 <div>OUT</div>
                 </Button>

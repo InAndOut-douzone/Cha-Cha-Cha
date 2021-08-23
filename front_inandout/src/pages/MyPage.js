@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Layout, Descriptions, Badge, Breadcrumb, Form,Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
+import SiteLayout from './SiteLayout';
 
 const MyPage = () => {
     
