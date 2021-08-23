@@ -27,11 +27,11 @@ public class OnOffController {
 		return new ResponseEntity<>(onOffService.insertOnTime(username),HttpStatus.OK);		
 	}
 	
-	@PutMapping("/onoff")
+	@GetMapping("/onoff")
 	public ResponseEntity<?> offTime(Authentication authentication){
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println("as" + principal.getUser().getUsername());
+		System.out.println("as" + principal.getUser().getId());
 		
-		return new ResponseEntity<>(onOffService.insertOffTime(principal.getUser().getUsername()),HttpStatus.OK);		
+		return new ResponseEntity<>(onOffService.insertOffTime(principal.getUser().getId()),HttpStatus.OK);		
 	}
 }

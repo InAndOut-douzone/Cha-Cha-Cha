@@ -32,9 +32,9 @@ public class OnOffService {
 		return onOffRepository.save(onOffEntity);
 	}
 
-	public OnOff insertOffTime(String username) {
+	public OnOff insertOffTime(long id) {
 		
-		OnOff onOffEntity = onOffRepository.findOnTimeByUsername(username);
+		OnOff onOffEntity = onOffRepository.findOnTimeById(id);
 		onOffEntity.setOffTime(new Date());
 		
 		return onOffRepository.save(onOffEntity);

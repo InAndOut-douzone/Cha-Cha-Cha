@@ -58,7 +58,7 @@ const _Header = () => {
     };
 
     const handleOk2 = () => {
-        axios.put("http://localhost:8080/api/onoff", header).then(res=>{
+        axios.get("http://localhost:8080/api/onoff", header).then(res=>{
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
             setOffTime(moment(res.data.offTime).format("HH mm"));
         }).catch();
