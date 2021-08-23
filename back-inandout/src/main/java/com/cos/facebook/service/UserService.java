@@ -24,7 +24,7 @@ public class UserService {
 		user1.setProfile(user.getProfile());
 		user1.setEmail(user.getEmail());
 		user1.setPhone(user.getPhone());
-		userRepository.save(user1);
+		userRepository.save(user1); 
 	}
 
 	

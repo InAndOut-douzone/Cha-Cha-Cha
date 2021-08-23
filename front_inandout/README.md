@@ -16,5 +16,6 @@
 - npm i @fullcalendar/daygrid
 - npm i @fullcalendar/interaction
 - npm i @material-ui/core
+- npm i redux react-redux
 
 ### 📀 설치할 것

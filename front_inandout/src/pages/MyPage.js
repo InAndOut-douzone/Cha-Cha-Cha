@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Layout, Descriptions, Badge, Breadcrumb, Form,Button,Input  } from 'antd';
+import { Layout, Descriptions, Badge, Breadcrumb, Form,Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 
 const MyPage = () => {
     
+    const imgPath = "profiles/";
+    //const imgPath = "/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/"
     const [user,setUser] = useState({});
     const [profile, setProfile] = useState({});
     const [email, setEmail]=useState({});
     const [phone, setPhone]=useState({});
+    const [image, setimage]=useState({});
+    const formData = new FormData();
 
     const profileHandler = (e) => {
-        e.preventDefault();
-        const imageFile = e.target.files[0];
-        const imageUrl = URL.createObjectURL(imageFile);
-        setProfile(imageUrl)
+         e.preventDefault();
+         const imageFile = e.target.files[0];
+         const imageUrl = URL.createObjectURL(imageFile);
+
+         setimage(imageFile);
+         setProfile(imageUrl);
+        // console.log(profile);
      };
 
     const emailHandler = (e) => {
@@ -30,31 +37,35 @@ const MyPage = () => {
 
     const header = {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("Authorization"),
-        },
+            'Content-Type': 'multipart/form-data',
+          Authorization: "Bearer " + localStorage.getItem("Authorization")
+        }
       };
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/user/1",header).then((res)=>{
-        console.log(res);
         setUser(res.data);
         setEmail(res.data.email);
         setPhone(res.data.phone);
-        setProfile(res.data.profile);
+        setProfile(imgPath + res.data.profile);
+
         });
     },[]);
 
     const dataUpdate = (e) => {
-        let user = {
-        headers:{"Content-Type": "application/json; charset=utf-8"},
-        profile:profile,
+        
+        let userData = {
+        profile: null,
         email:email,
         phone:phone
         };
 
-        axios.post("http://localhost:8080/api/user/update",user,header).then((res)=>{
+        formData.append('file',image);
+        formData.append('userData',JSON.stringify(userData));
+        axios.post("http://localhost:8080/api/user/update",formData,header).then((res)=>{
             console.log(res);
             });
+        
     }
     
     return (
@@ -67,10 +78,10 @@ const MyPage = () => {
             </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }}/>
             <br /><br />
-            <Form style={{width:'90%'}} onFinish={dataUpdate}>
+            <Form style={{width:'90%'}} onFinish={dataUpdate} >
             <h2>사용자 정보</h2>
             <img style={{width:'25%', height:'35%'}} src={profile}></img>
-            <input type="file" accept="image/*" onChange={profileHandler}></input>
+            <input type="file" accept="image/*" name="file" onChange={profileHandler}></input>
             <br/>
             <Descriptions title="" layout="vertical" bordered>
                 <Descriptions.Item label="이름">{user.name}</Descriptions.Item>
