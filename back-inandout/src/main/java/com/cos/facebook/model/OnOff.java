@@ -1,6 +1,6 @@
 package com.cos.facebook.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -21,8 +21,8 @@ public class OnOff {
 	private int no;
 	private String state;
 	private Date date;						// 날짜
-	private LocalDateTime onTime; // 출근시간
-	private LocalDateTime offTime;	// 퇴근시간
+	private Date onTime; 				// 출근시간
+	private Date offTime;				// 퇴근시간
 	
 	@ManyToOne
 	@JoinColumn(name="userId")
