@@ -22,50 +22,50 @@ const config = {
   },
 };
 
-export default function Login({ history, location }){
+export default function Login({ history, location }) {
 
   const onfinish = async (value) => {
     let data = {
-      username:value.no,
-      password:"1"
+      username: value.no,
+      password: "1"
     }
-    console.log(4444,data)
+    console.log(4444, data)
     await axios.post(
       "http://localhost:8080/login",
       JSON.stringify(data),
       config
     ).then(async res => {
-    if(res.status === 200) {
-      localStorage.setItem("Authorization", res.headers.authorization);
-      const header = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("Authorization"),
-        },
-      };
-      await axios.get("http://localhost:8080/api/user",header).then(res => {
-        localStorage.setItem('userNo', res.data.no);
-        localStorage.setItem('userRole', res.data.roles);
-        window.location.replace("/")  
-      }).catch (err => {
-        console.log(err);
-      })
-    }
-  }).catch(err => {
-    alert('a');
-  });
-}
-    return (
-      <Container>
-    <Form
-      name="global_state"
-      layout="inline"
-      onFinish={onfinish}
-    >
-      <Form.Item name="no">
-        <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> 
-      </Form.Item>
-      <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
-    </Form>
+      if (res.status === 200) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        const header = {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+          },
+        };
+        await axios.get("http://localhost:8080/api/user", header).then(res => {
+          localStorage.setItem('userNo', res.data.no);
+          localStorage.setItem('userRole', res.data.roles);
+          window.location.replace("/")
+        }).catch(err => {
+          console.log(err);
+        })
+      }
+    }).catch(err => {
+      alert('a');
+    });
+  }
+  return (
+    <Container>
+      <Form
+        name="global_state"
+        layout="inline"
+        onFinish={onfinish}
+      >
+        <Form.Item name="no">
+          <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} />
+        </Form.Item>
+        <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
+      </Form>
     </Container>
   )
 }

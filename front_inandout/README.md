@@ -12,5 +12,8 @@
 - npm i react-highlight-words
 - npm i bootstrap
 - npm i react-bootstrap
+- npm i @fullcalendar/react
+- npm i @fullcalendar/daygrid
+- npm i @fullcalendar/interaction
 
 ### 📀 설치할 것
