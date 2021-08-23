@@ -1,40 +1,41 @@
 .site-layout-background2 {
-    background-color: #fff;
-    /* overflow-x:hidden; overflow-y:auto; */
-    /* overflow-x:hidden; overflow-y:scroll; */
+  background-color: #fff;
+  /* overflow-x:hidden; overflow-y:auto; */
+  /* overflow-x:hidden; overflow-y:scroll; */
 }
 
 .profile_name {
-    background-color: #fff;
+  background-color: #fff;
 }
 
-.header{
-    /* display: block; */
-    display: flex;
-   /* text-align: right; */
+.header {
+  /* display: block; */
+  display: flex;
+  /* text-align: right; */
 }
 
 .clock {
-    color: rgb(137, 202, 134);
+  color: rgb(137, 202, 134);
 }
 
 .button {
-    margin-left: 10px;
-    transform: translate(0%, -70%);
+  margin-left: 10px;
+  transform: translate(0%, -70%);
 }
 
 #global_state {
-    position:absolute;
-    left:50%; top:50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 /* ant-menu-inline ant-menu-light */
 
-.ant-menu-light{
-    height: 90% !important;
+.ant-menu-light {
+  height: 90% !important;
 }
 
 .ant-layout {
-    background-color: white !important;
+  background-color: white !important;
 }

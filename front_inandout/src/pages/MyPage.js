@@ -100,5 +100,4 @@ const MyPage = () => {
         </Layout>
     );
 };
-
 export default MyPage;

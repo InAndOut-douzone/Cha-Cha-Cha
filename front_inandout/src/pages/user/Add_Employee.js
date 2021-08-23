@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Form, Input, Select, Button, DatePicker } from 'antd';
 import { Layout, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
-import { HomeOutlined } from '@ant-design/icons';
+import { HomeOutlined, CloseOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+import axios from 'axios';
+import styled from 'styled-components';
 
 const { Option } = Select;
 
@@ -10,8 +12,46 @@ const Add_Employee = () => {
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
-        console.log('값 : ', values);
+        if(usernameCheckState === false) {
+            alert("사원번호가 중복되었습니다. ")
+            return;
+        } else {
+            console.log('값 : ', values);
+            console.log(values.birthday);
+            console.log(values.birthday.format('YYYY MM DD'));
+            console.log(values.birthday.toDate());
+            console.log('값 : ', values);
+        }
     };
+
+    const [username, setUsername] = useState();
+    const [usernameCheckState, setUsernameCheckState] = useState(false);
+    const inputRef = useRef(null);
+
+    const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
+
+    const usernameCheck = async (event) => {
+        setUsername(event.target.value);
+        if(event.target.value === "") {
+            setUsernameCheckState(false);
+            inputRef.current.focus();
+        }
+        await axios.get("http://localhost:8080/api/user/usernameCheck/"+event.target.value, header).then( res => {
+            if(res.data === "") {
+                setUsernameCheckState(true);
+                inputRef.current.focus();
+            } else {
+                setUsernameCheckState(false);
+                inputRef.current.focus();
+            }
+        }).catch( err => {
+            console.log(err);
+        });
+    }
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -26,7 +66,18 @@ const Add_Employee = () => {
         </Form.Item>
     );
 
+    const DIV = styled.div`
+        .ant-form-item-control-input-content {
+        display: flex;
+        align-items: center;
+        }
+        label {
+            width: 100px;
+        }
+    `
+
     return (
+        <DIV>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -60,6 +111,7 @@ const Add_Employee = () => {
                 >
                     <Input placeholder="이름을 입력해주세요"/>
                 </Form.Item>
+                <div style={{ display: "flex", alignItems: "baseline"}}>
                 <Form.Item
                     name="username"
                     label="사원번호"
@@ -71,8 +123,14 @@ const Add_Employee = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="사원번호를 입력해주세요"/>
+                    <Input ref={inputRef} value={username} defaultValue={username} onChange={usernameCheck}  style={{display:"flex"}} placeholder="사원번호를 입력해주세요" />                     
                 </Form.Item>
+                {
+                        usernameCheckState ?
+                        <CheckCircleTwoTone style={{marginLeft:"10px"}} twoToneColor="#52c41a" /> :
+                         <CloseOutlined style={{marginLeft:"10px", color:"red"}}/>
+                }
+                </div>
                 <Form.Item
                     name="birthday"
                     label="생년월일"
@@ -182,6 +240,7 @@ const Add_Employee = () => {
                 </Form.Item>
             </Form>
         </Layout>
+        </DIV>
     );
 };
 
