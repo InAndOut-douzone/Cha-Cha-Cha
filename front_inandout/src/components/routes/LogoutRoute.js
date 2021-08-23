@@ -6,6 +6,7 @@ const LogoutRoute = ({component: Component, ...rest}) => {
     localStorage.removeItem('userNo');
     localStorage.removeItem('userRole');
     localStorage.removeItem('Authorization');
+    localStorage.removeItem('username');
 
     return ( 
         <Route {...rest} render={props => (     

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Descriptions, Table, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from '../SiteLayout';
 import axios from 'axios';
 
 const dataSource = [
@@ -71,7 +70,6 @@ const Employee_Details = (props) => {
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
-            <h1>asdfas</h1>
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                 <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
@@ -80,6 +78,7 @@ const Employee_Details = (props) => {
             </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }}/>
             <br /><br />
+            <Link to="/employeemanagement" style={{textAlign:"end"}}>사원 목록 이동</Link>
             <Descriptions title="[사원 이름]" bordered>
                 <Descriptions.Item label="이름">{user.name}</Descriptions.Item>
                 <Descriptions.Item label="생년월일">{user.birth}</Descriptions.Item>
