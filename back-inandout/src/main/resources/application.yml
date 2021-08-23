@@ -21,3 +21,10 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+    
+  servlet:  # 파일 업로드 처리
+    multipart:
+      file-size-threshold: 1MB
+      location: /Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images
+      max-file-size: 200MB
+      max-request-size: 200MB
