@@ -5,6 +5,7 @@ import Cal from '../components/cal/Cal2';
 import FullCalendar from '@fullcalendar/react';
 import daygridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import SiteLayout from './SiteLayout';
 
 const { Content } = Layout;
 
@@ -12,10 +13,11 @@ export default function First() {
 
   const role = localStorage.getItem('userRole');
 
-  const handleDateClick = (dateClickInfo)=>{
+  const handleDateClick = (dateClickInfo) => {
 
   }
   return (
+    <SiteLayout>
       <Content
         className="site-layout-background"
         style={{
@@ -28,14 +30,11 @@ export default function First() {
         [캘린더] [접속자 권한: {role} ]
         <Cal />
 
-        <FullCalendar 
+        <FullCalendar
           plugins={[daygridPlugin]}
           dateClick={handleDateClick}
         />
-
-
-
-
       </Content>
+    </SiteLayout>
   );
 }
