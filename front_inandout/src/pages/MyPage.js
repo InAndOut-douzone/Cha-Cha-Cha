@@ -103,5 +103,4 @@ const MyPage = () => {
         </SiteLayout>
     );
 };
-
 export default MyPage;

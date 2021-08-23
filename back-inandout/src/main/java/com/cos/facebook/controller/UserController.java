@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,8 +55,6 @@ public class UserController {
 	
 	@PostMapping("/user/update")
 	public void userUpdate(@RequestBody User user){
-		System.out.println("123123123");
-		System.out.println(user);
 		userService.userUpdate(user);
 	}
 	
