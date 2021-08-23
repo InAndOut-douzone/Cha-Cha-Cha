@@ -1,6 +1,10 @@
 package com.cos.facebook.controller;
 
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Random;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +15,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
 import com.cos.facebook.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -54,8 +61,31 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/update")
-	public void userUpdate(@RequestBody User user){
+	public ResponseEntity<Object> update(MultipartFile file, String userData){
+		//String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images/";
+		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/front_inandout/public/profiles/";
+		System.out.println("*****" + userData+"*****");
+		System.out.println("*************  " + file.getOriginalFilename());
+		User user = new User();
+		try {
+			user= new ObjectMapper().readValue(userData,User.class);
+			
+			String image = (new Date().getTime())+ "" + (new Random().ints(1000,9999).findAny().getAsInt());
+			String originName = file.getOriginalFilename();
+			String imgExtension = originName.substring(originName.lastIndexOf(".")+1);
+		
+			File fileSave = new File(UPLOAD_PATH, image + "." + imgExtension);
+			file.transferTo(fileSave);
+			
+			user.setProfile(image +"."+imgExtension);
+			System.out.println(image);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
 		userService.userUpdate(user);
+		return new ResponseEntity<Object>("Success",HttpStatus.OK);
+
 	}
 	
 	// @CrossOrigin : 메서드에 @CrossOrigin을 사용해서 cors정책을 풀 수 있다 .WebConfig에서 설정했기때문에 생략
