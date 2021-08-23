@@ -70,7 +70,7 @@ public class UserController {
 		return userRepository.findAll();
 	}
 
-	// 회원가입
+	// 관리자 회원가입   
 	@PostMapping("/join")
 	public String join(@RequestBody User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -84,5 +84,13 @@ public class UserController {
 	public ResponseEntity<?> usernameCheck(@PathVariable String username) {
 		System.out.println("username" + username);
 		return new ResponseEntity<>(userService.findByUsername(username),HttpStatus.OK);
+	}
+	
+	
+	// 사원 등록 
+	@PostMapping("/user/add")
+	public ResponseEntity<?> addEmployee(@RequestBody User user) {
+		user.setPassword(bCryptPasswordEncoder.encode("1"));
+		return new ResponseEntity<>(userService.save(user),HttpStatus.OK);
 	}
 }

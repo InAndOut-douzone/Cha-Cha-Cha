@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Breadcrumb, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from './SiteLayout';
+import SiteLayout from '../SiteLayout';
 
 const dataSource = [
     {
@@ -60,6 +60,11 @@ const columns = [
 ];
 
 const Employee_Management = () => {
+
+    useEffect(() => {
+
+    },[])
+
     return (
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />

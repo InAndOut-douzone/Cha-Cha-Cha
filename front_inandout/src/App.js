@@ -8,7 +8,7 @@ import PrivateRoute from './components/routes/PrivateRoute';
 import PublicRoute from './components/routes/PublicRoute';
 import LogoutRoute from './components/routes/LogoutRoute';
 import PageNotFound from './pages/error/PageNotFound';
-import Employee_Management from './pages/Employee_Management';
+import Employee_Management from './pages/user/Employee_Management';
 import Employee_Details from './pages/Employee_Details';
 import Leave_Management from './pages/Leave_Management';
 import Add_Employee from './pages/user/Add_Employee';
