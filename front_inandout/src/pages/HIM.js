@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Layout, Breadcrumb, Button, Input, Descriptions, Badge } from 'antd';
+import { Form, Layout, Breadcrumb, Button, Input, Upload } from 'antd';
 import { Link } from 'react-router-dom';
-import { HomeOutlined } from '@ant-design/icons';
+import { HomeOutlined, UploadOutlined } from '@ant-design/icons';
 import { InputGroup, FormControl, Image, Container, Row, Col } from 'react-bootstrap';
+import logo2 from '../assets/images/logo.png';
+
 const HIM = () => {
     const [hospital, setHospital] = useState({});
     const [form] = Form.useForm();
@@ -26,7 +28,19 @@ const HIM = () => {
 
     const HIM_logo = (e) => {
         e.preventDefault();
-        setLogo(e.target.value);
+        const imageFile = e.target.files[0];
+        const imageUrl = URL.createObjectURL(imageFile);
+        setLogo(imageUrl)
+    };
+
+    const normFile = (e) => {
+        console.log('Upload event:', e);
+
+        if (Array.isArray(e)) {
+            return e;
+        }
+
+        return e && e.fileList;
     };
 
     const HIM_telNum = (e) => {
@@ -82,22 +96,21 @@ const HIM = () => {
             </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }} />
             <br /><br />
-
-            <Container>
-                <Row>
-                    <Col xs={6} md={4}>
-                        <Image src={hospital.logo} rounded />
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <Image src="holder.js/171x180" roundedCircle />
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <Image src="holder.js/171x180" thumbnail />
-                    </Col>
-                </Row>
-            </Container>
-
+            
             <Form style={{ width: "350px", alignSelf: "center" }} onFinish={dataUpdate}>
+                <Image src={logo2} roundedCircle />
+                <br /><br />
+                <Form.Item
+                    // name="upload"
+                    label="Upload"
+                    valuePropName="fileList"
+                    getValueFromEvent={HIM_logo}
+                // extra="logo"
+                >
+                    <Upload name="logo" action="/upload.do" listType="picture">
+                        <Button icon={<UploadOutlined />}>Logo 변경</Button>
+                    </Upload>
+                </Form.Item>
                 <InputGroup size="sm" className="mb-3">
                     <InputGroup.Text id="inputGroup-sizing-sm">의원 번호</InputGroup.Text>
                     <FormControl aria-label="의원 번호" aria-describedby="inputGroup-sizing-sm" value={hospital.no} />
@@ -110,10 +123,10 @@ const HIM = () => {
                     <InputGroup.Text id="inputGroup-sizing-sm">의원 주소</InputGroup.Text>
                     <FormControl aria-label="의원 주소" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.address} onChange={HIM_address} />
                 </InputGroup>
-                <InputGroup size="sm" className="mb-3">
+                {/* <InputGroup size="sm" className="mb-3">
                     <InputGroup.Text id="inputGroup-sizing-sm">의원 로고</InputGroup.Text>
                     <FormControl aria-label="의원 로고" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.logo} onChange={HIM_logo} />
-                </InputGroup>
+                </InputGroup> */}
                 <InputGroup size="sm" className="mb-3">
                     <InputGroup.Text id="inputGroup-sizing-sm">의원 전화번호</InputGroup.Text>
                     <FormControl aria-label="의원 전화번호" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.telNum} onChange={HIM_telNum} />
