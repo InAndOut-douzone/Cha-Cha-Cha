@@ -1,35 +1,20 @@
-import React, { useEffect } from 'react';
-import { Layout, Breadcrumb, Table } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Layout, Breadcrumb, Table, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from '../SiteLayout';
-
-const dataSource = [
-    {
-        key: '1',
-        no: 1,
-        name: 'Mike',
-        rank: '간호사',
-        birthday: '0000-00-00',
-        hire_date: '0000-00-00',
-        details: '자세히',
-    },
-    {
-        key: '2',
-        no: 2,
-        name: 'Jone',
-        rank: '간호사',
-        birthday: '0000-00-00',
-        hire_date: '0000-00-00',
-        details: '자세히',
-    },
-];
+import axios from 'axios';
+import styled from 'styled-components';
 
 const columns = [
     {
-        title: 'No',
-        dataIndex: 'no',
-        key: 'no',
+        title: '번호',
+        dataIndex: 'key',
+        key: 'key'    
+    },
+    {
+        title: '사원번호',
+        dataIndex: 'username',
+        key: 'username',
     },
     {
         title: 'Name',
@@ -37,47 +22,77 @@ const columns = [
         key: 'name',
     },
     {
-        title: 'Rank',
-        dataIndex: 'rank',
-        key: 'rank',
+        title: 'Position',
+        dataIndex: 'position',
+        key: 'position',
     },
     {
-        title: 'Birthday',
-        dataIndex: 'birthday',
-        key: 'birthday',
+        title: 'Birth',
+        dataIndex: 'birth',
+        key: 'birth',
     },
     {
-        title: 'Hire_date',
-        dataIndex: 'hire_date',
-        key: 'hire_date',
+        title: 'Hire Date',
+        dataIndex: 'hireDate',
+        key: 'hireDate',
     },
     {
         title: 'Details',
-        dataIndex: 'details',
-        key: 'details',
-        render: ({ details }) => (<Link to={'/employeedetails'}>자세히</Link>),
+        dataIndex: 'username',
+        key: 'username',
+        render: (text, record) => (
+            <Space size="middle">
+                <Link to={"/employeedetails/"+record.id}>자세히</Link>
+                {/* <Link to={`/employeedetails/${record.id}`}>자세히</Link> */}
+            </Space>
+        )
     },
 ];
 
 const Employee_Management = () => {
 
-    useEffect(() => {
+    const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
 
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/user/list",header).then( res => {
+            setUsers(res.data);
+            console.log(res.data);
+        }).catch()
     },[])
 
+    const data = [];
+    users.map( (user,index) => data.push({
+        key: index+1,
+        ...user
+    }))
+
     return (
-        <Layout style={{ padding: '0 24px 24px' }}>
-            <br />
-            <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
-                <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
-                <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
-            </Breadcrumb>
-            <div style={{ borderTop: "1px solid #eee" }}/>
-            <br /><br />
-            <Table dataSource={dataSource} columns={columns} />
-        </Layout>
+        <ManagementLayout>
+            <Layout style={{ padding: '0 24px 24px' }}>
+                <br />
+                <Breadcrumb style={{ margin: '16px 0' }}>
+                    <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
+                    <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
+                    <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
+                </Breadcrumb>
+                <div style={{ borderTop: "1px solid #eee" }}/>
+                <br /><br />
+                <Table style={{textAlign:"center"}} dataSource={data} columns={columns} />
+            </Layout>
+        </ManagementLayout>
     );
 };
+
+
+const ManagementLayout = styled.div`
+    .ant-table-cell { text-align:center }
+
+`
 
 export default Employee_Management;
