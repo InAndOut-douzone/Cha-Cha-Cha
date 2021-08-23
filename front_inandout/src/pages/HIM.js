@@ -4,7 +4,6 @@ import { Form, Layout, Breadcrumb, Button, Input, Upload } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined, UploadOutlined } from '@ant-design/icons';
 import { InputGroup, FormControl, Image, Container, Row, Col } from 'react-bootstrap';
-import logo2 from '../assets/images/logo.png';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
@@ -12,9 +11,10 @@ const HIM = () => {
 
     const [name, setName] = useState();
     const [address, setAddress] = useState();
-    const [logo, setLogo] = useState();
     const [telNum, setTelNum] = useState();
     const [ceoName, setCeoName] = useState();
+
+    const [logo, setLogo] = useState();
 
     const HIM_name = (e) => {
         e.preventDefault();
@@ -30,18 +30,18 @@ const HIM = () => {
         e.preventDefault();
         const imageFile = e.target.files[0];
         const imageUrl = URL.createObjectURL(imageFile);
-        setLogo(imageUrl)
+        setLogo(imageUrl);
     };
 
-    const normFile = (e) => {
-        console.log('Upload event:', e);
+    // const normFile = (e) => {
+    //     console.log('Upload event:', e);
 
-        if (Array.isArray(e)) {
-            return e;
-        }
+    //     if (Array.isArray(e)) {
+    //         return e;
+    //     }
 
-        return e && e.fileList;
-    };
+    //     return e && e.fileList;
+    // };
 
     const HIM_telNum = (e) => {
         e.preventDefault();
@@ -60,7 +60,7 @@ const HIM = () => {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/hospital", header).then((res) => {
+        axios.get("http://localhost:8080/api/hospital2", header).then((res) => {
             console.log(res);
             setHospital(res.data);
             setName(res.data.name);
@@ -83,6 +83,8 @@ const HIM = () => {
 
         axios.put("http://localhost:8080/api/hospital2", hospital, header).then((res) => {
             console.log(res)
+            console.log(res.data)
+            console.log(res.data.logo)
         });
     }
 
@@ -98,9 +100,10 @@ const HIM = () => {
             <br /><br />
             
             <Form style={{ width: "350px", alignSelf: "center" }} onFinish={dataUpdate}>
-                <Image src={logo2} roundedCircle />
+                <Image style={{width: "200px"}} src={logo} roundedCircle />
                 <br /><br />
-                <Form.Item
+                <input type="file" accept="image/*" onChange={HIM_logo}></input>
+                {/* <Form.Item
                     // name="upload"
                     label="Upload"
                     valuePropName="fileList"
@@ -110,7 +113,10 @@ const HIM = () => {
                     <Upload name="logo" action="/upload.do" listType="picture">
                         <Button icon={<UploadOutlined />}>Logo 변경</Button>
                     </Upload>
-                </Form.Item>
+                </Form.Item> */}
+                {/* <input type="file" onClick={HIM_logo}/> */}
+
+
                 <InputGroup size="sm" className="mb-3">
                     <InputGroup.Text id="inputGroup-sizing-sm">의원 번호</InputGroup.Text>
                     <FormControl aria-label="의원 번호" aria-describedby="inputGroup-sizing-sm" value={hospital.no} />
