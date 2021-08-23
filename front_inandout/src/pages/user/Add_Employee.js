@@ -16,11 +16,11 @@ const Add_Employee = () => {
             alert("사원번호가 중복되었습니다. ")
             return;
         } else {
-            console.log('값 : ', values);
-            console.log(values.birthday);
-            console.log(values.birthday.format('YYYY MM DD'));
-            console.log(values.birthday.toDate());
-            console.log('값 : ', values);
+            // console.log(values.birthday);
+            // console.log(values.birthday.format('YYYY MM DD'));
+            // console.log(values.birthday.toDate());
+
+            axios.post("http://localhost:8080/api/user/add",values,header)
         }
     };
 
@@ -75,6 +75,7 @@ const Add_Employee = () => {
             width: 100px;
         }
     `
+    const dd = "aa";
 
     return (
         <DIV>
@@ -109,7 +110,7 @@ const Add_Employee = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="이름을 입력해주세요"/>
+                    <Input defaultValue={username} placeholder="이름을 입력해주세요"/>
                 </Form.Item>
                 <div style={{ display: "flex", alignItems: "baseline"}}>
                 <Form.Item
@@ -132,7 +133,7 @@ const Add_Employee = () => {
                 }
                 </div>
                 <Form.Item
-                    name="birthday"
+                    name="birth"
                     label="생년월일"
                     // rules={[
                     //     {
@@ -218,10 +219,29 @@ const Add_Employee = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="직급을 입력해주세요"/>
+                    <Select placeholder="직급을 선택해주세요">
+                        <Option value="간호사">간호사</Option>
+                        <Option value="의사">의사</Option>
+                    </Select>
                 </Form.Item>
                 <Form.Item
-                    name="hire_date"
+                    name="roles"
+                    label="권한"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your role!',
+                            whitespace: true,
+                        },
+                    ]}
+                >
+                    <Select placeholder="권한을 선택해주세요">
+                        <Option value="ROLE_USER">일반</Option>
+                        <Option value="ROLE_ADMIN">관리자</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    name="hireDate"
                     label="입사일"
                     // rules={[
                     //     {
