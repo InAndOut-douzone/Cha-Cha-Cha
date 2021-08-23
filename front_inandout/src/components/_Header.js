@@ -38,7 +38,7 @@ const _Header = () => {
         setIsModalVisible(true);
     };
 
-    const [onTime, setOnTime] = useState("");
+    const [onTime, setOnTime] = useState("IN");
     const [offTime, setOffTime] = useState("");
 
     const handleOk = () => {
@@ -58,6 +58,10 @@ const _Header = () => {
     };
 
     const handleOk2 = () => {
+        axios.put("http://localhost:8080/api/onoff", header).then(res=>{
+            // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
+            setOffTime(moment(res.data.offTime).format("HH mm"));
+        }).catch();
         setIsModalVisible2(false);
     };
 
@@ -84,7 +88,7 @@ const _Header = () => {
                 <div style={{width:"40%", textAlign:"right"}}>
 
                 <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModal}>
-                    <div> { {onTime} ? "IN" : {onTime} } </div>
+                    <div>{onTime}</div>
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p>정말 출근하시겠습니까?</p>

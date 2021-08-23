@@ -163,34 +163,6 @@ const WTM = () => {
                   ? 
                   <Form name="time_related_controls" {...formItemLayout}>
                   {time.map((time) => (<FormItem key={time.no} time={time} onChange={Monday}/>))}
-                  
-                    {/* <Form.Item name="Monday" label="Monday">
-                    <TimePicker.RangePicker onChange={Monday} bordered={true} format="HH:mm"/>
-                    </Form.Item>
-
-                    <Form.Item name="Tuesday" label="Tuesday">
-                    <TimePicker.RangePicker onChange={Tuesday} bordered={true} format="HH:mm"/>
-                    </Form.Item>
-
-                    <Form.Item name="Wednesday" label="Wednesday">
-                    <TimePicker.RangePicker onChange={Wednesday} bordered={true} format="HH:mm"/>
-                    </Form.Item>
-
-                    <Form.Item name="Thursday" label="Thursday">
-                    <TimePicker.RangePicker onChange={Thursday} bordered={true} format="HH:mm"/>
-                    </Form.Item>
-
-                    <Form.Item name="Friday" label="Friday">
-                    <TimePicker.RangePicker onChange={Friday} bordered={true} format="HH:mm"/>
-                    </Form.Item>
-
-                    <Form.Item name="Saturday" label="Saturday">
-                    <TimePicker.RangePicker onChange={Saturday} bordered={true} format="HH:mm"/>
-                    </Form.Item>
-
-                    <Form.Item name="Sunday" label="Sunday">
-                    <TimePicker.RangePicker onChange={Sunday} bordered={true} format="HH:mm"/>
-                    </Form.Item> */}
                   </Form>
                   : 12
               }

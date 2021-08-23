@@ -28,6 +28,15 @@ public class OnOffService {
 		onOffEntity.setDate(new Date());
 		onOffEntity.setOnTime(new Date());
 		onOffEntity.setUser(userEntity);
+		
+		return onOffRepository.save(onOffEntity);
+	}
+
+	public OnOff insertOffTime(String username) {
+		
+		OnOff onOffEntity = onOffRepository.findOnTimeByUsername(username);
+		onOffEntity.setOffTime(new Date());
+		
 		return onOffRepository.save(onOffEntity);
 	}
 }
