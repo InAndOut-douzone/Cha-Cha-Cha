@@ -1,13 +1,12 @@
 package com.cos.facebook.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
 
 @Service
 public class UserService {
@@ -36,5 +35,10 @@ public class UserService {
 
 	public User save(User user) {
 		return userRepository.save(user);
+	}
+
+
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 }

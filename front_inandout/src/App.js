@@ -9,7 +9,7 @@ import PublicRoute from './components/routes/PublicRoute';
 import LogoutRoute from './components/routes/LogoutRoute';
 import PageNotFound from './pages/error/PageNotFound';
 import Employee_Management from './pages/user/Employee_Management';
-import Employee_Details from './pages/Employee_Details';
+import Employee_Details from './pages/user/Employee_Details';
 import Leave_Management from './pages/Leave_Management';
 import Add_Employee from './pages/user/Add_Employee';
 import Add_Notice from './pages/Add_Notice';
@@ -43,7 +43,7 @@ export default function App() {
             <PrivateRoute component={Employee_Management} path="/employeemanagement" exact={true} />
             <PrivateRoute component={Leave_Management} path="/leavemanagement" exact={true} />
             <PrivateRoute component={Add_Notice} path="/addnotice" exact={true} />
-            <PrivateRoute component={Employee_Details} path="/employeedetails" exact={true} />
+            <PrivateRoute component={Employee_Details} path="/employeedetails/:id" exact={true} />
             <LogoutRoute component={Login} path="/logout" exact={true} />
             {/* 매칭되는 페이지가 없을 때 실행됨 switch가 있기에 가능 */}
             <Route component={PageNotFound} />

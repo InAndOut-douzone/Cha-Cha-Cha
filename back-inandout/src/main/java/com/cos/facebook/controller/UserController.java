@@ -93,4 +93,10 @@ public class UserController {
 		user.setPassword(bCryptPasswordEncoder.encode("1"));
 		return new ResponseEntity<>(userService.save(user),HttpStatus.OK);
 	}
+	
+	// 사원 리스트 
+	@GetMapping("/user/list")
+	public ResponseEntity<?> getEmployee() {
+		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
+	}
 }
