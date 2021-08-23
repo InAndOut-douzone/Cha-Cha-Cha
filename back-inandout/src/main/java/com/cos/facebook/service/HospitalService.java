@@ -3,8 +3,7 @@ package com.cos.facebook.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cos.facebook.dto.HospitalOnOffReqDto;
-import com.cos.facebook.config.dto.HospitalReqDto2;
+import com.cos.facebook.dto.HospitalInfoReqDto;
 import com.cos.facebook.model.Hospital;
 import com.cos.facebook.repository.HospitalRepository;
 
@@ -19,4 +18,15 @@ public class HospitalService {
 		return hospitalRepository.findById(a);
 	}
 
+	public void update(HospitalInfoReqDto hospitalInfoReqDto) {
+		Hospital hospitalEntity = hospitalRepository.findById(1);
+		hospitalEntity.setName(hospitalInfoReqDto.getName());
+		hospitalEntity.setAddress(hospitalInfoReqDto.getAddress());
+		hospitalEntity.setCeoName(hospitalInfoReqDto.getCeoName());
+		hospitalEntity.setLogo(hospitalInfoReqDto.getLogo());
+		hospitalEntity.setTelNum(hospitalInfoReqDto.getTelNum());
+
+		Hospital result = hospitalRepository.save(hospitalEntity);
+		System.out.println("result" + result);
+	}
 }

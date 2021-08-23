@@ -70,6 +70,7 @@ const _Header = () => {
             <Header className="header">
                 {/* <div className="logo" /> */}
                 <div style={{width:"20%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle:"oblique"}}>IN-N-OUT</div>
+                
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
                <div style={{textAlign:"right", width:"40%"}}>
                 <Card style={{ width: "100%", height: 40, marginTop: 12, backgroundColor: "#001528" }}>
