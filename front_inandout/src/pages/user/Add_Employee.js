@@ -20,7 +20,14 @@ const Add_Employee = () => {
             // console.log(values.birthday.format('YYYY MM DD'));
             // console.log(values.birthday.toDate());
 
-            axios.post("http://localhost:8080/api/user/add",values,header)
+            axios.post("http://localhost:8080/api/user/add",values,header).then( res => {
+                alert(res.data.name + " 사원 등록이 완료되었습니다. (사원번호 : "  + res.data.username + ")");
+                setUsernameCheckState(false);
+                console.log(res)
+            }).catch( err => {
+                console.log(err);
+                alert("사원 등록에 실패하였습니다.")
+            });
         }
     };
 
