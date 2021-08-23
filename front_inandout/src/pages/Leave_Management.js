@@ -166,7 +166,6 @@ export default class Add_Notice extends React.Component {
       },
     ];
     return (
-      <SiteLayout>
       <Layout style={{ padding: '0 24px 24px' }}>
         <br />
         <Breadcrumb style={{ margin: '16px 0' }}>
@@ -180,7 +179,6 @@ export default class Add_Notice extends React.Component {
         <br />
         <Table columns={columns} dataSource={data} />
       </Layout>
-      </SiteLayout>
     );
   }
 }

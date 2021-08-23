@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -11,23 +11,16 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 850px;
   background-image: url(${img});
   background-size: cover;
-`;
+  `;
 
 const config = {
   headers: {
     "Content-Type": "application/json; charset=utf-8",
   },
 };
-
-const header = {
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("Authorization"),
-  },
-};
-
 
 export default function Login({ history, location }){
 
@@ -41,12 +34,15 @@ export default function Login({ history, location }){
       "http://localhost:8080/login",
       JSON.stringify(data),
       config
-    ).then(res => {
+    ).then(async res => {
     if(res.status === 200) {
-      console.log("Authorization:" + res.headers.authorization);
       localStorage.setItem("Authorization", res.headers.authorization);
-      axios.get("http://localhost:8080/api/user",header).then(res => {
-        console.log(123,res);
+      const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
+      await axios.get("http://localhost:8080/api/user",header).then(res => {
         localStorage.setItem('userNo', res.data.no);
         localStorage.setItem('userRole', res.data.roles);
         window.location.replace("/")  

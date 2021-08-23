@@ -27,4 +27,9 @@ public class UserService {
 		user1.setPhone(user.getPhone());
 		userRepository.save(user1);
 	}
+
+	
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
 }

@@ -1,13 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Descriptions, Layout, Breadcrumb, Image } from 'antd';
+import { Form, Layout, Breadcrumb, Button, Input, Descriptions, Badge } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import logo from '../assets/images/logo.png';
-import SiteLayout from './SiteLayout';
-
+import { InputGroup, FormControl, Image, Container, Row, Col } from 'react-bootstrap';
 const HIM = () => {
     const [hospital, setHospital] = useState({});
+    const [form] = Form.useForm();
+
+    const [name, setName] = useState();
+    const [address, setAddress] = useState();
+    const [logo, setLogo] = useState();
+    const [telNum, setTelNum] = useState();
+    const [ceoName, setCeoName] = useState();
+
+    const HIM_name = (e) => {
+        e.preventDefault();
+        setName(e.target.value);
+    };
+
+    const HIM_address = (e) => {
+        e.preventDefault();
+        setAddress(e.target.value);
+    };
+
+    const HIM_logo = (e) => {
+        e.preventDefault();
+        setLogo(e.target.value);
+    };
+
+    const HIM_telNum = (e) => {
+        e.preventDefault();
+        setTelNum(e.target.value);
+    };
+
+    const HIM_ceoName = (e) => {
+        e.preventDefault();
+        setCeoName(e.target.value);
+    };
 
     const header = {
         headers: {
@@ -15,21 +45,34 @@ const HIM = () => {
         },
     };
 
-    const config = {
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-    };
-
     useEffect(() => {
         axios.get("http://localhost:8080/api/hospital", header).then((res) => {
             console.log(res);
             setHospital(res.data);
+            setName(res.data.name);
+            setAddress(res.data.address);
+            setLogo(res.data.logo);
+            setTelNum(res.data.telNum);
+            setCeoName(res.data.ceoName);
         });
     }, []);
 
+    const dataUpdate = (e) => {
+        let hospital = {
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            name: name,
+            address: address,
+            logo: logo,
+            telNum: telNum,
+            ceoName: ceoName
+        };
+
+        axios.put("http://localhost:8080/api/hospital2", hospital, header).then((res) => {
+            console.log(res)
+        });
+    }
+
     return (
-        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -39,21 +82,52 @@ const HIM = () => {
             </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }} />
             <br /><br />
-            <Descriptions title="의원 정보 관리" bordered>
-                <Descriptions.Item label="의원 번호" span={3}>{hospital.no}</Descriptions.Item>
-                <Descriptions.Item label="의원명" span={3}>{hospital.name}</Descriptions.Item>
-                <Descriptions.Item label="의원 로고" span={3}>
-                    <Image style={{ borderRadius: "0%", width: '100%', height: '100%' }}
-                        width={180}
-                        src={logo}
-                    />    
-                </Descriptions.Item>
-                <Descriptions.Item label="의원 연락처" span={3}>{hospital.telNum}</Descriptions.Item>
-                <Descriptions.Item label="의원 주소" span={3}>{hospital.address}</Descriptions.Item>
-                <Descriptions.Item label="대표자명" span={3}>{hospital.ceoName}</Descriptions.Item>
-            </Descriptions>
+
+            <Container>
+                <Row>
+                    <Col xs={6} md={4}>
+                        <Image src={hospital.logo} rounded />
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src="holder.js/171x180" roundedCircle />
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src="holder.js/171x180" thumbnail />
+                    </Col>
+                </Row>
+            </Container>
+
+            <Form style={{ width: "350px", alignSelf: "center" }} onFinish={dataUpdate}>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 번호</InputGroup.Text>
+                    <FormControl aria-label="의원 번호" aria-describedby="inputGroup-sizing-sm" value={hospital.no} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원명</InputGroup.Text>
+                    <FormControl aria-label="의원명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.name} onChange={HIM_name} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 주소</InputGroup.Text>
+                    <FormControl aria-label="의원 주소" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.address} onChange={HIM_address} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 로고</InputGroup.Text>
+                    <FormControl aria-label="의원 로고" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.logo} onChange={HIM_logo} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">의원 전화번호</InputGroup.Text>
+                    <FormControl aria-label="의원 전화번호" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.telNum} onChange={HIM_telNum} />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">대표자명</InputGroup.Text>
+                    <FormControl aria-label="대표자명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.ceoName} onChange={HIM_ceoName} />
+                </InputGroup>
+                <Form.Item>
+                    {/* <Button variant="dark" type='Primary' htmlType="submit">수정</Button> */}
+                    <Button type='Primary' htmlType="submit">수정</Button>
+                </Form.Item>
+            </Form>
         </Layout>
-        </SiteLayout>
     );
 };
 
