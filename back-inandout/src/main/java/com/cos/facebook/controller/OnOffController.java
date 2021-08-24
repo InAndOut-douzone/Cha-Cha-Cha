@@ -34,4 +34,13 @@ public class OnOffController {
 		
 		return new ResponseEntity<>(onOffService.insertOffTime(principal.getUser().getId()),HttpStatus.OK);		
 	}
+	
+	@GetMapping("/getonoff")
+	public ResponseEntity<?> getOnOff(Authentication authentication){
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		System.out.println("asd" + principal.getUser().getId());
+		
+		return new ResponseEntity<>(onOffService.getOnOff(principal.getUser().getId()),HttpStatus.OK);		
+		
+	}
 }
