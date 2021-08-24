@@ -8,7 +8,7 @@ import SiteLayout from './SiteLayout';
 const MyPage = () => {
     
     //const imgPath = "profiles/";
-    const imgPath = "localhost:8080/images";
+    const imgPath = "/images/";
     const [user,setUser] = useState({});
     const [profile, setProfile] = useState({});
     const [email, setEmail]=useState({});

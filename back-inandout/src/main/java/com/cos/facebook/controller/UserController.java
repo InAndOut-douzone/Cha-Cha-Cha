@@ -66,9 +66,6 @@ public class UserController {
 	@PostMapping("/user/update")
 	public ResponseEntity<Object> update(MultipartFile file, String userData){
 		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/webapp/images/";
-		//String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/front_inandout/public/profiles/";
-		System.out.println("*****" + userData+"*****");
-		System.out.println("*************  " + file.getOriginalFilename());
 		
 		User user = new User();
 		try {
