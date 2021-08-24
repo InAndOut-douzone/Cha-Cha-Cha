@@ -43,6 +43,6 @@ public class NoticeController {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		notice.setUser(principal.getUser());
 		noticeRepository.save(notice);
-		return "가입완료";
+		return "localhost:3000/addNotice";
 	}
 }

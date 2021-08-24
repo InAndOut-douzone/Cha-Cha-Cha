@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,12 +62,10 @@ public class UserController {
 		return new ResponseEntity<>(userRepository.findById(id),HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = {"http://localhost:3000"})
 	@PostMapping("/user/update")
 	public ResponseEntity<Object> update(MultipartFile file, String userData){
-		//String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images/";
-		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/front_inandout/public/profiles/";
-		System.out.println("*****" + userData+"*****");
-		System.out.println("*************  " + file.getOriginalFilename());
+		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/webapp/images/";
 		
 		User user = new User();
 		try {
