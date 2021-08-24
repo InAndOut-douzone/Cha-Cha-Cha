@@ -70,6 +70,7 @@ const MyPage = () => {
     }
     
     return (
+        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -110,6 +111,7 @@ const MyPage = () => {
             </Form.Item>
             </Form>
         </Layout>
+        </SiteLayout>
     );
 };
 export default MyPage;

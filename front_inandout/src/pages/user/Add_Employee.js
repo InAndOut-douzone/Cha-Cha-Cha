@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { HomeOutlined, CloseOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 import axios from 'axios';
 import styled from 'styled-components';
+import SiteLayout from '../SiteLayout';
 
 const { Option } = Select;
 
@@ -85,6 +86,7 @@ const Add_Employee = () => {
     const dd = "aa";
 
     return (
+        <SiteLayout>
         <DIV>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
@@ -268,6 +270,7 @@ const Add_Employee = () => {
             </Form>
         </Layout>
         </DIV>
+        </SiteLayout>
     );
 };
 

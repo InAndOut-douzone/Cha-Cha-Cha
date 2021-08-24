@@ -29,6 +29,7 @@ const Add_Employee = () => {
     );
 
     return (
+        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -74,6 +75,7 @@ const Add_Employee = () => {
                 <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
             </InputGroup>
         </Layout>
+        </SiteLayout>
     );
 };
 

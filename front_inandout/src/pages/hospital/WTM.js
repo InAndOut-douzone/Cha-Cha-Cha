@@ -8,6 +8,7 @@ import { Typography } from 'antd';
 import axios from 'axios';
 import TimeItem from '../../components/HospitalOnOff/TimeItem'
 import FormItem from '../../components/HospitalOnOff/FormItem'
+import SiteLayout from '../SiteLayout';
 
 const { Title, Text } = Typography;
 
@@ -79,7 +80,8 @@ const WTM = () => {
     // const Saturday = (moment) => { updateApi("Saturday", moment); }
     // const Sunday = (moment) => { updateApi("Sunday", moment); }
 
-    return (      
+    return (   
+      <SiteLayout>   
         <Layout style={{ padding: '0 24px 24px', maxWidth: "960px"}}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -196,6 +198,7 @@ const WTM = () => {
               }
             </div>
          </Layout>
+         </SiteLayout>
     );
 };
 

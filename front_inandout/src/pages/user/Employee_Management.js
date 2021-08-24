@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import styled from 'styled-components';
+import SiteLayout from '../SiteLayout';
 
 const columns = [
     {
@@ -73,6 +74,7 @@ const Employee_Management = () => {
     }))
 
     return (
+        <SiteLayout>
         <ManagementLayout>
             <Layout style={{ padding: '0 24px 24px' }}>
                 <br />
@@ -87,6 +89,7 @@ const Employee_Management = () => {
                 <Table style={{textAlign:"center"}} dataSource={data} columns={columns} />
             </Layout>
         </ManagementLayout>
+        </SiteLayout>
     );
 };
 

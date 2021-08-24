@@ -4,6 +4,7 @@ import { Form, Layout, Breadcrumb, Button, Input, Upload } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined, UploadOutlined } from '@ant-design/icons';
 import { InputGroup, FormControl, Image, Container, Row, Col } from 'react-bootstrap';
+import SiteLayout from './SiteLayout';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
@@ -89,6 +90,7 @@ const HIM = () => {
     }
 
     return (
+        <SiteLayout>
         <Layout style={{ padding: '0 24px 24px' }}>
             <br />
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -147,6 +149,7 @@ const HIM = () => {
                 </Form.Item>
             </Form>
         </Layout>
+        </SiteLayout>
     );
 };
 
