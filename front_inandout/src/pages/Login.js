@@ -52,7 +52,7 @@ export default function Login({ history, location }){
       })
     }
   }).catch(err => {
-    alert('a');
+    alert('없는 사원번호 입니다.');
   });
 }
     return (

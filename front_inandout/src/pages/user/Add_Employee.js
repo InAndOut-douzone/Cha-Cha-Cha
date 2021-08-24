@@ -119,7 +119,7 @@ const Add_Employee = () => {
                         },
                     ]}
                 >
-                    <Input defaultValue={username} placeholder="이름을 입력해주세요"/>
+                    <Input placeholder="이름을 입력해주세요"/>
                 </Form.Item>
                 <div style={{ display: "flex", alignItems: "baseline"}}>
                 <Form.Item

@@ -9,6 +9,8 @@ const MyPage = () => {
     
     const imgPath = "profiles/";
     //const imgPath = "/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/"
+    //const imgPath = "file:///Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images/";
+    //const imgPath = "file:///Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images/"
     const [user,setUser] = useState({});
     const [profile, setProfile] = useState({});
     const [email, setEmail]=useState({});
@@ -21,9 +23,9 @@ const MyPage = () => {
          const imageFile = e.target.files[0];
          const imageUrl = URL.createObjectURL(imageFile);
 
-         setimage(imageFile);
-         setProfile(imageUrl);
-        // console.log(profile);
+         console.log(imageUrl);
+         setimage(imageFile); // formdata에 선택된 이미지 파일을 넣기 위해 저장
+         setProfile(imageUrl);// 프로필 미리보기를 출력하기 위해 이미지 url 저장
      };
 
     const emailHandler = (e) => {
@@ -36,14 +38,14 @@ const MyPage = () => {
         setPhone(e.target.value);
     };
 
-    const header = {
+    const header = { 
         headers: {
             'Content-Type': 'multipart/form-data',
           Authorization: "Bearer " + localStorage.getItem("Authorization")
         }
       };
 
-    useEffect(() => {
+    useEffect(() => { // user정보 get, useEffect를 사용하여 한번만 get 하도록 설정
         axios.get("http://localhost:8080/api/user/1",header).then((res)=>{
         setUser(res.data);
         setEmail(res.data.email);
