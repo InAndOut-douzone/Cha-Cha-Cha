@@ -137,4 +137,10 @@ public class UserController {
 	public ResponseEntity<?> updateRole(@RequestBody UserReqRoleUpdateDto userReqRoleUpdateDto, @PathVariable long id) {
 		return new ResponseEntity<>(userService.updateRole(id,userReqRoleUpdateDto.getRoles()),HttpStatus.OK);
 	}
+
+	// 의사 리스트 뽑기
+	@GetMapping("/user/getdoctor")
+	public ResponseEntity<?> getDoctor() {
+		return new ResponseEntity<>(userService.getDoctor(),HttpStatus.OK);
+	}	
 }

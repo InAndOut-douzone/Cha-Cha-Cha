@@ -74,13 +74,11 @@ const Employee_Details = (props) => {
         state: work.state
     }));
 
-    const asd = (value) => {
+    const updateRole = (value) => {
         let data = {
             roles : value
         }
-        axios.put("http://localhost:8080/api/user/"+id,data, header).then( res => {
-           
-        }).catch();
+        axios.put("http://localhost:8080/api/user/"+id,data, header).then().catch();
     }
     
     return (
@@ -106,9 +104,10 @@ const Employee_Details = (props) => {
                 <Descriptions.Item label="직급">{user.position}</Descriptions.Item>
                 <Descriptions.Item label="입사일">{user.hireDate}</Descriptions.Item>
                 <Descriptions.Item label="퇴사일">{user.leaveDate}</Descriptions.Item>
-                <Descriptions.Item label="월차갯수">{user.mLeave}</Descriptions.Item>
-                <Descriptions.Item label="연차갯수">{user.aLeave}</Descriptions.Item>
+                <Descriptions.Item label="월차갯수">{user.mleave}</Descriptions.Item>
+                <Descriptions.Item label="연차갯수">{user.aleave}</Descriptions.Item>
                 <Descriptions.Item label="반차갯수"></Descriptions.Item>
+                { localStorage.getItem("userRole") === "ROLE_ADMIN" ? 
                 <Form.Item
                     name="roles"
                     label="권한"
@@ -120,11 +119,13 @@ const Employee_Details = (props) => {
                         },
                     ]}
                 >
-                    <Select onChange={asd} placeholder="권한을 설정해주세요. ">
+                    <Select onChange={updateRole} placeholder="권한을 설정해주세요. ">
                         <Option value="ROLE_USER">일반</Option>
                         <Option value="ROLE_ADMIN">관리자</Option>
                     </Select> &nbsp; * 자동 저장 됩니다.
-                </Form.Item>
+                </Form.Item> 
+                : 2 
+                }
             </Descriptions>
             <br /><br/>
             [근무 현황]
