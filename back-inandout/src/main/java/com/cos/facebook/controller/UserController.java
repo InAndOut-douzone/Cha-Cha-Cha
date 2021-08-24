@@ -1,9 +1,9 @@
 package com.cos.facebook.controller;
 
-import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.http.HttpStatus;
@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
+import com.cos.facebook.dto.UserReqRoleUpdateDto;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
 import com.cos.facebook.service.UserService;
@@ -131,5 +132,11 @@ public class UserController {
 	@GetMapping("/user/list")
 	public ResponseEntity<?> getEmployee() {
 		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
+	}
+	
+
+	@PutMapping("/user/{id}")
+	public ResponseEntity<?> updateRole(@RequestBody UserReqRoleUpdateDto userReqRoleUpdateDto, @PathVariable long id) {
+		return new ResponseEntity<>(userService.updateRole(id,userReqRoleUpdateDto.getRoles()),HttpStatus.OK);
 	}
 }

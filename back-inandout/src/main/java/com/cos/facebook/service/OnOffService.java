@@ -1,8 +1,9 @@
 package com.cos.facebook.service;
 
 
-import java.time.LocalTime;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,18 @@ public class OnOffService {
 		onOffEntity.setOffTime(new Date());
 		
 		return onOffRepository.save(onOffEntity);
+	}
+
+	public OnOff getOnOff(long id) {
+		Date date = new Date();
+		System.out.println("date : " +date);
+		 SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+		String dated = sDate.format(date);
+		System.out.println("dated : " + dated);
+		return onOffRepository.findByIdAndDate(id, dated);
+	}
+
+	public List<OnOff> getWork(long id) {
+		return onOffRepository.findAllById(id);
 	}
 }

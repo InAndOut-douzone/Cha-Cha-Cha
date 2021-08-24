@@ -41,4 +41,13 @@ public class UserService {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
+
+
+	public User updateRole(long id, String roles) {
+		User userEntity = userRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("없");
+		});   
+		userEntity.setRoles(roles);
+		return userRepository.save(userEntity);
+	}
 }
