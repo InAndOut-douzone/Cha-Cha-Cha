@@ -30,17 +30,18 @@ public class OnOffController {
 	@GetMapping("/onoff")
 	public ResponseEntity<?> offTime(Authentication authentication){
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println("as" + principal.getUser().getId());
-		
 		return new ResponseEntity<>(onOffService.insertOffTime(principal.getUser().getId()),HttpStatus.OK);		
 	}
 	
 	@GetMapping("/getonoff")
 	public ResponseEntity<?> getOnOff(Authentication authentication){
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println("asd" + principal.getUser().getId());
-		
 		return new ResponseEntity<>(onOffService.getOnOff(principal.getUser().getId()),HttpStatus.OK);		
-		
+	}
+	
+	@GetMapping("/getwork/{id}")
+	public ResponseEntity<?> getwork(@PathVariable long id){
+		System.out.println("getwork 실행됨");
+		return new ResponseEntity<>(onOffService.getWork(id),HttpStatus.OK);		
 	}
 }

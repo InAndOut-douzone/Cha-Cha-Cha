@@ -3,6 +3,7 @@ package com.cos.facebook.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,9 @@ public class OnOffService {
 		String dated = sDate.format(date);
 		System.out.println("dated : " + dated);
 		return onOffRepository.findByIdAndDate(id, dated);
+	}
+
+	public List<OnOff> getWork(long id) {
+		return onOffRepository.findAllById(id);
 	}
 }

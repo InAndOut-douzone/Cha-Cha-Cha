@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import SiteLayout from '../SiteLayout';
+import moment from 'moment';
 
 const dataSource = [
     {
@@ -23,20 +24,21 @@ const dataSource = [
 ];
 
 const columns = [
+
     {
         title: 'Date',
         dataIndex: 'date',
         key: 'date',
     },
     {
-        title: 'On_time',
-        dataIndex: 'on_time',
-        key: 'on_time',
+        title: 'onTime',
+        dataIndex: 'onTime',
+        key: 'onTime',
     },
     {
-        title: 'Off_time',
-        dataIndex: 'off_time',
-        key: 'off_time',
+        title: 'offTime',
+        dataIndex: 'offTime',
+        key: 'offTime',
     },
     {
         title: 'State',
@@ -56,17 +58,38 @@ const Employee_Details = (props) => {
     const { id } = props.match.params;
 
     const [user, setUser] = useState({});
+    const [works, setWorks] = useState([]);
 
     useEffect(()=>{
+        userFetch();
+        workFetch();
+    },[])
+
+    const userFetch = () => {
         axios.get("http://localhost:8080/api/user/"+id, header).then( res => {
             setUser(res.data);
             console.log(res.data)
         }).catch();
-    },[])
-
-    const workFetch = () => {
-        
     }
+
+    const data = []; 
+    const workFetch = async () => {
+        await axios.get("http://localhost:8080/api/getwork/"+id, header).then( res => {
+            console.log(res.data);
+            setWorks(res.data);
+
+        }).catch();
+    }
+
+    works.map( (work,index) => data.push({
+        key: index+1,
+        date: moment(work.date).format("yyyy MM DD"),
+        onTime: moment(work.onTime).format("HH : mm"),
+        offTime: moment(work.offTime).format("HH : mm") !== "Invalid date" ? moment(work.offTime).format("HH : mm") : "",
+        state: work.state
+    }))
+
+    console.log("data:" + data);
     
     return (
         <SiteLayout>
@@ -95,9 +118,9 @@ const Employee_Details = (props) => {
                 <Descriptions.Item label="연차갯수">{user.aLeave}</Descriptions.Item>
                 <Descriptions.Item label="반차갯수"></Descriptions.Item>
             </Descriptions>
-            <br />
+            <br /><br/>
             [근무 현황]
-            <Table dataSource={dataSource} columns={columns} /> 
+            <Table dataSource={data} columns={columns} /> 
         </Layout>
         </SiteLayout>
     );
