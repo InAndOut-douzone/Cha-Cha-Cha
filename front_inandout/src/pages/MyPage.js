@@ -7,10 +7,8 @@ import SiteLayout from './SiteLayout';
 
 const MyPage = () => {
     
-    const imgPath = "profiles/";
-    //const imgPath = "/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/"
-    //const imgPath = "file:///Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images/";
-    //const imgPath = "file:///Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images/"
+    //const imgPath = "profiles/";
+    const imgPath = "/images/";
     const [user,setUser] = useState({});
     const [profile, setProfile] = useState({});
     const [email, setEmail]=useState({});

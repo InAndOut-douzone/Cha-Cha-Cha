@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Button, Modal, Card } from 'antd';
 import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
@@ -34,12 +34,16 @@ const _Header = () => {
         //borderRadius:"5px",
     }
 
-    const showModal = () => {
-        setIsModalVisible(true);
+    const showModalOn = () => {
+        if(onTime === "IN") {
+            setIsModalVisible(true);    
+        } else {
+            alert("출근을 이미 하였습니다.");
+        }
     };
 
     const [onTime, setOnTime] = useState("IN");
-    const [offTime, setOffTime] = useState("");
+    const [offTime, setOffTime] = useState("OUT");
 
     const handleOk = () => {
         axios.get("http://localhost:8080/api/onoff/"+localStorage.getItem("username"), header).then(res=>{
@@ -53,8 +57,12 @@ const _Header = () => {
         setIsModalVisible(false);
     };
 
-    const showModal2 = () => {
-        setIsModalVisible2(true);
+    const showModalOff = () => {
+        if(offTime === "OUT") {
+            setIsModalVisible2(true);  
+        } else {
+            alert("퇴근을 이미 하였습니다.");
+        }
     };
 
     const handleOk2 = () => {
@@ -68,6 +76,22 @@ const _Header = () => {
     const handleCancel2 = () => {
         setIsModalVisible2(false);
     };
+
+    useEffect(()=>{
+        axios.get("http://localhost:8080/api/getonoff", header).then(res => {
+            if(res.data === "") {
+                return;                
+            } else {
+                if(res.data.onTime !== null) {
+                    setOnTime(moment(res.data.onTime).format("HH mm"));
+                } 
+                if(res.data.offTime !== null) {
+                    setOffTime(moment(res.data.offTime).format("HH mm"));
+                }
+            }
+            console.log(res);
+        }).catch();
+    },[])
 
     return (
         <div>
@@ -87,15 +111,15 @@ const _Header = () => {
                 </div>
                 <div style={{width:"40%", textAlign:"right"}}>
 
-                <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModal}>
+                <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
                     <div>{onTime}</div>
                 </Button>
                 <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <p>정말 출근하시겠습니까?</p>
                 </Modal>  
                 
-                <Button style={buttonStyle} className="button" type="primary" onClick={showModal2}>
-                <div>OUT</div>
+                <Button style={buttonStyle} className="button" type="primary" onClick={showModalOff}>
+                    <div>{offTime}</div>
                 </Button>
                 <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
                     <p>정말 퇴근하시겠습니까?</p>

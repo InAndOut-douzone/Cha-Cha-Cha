@@ -1,25 +1,27 @@
 package com.cos.facebook.controller;
 
-import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
+import com.cos.facebook.dto.UserReqRoleUpdateDto;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
 import com.cos.facebook.service.UserService;
@@ -60,12 +62,10 @@ public class UserController {
 		return new ResponseEntity<>(userRepository.findById(id),HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = {"http://localhost:3000"})
 	@PostMapping("/user/update")
 	public ResponseEntity<Object> update(MultipartFile file, String userData){
-		//String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/resources/images/";
-		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/front_inandout/public/profiles/";
-		System.out.println("*****" + userData+"*****");
-		System.out.println("*************  " + file.getOriginalFilename());
+		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/webapp/images/";
 		
 		User user = new User();
 		try {
@@ -130,4 +130,16 @@ public class UserController {
 	public ResponseEntity<?> getEmployee() {
 		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
 	}
+	
+
+	@PutMapping("/user/{id}")
+	public ResponseEntity<?> updateRole(@RequestBody UserReqRoleUpdateDto userReqRoleUpdateDto, @PathVariable long id) {
+		return new ResponseEntity<>(userService.updateRole(id,userReqRoleUpdateDto.getRoles()),HttpStatus.OK);
+	}
+
+	// 의사 리스트 뽑기
+	@GetMapping("/user/getdoctor")
+	public ResponseEntity<?> getDoctor() {
+		return new ResponseEntity<>(userService.getDoctor(),HttpStatus.OK);
+	}	
 }
