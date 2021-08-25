@@ -3,6 +3,7 @@ import { Layout, Menu, Image, Button } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import profile from '../assets/images/doctor.jpg';
+import profile2 from '../assets/images/nurse.jpg';
 import Drawer from './_Drawer';
 
 // import Nstate from '../components/Nstate';
@@ -45,12 +46,12 @@ const Navigation = (name) => {
                 </Button> */}
 
                 <Menu
-                    theme="dark"
                     inlineCollapsed={collapsed}
                     // selectedKeys={['1', 'sub2']}
                     mode="inline"
                     // defaultSelectedKeys={['1']}
                     style={{ height: '100%', borderRight: 0 }}
+                    theme="dark"
                     // openKeys={openKeys}
                     // openKeys={openKeys}
                     // selectedKeys={selectedKeys}
@@ -88,15 +89,16 @@ const Navigation = (name) => {
             // </Provider>
             :
             <Sider width={200} className="site-layout-background2">
-                <Image
+                <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }}
                     width={200}
-                    src={profile}
+                    src={profile2}
                 />
-                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
+                <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={['1']}
-                    // defaultOpenKeys={['sub1', 'sub2', 'sub3']}
+                    theme="dark"
+                    defaultOpenKeys={['1', 'sub2', 'sub3', 'sub4', '2']}
                     style={{ height: '100%', borderRight: 0 }}
                 >
                     <Menu.Item key="1" icon={<LaptopOutlined />}>

@@ -33,7 +33,7 @@ export default function First() {
           // minHeight: 280,
         }}
       >
-        [캘린더] [접속자 권한: {role} ]
+        {/* [캘린더] [접속자 권한: {role} ] */}
         {/* <Cal /> */}
         <FullCal2 />
       </Content>
