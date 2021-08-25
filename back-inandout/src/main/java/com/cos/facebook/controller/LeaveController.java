@@ -3,6 +3,7 @@ package com.cos.facebook.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +29,12 @@ public class LeaveController {
 		System.out.println("leaveAddReqDto" + leaveAddReqDto);
 		
 		return new ResponseEntity<>(leaveService.add(leaveAddReqDto,principal.getUser().getUsername()), HttpStatus.OK);
+	}	
+	
+	@GetMapping("/leave")
+	public ResponseEntity<?> getLeave(Authentication authentication){
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		
+		return new ResponseEntity<>(leaveService.getLeavesByDoctor(principal.getUser().getId()), HttpStatus.OK);
 	}	
 }
