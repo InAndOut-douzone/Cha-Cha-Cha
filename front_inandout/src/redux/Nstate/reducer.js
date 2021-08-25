@@ -1,19 +1,14 @@
-import { ADD_NSTATE, REMOVE_NSTATE } from "./types"
+import { NSTATE } from "./types"
 
 const initialState = {
-    count: 370
+    openKeys:['1']
 }
 const nstateReducer = (state=initialState, action) => {
     switch(action.type){
-        case ADD_NSTATE:
+        case NSTATE:
             return {
                 ...state,
-                count: state.count + 1
-            }
-        case REMOVE_NSTATE:
-            return {
-                ...state,
-                count: state.count - 1
+                openKeys: state.count + 1
             }
         default: return state
     }

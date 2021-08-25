@@ -1,28 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import { addNstate } from '../redux/Nstate/action';
+// import React from 'react';
+// import { connect } from 'react-redux'
+// import { nstate } from '../redux/Nstate/action';
 
-const Nstate = (count, addNstate) => {
-    return (
-        <div className="items">
-            <p>구독자 수: {count}</p>
-            <button onClick={() => addNstate()}>구독하기!</button>
-        </div>
-    );
-};
+// const Nstate = (count, nstate) => {
+//     return (
+//         <div className="items">
+//             <p>구독자 수: {count}</p>
+//             <button onClick={() => nstate()}>구독하기!</button>
+//         </div>
+//     );
+// };
 
-const mapStateToProps = (state) => {
-    return {
-        count: state.count
-    }
-}
-// const mapDispatchToProps = (dispatch) => {
+// const mapStateToProps = (state) => {
 //     return {
-//         addNstate: () => dispatch(addNstate())
+//         count: state.count
 //     }
 // }
-const mapDispatchToProps = {
-    addNstate
-}
+// // const mapDispatchToProps = (dispatch) => {
+// //     return {
+// //         addNstate: () => dispatch(addNstate())
+// //     }
+// // }
+// const mapDispatchToProps = {
+//     addNstate
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nstate);
+// export default connect(mapStateToProps, mapDispatchToProps)(Nstate);

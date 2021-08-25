@@ -1,2 +1,1 @@
-export const ADD_NSTATE = 'ADD_NSTATE'
-export const REMOVE_NSTATE = 'REMOVE_NSTATE'
+export const NSTATE = 'NSTATE'

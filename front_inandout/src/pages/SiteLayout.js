@@ -8,7 +8,7 @@ export default function SiteLayout({ children }) {
         <Layout >
             <Header />
             <Layout>
-                <Navigation />
+                <Navigation name="ok2"/>
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <div>
                         {children}

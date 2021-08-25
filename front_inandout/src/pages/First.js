@@ -4,10 +4,9 @@ import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import '../assets/css/app.css';
 import Cal from '../components/cal/Cal2';
-import FullCalendar from '@fullcalendar/react';
-import daygridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
 import SiteLayout from './SiteLayout';
+import FullCal from '../components/cal/FullCal';
+import FullCal2 from '../components/cal/FullCal2';
 
 
 const { Content } = Layout;
@@ -16,9 +15,6 @@ export default function First() {
 
   const role = localStorage.getItem('userRole');
 
-  const handleDateClick = (dateClickInfo) => {
-
-  }
   return (
     <SiteLayout>
       <Layout style={{ padding: '0 24px 24px' }}>
@@ -39,12 +35,9 @@ export default function First() {
         }}
       >
         [캘린더] [접속자 권한: {role} ]
-        <Cal />
-
-        <FullCalendar
-          plugins={[daygridPlugin]}
-          dateClick={handleDateClick}
-        />
+        {/* <Cal /> */}
+        {/* <FullCal /> */}
+        <FullCal2 />
       </Content>
       </Layout>
     </SiteLayout>

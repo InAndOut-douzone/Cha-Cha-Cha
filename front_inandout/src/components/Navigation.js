@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Image } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardFilled, IdcardOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import profile from '../assets/images/doctor.jpg';
 import Drawer from './_Drawer';
 
-import Nstate from '../components/Nstate';
-import { Provider } from 'react-redux';
-import store from '../redux/store';
+// import Nstate from '../components/Nstate';
+// import { Provider } from 'react-redux';
+// import store from '../redux/store';
 
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-const Navigation = () => {
+const Navigation = (name) => {
 
     const role = localStorage.getItem('userRole');
 
+    // const [openKeys, setOpenkeys] = useState(); //펼쳐져 있을 메뉴
+    // sessionStorage.setItem('ok', JSON.stringify(openKeys));
+    // const ok2 = JSON.parse(sessionStorage.getItem('ok'));
+    // const ok2 = sessionStorage.getItem('ok');
+    // const ok = JSON.parse(ok2) || "";
+    
+    // const [selectedKeys, setSelectedKeys] = useState(); //키
+
     return (
         role === "ROLE_ADMIN" ?
-            <Provider store={store}>
+            // <Provider store={store}>
                 <Sider width={200} className="site-layout-background2">
                     <Image style={{ borderRadius: "0%", width: '100%', height: '100%' }}
                         width={200}
@@ -28,15 +36,23 @@ const Navigation = () => {
                     <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
 
                     <Menu
+                        // selectedKeys={['1', 'sub2']}
                         mode="inline"
                         defaultSelectedKeys={['1']}
-                        // defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6']}
                         style={{ height: '100%', borderRight: 0 }}
+                        // openKeys={openKeys}
+                        // openKeys={openKeys}
+                        // selectedKeys={selectedKeys}
+                        // onOpenChange={(openKeys) => setOpenkeys(openKeys)}
+                        // defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6']}
                     >
+                        {/* {
+                            console.log(openKeys)
+                        } */}
                         <Menu.Item key="1" icon={<HomeOutlined />}>
                             <Link to="/">홈화면</Link>
                         </Menu.Item>
-                        <SubMenu key="sub2" icon={<UserOutlined />} title="내 정보">
+                        <SubMenu key="sub2" icon={<UserOutlined />} title="내 정보" >
                             <Menu.Item key="5"><Link to="/mypage">프로필 수정</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub3" icon={<LaptopOutlined />} title="내 근무">
@@ -57,7 +73,7 @@ const Navigation = () => {
                         </SubMenu>
                     </Menu>
                 </Sider>
-            </Provider>
+            // </Provider>
             :
             <Sider width={200} className="site-layout-background2">
                 <Image
