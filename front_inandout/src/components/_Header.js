@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import '../assets/css/scroll.css';
 import axios from 'axios';
 import moment from 'moment';
+import styled from 'styled-components';
 
 const { Header } = Layout;
 
@@ -100,8 +101,52 @@ const _Header = () => {
         })
     },[])
 
+    const DIV = styled.div`
+    .ant-card{
+        text-align: left;
+        margin-right: 10px;
+        display: inline-block;
+    }
+    
+    
+    .ant-card-body{
+        padding: 5px !important;
+        height: 38px;
+        overflow: hidden;
+    }
+    
+    .ant-card-bordered {
+        border: 0px solid !important;
+    }
+    
+    .animation{
+        animation:text-scroll 5s linear infinite;
+    }
+    .animation a {
+        color:black;
+        margin-bottom: 10px;
+    }
+    
+    @keyframes text-scroll{
+        from{
+          transform:translateY(30%);
+          -moz-transform:translateY(30%);
+          -webkit-transform:translateY(30%);
+          -o-transform:translateY(30%);
+          -ms-transform:translateY(30%);
+        }
+        to{
+          transform:translateY(-100%);
+          -moz-transform:translateY(-100%);
+          -webkit-transform:translateY(-100%);
+          -o-transform:translateY(-100%);
+          -ms-transform:translateY(-100%);
+        }
+    }
+    `
+
     return (
-        <div>
+        <DIV>
             <Header className="header">
                 {/* <div className="logo" /> */}
                 <div style={{width:"20%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle:"oblique"}}>IN-N-OUT</div>
@@ -142,7 +187,7 @@ const _Header = () => {
                 </Button>
                 </div>
             </Header>
-        </div>
+        </DIV>
     );
 };
 

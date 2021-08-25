@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -7,8 +7,11 @@ import DoctorItem from './leave/DoctorItem';
 const { Option } = Select;
 
 const _Drawer = () => {
+  
+  const formRef = useRef(null);
   const [state1, setState1] = useState(false);
   const [doctors, setDoctors] = useState([]);
+  const [user, setUser] = useState({});
 
   const header = {
     headers: {
@@ -22,7 +25,7 @@ const _Drawer = () => {
     });
   };
 
-  const onClose = () => {
+  const onClose = (value) => {
     setState1({
       visible: false,
     });
@@ -30,14 +33,47 @@ const _Drawer = () => {
 
   useEffect(()=>{
     getDoctor();
+    getUser();
   },[])
 
   const getDoctor = () => {
     axios.get("http://localhost:8080/api/user/getdoctor", header).then(res => {
-      console.log("닥터 : " + res.data);
-      console.log(res)
       setDoctors(res.data);
     }).catch();
+  }
+
+  const getUser = () => {
+    axios.get("http://localhost:8080/api/user", header).then(res => {
+      setUser(res.data);
+    }).catch();
+  }
+
+  const onFinish = (value) => {
+    let data = {
+      category: value.category,
+      content: value.content,
+      toDate: value.date[1],
+      fromDate: value.date[0],
+      state: "wait",
+      fromUser: value.name
+    }
+
+    console.log(data);
+
+    axios.post("http://localhost:8080/api/leave",data,header).then( res => {
+      alert("연차 신청이 완료되었습니다.");
+      formRef.current.setFieldsValue({
+        category: "",
+        content: "",
+        toDate: "",
+        fromDate: "",
+        name: ""
+      });
+    }).catch();
+
+    // setState1({
+    //   visible: false,
+    // });
   }
 
   return (
@@ -51,44 +87,30 @@ const _Drawer = () => {
         onClose={onClose}
         visible={state1.visible}
         bodyStyle={{ paddingBottom: 80 }}
-        footer={
-          <div
-            style={{
-              textAlign: 'right',
-            }}
-          >
-            <Button onClick={onClose} style={{ marginRight: 8 }}>
-              취소
-            </Button>
-            <Button onClick={onClose} type="primary">
-              등록
-            </Button>
-          </div>
-        }
       >
-        <Form layout="vertical" hideRequiredMark>
+        <Form ref={formRef} layout="vertical" hideRequiredMark onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="leave_type"
+                name="category"
                 label="휴가 구분"
                 rules={[{ required: true, message: '휴가 구분을 선택해주세요' }]}
               >
                 <Select placeholder="휴가 구분을 선택해주세요">
-                  <Option value="a_leave">연차</Option>
-                  <Option value="a_h_leave">오전 반차</Option>
-                  <Option value="p_h_leave">오후 반차</Option>
+                  <Option value="연차">연차</Option>
+                  <Option value="오전 반차">오전 반차</Option>
+                  <Option value="오후 반차">오후 반차</Option>
                 </Select>
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="type"
+                name="name"
                 label="담당의사"
                 rules={[{ required: true, message: '담당의사를 선택해주세요' }]}
               >
                 <Select placeholder="담당의사를 선택해주세요">
-                  {doctors.map((doctor)=>(<Option key={doctor.id} value={doctor.name}>{doctor.name}</Option>))}
+                  {doctors.map((doctor)=>(<Option key={doctor.id} value={doctor.id}>{doctor.name}</Option>))}
                   {/* {doctors.map((doctor)=>(<DoctorItem key={doctor.name} doctor={doctor} />))} */}
                 </Select>
               </Form.Item>
@@ -101,23 +123,22 @@ const _Drawer = () => {
                 label="대상"
                 // rules={[{ required: true, message: 'Please choose the user' }]}
               >
-                {/* 로그인 한사람 이름, 직책 받아오기 */}
+                <Input placeholder="이름입니다." value={user.name} defaultValue={user.name} readOnly />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name="Number_of_days"
                 label="남은 휴가 일수"
-                rules={[{ required: true, message: 'Please choose the Number of days' }]}
               >
-                {/* 로그인 한사람 이름, 직책 받아오기 */}
+                {user.aleave}
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="dateTime"
+                name="date"
                 label="기간 선택"
                 rules={[{ required: true, message: '기간을 입력해주세요' }]}
               >
@@ -131,7 +152,7 @@ const _Drawer = () => {
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="description"
+                name="content"
                 label="휴가 사유"
                 rules={[
                   {
@@ -144,6 +165,16 @@ const _Drawer = () => {
               </Form.Item>
             </Col>
           </Row>
+                <div style={{display:"flex", textAlign:"right"}}>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                        등록
+                    </Button>
+                </Form.Item>
+                    <Button onClick={onClose} style={{marginLeft:"10px"}}>
+                        취소
+                    </Button>
+                </div>
         </Form>
       </Drawer>
     </div>
