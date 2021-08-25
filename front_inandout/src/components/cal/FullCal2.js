@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
+import { Checkbox } from 'antd';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -10,6 +11,10 @@ import axios from 'axios';
 const FullCal2 = () => {
 
   const [leaves, setLeaves] = useState([]);
+
+  function onChange(e) {
+    console.log(`checked = ${e.target.checked}`);
+  }
 
   const header = {
     headers: {
@@ -64,16 +69,16 @@ const FullCal2 = () => {
       cancelButtonText: "닫기"
     }).then(result => {
       if (result.value) {
-      //   let leaves = { // 수정
-      //     headers: { "Content-Type": "application/json; charset=utf-8" },
-      //     fromDate: ,
-      //     toDate: ,
-      // };
+        //   let leaves = { // 수정
+        //     headers: { "Content-Type": "application/json; charset=utf-8" },
+        //     fromDate: ,
+        //     toDate: ,
+        // };
 
-      axios.delete("http://localhost:8080/api/leaves", leaves, header).then((res) => {
+        axios.delete("http://localhost:8080/api/leaves", leaves, header).then((res) => {
           console.log(res)
           console.log(res.data)
-      });
+        });
 
         eventClick.event.remove(); // It will remove event from the calendar
         Alert.fire("삭제!", "삭제가 완료되었습니다.", "success");
@@ -98,8 +103,16 @@ const FullCal2 = () => {
     });
   }
 
-  let data = [];
+  let data = []; // 연차
   leaves.map((leave) => data.push({
+    no: leave.no,
+    title: leave.user.name + ' ' + leave.category,
+    start: leave.fromDate,
+    end: leave.toDate
+  }))
+
+  let data2 = []; // 일정
+  leaves.map((leave) => data2.push({
     no: leave.no,
     title: leave.user.name + ' ' + leave.category,
     start: leave.fromDate,
@@ -127,18 +140,22 @@ const FullCal2 = () => {
               eventClick={eventClick} // 이벤트 클릭시 함수 실행
               selectable={true}
               events={data} // 이벤트 데이터
+              // events={data2} // 일정
 
-              // ref={calendarComponentRef}
-              // weekends={this.state.calendarWeekends}
-              // events={this.state.calendarEvents}
-              // eventDrop={this.drop}
-              // drop={this.drop}
-              // eventReceive={this.eventReceive}
+            // ref={calendarComponentRef}
+            // weekends={this.state.calendarWeekends}
+            // eventDrop={this.drop}
+            // drop={this.drop}
+            // eventReceive={this.eventReceive}
             />
           </div>
         </Col>
-        {/* <Col lg={3} sm={3} md={3}>
-          <div
+        <Col lg={3} sm={3} md={3}>
+            <Checkbox onChange={onChange}>내 일정</Checkbox><br />
+            <Checkbox onChange={onChange}>휴가</Checkbox><br />
+            <Checkbox onChange={onChange}>출장</Checkbox><br />
+            <Checkbox onChange={onChange}>외근</Checkbox><br />
+          {/* <div
             id="external-events"
             style={{
               padding: "10px",
@@ -147,8 +164,8 @@ const FullCal2 = () => {
               maxHeight: "-webkit-fill-available"
             }}
           >
-          </div>
-        </Col> */}
+          </div> */}
+        </Col>
       </Row>
     </div>
   );

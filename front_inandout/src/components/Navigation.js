@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Layout, Menu, Image } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardFilled, IdcardOutlined } from '@ant-design/icons';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import profile from '../assets/images/doctor.jpg';
 import Drawer from './_Drawer';
@@ -8,7 +8,6 @@ import Drawer from './_Drawer';
 // import Nstate from '../components/Nstate';
 // import { Provider } from 'react-redux';
 // import store from '../redux/store';
-
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;

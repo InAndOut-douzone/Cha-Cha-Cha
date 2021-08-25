@@ -11,37 +11,37 @@ const ApiTest = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/user/"+userNo).then(res => {
+        axios.get("http://localhost:8080/user/" + userNo).then(res => {
             setLoading(true);
-            setTimeout( () => {
+            setTimeout(() => {
                 setLoading(false);
-                console.log(1,res);
-                console.log(2,res.data);
-                console.log(3,res.data.name);
-    
-                setUser(res.data.name);
-            }, 500);       
-        })
-    },[userNo]); // 빈 괄호 = 최초 처음 한번만 실행한다.
+                console.log(1, res);
+                console.log(2, res.data);
+                console.log(3, res.data.name);
 
-    const userUp = () =>{
-        if(userNo === 3){
+                setUser(res.data.name);
+            }, 500);
+        })
+    }, [userNo]); // 빈 괄호 = 최초 처음 한번만 실행한다.
+
+    const userUp = () => {
+        if (userNo === 3) {
             setValue(false);
         }
         setUserNo(userNo + 1);
         setLoading(true);
     }
-    
+
     return (
         <div>
             <div>
-                {   value ?
-                        loading ? 
-                            <Button type="primary" loading onClick={userUp}>123</Button> 
-                        :   <Button type="primary" onClick={userUp}>123</Button> 
+                {value ?
+                    loading ?
+                        <Button type="primary" loading onClick={userUp}>123</Button>
+                        : <Button type="primary" onClick={userUp}>123</Button>
                     : null
                 }
-                { user }
+                {user}
             </div>
         </div>
     );

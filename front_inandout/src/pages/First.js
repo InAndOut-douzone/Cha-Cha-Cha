@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import '../assets/css/app.css';
 import Cal from '../components/cal/Cal2';
 import SiteLayout from './SiteLayout';
-import FullCal from '../components/cal/FullCal';
 import FullCal2 from '../components/cal/FullCal2';
 
 
@@ -36,7 +35,6 @@ export default function First() {
       >
         [캘린더] [접속자 권한: {role} ]
         {/* <Cal /> */}
-        {/* <FullCal /> */}
         <FullCal2 />
       </Content>
       </Layout>
