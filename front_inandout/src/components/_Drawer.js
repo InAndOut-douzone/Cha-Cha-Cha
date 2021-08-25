@@ -52,8 +52,8 @@ const _Drawer = () => {
     let data = {
       category: value.category,
       content: value.content,
-      toDate: value.date[0],
-      fromDate: value.date[1],
+      toDate: value.date[1],
+      fromDate: value.date[0],
       state: "wait",
       fromUser: value.name
     }
