@@ -50,4 +50,10 @@ public class UserService {
 		userEntity.setRoles(roles);
 		return userRepository.save(userEntity);
 	}
+
+
+	public List<User> getDoctor() {
+		String roles = "ROLE_ADMIN";
+		return userRepository.findByRoles(roles);
+	}
 }

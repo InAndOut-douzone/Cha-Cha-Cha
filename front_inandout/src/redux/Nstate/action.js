@@ -1,12 +1,7 @@
-import { ADD_NSTATE, REMOVE_NSTATE } from "./types"
+import { NSTATE } from "./types"
 
-export const addNstate = () => {
+export const Nstate = () => {
     return {
-        type: ADD_NSTATE
-    }
-}
-export const removeNstate = () => {
-    return {
-        type: REMOVE_NSTATE
+        type: NSTATE
     }
 }

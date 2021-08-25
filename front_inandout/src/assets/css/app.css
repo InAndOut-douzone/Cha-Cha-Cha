@@ -39,3 +39,7 @@
 .ant-layout {
   background-color: white !important;
 }
+
+.img, svg {
+  vertical-align: baseline;
+}

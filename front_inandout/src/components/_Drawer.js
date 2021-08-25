@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import DoctorItem from './leave/DoctorItem';
 
 const { Option } = Select;
 
 const _Drawer = () => {
   const [state1, setState1] = useState(false);
+  const [doctors, setDoctors] = useState([]);
+
+  const header = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+    },
+  };
 
   const showDrawer = () => {
     setState1({
@@ -18,6 +27,18 @@ const _Drawer = () => {
       visible: false,
     });
   };
+
+  useEffect(()=>{
+    getDoctor();
+  },[])
+
+  const getDoctor = () => {
+    axios.get("http://localhost:8080/api/user/getdoctor", header).then(res => {
+      console.log("닥터 : " + res.data);
+      console.log(res)
+      setDoctors(res.data);
+    }).catch();
+  }
 
   return (
     <div>
@@ -55,7 +76,7 @@ const _Drawer = () => {
               >
                 <Select placeholder="휴가 구분을 선택해주세요">
                   <Option value="a_leave">연차</Option>
-                  <Option value="a_h_leave">오전 반차</Option>
+                  <Option value="a_h_leave">오전 반차</Option>
                   <Option value="p_h_leave">오후 반차</Option>
                 </Select>
               </Form.Item>
@@ -67,8 +88,8 @@ const _Drawer = () => {
                 rules={[{ required: true, message: '담당의사를 선택해주세요' }]}
               >
                 <Select placeholder="담당의사를 선택해주세요">
-                  <Option value="private">의사 1</Option>
-                  <Option value="public">의사 2</Option>
+                  {doctors.map((doctor)=>(<Option key={doctor.id} value={doctor.name}>{doctor.name}</Option>))}
+                  {/* {doctors.map((doctor)=>(<DoctorItem key={doctor.name} doctor={doctor} />))} */}
                 </Select>
               </Form.Item>
             </Col>
