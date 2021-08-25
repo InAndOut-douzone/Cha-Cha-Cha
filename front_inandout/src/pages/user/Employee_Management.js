@@ -85,7 +85,9 @@ const Employee_Management = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }}/>
                 <br /><br />
-                사원 목록이 나오는 화면입니다. 자세히 버튼을 통해서 해당 사원 상세 정보를 볼 수 있습니다. <br/><br/><br/>
+                <div style={{textAlign:"center"}}>
+                    사원 목록이 나오는 화면입니다. 자세히 버튼을 통해서 해당 사원 상세 정보를 볼 수 있습니다. <br/><br/><br/>
+                </div>
                 <Table style={{textAlign:"center"}} dataSource={data} columns={columns} />
             </Layout>
         </ManagementLayout>

@@ -1,5 +1,7 @@
 package com.cos.facebook.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
@@ -31,5 +33,9 @@ public class LeaveService {
 		leavesEntity.setFromUser(doctoryEntity);
 		
 		return leaveRepository.save(leavesEntity);
+	}
+
+	public List<Leaves> getLeavesByDoctor(long doctorId) {
+		return leaveRepository.findByDoctorId(doctorId);
 	}	
 }
