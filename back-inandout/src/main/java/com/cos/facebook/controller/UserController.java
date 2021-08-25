@@ -49,9 +49,9 @@ public class UserController {
 		
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		
-		System.out.println("principal : " + principal.getUser().getId());
-		System.out.println("principal : " + principal.getUser().getUsername());
-		System.out.println("principal : " + principal.getUser().getPassword());
+		// System.out.println("principal : " + principal.getUser().getId());
+		// System.out.println("principal : " + principal.getUser().getUsername());
+		// System.out.println("principal : " + principal.getUser().getPassword());
 		User user = userRepository.findByUsername(principal.getUser().getUsername());
 
 		return new ResponseEntity<>(user,HttpStatus.OK);
@@ -79,7 +79,7 @@ public class UserController {
 			file.transferTo(fileSave); // 파일저장
 			
 			user.setProfile(image +"."+imgExtension);
-			System.out.println(image);
+			// System.out.println(image);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -113,7 +113,7 @@ public class UserController {
 	// 유저네임 중복체크
 	@GetMapping("/user/usernameCheck/{username}")
 	public ResponseEntity<?> usernameCheck(@PathVariable String username) {
-		System.out.println("username" + username);
+		// System.out.println("username" + username);
 		return new ResponseEntity<>(userService.findByUsername(username),HttpStatus.OK);
 	}
 	

@@ -32,14 +32,14 @@ public class NoticeController {
 	@GetMapping("/list")
 	public ResponseEntity<?> list() {
 		List<Notice> lists = noticeRepository.findAll();
-		System.out.println("lists : " + lists);
+		// System.out.println("lists : " + lists);
 		return new ResponseEntity<>(lists,HttpStatus.OK);
 	}
 
 	@PostMapping("/add")
 	public String home(@RequestBody Notice notice, Authentication authentication) {
-		System.out.println("notice : " + notice);
-		System.out.println("authentication : " +authentication);
+		// System.out.println("notice : " + notice);
+		// System.out.println("authentication : " +authentication);
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		notice.setUser(principal.getUser());
 		noticeRepository.save(notice);

@@ -23,6 +23,9 @@ public class OnOff {
 	private Date date;						// 날짜
 	private Date onTime; 				// 출근시간
 	private Date offTime;				// 퇴근시간
+	private String strDate;               // 날짜 문자열변
+	private String strOn;               // 출근시간 문자열변환
+	private String strOff;              // 퇴근시간 문자열변환
 	
 	@ManyToOne
 	@JoinColumn(name="userId")
