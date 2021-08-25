@@ -14,7 +14,7 @@ import lombok.Data;
 public class Hospital {
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // 전략을 따름
 	private int no;
 	private String name;
 	private String address;
