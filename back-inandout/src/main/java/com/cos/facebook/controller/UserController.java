@@ -142,4 +142,5 @@ public class UserController {
 	public ResponseEntity<?> getDoctor() {
 		return new ResponseEntity<>(userService.getDoctor(),HttpStatus.OK);
 	}	
+
 }
