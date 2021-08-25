@@ -10,7 +10,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	public User findByUsername(String username);
 
 	public List<User> findByRoles(String roles);
-	
+
+	public User findByName(String fromUser);
+		
 //	@Query(value = "select asdfsadf", nativeQuery = true)
 //	public User findzxcv(String name);
 

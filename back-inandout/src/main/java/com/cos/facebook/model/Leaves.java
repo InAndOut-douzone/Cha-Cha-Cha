@@ -25,6 +25,10 @@ public class Leaves {
 	private String state;	  		// 휴가 상태 ( success : 휴가 승인됨 , fail : 휴가 승인안됨, wait : 휴가 승인 대기 중 ) 
 
 	@ManyToOne
+	@JoinColumn(name="fromUserId")
+	private User fromUser;						// 휴가 승인 내주는 사람
+	
+	@ManyToOne
 	@JoinColumn(name="userId")
-	private User user;
+	private User user;								// 휴가를 낸 사람
 }

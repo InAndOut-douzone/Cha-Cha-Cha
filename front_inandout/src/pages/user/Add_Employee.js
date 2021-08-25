@@ -24,7 +24,18 @@ const Add_Employee = () => {
             axios.post("http://localhost:8080/api/user/add",values,header).then( res => {
                 alert(res.data.name + " 사원 등록이 완료되었습니다. (사원번호 : "  + res.data.username + ")");
                 setUsernameCheckState(false);
-                console.log(res)
+                formRef.current.setFieldsValue({
+                    name: "",
+                    username: "",
+                    birth: "",
+                    gender: "",
+                    email: "",
+                    roles: "",
+                    position: "",
+                    hireDate: "",
+                    address:"",
+                    phone:""
+                  });
             }).catch( err => {
                 console.log(err);
                 alert("사원 등록에 실패하였습니다.")
@@ -35,6 +46,7 @@ const Add_Employee = () => {
     const [username, setUsername] = useState();
     const [usernameCheckState, setUsernameCheckState] = useState(false);
     const inputRef = useRef(null);
+    const formRef = useRef(null);
 
     const header = {
         headers: {
@@ -102,6 +114,7 @@ const Add_Employee = () => {
                 form={form}
                 name="register"
                 onFinish={onFinish}
+                ref={formRef}
                 initialValues={{
                     residence: ['zhejiang', 'hangzhou', 'xihu'],
                     prefix: '86',
