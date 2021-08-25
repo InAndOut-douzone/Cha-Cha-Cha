@@ -1,26 +1,15 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
+import interactionPlugin from "@fullcalendar/interaction";
 import Alert from "sweetalert2";
 import axios from 'axios';
-// import "@fullcalendar/core/main.css";
-// import "@fullcalendar/daygrid/main.css";
-// import "@fullcalendar/timegrid/main.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 const FullCal2 = () => {
 
   const [leaves, setLeaves] = useState([]);
-
-  // const events= () => [{
-  //   title:"",
-  //   date:""
-  // }]
-
-
 
   const header = {
     headers: {
@@ -32,12 +21,12 @@ const FullCal2 = () => {
     axios.get("http://localhost:8080/api/leaves", header).then((res) => {
       console.log(res);
       setLeaves(res.data);
-      // JSON.stringify(res.data)
     });
   }, []);
 
   const eventClick = eventClick => {
     Alert.fire({
+      no: eventClick.event.no,
       title: eventClick.event.title,
       html:
         `<div class="table-responsive">
@@ -75,7 +64,6 @@ const FullCal2 = () => {
       cancelButtonText: "닫기"
     }).then(result => {
       if (result.value) {
-
       //   let leaves = { // 수정
       //     headers: { "Content-Type": "application/json; charset=utf-8" },
       //     fromDate: ,
@@ -88,7 +76,7 @@ const FullCal2 = () => {
       });
 
         eventClick.event.remove(); // It will remove event from the calendar
-        Alert.fire("Deleted!", "Your Event has been deleted.", "success");
+        Alert.fire("삭제!", "삭제가 완료되었습니다.", "success");
       }
     });
   };
@@ -130,25 +118,26 @@ const FullCal2 = () => {
                 center: "title",
                 right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
               }}
-              dateClick={handleDateClick}
               rerenderDelay={10}
               eventDurationEditable={false}
               editable={true}
               droppable={true}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              dateClick={handleDateClick} // 날짜 클릭시 함수 실행
+              eventClick={eventClick} // 이벤트 클릭시 함수 실행
+              selectable={true}
+              events={data} // 이벤트 데이터
+
               // ref={calendarComponentRef}
               // weekends={this.state.calendarWeekends}
               // events={this.state.calendarEvents}
-              events={data}
               // eventDrop={this.drop}
               // drop={this.drop}
               // eventReceive={this.eventReceive}
-              eventClick={eventClick}
-              selectable={true}
             />
           </div>
         </Col>
-        <Col lg={3} sm={3} md={3}>
+        {/* <Col lg={3} sm={3} md={3}>
           <div
             id="external-events"
             style={{
@@ -159,7 +148,7 @@ const FullCal2 = () => {
             }}
           >
           </div>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   );
