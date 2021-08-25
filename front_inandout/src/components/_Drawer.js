@@ -79,7 +79,7 @@ const _Drawer = () => {
   return (
     <div>
       <div type="primary" onClick={showDrawer}>
-        <Link to="/">휴가 등록</Link>
+        <Link to="/" style={{color:'currentcolor'}}>휴가 등록</Link>
       </div>
       <Drawer
         title="휴가 등록"
