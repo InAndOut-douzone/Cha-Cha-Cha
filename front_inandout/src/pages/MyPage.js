@@ -63,7 +63,7 @@ const MyPage = () => {
 
         formData.append('file',image);
         formData.append('userData',JSON.stringify(userData));
-        axios.post("http://localhost:8080/api/user/update",formData,header).then((res)=>{
+        axios.post("http://localhost:8080/api/getwork/{id}}",formData,header).then((res)=>{
             console.log(res);
             });
         

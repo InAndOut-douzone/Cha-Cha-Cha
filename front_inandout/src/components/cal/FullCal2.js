@@ -36,6 +36,44 @@ const FullCal2 = () => {
     });
   }, []);
 
+  const eventClick = (eventClick) => {
+    Alert.fire({
+      title: eventClick.event.title,
+      html:
+        `<div class="table-responsive">
+      <table class="table">
+      <tbody>
+      <tr >
+      <td>이름</td>
+      <td><strong>` +
+        eventClick.event.title +
+        `</strong></td>
+      </tr>
+      <tr >
+      <td>날짜</td>
+      <td><strong>
+      ` +
+        eventClick.event.start +
+        `
+      </strong></td>
+      </tr>
+      </tbody>
+      </table>
+      </div>`,
+
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "삭제",
+      cancelButtonText: "닫기"
+    }).then(result => {
+      if (result.value) {
+        eventClick.event.remove(); // It will remove event from the calendar
+        Alert.fire("Deleted!", "Your Event has been deleted.", "success");
+      }
+    });
+  };
+
   // {leaves.map((leave) => events.push("titl"))}
 
   // const event = leaves.map(leave => event.push(leave));
@@ -168,7 +206,7 @@ const FullCal2 = () => {
               // eventDrop={this.drop}
               // drop={this.drop}
               // eventReceive={this.eventReceive}
-              // eventClick={eventClick}
+              eventClick={eventClick}
               selectable={true}
             />
           </div>

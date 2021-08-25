@@ -41,7 +41,6 @@ public class OnOffController {
 	
 	@GetMapping("/getwork/{id}")
 	public ResponseEntity<?> getwork(@PathVariable long id){
-		System.out.println("getwork 실행됨");
 		return new ResponseEntity<>(onOffService.getWork(id),HttpStatus.OK);		
 	}
 }

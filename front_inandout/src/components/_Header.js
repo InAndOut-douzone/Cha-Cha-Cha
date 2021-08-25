@@ -78,6 +78,8 @@ const _Header = () => {
         setIsModalVisible2(false);
     };
 
+    const [title,setTitle] = useState([]);
+
     useEffect(()=>{
         axios.get("http://localhost:8080/api/getonoff", header).then(res => {
             if(res.data === "") {
@@ -90,8 +92,13 @@ const _Header = () => {
                     setOffTime(moment(res.data.offTime).format("HH mm"));
                 }
             }
-            console.log(res);
+            // console.log(res);
         }).catch();
+
+        axios.get("http://localhost:8080/api/notice/list", header).then(res=>{
+            console.log(res.data);
+            setTitle(res.data);
+        })
     },[])
 
     const DIV = styled.div`
@@ -148,7 +155,7 @@ const _Header = () => {
                <div style={{textAlign:"right", width:"40%"}}>
                 <Card style={{ width: "100%", height: 40, marginTop: 12, backgroundColor: "#001528" }}>
                     <div className='animation'>
-                        <p><a style={{ color: "white" }} href="aa">[공지사항 1]</a></p>
+                        <p><a style={{ color: "white" }} href="aa">{title.title}</a></p>
                         <p><a style={{ color: "white" }} href="aa">[공지사항 2]</a></p>
                         <p><a style={{ color: "white" }} href="aa">[공지사항 3]</a></p>
                     </div>

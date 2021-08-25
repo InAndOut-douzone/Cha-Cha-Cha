@@ -1,43 +1,62 @@
-import React from 'react';
-import { Layout, Progress, Breadcrumb, Table } from 'antd';
+import React,{ useState, useEffect } from 'react';
+import axios from 'axios';
+import { Layout, Progress, Breadcrumb, Table,DatePicker,Space } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import SiteLayout from './SiteLayout';
 
-const dataSource = [
-    {
-        key: '1',
-        wd: '0000-00-00',
-        workstate: '총 근무8시간',
-        remark: '',
-    },
-    {
-        key: '2',
-        wd: '0000-00-00',
-        workstate: '휴가',
-        remark: '휴가',
-    },
-];
+const {RangePicker} = DatePicker
+const header = { 
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("Authorization")
+    }
+  };
 
 const columns = [
     {
         title: '근무일',
-        dataIndex: 'wd',
-        key: 'wd',
+        dataIndex: 'strDate',
+        key: 'strDate',
     },
     {
         title: '근무상태',
-        dataIndex: 'workstate',
-        key: 'workstate',
+        dataIndex: 'state',
+        key: 'state',
     },
     {
-        title: '비고',
-        dataIndex: 'remark',
-        key: 'remark',
+        title: '출근시간',
+        dataIndex: 'strOn',
+        key: 'strOn',
     },
+    {
+        title: '퇴근시간',
+        dataIndex: 'strOff',
+        key: 'strOff',
+    }
 ];
 
 const Work = () => {
+
+    const [onoff, setOnoff] = useState([]);
+
+    useEffect(() => { // user정보 get, useEffect를 사용하여 한번만 get 하도록 설정
+        axios.get("/api/work",header).then((res)=>{
+            setOnoff(res.data);
+        });
+    },[]);
+
+    const dateHandler = (value,dateString) => {
+
+        let data = {
+            onTime :dateString[0],
+            offTime : dateString[1]
+        }
+
+        axios.post("/api/workdate",data,header).then((res)=>{
+            console.log(res.data);
+            setOnoff(res.data);
+        });
+    }
     return (
         <SiteLayout>
             <Layout style={{ padding: '0 24px 24px' }}>
@@ -49,6 +68,8 @@ const Work = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
+
+                <h1>21년 8월 23일 ~ 21년 8월 29일</h1>
                 <Progress
                     strokeColor={{
                         '0%': '#108ee9',
@@ -64,23 +85,12 @@ const Work = () => {
                     percent={99.9}
                     status="active"
                 />
-                {/* <Progress
-                    type="circle"
-                    strokeColor={{
-                        '0%': '#108ee9',
-                        '100%': '#87d068',
-                    }}
-                    percent={90}
-                />
-                <Progress
-                    type="circle"
-                    strokeColor={{
-                        '0%': '#108ee9',
-                        '100%': '#87d068',
-                    }}
-                    percent={100}
-                /> */}
-                <Table dataSource={dataSource} columns={columns} />
+                <br />
+                <Space direction="vertical" size={12}>
+                    <RangePicker onChange={dateHandler}/>
+                </Space>
+                <br />
+                <Table dataSource={onoff} columns={columns} />
             </Layout>
             </SiteLayout>
     );
