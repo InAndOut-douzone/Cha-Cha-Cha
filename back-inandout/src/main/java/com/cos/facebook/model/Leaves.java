@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class leaves {
+public class Leaves {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호증가 전략 3가지 Table, auto_increment, Sequence / 기본 전략을 따르겠다

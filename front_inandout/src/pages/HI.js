@@ -25,6 +25,7 @@ const HIM = () => {
         axios.get("http://localhost:8080/api/hospital", header).then((res) => {
             console.log(res); 
             setHospital(res.data);
+            JSON.stringify(res.data)
         });
     }, []);
 
