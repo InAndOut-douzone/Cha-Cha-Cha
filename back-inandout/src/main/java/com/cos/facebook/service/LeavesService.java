@@ -17,14 +17,18 @@ public class LeavesService {
 	public List<Leaves> findAll() {
 		return leavesRepository.findAll();
 	}
+	
+	public void delete(int no) {
+		leavesRepository.deleteById(no);
+	}
 
 //	public void update(LeavesReqDto leavesReqDto) {
-//		List<Leaves> leavesEntity = leavesRepository.findAll();
+//		Leaves leavesEntity = leavesRepository.findById();
 //		leavesEntity.setFromDate(leavesReqDto.getFromDate());
 //		leavesEntity.setToDate(leavesReqDto.getToDate());
-//		leavesEntity.setContent(leavesReqDto.getContent());
-//		leavesEntity.setCategory(leavesReqDto.getCategory());
-//		leavesEntity.setState(leavesReqDto.getState());
+////		leavesEntity.setContent(leavesReqDto.getContent());
+////		leavesEntity.setCategory(leavesReqDto.getCategory());
+////		leavesEntity.setState(leavesReqDto.getState());
 //
 //		Leaves result = leavesRepository.save(leavesEntity);
 //		System.out.println("result" + result);
