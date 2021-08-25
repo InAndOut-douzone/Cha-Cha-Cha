@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
+import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
 import com.cos.facebook.service.LeaveService;
 
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,12 @@ public class LeaveController {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		
 		return new ResponseEntity<>(leaveService.getLeavesByDoctor(principal.getUser().getId()), HttpStatus.OK);
+	}	
+	
+	@PostMapping("/leave/update")
+	public ResponseEntity<?> updateState(@RequestBody LeaveUpdateReqDto leaveUpdateReqDto){
+		leaveService.leaveUpdate(leaveUpdateReqDto);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}	
 }
