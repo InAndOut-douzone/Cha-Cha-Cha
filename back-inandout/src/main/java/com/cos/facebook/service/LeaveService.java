@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
+import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
 import com.cos.facebook.model.Leaves;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.LeaveRepository;
@@ -37,5 +38,11 @@ public class LeaveService {
 
 	public List<Leaves> getLeavesByDoctor(long doctorId) {
 		return leaveRepository.findByDoctorId(doctorId);
+	}
+
+	public void leaveUpdate(LeaveUpdateReqDto leaveUpdateReqDto) {
+		Leaves leaveEntity = leaveRepository.findById(leaveUpdateReqDto.getNo()).get();
+		leaveEntity.setState(leaveUpdateReqDto.getState());
+		leaveRepository.save(leaveEntity);
 	}	
 }

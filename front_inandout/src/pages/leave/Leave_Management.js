@@ -109,7 +109,7 @@ const Leave_Management = () => {
           <Table style={{textAlign:"center"}} dataSource={data} columns={columns} /><br/><br/><br/>
           <Text style={{textAlign:"center"}}>현재 의원님한테 들어온 휴가신청 목록 입니다.  <button onClick={getLeaves} style={{border:"0px", background:"white", color:"cadetblue"}}>*새로 고침*</button></Text><br/><br/>
           <div style={{display:"flex", flexWrap: "wrap", justifyContent: "space-evenly"}}>
-            {leaves.map((leave) => (<LeaveItem key={leave.no} leave={leave}/>))}
+            {leaves.map((leave) => (<LeaveItem key={leave.no} leave={leave} onClick={getLeaves}/>))}
           </div>
         </Layout>
         </SiteLayout>
