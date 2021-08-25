@@ -2,7 +2,9 @@ package com.cos.facebook.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +20,13 @@ public class LeavesController {
 	private final LeavesService leavesService;
 	
 	@GetMapping("/leaves")
-	public ResponseEntity<?> getHospital() {
+	public ResponseEntity<?> getLeaves() {
 		return new ResponseEntity<>(leavesService.findAll(),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/leaves/{no}")
+	public void deleteLeaves(@PathVariable int no) {
+		leavesService.delete(no);
 	}
 	
 //	@PutMapping("/hospital2")

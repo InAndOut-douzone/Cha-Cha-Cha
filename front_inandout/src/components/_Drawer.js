@@ -69,6 +69,7 @@ const _Drawer = () => {
         fromDate: "",
         name: ""
       });
+      window.location.replace("/")  
     }).catch();
 
     // setState1({
