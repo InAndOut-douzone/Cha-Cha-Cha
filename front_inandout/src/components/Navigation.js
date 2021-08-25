@@ -38,13 +38,13 @@ const Navigation = (name) => {
                     <Menu
                         // selectedKeys={['1', 'sub2']}
                         mode="inline"
-                        defaultSelectedKeys={['1']}
+                        // defaultSelectedKeys={['1']}
                         style={{ height: '100%', borderRight: 0 }}
                         // openKeys={openKeys}
                         // openKeys={openKeys}
                         // selectedKeys={selectedKeys}
                         // onOpenChange={(openKeys) => setOpenkeys(openKeys)}
-                        // defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6']}
+                        defaultOpenKeys={['1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6']}
                     >
                         {/* {
                             console.log(openKeys)
@@ -68,8 +68,9 @@ const Navigation = (name) => {
                             <Menu.Item key="11"><Link to="/employeeManagement">사원 관리</Link></Menu.Item>
                             <Menu.Item key="12"><Link to="/leaveManagement">휴가 관리</Link></Menu.Item>
                         </SubMenu>
-                        <SubMenu key="sub6" icon={<NotificationOutlined />} title="공지사항 관리">
+                        <SubMenu key="sub6" icon={<NotificationOutlined />} title="공지사항">
                             <Menu.Item key="13"><Link to="/addNotice">공지사항 등록</Link></Menu.Item>
+                            <Menu.Item key="14"><Link to="/notice">공지사항</Link></Menu.Item>
                         </SubMenu>
                     </Menu>
                 </Sider>
@@ -101,6 +102,9 @@ const Navigation = (name) => {
                         <Menu.Item key="8"><Link to="/hi">의원 정보</Link></Menu.Item>
                         <Menu.Item key="9"><Link to="/wtm">근무 시간</Link></Menu.Item>
                     </SubMenu>
+                    <Menu.Item key="2" icon={<LaptopOutlined />}>
+                        <Link to="/notice">공지사항</Link>
+                    </Menu.Item>
                 </Menu>
             </Sider>
     );
