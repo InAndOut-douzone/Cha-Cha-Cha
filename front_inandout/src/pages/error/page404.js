@@ -3,7 +3,7 @@ import React from 'react';
 const page404 = () => {
     return (
         <div>
-                404 error
+            404 error
         </div>
     );
 };

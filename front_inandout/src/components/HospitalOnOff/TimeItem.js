@@ -16,11 +16,11 @@ const TimeComponent = (props) => {
     },
   };
 
-    return (
-        <Form name="time_related_controls" {...formItemLayout} style={{textAlign: "initial", marginLeft: "23%", marginBottom:"-20px"}}>
-            <Form.Item name={week} label={week} >{onTime}~ {offTime}</Form.Item>
-        </Form>
-    );
+  return (
+    <Form name="time_related_controls" {...formItemLayout} style={{ textAlign: "initial", marginLeft: "23%", marginBottom: "-20px" }}>
+      <Form.Item name={week} label={week} >{onTime}~ {offTime}</Form.Item>
+    </Form>
+  );
 };
 
 export default TimeComponent;

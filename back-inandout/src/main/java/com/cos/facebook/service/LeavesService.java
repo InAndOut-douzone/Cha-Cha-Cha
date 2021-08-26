@@ -25,8 +25,34 @@ public class LeavesService {
 		return leavesRepository.findAll();
 	}
 	
-	public void delete(int no) {
-		leavesRepository.deleteById(no);
+	public List<Leaves> findByNo(int no, long id) {
+		String category = "";
+		if(no == 1) {
+			return leavesRepository.findByNo3(id);
+		} else if(no == 2) {
+			category = "연차";
+			return leavesRepository.findByNo2(category);
+		} else if(no == 3) {
+			 category = "출장";
+		} else if(no == 4) {
+			 category = "외근";
+		} else if(no == 31) {
+			 category = "출장";
+			 return leavesRepository.findByNo31(category);
+		} else if(no == 32) {
+			 category = "출장";
+			 return leavesRepository.findByNo32(category);
+		} else if(no == 33) {
+			 category = "출장";
+			 return leavesRepository.findByNo33(category);
+		} else if(no == 34) {
+			 return leavesRepository.findByNo34();
+		}
+		return leavesRepository.findByNo(category);
+	}
+	
+	public void delete(int id) {
+		leavesRepository.deleteById(id);
 	}
 
 //	public void update(LeavesReqDto leavesReqDto) {

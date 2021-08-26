@@ -1,9 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
-import { Layout } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/_Header';
-import Navigation from './components/Navigation';
 import PrivateRoute from './components/routes/PrivateRoute';
 import PublicRoute from './components/routes/PublicRoute';
 import LogoutRoute from './components/routes/LogoutRoute';
@@ -13,6 +10,7 @@ import Employee_Details from './pages/user/Employee_Details';
 import Leave_Management from './pages/leave/Leave_Management';
 import Add_Employee from './pages/user/Add_Employee';
 import Add_Notice from './pages/Add_Notice';
+import Notice from './notice/Notice';
 import MyPage from './pages/MyPage';
 import First from './pages/First';
 import Login from './pages/Login';
@@ -43,6 +41,7 @@ export default function App() {
             <PrivateRoute component={Employee_Management} path="/employeemanagement" exact={true} />
             <PrivateRoute component={Leave_Management} path="/leavemanagement" exact={true} />
             <PrivateRoute component={Add_Notice} path="/addnotice" exact={true} />
+            <PrivateRoute component={Notice} path="/notice" exact={true} />
             <PrivateRoute component={Employee_Details} path="/employeedetails/:id" exact={true} />
             <LogoutRoute component={Login} path="/logout" exact={true} />
             {/* 매칭되는 페이지가 없을 때 실행됨 switch가 있기에 가능 */}

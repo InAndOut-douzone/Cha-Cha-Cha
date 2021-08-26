@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import axios from 'axios';
-// import { Button, Form, Input } from 'antd';
-import { Form, Input } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Form } from 'antd';
 import "../assets/css/loginForm.css"
 import styled from 'styled-components'
 import img from '../assets/images/hospital.jpg';
@@ -18,11 +16,11 @@ const Container = styled.div`
   background-size: cover;
   `;
 
-  // const Inandout = styled.div`
-  // body { width: 100%; height: 100%; background: #16345A; padding:0; margin:0; } 
-  // text-box { width: 100%; height: 100%; display:flex; justify-content: center; align-items: center; }
-  // font-family: 'Staatliches', cursive; font-size: 6em; text-align: center; color: #F1C164; text-shadow: 5px 5px #2D63A7; margin: 0;
-  // `;
+// const Inandout = styled.div`
+// body { width: 100%; height: 100%; background: #16345A; padding:0; margin:0; } 
+// text-box { width: 100%; height: 100%; display:flex; justify-content: center; align-items: center; }
+// font-family: 'Staatliches', cursive; font-size: 6em; text-align: center; color: #F1C164; text-shadow: 5px 5px #2D63A7; margin: 0;
+// `;
 
 const config = {
   headers: {
@@ -69,7 +67,7 @@ export default function Login({ history, location }) {
         name="global_state"
         layout="inline"
         onFinish={onfinish}
-        >
+      >
         <Form.Item name="no">
           {/* <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> */}
           {/* <TextField type="number" maxLength="8" id="standard-basic" label="사원번호" /> */}
