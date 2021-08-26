@@ -8,7 +8,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Alert from "sweetalert2";
 import axios from 'axios';
 import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
 const FullCal2 = () => {
 
@@ -298,11 +298,11 @@ const FullCal2 = () => {
   }))
 
 
-  // const CalendarLayout = styled.div`
-  //   .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
-  //   .fc-col-header-cell-cushion { color: black; font-weight: 400; },
-  //   .fc-daygrid-day-number { color: black; font-weight: 400; }   
-  // `;
+  const CalendarLayout = styled.div`
+    .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
+    .fc-col-header-cell-cushion { color: black; font-weight: 400; },
+    .fc-daygrid-day-number { color: black; font-weight: 400; }   
+  `;
 
   const eventColor = () => {
     "skyblue"
