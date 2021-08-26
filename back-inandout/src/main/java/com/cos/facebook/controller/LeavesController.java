@@ -33,9 +33,9 @@ public class LeavesController {
 		return new ResponseEntity<>(leavesService.findByNo(no,principal.getUser().getId()),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/leaves/{no}")
-	public void deleteLeaves(@PathVariable int no) {
-		leavesService.delete(no);
+	@DeleteMapping("/leaves/{id}")
+	public void deleteLeaves(@PathVariable int id) {
+		leavesService.delete(id);
 	}
 	
 //	@PutMapping("/hospital2")
