@@ -18,6 +18,21 @@ public class LeavesService {
 		return leavesRepository.findAll();
 	}
 	
+	public List<Leaves> findByNo(int no, long id) {
+		String category = "";
+		if(no == 1) {
+			return leavesRepository.findByNo3(id);
+		} else if(no == 2) {
+			category = "연차";
+			return leavesRepository.findByNo2(category);
+		} else if(no == 3) {
+			 category = "출장";
+		} else if(no == 4) {
+			 category = "외근";
+		}
+		return leavesRepository.findByNo(category);
+	}
+	
 	public void delete(int no) {
 		leavesRepository.deleteById(no);
 	}

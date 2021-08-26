@@ -2,12 +2,14 @@ package com.cos.facebook.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cos.facebook.config.auth.PrincipalDetails;
 import com.cos.facebook.service.LeavesService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,13 @@ public class LeavesController {
 	@GetMapping("/leaves")
 	public ResponseEntity<?> getLeaves() {
 		return new ResponseEntity<>(leavesService.findAll(),HttpStatus.OK);
+	}
+	
+	@GetMapping("/leaves/{no}")
+	public ResponseEntity<?> getLeaves(@PathVariable int no, Authentication authentication) {
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		
+		return new ResponseEntity<>(leavesService.findByNo(no,principal.getUser().getId()),HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/leaves/{no}")

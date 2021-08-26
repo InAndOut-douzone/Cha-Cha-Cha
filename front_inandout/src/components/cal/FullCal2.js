@@ -11,9 +11,63 @@ import axios from 'axios';
 const FullCal2 = () => {
 
   const [leaves, setLeaves] = useState([]);
+  // 휴가 state = true
+  // 출장 state = t
+  // 외출 state = 
 
-  function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
+  function onChange1(e) {
+    if (e.target.checked) {
+      axios.get("http://localhost:8080/api/leaves/" + 1, header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    } else {
+      axios.get("http://localhost:8080/api/leaves", header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    }
+  }
+
+  function onChange2(e) {
+    if (e.target.checked) {
+      axios.get("http://localhost:8080/api/leaves/" + 2, header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    } else {
+      axios.get("http://localhost:8080/api/leaves", header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    }
+  }
+
+  function onChange3(e) {
+    if (e.target.checked) {
+      axios.get("http://localhost:8080/api/leaves/" + 3, header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    } else {
+      axios.get("http://localhost:8080/api/leaves", header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    }
+  }
+  function onChange4(e) {
+    if (e.target.checked) {
+      axios.get("http://localhost:8080/api/leaves/" + 4, header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    } else {
+      axios.get("http://localhost:8080/api/leaves", header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    }
   }
 
   const header = {
@@ -116,7 +170,7 @@ const FullCal2 = () => {
     no: leave.no,
     title: leave.user.name + ' ' + leave.category,
     start: leave.fromDate,
-    end: leave.toDate
+    end: leave.toDate,
   }))
 
   return (
@@ -125,7 +179,14 @@ const FullCal2 = () => {
         <Col lg={9} sm={9} md={9}>
           <div className="demo-app-calendar" id="mycalendartest">
             <FullCalendar
+
               defaultView="dayGridMonth"
+
+              headerToolbar={{
+                center: 'dayGridMonth,timeGridWeek,timeGridDay',
+              }}
+              eventColor="skyblue"
+
               header={{
                 left: "prev,next today",
                 center: "title",
@@ -140,7 +201,8 @@ const FullCal2 = () => {
               eventClick={eventClick} // 이벤트 클릭시 함수 실행
               selectable={true}
               events={data} // 이벤트 데이터
-              // events={data2} // 일정
+            // calendarEvents={data}
+            // events={data2} // 일정
 
             // ref={calendarComponentRef}
             // weekends={this.state.calendarWeekends}
@@ -151,10 +213,10 @@ const FullCal2 = () => {
           </div>
         </Col>
         <Col lg={3} sm={3} md={3}>
-            <Checkbox onChange={onChange}>내 일정</Checkbox><br />
-            <Checkbox onChange={onChange}>휴가</Checkbox><br />
-            <Checkbox onChange={onChange}>출장</Checkbox><br />
-            <Checkbox onChange={onChange}>외근</Checkbox><br />
+          <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
+          <Checkbox onChange={onChange2}>휴가</Checkbox><br />
+          <Checkbox onChange={onChange3}>출장</Checkbox><br />
+          <Checkbox onChange={onChange4}>외근</Checkbox><br />
           {/* <div
             id="external-events"
             style={{
