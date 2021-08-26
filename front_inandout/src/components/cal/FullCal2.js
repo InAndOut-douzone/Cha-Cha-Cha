@@ -8,6 +8,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Alert from "sweetalert2";
 import axios from 'axios';
 import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
+import styled from 'styled-components';
 
 const FullCal2 = () => {
 
@@ -296,37 +297,83 @@ const FullCal2 = () => {
     end: leave.toDate,
   }))
 
+
+  const CalendarLayout = styled.div`
+    .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
+    .fc-col-header-cell-cushion { color: black; font-weight: 400; },
+    .fc-daygrid-day-number { color: black; font-weight: 400; }   
+  `;
+
+  const eventColor = () => {
+    "skyblue"
+  }
+ 
   return (
-    <div className="animated fadeIn p-4 demo-app">
-      <Row>
-        <Col lg={9} sm={9} md={9}>
-          <div className="demo-app-calendar" id="mycalendartest">
-            <FullCalendar
+    <CalendarLayout>
+      <div className="animated fadeIn p-4 demo-app">
+        <Row>
+          <Col lg={9} sm={9} md={9}>
+            <div className="demo-app-calendar" id="mycalendartest">
+              <FullCalendar
 
-              defaultView="dayGridMonth"
+                defaultView="dayGridMonth"
 
-              headerToolbar={{
-                center: 'dayGridMonth,timeGridWeek,timeGridDay',
+                eventColor="skyblue"
+
+                header={{
+                  left: "prev,next today",
+                  center: "title",
+                  right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                }}
+                rerenderDelay={10}
+                eventDurationEditable={false}
+                editable={true}
+                droppable={true}
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                dateClick={handleDateClick} // 날짜 클릭시 함수 실행
+                eventClick={eventClick} // 이벤트 클릭시 함수 실행
+                selectable={true}
+                events={data} // 이벤트 데이터
+              // calendarEvents={data}
+              // events={data2} // 일정
+
+<<<<<<< HEAD
+              // ref={calendarComponentRef}
+              // weekends={this.state.calendarWeekends}
+              // eventDrop={this.drop}
+              // drop={this.drop}
+              // eventReceive={this.eventReceive}
+              />
+            </div>
+          </Col>
+          <Col lg={3} sm={3} md={3}>
+            {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
+            <br /><br /><br />
+            <div style={{ marginTop: "-7.5px", height: "40px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
+            <Checkbox onChange={onChange1}>내 일정</Checkbox><br />   
+            </div><br />
+            <div style={{ height: "100px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
+            <Checkbox style={{marginBottom:"5px"}} onChange={onChange2}>연차</Checkbox><br />
+            <Checkbox style={{marginBottom:"5px"}} onChange={onChange3}>출장</Checkbox><br />
+            <Checkbox style={{marginBottom:"5px"}} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+            </div>
+            <br/>
+            <EmployeeOnOffList />
+            {/* <div
+              id="external-events"
+              style={{
+                padding: "10px",
+                width: "80%",
+                height: "auto",
+                maxHeight: "-webkit-fill-available"
               }}
-              eventColor="skyblue"
-
-              header={{
-                left: "prev,next today",
-                center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-              }}
-              rerenderDelay={10}
-              eventDurationEditable={false}
-              editable={true}
-              droppable={true}
-              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-              dateClick={handleDateClick} // 날짜 클릭시 함수 실행
-              eventClick={eventClick} // 이벤트 클릭시 함수 실행
-              selectable={true}
-              events={data} // 이벤트 데이터
-            // calendarEvents={data}
-            // events={data2} // 일정
-
+            >
+            </div> */}
+          </Col>
+        </Row>
+      </div>
+    </CalendarLayout>
+=======
             // ref={calendarComponentRef}
             // weekends={this.state.calendarWeekends}
             // eventDrop={this.drop}
@@ -361,6 +408,7 @@ const FullCal2 = () => {
         </Col>
       </Row>
     </div>
+>>>>>>> 25ac49edc70940ecee6828932a21ae4737b8b921
   );
 }
 
