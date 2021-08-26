@@ -46,7 +46,7 @@ const EmployeeOnOffList = () => {
                         />
                     </List.Item>
                     )}
-                />,
+                />
             </div>
         </EmployeeOnOffListLayout>
     );
