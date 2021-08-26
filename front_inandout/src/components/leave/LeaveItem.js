@@ -7,10 +7,6 @@ const { Text } = Typography;
 
 const LeaveItem = (props) => {
 
-    console.log(11);
-    console.log(props);
-    console.log(props.onClick);
-    console.log(11);
     const getLeaves = props.onClick;
     const { no, category, toDate, fromDate, content, user } = props.leave;
 
@@ -57,7 +53,7 @@ const LeaveItem = (props) => {
                 
                 
                 <p><Text type="success">구분 : </Text>{category}</p>
-                <p><Text type="success">기간 : </Text>{formatToDate + " ~ " + formatFromDate}</p>
+                <p><Text type="success">기간 : </Text>{formatFromDate + " ~ " + formatToDate}</p>
                 <p><Text type="success">사유 : </Text> {content}</p>
             </Card>
         </>

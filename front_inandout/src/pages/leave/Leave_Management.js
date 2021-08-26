@@ -28,36 +28,36 @@ const columns = [
       key: 'username',
   },
   {
-      title: 'Name',
+      title: '이름',
       dataIndex: 'name',
       key: 'name',
   },
   {
-      title: 'Position',
+      title: '직책',
       dataIndex: 'position',
       key: 'position',
   },
   {
-      title: 'Hire Date',
+      title: '입사일',
       dataIndex: 'hireDate',
       key: 'hireDate',
   },
   {
-      title: 'aleave',
+      title: '남은 연차',
       dataIndex: 'aleave',
       key: 'aleave',
   },
-  {
-      title: 'Details',
-      dataIndex: 'username',
-      key: 'username',
-      render: (text, record) => (
-          <Space size="middle">
-              <Link to={"/employeedetails/"+record.id}>자세히</Link>
-              {/* <Link to={`/employeedetails/${record.id}`}>자세히</Link> */}
-          </Space>
-      )
-  },
+  // {
+  //     title: 'Details',
+  //     dataIndex: 'username',
+  //     key: 'username',
+  //     render: (text, record) => (
+  //         <Space size="middle">
+  //             <Link to={"/employeedetails/"+record.id}>자세히</Link>
+  //             {/* <Link to={`/employeedetails/${record.id}`}>자세히</Link> */}
+  //         </Space>
+  //     )
+  // },
 ];
 
 const Leave_Management = () => {

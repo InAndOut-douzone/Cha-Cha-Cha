@@ -7,6 +7,7 @@ import Cal from '../components/cal/Cal2';
 import SiteLayout from './SiteLayout';
 import FullCal from '../components/cal/FullCal';
 import FullCal2 from '../components/cal/FullCal2';
+import EmployeeOnOffList from './user/EmployeeOnOffList';
 
 
 const { Content } = Layout;
@@ -37,7 +38,10 @@ export default function First() {
         [캘린더] [접속자 권한: {role} ]
         {/* <Cal /> */}
         {/* <FullCal /> */}
+        <div style={{display:"flex"}}>
         <FullCal2 />
+        <EmployeeOnOffList />
+        </div>
       </Content>
       </Layout>
     </SiteLayout>

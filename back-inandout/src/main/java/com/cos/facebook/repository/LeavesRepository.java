@@ -12,4 +12,8 @@ public interface LeavesRepository extends JpaRepository<Leaves, Integer>{
 	@Query(value = "select * from Leaves where state='success'",nativeQuery = true)
 	public List<Leaves> findAll();
 	
+	@Query(value = "select * from Leaves where fromUserId = :doctorId and state='wait'", nativeQuery = true)
+	List<Leaves> findByDoctorId(long doctorId);
+
+	
 }
