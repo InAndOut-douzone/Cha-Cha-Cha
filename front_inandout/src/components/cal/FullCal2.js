@@ -7,6 +7,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Alert from "sweetalert2";
 import axios from 'axios';
+import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 
 const FullCal2 = () => {
 
@@ -263,6 +264,7 @@ const FullCal2 = () => {
           <Checkbox onChange={onChange2}>연차</Checkbox><br />
           <Checkbox onChange={onChange3}>출장</Checkbox><br />
           <Checkbox onChange={onChange4}>외근</Checkbox><br />
+          <EmployeeOnOffList />
           {/* <div
             id="external-events"
             style={{

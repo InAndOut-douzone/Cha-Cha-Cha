@@ -37,10 +37,7 @@ export default function First() {
         {/* [캘린더] [접속자 권한: {role} ] */}
         {/* <Cal /> */}
         {/* <FullCal /> */}
-        <div style={{display:"flex"}}>
         <FullCal2 />
-        <EmployeeOnOffList />
-        </div>
       </Content>
       </Layout>
     </SiteLayout>
