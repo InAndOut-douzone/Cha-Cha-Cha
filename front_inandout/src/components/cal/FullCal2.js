@@ -7,13 +7,115 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Alert from "sweetalert2";
 import axios from 'axios';
+import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 
 const FullCal2 = () => {
 
   const [leaves, setLeaves] = useState([]);
+  const [연차, 연차체크] = useState(false);
+  const [출장, 출장체크] = useState(false);
+  const [외근, 외근체크] = useState(false);
 
-  function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
+  const fetch = (no) => {
+    axios.get("http://localhost:8080/api/leaves/" + no, header).then((res) => {
+      console.log(res);
+      setLeaves(res.data);
+    });
+  }
+
+  const dd = () => {
+    axios.get("http://localhost:8080/api/leaves", header).then((res) => {
+      console.log(res);
+      setLeaves(res.data);
+    });
+  }
+
+  function onChange1(e) {
+    if (e.target.checked) {
+      axios.get("http://localhost:8080/api/leaves/" + 1, header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    } else {
+      axios.get("http://localhost:8080/api/leaves", header).then((res) => {
+        console.log(res);
+        setLeaves(res.data);
+      });
+    }
+  }
+
+  function onChange2(e) {
+    연차체크(!연차);
+    if (e.target.checked) {
+      if (출장 && 외근) {
+        fetch(32) // 연차, 출장, 외근
+      } else if (출장) {
+        fetch(33) // 연차, 출장
+      } else if (외근) {
+        fetch(34) // 연차, 외근
+      } else {
+        fetch(2) // 연차
+      }
+    } else {
+      if (출장 && 외근) {
+        fetch(31) // 출장, 외근
+      } else if (출장) {
+        fetch(3) // 외근
+      } else if (외근) {
+        fetch(4) // 연차
+      } else {
+        dd();
+      }
+    }
+  }
+
+  function onChange3(e) {
+    출장체크(!출장);
+    if (e.target.checked) {
+      if (연차 && 외근) {
+        fetch(32) // 연차, 출장, 외근
+      } else if (연차) {
+        fetch(33) // 연차, 출장
+      } else if (외근) {
+        fetch(31) // 출장, 외근
+      } else {
+        fetch(3) // 출장
+      }
+    } else {
+      if (외근 && 연차) {
+        fetch(34) // 연차, 외근
+      } else if (외근) {
+        fetch(4) // 외근
+      } else if (연차) {
+        fetch(2) // 연차
+      } else {
+        dd();
+      }
+    }
+  }
+  function onChange4(e) {
+    외근체크(!외근);
+    if (e.target.checked) {
+      if (연차 && 출장) {
+        fetch(32) // 연차, 출장, 외근
+      } else if (연차) {
+        fetch(34) // 연차, 외근
+      } else if (출장) {
+        fetch(31) // 출장, 외근
+      } else {
+        fetch(4) // 외근
+      }
+    } else {
+      if (연차 && 출장) {
+        fetch(33) // 연차, 출장
+      } else if (연차) {
+        fetch(2) // 연차
+      } else if (출장) {
+        fetch(3) // 출장
+      } else {
+        dd();
+      }
+    }
   }
 
   const header = {
@@ -31,7 +133,7 @@ const FullCal2 = () => {
 
   const eventClick = eventClick => {
     Alert.fire({
-      no: eventClick.event.no,
+      id: eventClick.event.id,
       title: eventClick.event.title,
       html:
         `<div class="table-responsive">
@@ -54,9 +156,8 @@ const FullCal2 = () => {
       <td>번호</td>
       <td><strong>
       ` +
-        eventClick.event.no +
-        `
-      </strong></td>
+        eventClick.event.id +
+        `</strong></td>
       </tr>
       </tbody>
       </table>
@@ -75,7 +176,7 @@ const FullCal2 = () => {
         //     toDate: ,
         // };
 
-        axios.delete("http://localhost:8080/api/leaves", leaves, header).then((res) => {
+        axios.delete("http://localhost:8080/api/leaves/" + eventClick.event.id, header).then((res) => {
           console.log(res)
           console.log(res.data)
         });
@@ -105,7 +206,7 @@ const FullCal2 = () => {
 
   let data = []; // 연차
   leaves.map((leave) => data.push({
-    no: leave.no,
+    id: leave.no,
     title: leave.user.name + ' ' + leave.category,
     start: leave.fromDate,
     end: leave.toDate
@@ -113,10 +214,10 @@ const FullCal2 = () => {
 
   let data2 = []; // 일정
   leaves.map((leave) => data2.push({
-    no: leave.no,
+    id: leave.no,
     title: leave.user.name + ' ' + leave.category,
     start: leave.fromDate,
-    end: leave.toDate
+    end: leave.toDate,
   }))
 
   return (
@@ -125,7 +226,14 @@ const FullCal2 = () => {
         <Col lg={9} sm={9} md={9}>
           <div className="demo-app-calendar" id="mycalendartest">
             <FullCalendar
+
               defaultView="dayGridMonth"
+
+              headerToolbar={{
+                center: 'dayGridMonth,timeGridWeek,timeGridDay',
+              }}
+              eventColor="skyblue"
+
               header={{
                 left: "prev,next today",
                 center: "title",
@@ -140,7 +248,8 @@ const FullCal2 = () => {
               eventClick={eventClick} // 이벤트 클릭시 함수 실행
               selectable={true}
               events={data} // 이벤트 데이터
-              // events={data2} // 일정
+            // calendarEvents={data}
+            // events={data2} // 일정
 
             // ref={calendarComponentRef}
             // weekends={this.state.calendarWeekends}
@@ -151,10 +260,18 @@ const FullCal2 = () => {
           </div>
         </Col>
         <Col lg={3} sm={3} md={3}>
-            <Checkbox onChange={onChange}>내 일정</Checkbox><br />
-            <Checkbox onChange={onChange}>휴가</Checkbox><br />
-            <Checkbox onChange={onChange}>출장</Checkbox><br />
-            <Checkbox onChange={onChange}>외근</Checkbox><br />
+          {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
+          <br /><br /><br />
+          <div style={{ marginTop: "-7.5px", height: "40px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
+          <Checkbox onChange={onChange1}>내 일정</Checkbox><br />   
+          </div><br />
+          <div style={{ height: "100px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
+          <Checkbox style={{marginBottom:"5px"}} onChange={onChange2}>연차</Checkbox><br />
+          <Checkbox style={{marginBottom:"5px"}} onChange={onChange3}>출장</Checkbox><br />
+          <Checkbox style={{marginBottom:"5px"}} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+          </div>
+          <br/>
+          <EmployeeOnOffList />
           {/* <div
             id="external-events"
             style={{

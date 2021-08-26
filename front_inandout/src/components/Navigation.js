@@ -35,11 +35,13 @@ const Navigation = (name) => {
         role === "ROLE_ADMIN" ?
             // <Provider store={store}>
             <Sider width={200} className="site-layout-background2">
-                <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }}
+                {/* <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }} */}
+                <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
                     width={200}
                     src={profile}
                 />
-                <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
+                {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
+                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
 
                 {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
@@ -51,7 +53,6 @@ const Navigation = (name) => {
                     mode="inline"
                     // defaultSelectedKeys={['1']}
                     style={{ height: '100%', borderRight: 0 }}
-                    theme="dark"
                     // openKeys={openKeys}
                     // openKeys={openKeys}
                     // selectedKeys={selectedKeys}
@@ -89,15 +90,15 @@ const Navigation = (name) => {
             // </Provider>
             :
             <Sider width={200} className="site-layout-background2">
-                <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }}
+                <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
                     width={200}
                     src={profile2}
                 />
-                <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
+                {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
+                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={['1']}
-                    theme="dark"
                     defaultOpenKeys={['1', 'sub2', 'sub3', 'sub4', '2']}
                     style={{ height: '100%', borderRight: 0 }}
                 >

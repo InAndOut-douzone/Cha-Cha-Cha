@@ -104,7 +104,7 @@ const _Header = () => {
         })
     },[])
 
-    const noticeList = notice.map((title, index) => <p key={index}><a>{title}</a><br/></p>);
+    const noticeList = notice.map((title, index) => <p key={index}><Link to="/notice">{title}</Link><br/></p>);
 
     const DIV = styled.div`
     .ant-card{
