@@ -261,9 +261,9 @@ const FullCal2 = () => {
         </Col>
         <Col lg={3} sm={3} md={3}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
-          <Checkbox onChange={onChange2}>연차</Checkbox><br />
+          <br /><br /><br /><Checkbox onChange={onChange2}>연차</Checkbox><br />
           <Checkbox onChange={onChange3}>출장</Checkbox><br />
-          <Checkbox onChange={onChange4}>외근</Checkbox><br />
+          <Checkbox onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
           <EmployeeOnOffList />
           {/* <div
             id="external-events"
