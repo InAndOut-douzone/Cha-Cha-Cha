@@ -262,7 +262,7 @@ const FullCal2 = () => {
         <Col lg={3} sm={3} md={3}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
           <br /><br /><br />
-          <div style={{ height: "90px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
+          <div style={{ marginTop: "-7.5px", height: "40px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
           <Checkbox onChange={onChange1}>내 일정</Checkbox><br />   
           </div><br />
           <div style={{ height: "100px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
