@@ -61,8 +61,13 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		String strSun = dayformat.format(sun);
 		
 		Date time = workRepository.workTime(id,mon,sun); // 일주일 일한 시간
-		
-		String hour = timeformat.format(time).substring(0,2); // 일주일 일한 시간 string으로 시간만 나오게 정리
+		String hour = "";
+		if (time == null) {
+			hour = "0";
+		}
+		else {
+			hour = timeformat.format(time).substring(0,2); // 일주일 일한 시간 string으로 시간만 나오게 정리
+		}
 		
 		String percent = String.format("%.2f",(Double.parseDouble(hour)/52)*100); // percent로 계산
 		
