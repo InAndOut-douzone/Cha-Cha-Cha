@@ -28,7 +28,19 @@ public class LeavesService {
 	public List<Leaves> findByNo(int no, long id) {
 		String category = "";
 		if(no == 1) {
-			return leavesRepository.findByNo3(id);
+			return leavesRepository.findByNo1(id);
+		} else if(no == 12) {
+			 return leavesRepository.findByNo12(id);
+		} else if(no == 13) {
+			 return leavesRepository.findByNo13(id);
+		} else if(no == 14) {
+			 return leavesRepository.findByNo14(id);
+		} else if(no == 123) {
+			 return leavesRepository.findByNo123(id);
+		} else if(no == 124) {
+			 return leavesRepository.findByNo124(id);
+		} else if(no == 134) {
+			 return leavesRepository.findByNo134(id);
 		} else if(no == 2) {
 			category = "연차";
 			return leavesRepository.findByNo2(category);
@@ -36,17 +48,17 @@ public class LeavesService {
 			 category = "출장";
 		} else if(no == 4) {
 			 category = "외근";
-		} else if(no == 31) {
-			 category = "출장";
-			 return leavesRepository.findByNo31(category);
-		} else if(no == 32) {
-			 category = "출장";
-			 return leavesRepository.findByNo32(category);
-		} else if(no == 33) {
-			 category = "출장";
-			 return leavesRepository.findByNo33(category);
 		} else if(no == 34) {
 			 return leavesRepository.findByNo34();
+		} else if(no == 234) {
+			 return leavesRepository.findByNo234();
+		} else if(no == 23) {
+			 return leavesRepository.findByNo23();
+		} else if(no == 24) {
+			 return leavesRepository.findByNo24();
+			 
+		} else if(no == 1234) {
+			 return leavesRepository.findAll();
 		}
 		return leavesRepository.findByNo(category);
 	}

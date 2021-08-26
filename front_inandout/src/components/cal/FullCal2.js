@@ -12,6 +12,7 @@ import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 const FullCal2 = () => {
 
   const [leaves, setLeaves] = useState([]);
+  const [내일정, 내일정체크] = useState(false);
   const [연차, 연차체크] = useState(false);
   const [출장, 출장체크] = useState(false);
   const [외근, 외근체크] = useState(false);
@@ -31,40 +32,83 @@ const FullCal2 = () => {
   }
 
   function onChange1(e) {
+    내일정체크(!내일정);
     if (e.target.checked) {
-      axios.get("http://localhost:8080/api/leaves/" + 1, header).then((res) => {
-        console.log(res);
-        setLeaves(res.data);
-      });
+      if (연차 && 출장 && 외근) {
+        fetch(1234) // 내일정, 연차, 출장, 외근
+      } else if (연차 && 출장) {
+        fetch(123) // 내일정, 연차, 출장
+      } else if (연차 && 외근) {
+        fetch(124) // 내일정, 연차, 외근
+      } else if (출장 && 외근) {
+        fetch(134) // 내일정, 출장, 외근
+      } else if (연차) {
+        fetch(12) // 내일정, 연차
+      } else if (출장) {
+        fetch(13) // 내일정, 출장
+      } else if (외근) {
+        fetch(14) // 내일정, 외근
+      } else {
+        fetch(1) // 내일정
+      }
     } else {
-      axios.get("http://localhost:8080/api/leaves", header).then((res) => {
-        console.log(res);
-        setLeaves(res.data);
-      });
+      if (연차 && 출장 && 외근) {
+        fetch(234) // 연차, 출장, 외근
+      } else if (연차 && 출장) {
+        fetch(23) // 연차, 출장
+      } else if (연차 && 외근) {
+        fetch(24) // 연차, 외근
+      } else if (출장 && 외근) {
+        fetch(34) // 출장, 외근
+      } else if (연차) {
+        fetch(2) // 연차
+      } else if (출장) {
+        fetch(3) // 출장
+      } else if (외근) {
+        fetch(4) // 외근
+      } else {
+        dd()
+      }
     }
   }
 
   function onChange2(e) {
     연차체크(!연차);
     if (e.target.checked) {
-      if (출장 && 외근) {
-        fetch(32) // 연차, 출장, 외근
+      if (내일정 && 출장 && 외근) {
+        fetch(1234) // 내일정, 연차, 출장, 외근
+      } else if (내일정 && 출장) {
+        fetch(123) // 내일정, 연차, 출장
+      } else if (내일정 && 외근) {
+        fetch(124) // 내일정, 연차, 외근
+      } else if (출장 && 외근) {
+        fetch(234) // 내일정, 출장, 외근
+      } else if (내일정) {
+        fetch(12) // 내일정, 연차
       } else if (출장) {
-        fetch(33) // 연차, 출장
+        fetch(23) // 연차, 출장
       } else if (외근) {
-        fetch(34) // 연차, 외근
+        fetch(24) // 연차, 외근
       } else {
         fetch(2) // 연차
       }
     } else {
-      if (출장 && 외근) {
-        fetch(31) // 출장, 외근
+      if (내일정 && 출장 && 외근) {
+        fetch(134) // 내일정, 출장, 외근
+      } else if (내일정 && 출장) {
+        fetch(13) // 내일정, 출장
+      } else if (내일정 && 외근) {
+        fetch(14) // 내일정, 외근
+      } else if (출장 && 외근) {
+        fetch(34) // 내일정, 출장, 외근
+      } else if (내일정) {
+        fetch(1) // 내일정
       } else if (출장) {
-        fetch(3) // 외근
+        fetch(3) // 출장
       } else if (외근) {
-        fetch(4) // 연차
+        fetch(4) // 외근
       } else {
-        dd();
+        dd()
       }
     }
   }
@@ -72,48 +116,80 @@ const FullCal2 = () => {
   function onChange3(e) {
     출장체크(!출장);
     if (e.target.checked) {
-      if (연차 && 외근) {
-        fetch(32) // 연차, 출장, 외근
+      if (내일정 && 연차 && 외근) {
+        fetch(1234) // 내일정, 연차, 출장, 외근
+      } else if (내일정 && 연차) {
+        fetch(123) // 내일정, 연차, 출장
+      } else if (내일정 && 외근) {
+        fetch(134) // 내일정, 출장, 외근
+      } else if (연차 && 외근) {
+        fetch(234) // 연차, 출장, 외근
+      } else if (내일정) {
+        fetch(13) // 내일정, 출장
       } else if (연차) {
-        fetch(33) // 연차, 출장
+        fetch(23) // 연차, 출장
       } else if (외근) {
-        fetch(31) // 출장, 외근
+        fetch(34) // 출장, 외근
       } else {
         fetch(3) // 출장
       }
     } else {
-      if (외근 && 연차) {
-        fetch(34) // 연차, 외근
-      } else if (외근) {
-        fetch(4) // 외근
+      if (내일정 && 연차 && 외근) {
+        fetch(124) // 내일정, 연차, 외근
+      } else if (내일정 && 연차) {
+        fetch(12) // 내일정, 연차 
+      } else if (내일정 && 외근) {
+        fetch(14) // 내일정, 외근
+      } else if (연차 && 외근) {
+        fetch(24) // 연차, 외근
+      } else if (내일정) {
+        fetch(1) // 내일정
       } else if (연차) {
         fetch(2) // 연차
+      } else if (외근) {
+        fetch(4) // 외근
       } else {
-        dd();
+        dd()
       }
     }
   }
   function onChange4(e) {
     외근체크(!외근);
     if (e.target.checked) {
-      if (연차 && 출장) {
-        fetch(32) // 연차, 출장, 외근
+      if (내일정 && 연차 && 출장) {
+        fetch(1234) // 내일정, 연차, 출장, 외근
+      } else if (내일정 && 연차) {
+        fetch(124) // 내일정, 연차, 외근
+      } else if (내일정 && 출장) {
+        fetch(134) // 내일정, 출장, 외근
+      } else if (출장 && 외근) {
+        fetch(234) // 연차, 출장, 외근
+      } else if (내일정) {
+        fetch(14) // 내일정, 외근
       } else if (연차) {
-        fetch(34) // 연차, 외근
+        fetch(24) // 연차, 외근
       } else if (출장) {
-        fetch(31) // 출장, 외근
+        fetch(34) // 출장, 외근
       } else {
         fetch(4) // 외근
       }
     } else {
-      if (연차 && 출장) {
-        fetch(33) // 연차, 출장
+      if (내일정 && 연차 && 출장) {
+        fetch(123) // 내일정, 연차, 출장
+      } else if (내일정 && 연차) {
+        fetch(12) // 내일정, 연차
+      } else if (내일정 && 출장) {
+        fetch(13) // 내일정, 출장
+      } else if (출장 && 외근) {
+        fetch(23) // 연차, 출장
+      } else if (내일정) {
+        fetch(1) // 내일정
       } else if (연차) {
         fetch(2) // 연차
-      } else if (출장) {
+      } else if (외근) {
         fetch(3) // 출장
       } else {
-        dd();
+        dd()
       }
     }
   }
@@ -262,15 +338,15 @@ const FullCal2 = () => {
         <Col lg={3} sm={3} md={3}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
           <br /><br /><br />
-          <div style={{ marginTop: "-7.5px", height: "40px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
-          <Checkbox onChange={onChange1}>내 일정</Checkbox><br />   
+          <div style={{ marginTop: "-7.5px", height: "40px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
+            <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
           </div><br />
-          <div style={{ height: "100px", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
-          <Checkbox style={{marginBottom:"5px"}} onChange={onChange2}>연차</Checkbox><br />
-          <Checkbox style={{marginBottom:"5px"}} onChange={onChange3}>출장</Checkbox><br />
-          <Checkbox style={{marginBottom:"5px"}} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+          <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
+            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
+            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
+            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
           </div>
-          <br/>
+          <br />
           <EmployeeOnOffList />
           {/* <div
             id="external-events"
