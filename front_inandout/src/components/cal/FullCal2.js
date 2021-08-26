@@ -309,11 +309,12 @@ const FullCal2 = () => {
   }
  
   return (
-    <div className="animated fadeIn p-4 demo-app">
+      <div className="animated fadeIn p-4 demo-app">
         <Row>
           <Col lg={9} sm={9} md={9}>
            <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
+              <CalendarLayout>
               <FullCalendar
 
                 defaultView="dayGridMonth"
@@ -343,6 +344,7 @@ const FullCal2 = () => {
               // drop={this.drop}
               // eventReceive={this.eventReceive}
               />
+              </CalendarLayout>
             </div>
             </CalendarLayout>
           </Col>
