@@ -27,4 +27,14 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId"
 			+ " from OnOff where userId=:id and date between :start and :end order by date", nativeQuery = true)
 	List<OnOff> findAllByDate(long id, Date start, Date end);
+	
+	@Query(value = "select "
+			+ "	ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 0 ) AS MONDAY, "
+			+ "	ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 6 ) AS SUNDAY "
+			+ "from DUAL",nativeQuery = true)
+	List<Date> findWeek();
+	
+	@Query(value = " select sec_to_time(sum(time_to_sec(timediff(offTime,onTime)))) "
+			+ " from OnOff where userId=:id and date between :start and :end",nativeQuery = true)
+	Date workTime(long id, Date start, Date end);
 }
