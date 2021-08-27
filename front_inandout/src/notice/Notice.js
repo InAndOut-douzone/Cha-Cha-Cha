@@ -4,6 +4,7 @@ import SiteLayout from '../pages/SiteLayout';
 import { Layout,Breadcrumb, Table } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const columns = [
     {
@@ -49,7 +50,7 @@ const Notice = () => {
     const data = [];
     list.map( (li,index) => data.push({
         key: index+1,
-        ...li
+        ...li,
     }))
 
     return (

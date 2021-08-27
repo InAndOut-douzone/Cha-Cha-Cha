@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { List, Avatar,Typography, Space } from 'antd';
-import image from '../../assets/images/52.jpg'
+import image from '../../assets/images/nurse.jpg'
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -64,7 +64,8 @@ const EmployeeOnOffList = () => {
                         <List.Item.Meta
                         avatar={<Avatar src={'images/'+item.user.profile}/>}
                         title={<a href="#">{item.user.name}</a>}
-                        description="의사"
+                        // title={<a href="#">{item.title}</a>}
+                        description={item.user.position}
                         />
                     </List.Item>
                     )}
