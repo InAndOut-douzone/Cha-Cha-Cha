@@ -72,7 +72,7 @@ const FullCal2 = () => {
       }
     }
   }
-
+  
   function onChange2(e) {
     연차체크(!연차);
     if (e.target.checked) {
@@ -309,11 +309,12 @@ const FullCal2 = () => {
   }
  
   return (
-    <CalendarLayout>
       <div className="animated fadeIn p-4 demo-app">
         <Row>
           <Col lg={9} sm={9} md={9}>
+           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
+              <CalendarLayout>
               <FullCalendar
 
                 defaultView="dayGridMonth"
@@ -343,7 +344,9 @@ const FullCal2 = () => {
               // drop={this.drop}
               // eventReceive={this.eventReceive}
               />
+              </CalendarLayout>
             </div>
+            </CalendarLayout>
           </Col>
           <Col lg={3} sm={3} md={3}>
             {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
@@ -371,7 +374,6 @@ const FullCal2 = () => {
           </Col>
         </Row>
       </div>
-    </CalendarLayout>
   );
 }
 
