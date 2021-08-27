@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Avatar,Typography, Space } from 'antd';
-import image from '../../assets/images/52.jpg'
+import image from '../../assets/images/nurse.jpg'
 import styled from 'styled-components';
 
 const { Text, Link } = Typography;
@@ -44,7 +44,7 @@ const EmployeeOnOffList = () => {
                         <List.Item.Meta
                         avatar={<Avatar src={image} />}
                         title={<a href="https://ant.design">{item.title}</a>}
-                        description="의사"
+                        description="간호사"
                         />
                     </List.Item>
                     )}
