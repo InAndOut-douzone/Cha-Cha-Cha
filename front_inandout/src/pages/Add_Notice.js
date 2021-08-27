@@ -42,6 +42,7 @@ const Add_Notice = () => {
         axios.post("http://localhost:8080/api/notice/add", notice, header).then((res) => {
             console.log(res);
         });
+        window.location.reload("/")
     }
     return (
         <SiteLayout>
@@ -55,7 +56,7 @@ const Add_Notice = () => {
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br />
                 <Container>
-                    <Form onFinish={add}>
+                    <Form onFinish={add} >
                         <Descriptions title="공지사항 등록" column={1} bordered size='small'>
                             <Descriptions.Item label="제목">
                                 <FormItem>
@@ -69,7 +70,7 @@ const Add_Notice = () => {
                             </Descriptions.Item>
                         </Descriptions>
                         <br />
-                        <Button type='primary' htmlType='submit'>등록</Button>
+                        <Button type='primary' htmlType='submit' >등록</Button>
                     </Form>
                 </Container>
             </Layout>
