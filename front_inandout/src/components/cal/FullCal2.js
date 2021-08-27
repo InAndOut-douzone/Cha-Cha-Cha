@@ -336,12 +336,11 @@ const FullCal2 = () => {
   return (
     <div className="animated fadeIn p-4 demo-app">
       <Row>
-        <Col lg={9} sm={9} md={9}>
+        <Col lg={10} sm={10} md={10}>
           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
               <CalendarLayout>
                 <FullCalendar
-
                   defaultView="dayGridMonth"
 
                   eventColor="skyblue"
@@ -374,7 +373,7 @@ const FullCal2 = () => {
             </div>
           </CalendarLayout>
         </Col>
-        <Col lg={3} sm={3} md={3}>
+        <Col lg={2} sm={2} md={2}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
           <br /><br /><br />
           <div style={{ marginTop: "-7.5px", height: "40px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>

@@ -30,7 +30,7 @@ export default function First() {
         style={{
           padding: 24,
           margin: 0,
-          height: 600
+          height: 800
           // minHeight: 280,
         }}
       >
