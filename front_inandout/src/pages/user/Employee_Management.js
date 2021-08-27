@@ -164,7 +164,7 @@ const Employee_Management = () => {
                         &nbsp;  &nbsp; <button onClick={openState} style={{color:"#4EAFFF", border:"0px solid gray", background:"white" }}>펼치기</button><br/><br/><br/>
                     </div>
                     <div>
-                    { open ? <Table style={{ textAlign: "center" }} dataSource={data2} columns={columns2} /> : 2 }
+                    { open ? <Table style={{ textAlign: "center" }} dataSource={data2} columns={columns2} /> : null }
                     </div>  
                 </Layout>
             </ManagementLayout>
