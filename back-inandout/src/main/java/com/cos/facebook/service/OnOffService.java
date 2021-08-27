@@ -53,4 +53,12 @@ public class OnOffService {
 	public List<OnOff> getWork(long id) {
 		return onOffRepository.findAllById(id);
 	}
+
+	public List<OnOff> getOnUser() {
+		Date date = new Date();
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+		String dated = sDate.format(date);
+		
+		return onOffRepository.findAllByDate(dated);
+	}
 }

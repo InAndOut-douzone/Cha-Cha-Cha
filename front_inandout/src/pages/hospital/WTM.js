@@ -91,7 +91,6 @@ const WTM = () => {
         </Breadcrumb>
         <div style={{ borderTop: "1px solid #eee" }} />
         <br /><br />
-
         <div style={{ textAlign: "center" }}>
           <Title level={2}>현재 근무 시간</Title>
           {time.map((time) => (<TimeItem key={time.no} time={time} />))}
@@ -157,7 +156,7 @@ const WTM = () => {
         </section>
 
         <div style={{ textAlign: "center" }}>
-          <Title level={3}>현재 근무 시간</Title>
+          <Title level={3}>근무 시간 관리</Title>
           <Text>* 시간 선택 시</Text> <Text type="danger">자동 저장</Text> <Text>됩니다 .</Text>
           <br /><br />
           {
@@ -166,7 +165,7 @@ const WTM = () => {
               <Form name="time_related_controls" {...formItemLayout}>
                 {time.map((time) => (<FormItem key={time.no} time={time} onChange={Monday} />))}
               </Form>
-              : 12
+              : " - 관리자만 변경 할 수 있습니다. - "
           }
         </div>
       </Layout>
