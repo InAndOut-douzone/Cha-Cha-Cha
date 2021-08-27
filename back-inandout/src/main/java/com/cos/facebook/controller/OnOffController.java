@@ -43,4 +43,9 @@ public class OnOffController {
 	public ResponseEntity<?> getwork(@PathVariable long id){
 		return new ResponseEntity<>(onOffService.getWork(id),HttpStatus.OK);		
 	}
+
+	@GetMapping("/onoff/onuser")
+	public ResponseEntity<?> getOnUser(){
+		return new ResponseEntity<>(onOffService.getOnUser(),HttpStatus.OK);		
+	}
 }
