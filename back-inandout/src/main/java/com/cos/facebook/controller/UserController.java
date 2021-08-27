@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
 import com.cos.facebook.dto.UserReqRoleUpdateDto;
+import com.cos.facebook.dto.user.UserLeaveDateReqUpdateDto;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
 import com.cos.facebook.service.UserService;
@@ -142,5 +143,11 @@ public class UserController {
 	public ResponseEntity<?> getDoctor() {
 		return new ResponseEntity<>(userService.getDoctor(),HttpStatus.OK);
 	}	
+	
+	@PutMapping("/user/updateLeaveDate/{id}")
+	public ResponseEntity<?> updateLeaveDate(@RequestBody UserLeaveDateReqUpdateDto leaveDateReqUpdateDto,@PathVariable long id) {
+		userService.updateLeaveDate(leaveDateReqUpdateDto,id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 }

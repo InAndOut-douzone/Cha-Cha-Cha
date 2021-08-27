@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, Descriptions, Table, Breadcrumb, Select, Form } from 'antd';
+import { Layout, Descriptions, Table, Breadcrumb, Select, Form, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -44,6 +44,7 @@ const Employee_Details = (props) => {
 
     const [user, setUser] = useState({});
     const [works, setWorks] = useState([]);
+    const [state, setState] = useState(true);
 
     useEffect(() => {
         userFetch();
@@ -54,6 +55,9 @@ const Employee_Details = (props) => {
         axios.get("http://localhost:8080/api/user/" + id, header).then(res => {
             setUser(res.data);
             console.log(res.data)
+            if(res.data.leaveDate !== null) {
+                setState(false);
+            }
         }).catch();
     }
 
@@ -79,6 +83,15 @@ const Employee_Details = (props) => {
             roles: value
         }
         axios.put("http://localhost:8080/api/user/" + id, data, header).then().catch();
+    }
+
+    const leaveDate = (value) => {
+        let data = {
+            leaveDate : value
+        }
+        axios.put("http://localhost:8080/api/user/updateLeaveDate/"+user.id,data,header).then(res=>{
+            setState(false);
+        }).catch();
     }
 
     return (
@@ -138,7 +151,7 @@ const Employee_Details = (props) => {
                                 },
                             ]}
                         >
-                            <button>퇴사처리</button>
+                            <DatePicker onSelect={leaveDate} inputReadOnly/> <br/> &nbsp; * 자동 저장 됩니다. 
                         </Form.Item>
                 </Descriptions>
                 <br /><br />

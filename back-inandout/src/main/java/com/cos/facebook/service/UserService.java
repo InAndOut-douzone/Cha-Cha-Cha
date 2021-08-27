@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cos.facebook.dto.user.UserLeaveDateReqUpdateDto;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
 
@@ -55,5 +56,15 @@ public class UserService {
 	public List<User> getDoctor() {
 		String roles = "ROLE_ADMIN";
 		return userRepository.findByRoles(roles);
+	}
+
+	public User updateLeaveDate(UserLeaveDateReqUpdateDto leaveDateReqUpdateDto ,long id) {
+		User userEntity = userRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("없");
+		});   
+		userEntity.setLeaveDate(leaveDateReqUpdateDto.getLeaveDate());
+		
+		
+		return userRepository.save(userEntity);
 	}
 }
