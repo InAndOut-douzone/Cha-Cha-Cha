@@ -129,7 +129,7 @@ const Employee_Details = (props) => {
                     }
                      <Form.Item
                             name="roles"
-                            label="권한"
+                            label="퇴사 처리"
                             rules={[
                                 {
                                     required: true,
@@ -138,10 +138,7 @@ const Employee_Details = (props) => {
                                 },
                             ]}
                         >
-                            <Select onChange={updateRole} placeholder="권한을 설정해주세요. ">
-                                <Option value="ROLE_USER">일반</Option>
-                                <Option value="ROLE_ADMIN">관리자</Option>
-                            </Select>
+                            <button>퇴사처리</button>
                         </Form.Item>
                 </Descriptions>
                 <br /><br />
