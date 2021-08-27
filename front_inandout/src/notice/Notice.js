@@ -26,6 +26,7 @@ const columns = [
         title: '작성시간',
         dataIndex: 'regDate',
         key: 'regDate',
+        render: (record) => ( <div>{moment(record.regDate).format("yyyy-MM-DD")} </div>)
     },
 ];
 
@@ -50,6 +51,7 @@ const Notice = () => {
     const data = [];
     list.map( (li,index) => data.push({
         key: index+1,
+        regDate: moment(li.regDate).format("HH mm"),
         ...li,
     }))
 
