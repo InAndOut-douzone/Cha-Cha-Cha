@@ -37,4 +37,9 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 	@Query(value = " select sec_to_time(sum(time_to_sec(timediff(offTime,onTime)))) " // 이번주 일했던 시간 구하기
 			+ " from OnOff where userId=:id and date between :start and :end",nativeQuery = true)
 	Date workTime(long id, Date start, Date end);
+
+//	
+//	@Query(value = "select * from OnOff where date like CONCAT('2021-08-26%') order by offTime asc", nativeQuery = true)
+	@Query(value = "select * from OnOff where date like CONCAT(:dated,'%') order by offTime asc", nativeQuery = true)
+	List<OnOff> findAllByDate(String dated);
 }

@@ -1,5 +1,6 @@
 package com.cos.facebook.service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +105,11 @@ public class LeavesService {
 		leaveEntity.setState(leaveUpdateReqDto.getState());
 		if(leaveUpdateReqDto.getState().equals("success")) {
 			if(leaveEntity.getCategory().equals("연차")) {
-				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-1);
+				
+				// 두 기간의 차이 구하기
+				long leaveTime = leaveEntity.getToDate().getTime() - leaveEntity.getFromDate().getTime(); 
+				long leaveDay = leaveTime / (24 *60*60*1000);
+				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-(leaveDay+1));
 			} else {
 				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-0.5);
 			}

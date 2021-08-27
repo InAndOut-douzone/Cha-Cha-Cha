@@ -4,6 +4,7 @@ import SiteLayout from '../pages/SiteLayout';
 import { Layout,Breadcrumb, Table, Space } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const columns = [
 
@@ -26,9 +27,15 @@ const columns = [
     },
     {
         title: '작성시간',
+<<<<<<< HEAD:front_inandout/src/notice/NoticeList.js
         dataIndex: 'date',
         key: 'date',
         width:30
+=======
+        dataIndex: 'regDate',
+        key: 'regDate',
+        render: (record) => ( <div>{moment(record.regDate).format("yyyy-MM-DD")} </div>)
+>>>>>>> 48242a4f9146b4aced06ca555b416a6864cbe30b:front_inandout/src/notice/Notice.js
     },
 ];
 
@@ -54,9 +61,14 @@ const NoticeList = () => {
     const data = [];
     list.map( (li,index) => data.push({
         key: index+1,
+<<<<<<< HEAD:front_inandout/src/notice/NoticeList.js
         name: li.user.name,
         date:moment(li.regDate).format('YY년 MM월 DD일'),
         ...li
+=======
+        regDate: moment(li.regDate).format("HH mm"),
+        ...li,
+>>>>>>> 48242a4f9146b4aced06ca555b416a6864cbe30b:front_inandout/src/notice/Notice.js
     }))
 
     return (

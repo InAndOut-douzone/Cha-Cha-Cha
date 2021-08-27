@@ -45,8 +45,8 @@ const _Header = () => {
     const [onTime, setOnTime] = useState("IN");
     const [offTime, setOffTime] = useState("OUT");
 
-    const handleOk = () => {
-        axios.get("http://localhost:8080/api/onoff/"+localStorage.getItem("username"), header).then(res=>{
+    const handleOk = async () => {
+        await axios.get("http://localhost:8080/api/onoff/"+localStorage.getItem("username"), header).then(res=>{
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
             setOnTime(moment(res.data.onTime).format("HH mm"));
         }).catch();
@@ -65,8 +65,8 @@ const _Header = () => {
         }
     };
 
-    const handleOk2 = () => {
-        axios.get("http://localhost:8080/api/onoff", header).then(res=>{
+    const handleOk2 = async() => {
+        await axios.get("http://localhost:8080/api/onoff", header).then(res=>{
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
             setOffTime(moment(res.data.offTime).format("HH mm"));
         }).catch();

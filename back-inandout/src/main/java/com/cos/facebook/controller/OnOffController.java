@@ -21,10 +21,10 @@ public class OnOffController {
 	@Autowired
 	private OnOffService onOffService;
 
-	@GetMapping("/onoff/{username}")
-	public ResponseEntity<?> onTime(@PathVariable String username){
-		System.out.println(username);
-		return new ResponseEntity<>(onOffService.insertOnTime(username),HttpStatus.OK);		
+	@GetMapping("/onoff/{username}")	// 출근
+	public ResponseEntity<?> onTime(@PathVariable String username, Authentication authentication){
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		return new ResponseEntity<>(onOffService.insertOnTime(principal.getUser().getId()),HttpStatus.OK);		
 	}
 	
 	@GetMapping("/onoff")
@@ -42,5 +42,10 @@ public class OnOffController {
 	@GetMapping("/getwork/{id}")
 	public ResponseEntity<?> getwork(@PathVariable long id){
 		return new ResponseEntity<>(onOffService.getWork(id),HttpStatus.OK);		
+	}
+
+	@GetMapping("/onoff/onuser")
+	public ResponseEntity<?> getOnUser(){
+		return new ResponseEntity<>(onOffService.getOnUser(),HttpStatus.OK);		
 	}
 }
