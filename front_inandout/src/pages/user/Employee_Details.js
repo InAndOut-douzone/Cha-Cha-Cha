@@ -122,10 +122,27 @@ const Employee_Details = (props) => {
                             <Select onChange={updateRole} placeholder="권한을 설정해주세요. ">
                                 <Option value="ROLE_USER">일반</Option>
                                 <Option value="ROLE_ADMIN">관리자</Option>
-                            </Select> &nbsp; * 자동 저장 됩니다.
+                            </Select> <br/>
+                            &nbsp; * 자동 저장 됩니다.
                         </Form.Item>
                         : 2
                     }
+                     <Form.Item
+                            name="roles"
+                            label="권한"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your roles!',
+                                    whitespace: true,
+                                },
+                            ]}
+                        >
+                            <Select onChange={updateRole} placeholder="권한을 설정해주세요. ">
+                                <Option value="ROLE_USER">일반</Option>
+                                <Option value="ROLE_ADMIN">관리자</Option>
+                            </Select>
+                        </Form.Item>
                 </Descriptions>
                 <br /><br />
                 [근무 현황]

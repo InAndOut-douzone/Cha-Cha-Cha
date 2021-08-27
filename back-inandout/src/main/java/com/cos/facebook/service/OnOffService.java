@@ -22,8 +22,8 @@ public class OnOffService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public OnOff insertOnTime(String username) {
-		User userEntity = userRepository.findByUsername(username);
+	public OnOff insertOnTime(long id) {
+		User userEntity = userRepository.findById(id).get();
 	
 		OnOff onOffEntity = new OnOff();
 		onOffEntity.setDate(new Date());

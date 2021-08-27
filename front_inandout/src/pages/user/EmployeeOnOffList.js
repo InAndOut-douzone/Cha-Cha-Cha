@@ -41,17 +41,15 @@ const EmployeeOnOffList = () => {
   const [onUsers, setOnUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/onoff/onuser", header).then((res) => {
-      setOnUsers(res.data);
-    });
+    getOnUser();
   },[])
 
-  let data = [];
-  onUsers.map((onUser) => data.push({
-    ...onUser}
-    ))
+  const getOnUser = async () => {
+    await axios.get("http://localhost:8080/api/onoff/onuser", header).then((res) => {
+      setOnUsers(res.data);
+    });
+  }
 
-    console.log(data);
     return (
         <EmployeeOnOffListLayout>
             <div style={{height:"100%", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
