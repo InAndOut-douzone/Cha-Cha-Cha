@@ -1,10 +1,5 @@
 package com.cos.facebook.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
 import com.cos.facebook.model.OnOff;
-import com.cos.facebook.repository.OnOffRepository;
 import com.cos.facebook.service.WorkService;
 
 import lombok.RequiredArgsConstructor;

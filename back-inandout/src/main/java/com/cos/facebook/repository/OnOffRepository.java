@@ -16,25 +16,25 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 	@Query(value = "select * from OnOff where userId=:id and date like CONCAT(:dated,'%') order by date desc limit 0,1", nativeQuery = true)
 	OnOff findByIdAndDate(long id, String dated);
 	
-	@Query(value = "select no, date, onTime, offTime,"
+	@Query(value = "select no, date, onTime, offTime," // id값으로 일한 날 전체 데이터 불러오기
 			+ "date_format(date,'%y년 %m월 %d일') as 'strDate', date_format(onTime,'%H시 %i분 %s초') as 'strOn',"
 			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId"
 			+ " from OnOff where userId=:id order by date", nativeQuery = true)
 	List<OnOff> findAllById(long id);
 	
-	@Query(value = "select no, date, onTime, offTime,"
+	@Query(value = "select no, date, onTime, offTime," // 기간날짜동안 일한 날 데이터 불러오기
 			+ "date_format(date,'%y년 %m월 %d일') as 'strDate', date_format(onTime,'%H시 %i분 %s초') as 'strOn',"
 			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId"
 			+ " from OnOff where userId=:id and date between :start and :end order by date", nativeQuery = true)
 	List<OnOff> findAllByDate(long id, Date start, Date end);
 	
-	@Query(value = "select "
+	@Query(value = "select " //현재시간 기준으로 월요일, 일요일 날짜구하기
 			+ "	ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 0 ) AS MONDAY, "
 			+ "	ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 6 ) AS SUNDAY "
 			+ "from DUAL",nativeQuery = true)
 	List<Date> findWeek();
 	
-	@Query(value = " select sec_to_time(sum(time_to_sec(timediff(offTime,onTime)))) "
+	@Query(value = " select sec_to_time(sum(time_to_sec(timediff(offTime,onTime)))) " // 이번주 일했던 시간 구하기
 			+ " from OnOff where userId=:id and date between :start and :end",nativeQuery = true)
 	Date workTime(long id, Date start, Date end);
 
