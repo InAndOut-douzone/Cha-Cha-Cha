@@ -39,7 +39,7 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 	Date workTime(long id, Date start, Date end);
 
 //	
-//	@Query(value = "select * from OnOff where date like CONCAT('2021-08-26%')", nativeQuery = true)
-	@Query(value = "select * from OnOff where date like CONCAT(:dated,'%')", nativeQuery = true)
+//	@Query(value = "select * from OnOff where date like CONCAT('2021-08-26%') order by offTime asc", nativeQuery = true)
+	@Query(value = "select * from OnOff where date like CONCAT(:dated,'%') order by offTime asc", nativeQuery = true)
 	List<OnOff> findAllByDate(String dated);
 }

@@ -61,7 +61,7 @@ const EmployeeOnOffList = () => {
                     dataSource={onUsers}
                     renderItem={item => (
                     <List.Item
-                        actions={[<Text style={{color:"#40BCFF"}}>출근</Text>]}
+                        actions={ item.offTime === null ? [<Text style={{fontSize:"12px", color:"#40BCFF"}}>출근</Text>] : [<Text style={{fontSize:"12px", color:"#ff0000"}}>퇴근</Text>]}
                     >
                         <List.Item.Meta
                         avatar={<Avatar src={'images/'+item.user.profile}/>}
