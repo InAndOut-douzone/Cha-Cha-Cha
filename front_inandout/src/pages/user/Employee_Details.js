@@ -150,7 +150,7 @@ const Employee_Details = (props) => {
                                     whitespace: true,
                                 },
                             ]}
-                        >
+                        >   
                             <DatePicker onSelect={leaveDate} inputReadOnly/> <br/> &nbsp; * 자동 저장 됩니다. 
                         </Form.Item>
                 </Descriptions>

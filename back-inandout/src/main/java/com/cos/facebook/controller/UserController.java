@@ -132,6 +132,12 @@ public class UserController {
 		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
 	}
 	
+	// 사원 리스트 
+	@GetMapping("/user/leavelist")
+	public ResponseEntity<?> getLeaveUser() {
+		return new ResponseEntity<>(userService.findLeaveUser(),HttpStatus.OK);
+	}
+	
 
 	@PutMapping("/user/{id}")
 	public ResponseEntity<?> updateRole(@RequestBody UserReqRoleUpdateDto userReqRoleUpdateDto, @PathVariable long id) {
