@@ -39,12 +39,25 @@ const FullCal2 = () => {
 
   // 
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [no1, setNo1] = useState();
+  const [category1, setCategory1] = useState();
+  const [content1, setContent1] = useState();
   const [user, setUser] = useState({});
   const handleDateClick = () => {
     setVisible(true);
   };
   const onClose = () => {
     setVisible(false);
+  };
+  const handleDateClick2 = (eventClick) => {
+    setVisible2(true);
+    setNo1(eventClick.event.id);
+    setCategory1(eventClick.event.extendedProps.category);
+    setContent1(eventClick.event.extendedProps.content);
+  };
+  const onClose2 = () => {
+    setVisible2(false);
   };
   const getUser = () => {
     axios.get("http://localhost:8080/api/user", header).then(res => {
@@ -67,6 +80,22 @@ const FullCal2 = () => {
       alert("일정 등록이 완료되었습니다.");
       window.location.replace("/")
     }).catch();
+  }
+  const update = async (value) => {
+    console.log(value);
+    let data3 = {
+      id: value.id,
+      category: value.category,
+      content: value.content,
+      // toDate: value.date[1],
+      // fromDate: value.date[0],
+    }
+
+    await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+      console.log(res);
+      alert("일정 수정이 완료되었습니다.");
+      window.location.replace("/")
+    })
   }
   // 
 
@@ -306,7 +335,7 @@ const FullCal2 = () => {
         });
 
         eventClick.event.remove(); // It will remove event from the calendar
-        Alert.fire("삭제!", "삭제가 완료되었습니다.", "success");
+        Alert.fire("삭제!", "삭제가   완료되었습니다.", "success");
       }
     });
   };
@@ -314,23 +343,17 @@ const FullCal2 = () => {
   let data = []; // 연차
   leaves.map((leave) => data.push({
     id: leave.no,
-    title: leave.user.name + ' ' + leave.category,
+    title: '[' + leave.user.name + '] ' + leave.category,
     start: leave.fromDate,
     end: leave.toDate,
-  }))
-
-  let data2 = []; // 일정
-  leaves.map((leave) => data2.push({
-    id: leave.no,
-    title: leave.user.name + ' ' + leave.category,
-    start: leave.fromDate,
-    end: leave.toDate,
+    category: leave.category,
+    content: leave.content
   }))
 
   const CalendarLayout = styled.div`
     .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
-    .fc-daygrid-day-number { color: black; font-weight: 400; }   
+    .fc-daygrid-day-number { color: black; font-weight: 400; }
   `;
 
   return (
@@ -356,8 +379,8 @@ const FullCal2 = () => {
                   droppable={true}
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                   dateClick={handleDateClick} // 날짜 클릭시 함수 실행
-                  eventClick={eventClick} // 이벤트 클릭시 함수 실행
-                  // eventClick={showModal} // 이벤트 클릭시 함수 실행
+                  // eventClick={eventClick} // 이벤트 클릭시 함수 실행
+                  eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
                   selectable={true}
                   events={data} // 이벤트 데이터
                 // calendarEvents={data}
@@ -470,7 +493,88 @@ const FullCal2 = () => {
             </Form>
           </Drawer>
 
+          <Drawer
+            title="일정 수정"
+            width="40%"
+            onClose={onClose2}
+            visible={visible2}
+            bodyStyle={{ paddingBottom: 80 }}
+          >
+            <Form layout="vertical" hideRequiredMark onFinish={update}>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item
+                    name="category"
+                    label="일정 구분"
+                    
+                    rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
+                  >
+                    <select value={category1} placeholder="일정 구분을 선택해주세요">
+                      <option value="출장">출장</option>
+                      <option value="외근">외근</option>
+                    </select>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="user"
+                    label="대상"
+                  // rules={[{ required: true, message: 'Please choose the user' }]}
+                  >
+                    <Input placeholder="이름입니다." value={user.name} defaultValue={user.name} readOnly />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={24}>
+                  <Form.Item
+                    name="date"
+                    label="일시"
+                  >
+                    <RangePicker
+                      showTime={{ format: 'HH' }}
+                      format="YYYY-MM-DD HH"
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={24}>
+                  <Form.Item
+                    name="content"
+                    label="일정 내용"
+                    rules={[
+                      {
+                        required: true,
+                        message: '일정 내용을 입력해주세요',
+                      },
+                    ]}
+                  >
+                    {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
+                    <textArea rows={4} placeholder="일정 내용을 입력해주세요" >{content1}</textArea>
+                  </Form.Item>
 
+                  <Form.Item name="no">
+                  <textArea rows={4} placeholder="일정 내용을 입력해주세요" >{no1}</textArea>
+                  </Form.Item>
+
+                </Col>
+              </Row>
+              <div style={{ display: "flex", textAlign: "right" }}>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    등록
+                  </Button>
+                </Form.Item>
+                <Button onClick={onClose2} style={{ marginLeft: "10px" }}>
+                  삭제
+                </Button>
+                <Button onClick={onClose2} style={{ marginLeft: "10px" }}>
+                  취소
+                </Button>
+              </div>
+            </Form>
+          </Drawer>
 
 
 

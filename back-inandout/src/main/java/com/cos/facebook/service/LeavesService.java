@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
+import com.cos.facebook.model.HospitalOnOff;
 import com.cos.facebook.model.Leaves;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.LeavesRepository;
@@ -116,5 +118,13 @@ public class LeavesService {
 		}
 
 		leavesRepository.save(leaveEntity);
+	}
+
+	public void update(LeavesReqDto leavesReqDto) {
+		Leaves leavesEntity = leavesRepository.findByWeek(leavesReqDto.getNo());
+		leavesEntity.setCategory(leavesReqDto.getCategory());
+		leavesEntity.setContent(leavesReqDto.getContent());
+		leavesRepository.save(leavesEntity);
+		
 	}	
 }

@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
+import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
 import com.cos.facebook.service.LeavesService;
@@ -56,6 +58,12 @@ public class LeavesController {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		
 		return new ResponseEntity<>(leavesService.getLeavesByDoctor(principal.getUser().getId()), HttpStatus.OK);
+	}
+	
+	@PutMapping("/leave")
+	public ResponseEntity<?> updateLeave(@RequestBody LeavesReqDto leavesReqDto){
+		leavesService.update(leavesReqDto);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}	
 	
 	@PostMapping("/leave/update")
