@@ -78,7 +78,6 @@ const _Header = () => {
     };
 
     const [notice,setNotice] = useState([]);
-    // const notice=[];
 
     useEffect(()=>{
         axios.get("http://localhost:8080/api/getonoff", header).then(res => {
@@ -98,13 +97,17 @@ const _Header = () => {
         axios.get("http://localhost:8080/api/notice/list", header).then(res=>{
             const title=[];
             for(var i in res.data){
-                title.push(res.data[i].title);
+                title.push({
+                    no:res.data[i].no,
+                    title:res.data[i].title
+                })
             }
             setNotice(title);
         })
     },[])
 
-    const noticeList = notice.map((title, index) => <p key={index}><Link to="/notice">{title}</Link><br/></p>);
+    const noticeList = notice.map((title, index) => 
+        <p key={title.no}><Link to={"/notice/"+title.no}>{title.title}</Link></p>);
 
     const DIV = styled.div`
     .ant-card{
@@ -125,7 +128,7 @@ const _Header = () => {
     }
     
     .animation{
-        animation:text-scroll 8s linear infinite;
+        animation:text-scroll 20s linear infinite;
     }
     .animation a {
         color:white;
@@ -158,7 +161,7 @@ const _Header = () => {
                 
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
                <div style={{textAlign:"right", width:"40%"}}>
-                <Card style={{ width: "100%", height: 40, marginTop: 12, backgroundColor: "#001528" }}>
+                <Card style={{ width: "100%", height: 50, marginTop: 12, backgroundColor: "#001528" }}>
                     <ul className='animation'>
                         { /* <p><a style={{ color: "white" }} href="/notice">{notice}</a></p> */}
                        {noticeList}

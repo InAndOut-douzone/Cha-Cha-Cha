@@ -1,30 +1,34 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 import SiteLayout from '../pages/SiteLayout';
-import { Layout,Breadcrumb, Table } from 'antd';
+import { Layout,Breadcrumb, Table, Space } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const columns = [
-    {
-        title: '번호',
-        dataIndex: 'no',
-        key: 'no'    
-    },
+
     {
         title: '제목',
         dataIndex: 'title',
         key: 'title',
+        width:60,
+        render: (text, record) => (
+            <Space size="middle">
+                <Link to={"/notice/" + record.no}>{text}</Link>
+            </Space>
+        )
     },
     {
-        title: '내용',
-        dataIndex: 'contents',
-        key: 'contents',
+        title: '작성자',
+        dataIndex: 'name',
+        key: 'name',
+        width:30
     },
     {
         title: '작성시간',
-        dataIndex: 'regDate',
-        key: 'regDate',
+        dataIndex: 'date',
+        key: 'date',
+        width:30
     },
 ];
 
@@ -34,21 +38,24 @@ const header = {
     }
 };
 
-const Notice = () => {
+const NoticeList = () => {
 
     const [list, setList] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/notice/list",header).then((res)=>{
             setList(res.data);
-            console.log(res);
+
             })
     },[])
 
+    var moment=require('moment');
 
     const data = [];
     list.map( (li,index) => data.push({
         key: index+1,
+        name: li.user.name,
+        date:moment(li.regDate).format('YY년 MM월 DD일'),
         ...li
     }))
 
@@ -70,4 +77,4 @@ const Notice = () => {
         </SiteLayout>
     );
 }
-export default Notice;
+export default NoticeList;

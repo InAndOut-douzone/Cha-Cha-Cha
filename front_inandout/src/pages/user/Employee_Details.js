@@ -39,7 +39,7 @@ const Employee_Details = (props) => {
             Authorization: "Bearer " + localStorage.getItem("Authorization"),
         },
     };
-
+    console.log(props);
     const { id } = props.match.params;
 
     const [user, setUser] = useState({});
