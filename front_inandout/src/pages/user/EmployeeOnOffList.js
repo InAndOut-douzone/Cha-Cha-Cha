@@ -67,7 +67,7 @@ const EmployeeOnOffList = () => {
                         avatar={<Avatar src={'images/'+item.user.profile}/>}
                         title={<a href="#">{item.user.name}</a>}
                         // title={<a href="#">{item.title}</a>}
-                        description="의사"
+                        description={item.user.position}
                         />
                     </List.Item>
                     )}
