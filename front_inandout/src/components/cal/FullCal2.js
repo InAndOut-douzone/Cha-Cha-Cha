@@ -43,6 +43,8 @@ const FullCal2 = () => {
   const [no1, setNo1] = useState();
   const [category1, setCategory1] = useState();
   const [content1, setContent1] = useState();
+  const [fromDate1, setFromDate1] = useState();
+  const [toDate1, setToDate1] = useState();
   const [user, setUser] = useState({});
   const handleDateClick = () => {
     setVisible(true);
@@ -52,9 +54,11 @@ const FullCal2 = () => {
   };
   const handleDateClick2 = (eventClick) => {
     setVisible2(true);
-    setNo1(eventClick.event.id);
+    setNo1(eventClick.event.id);  
     setCategory1(eventClick.event.extendedProps.category);
     setContent1(eventClick.event.extendedProps.content);
+    setFromDate1(eventClick.event.start);
+    setToDate1(eventClick.event.end);
   };
   const onClose2 = () => {
     setVisible2(false);
@@ -84,11 +88,11 @@ const FullCal2 = () => {
   const update = async (value) => {
     console.log(value);
     let data3 = {
-      id: value.id,
+      id: {no1},
       category: value.category,
       content: value.content,
-      // toDate: value.date[1],
-      // fromDate: value.date[0],
+      toDate: value.date[1],
+      fromDate: value.date[0],
     }
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
@@ -509,10 +513,10 @@ const FullCal2 = () => {
                     
                     rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                   >
-                    <select value={category1} placeholder="일정 구분을 선택해주세요">
-                      <option value="출장">출장</option>
-                      <option value="외근">외근</option>
-                    </select>
+                    <Select value={category1} placeholder={category1}>
+                      <Option value="출장">출장</Option>
+                      <Option value="외근">외근</Option>
+                    </Select>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -534,6 +538,7 @@ const FullCal2 = () => {
                     <RangePicker
                       showTime={{ format: 'HH' }}
                       format="YYYY-MM-DD HH"
+                      placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"),moment(toDate1).format("YYYY-MM-DD HH")]}
                     />
                   </Form.Item>
                 </Col>
@@ -551,14 +556,10 @@ const FullCal2 = () => {
                     ]}
                   >
                     {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
-                    <textArea rows={4} placeholder="일정 내용을 입력해주세요" >{content1}</textArea>
+                    <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                   </Form.Item>
-
-                  <Form.Item name="no">
-                  <textArea rows={4} placeholder="일정 내용을 입력해주세요" >{no1}</textArea>
-                  </Form.Item>
-
                 </Col>
+                
               </Row>
               <div style={{ display: "flex", textAlign: "right" }}>
                 <Form.Item>
