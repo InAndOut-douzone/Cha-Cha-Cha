@@ -3,7 +3,6 @@ import { Layout, Button, Modal, Card } from 'antd';
 import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
-import '../assets/css/scroll.css';
 import axios from 'axios';
 import moment from 'moment';
 import styled from 'styled-components';
@@ -46,8 +45,8 @@ const _Header = () => {
     const [onTime, setOnTime] = useState("IN");
     const [offTime, setOffTime] = useState("OUT");
 
-    const handleOk = () => {
-        axios.get("http://localhost:8080/api/onoff/"+localStorage.getItem("username"), header).then(res=>{
+    const handleOk = async () => {
+        await axios.get("http://localhost:8080/api/onoff/"+localStorage.getItem("username"), header).then(res=>{
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
             setOnTime(moment(res.data.onTime).format("HH mm"));
         }).catch();
@@ -66,8 +65,8 @@ const _Header = () => {
         }
     };
 
-    const handleOk2 = () => {
-        axios.get("http://localhost:8080/api/onoff", header).then(res=>{
+    const handleOk2 = async() => {
+        await axios.get("http://localhost:8080/api/onoff", header).then(res=>{
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
             setOffTime(moment(res.data.offTime).format("HH mm"));
         }).catch();
@@ -78,7 +77,7 @@ const _Header = () => {
         setIsModalVisible2(false);
     };
 
-    const [title,setTitle] = useState([]);
+    const [notice,setNotice] = useState([]);
 
     useEffect(()=>{
         axios.get("http://localhost:8080/api/getonoff", header).then(res => {
@@ -96,10 +95,19 @@ const _Header = () => {
         }).catch();
 
         axios.get("http://localhost:8080/api/notice/list", header).then(res=>{
-            console.log(res.data);
-            setTitle(res.data);
+            const title=[];
+            for(var i in res.data){
+                title.push({
+                    no:res.data[i].no,
+                    title:res.data[i].title
+                })
+            }
+            setNotice(title);
         })
     },[])
+
+    const noticeList = notice.map((title, index) => 
+        <p key={title.no}><Link to={"/notice/"+title.no}>{title.title}</Link></p>);
 
     const DIV = styled.div`
     .ant-card{
@@ -120,10 +128,10 @@ const _Header = () => {
     }
     
     .animation{
-        animation:text-scroll 5s linear infinite;
+        animation:text-scroll 20s linear infinite;
     }
     .animation a {
-        color:black;
+        color:white;
         margin-bottom: 10px;
     }
     
@@ -153,12 +161,11 @@ const _Header = () => {
                 
                 {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
                <div style={{textAlign:"right", width:"40%"}}>
-                <Card style={{ width: "100%", height: 40, marginTop: 12, backgroundColor: "#001528" }}>
-                    <div className='animation'>
-                        <p><a style={{ color: "white" }} href="aa">{title.title}</a></p>
-                        <p><a style={{ color: "white" }} href="aa">[공지사항 2]</a></p>
-                        <p><a style={{ color: "white" }} href="aa">[공지사항 3]</a></p>
-                    </div>
+                <Card style={{ width: "100%", height: 50, marginTop: 12, backgroundColor: "#001528" }}>
+                    <ul className='animation'>
+                        { /* <p><a style={{ color: "white" }} href="/notice">{notice}</a></p> */}
+                       {noticeList}
+                    </ul>
                 </Card>
                 </div>
                 <div style={{width:"40%", textAlign:"right"}}>

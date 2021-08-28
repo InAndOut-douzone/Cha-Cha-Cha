@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,12 @@ public class NoticeController {
 		// System.out.println("lists : " + lists);
 		return new ResponseEntity<>(lists,HttpStatus.OK);
 	}
+	
+	@GetMapping("/{no}")
+	public ResponseEntity<?> notice(@PathVariable long no){
+		
+		return new ResponseEntity<>(noticeRepository.findByNo(no),HttpStatus.OK);
+	}
 
 	@PostMapping("/add")
 	public String home(@RequestBody Notice notice, Authentication authentication) {
@@ -43,6 +50,6 @@ public class NoticeController {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		notice.setUser(principal.getUser());
 		noticeRepository.save(notice);
-		return "localhost:3000/addNotice";
+		return "redirect:localhost:3000/addNotice";
 	}
 }

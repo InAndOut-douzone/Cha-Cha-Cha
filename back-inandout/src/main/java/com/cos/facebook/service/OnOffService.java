@@ -22,8 +22,8 @@ public class OnOffService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public OnOff insertOnTime(String username) {
-		User userEntity = userRepository.findByUsername(username);
+	public OnOff insertOnTime(long id) {
+		User userEntity = userRepository.findById(id).get();
 	
 		OnOff onOffEntity = new OnOff();
 		onOffEntity.setDate(new Date());
@@ -52,5 +52,13 @@ public class OnOffService {
 
 	public List<OnOff> getWork(long id) {
 		return onOffRepository.findAllById(id);
+	}
+
+	public List<OnOff> getOnUser() {
+		Date date = new Date();
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+		String dated = sDate.format(date);
+		
+		return onOffRepository.findAllByDate(dated);
 	}
 }

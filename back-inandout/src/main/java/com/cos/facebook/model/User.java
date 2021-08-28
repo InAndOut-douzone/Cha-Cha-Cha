@@ -30,8 +30,8 @@ public class User {
 	private Date leaveDate; // 퇴사일
 	private String profile;
 	private String position;
-	private String mLeave; // 월차
-	private String aLeave; // 연차
+	private Double mLeave; // 월차
+	private Double aLeave; // 연차
 	private String address;
 	private String email;
 	

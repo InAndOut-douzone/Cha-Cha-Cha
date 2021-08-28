@@ -11,6 +11,7 @@ import axios from 'axios';
 // import "@fullcalendar/timegrid/main.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
+import moment from 'moment';
 
 export default class FullCal2 extends Component {
 
@@ -154,7 +155,7 @@ export default class FullCal2 extends Component {
         <td>날짜</td>
         <td><strong>
         ` +
-        eventClick.event?.start +
+        moment(eventClick.event.start, "YYYY.MM.DD").format("YYYY-MM-DD") +
         `
         </strong></td>
         </tr>
