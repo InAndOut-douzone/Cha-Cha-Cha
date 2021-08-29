@@ -109,6 +109,9 @@ const Add_Employee = () => {
                     </Breadcrumb>
                     <div style={{ borderTop: "1px solid #eee" }} />
                     <br /><br />
+                    <div style={{ textAlign: "center" }}>
+                        사원을 등록할 수 있는 화면입니다. 사원 번호는 임의로 줄 수 있고, 중복은 허용되지 않습니다. <br/> ( *사원번호는 입력 시 중복을 확인 합니다.) <br /><br /><br />
+                    </div>
                     <Form
                         style={{ width: "350px", alignSelf: "center" }}
                         form={form}
