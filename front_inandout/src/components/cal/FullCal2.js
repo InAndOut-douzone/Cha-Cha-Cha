@@ -348,10 +348,16 @@ const FullCal2 = () => {
   leaves.map((leave) => data.push({
     id: leave.no,
     title: '[' + leave.user.name + '] ' + leave.category,
+    color : leave.category === "연차" ? "skyblue" :
+               leave.category === "오후 반차" ? "#ff9aa3" : 
+               leave.category === "오전 반차" ? "lightgrey" :
+               leave.category === "출장" ? "yellowgreen" : "gold", 
+    // textColor: leave.category === "출장" ? "gold" : "red",
     start: leave.fromDate,
     end: leave.toDate,
     category: leave.category,
-    content: leave.content
+    content: leave.content,
+
   }))
 
   const CalendarLayout = styled.div`
@@ -370,7 +376,7 @@ const FullCal2 = () => {
                 <FullCalendar
                   defaultView="dayGridMonth"
 
-                  eventColor="skyblue"
+                  // eventColor="skyblue"
 
                   header={{
                     left: "prev,next today",
