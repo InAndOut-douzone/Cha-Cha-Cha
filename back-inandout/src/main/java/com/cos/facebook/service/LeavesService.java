@@ -121,7 +121,7 @@ public class LeavesService {
 	}
 
 	public void update(LeavesReqDto leavesReqDto) {
-		Leaves leavesEntity = leavesRepository.findByNo(leavesReqDto.getId());
+		Leaves leavesEntity = leavesRepository.findById(leavesReqDto.getId()).get();
 		leavesEntity.setCategory(leavesReqDto.getCategory());
 		leavesEntity.setContent(leavesReqDto.getContent());
 		leavesEntity.setFromDate(leavesReqDto.getFromDate());

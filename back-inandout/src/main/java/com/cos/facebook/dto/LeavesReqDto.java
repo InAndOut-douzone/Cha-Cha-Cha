@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class LeavesReqDto {
-	private int Id;
+	private int id;
 	private Date fromDate;
 	private Date toDate;
 	private String content;

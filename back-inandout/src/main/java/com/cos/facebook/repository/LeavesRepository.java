@@ -54,6 +54,4 @@ public interface LeavesRepository extends JpaRepository<Leaves, Integer>{
 	
 	@Query(value = "select * from Leaves where fromUserId = :doctorId and state='wait'", nativeQuery = true)
 	List<Leaves> findByDoctorId(long doctorId);
-
-	public Leaves findByNo(int no);
 }
