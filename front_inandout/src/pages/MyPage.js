@@ -3,7 +3,14 @@ import axios from 'axios';
 import { Layout, Descriptions, Badge, Breadcrumb, Form, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
+import DefaultProfile from '../assets/images/defaultProfile.png';
 import SiteLayout from './SiteLayout';
+import styled from 'styled-components';
+
+const MyPageLayout = styled.div`
+    .ant-descriptions-item-label { text-align:center }
+
+`
 
 const MyPage = () => {
 
@@ -44,12 +51,15 @@ const MyPage = () => {
     };
 
     useEffect(() => { // user정보 get, useEffect를 사용하여 한번만 get 하도록 설정
-        axios.get("http://localhost:8080/api/user/1", header).then((res) => {
+        axios.get("http://localhost:8080/api/user", header).then((res) => {
             setUser(res.data);
             setEmail(res.data.email);
             setPhone(res.data.phone);
-            setProfile(imgPath + res.data.profile);
-
+            if(res.data.profile != null) {
+                setProfile(imgPath + res.data.profile);
+            } else {
+                setProfile(null);
+            }
         });
     }, []);
 
@@ -63,8 +73,8 @@ const MyPage = () => {
 
         formData.append('file', image);
         formData.append('userData', JSON.stringify(userData));
-        axios.post("http://localhost:8080/api/getwork/{id}}", formData, header).then((res) => {
-            console.log(res);
+        axios.post("http://localhost:8080/api/user/update", formData, header).then((res) => {
+            alert("수정 되었습니다.");
         });
 
     }
@@ -80,11 +90,18 @@ const MyPage = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
-                <Form style={{ width: '90%' }} onFinish={dataUpdate} >
-                    <h2>사용자 정보</h2>
-                    <img style={{ width: '25%', height: '35%' }} src={profile}></img>
-                    <input type="file" accept="image/*" name="file" onChange={profileHandler}></input>
-                    <br />
+                <Form style={{ width: '90%', textAlign:"center" }} onFinish={dataUpdate} >    
+                    <div style={{ textAlign: "center" }}>
+                        프로필을 수정 할 수 있는 화면입니다. <br/> ( *이메일과 연락처만 수정 가능합니다.) <br /><br /><br />
+                    </div>
+                    <div style={{textAlign:"center"}}>
+                        <img style={{width:"200px", height:"200px"}} src={profile === null ? DefaultProfile : profile}></img>
+                        <br/><br/>   
+                        <div style={{ textAlign: "-webkit-center"}}>
+                            <input style={{textAlignLast:"center"}} type="file" accept="image/*" name="file" onChange={profileHandler}></input>
+                        </div>
+                    </div>
+                    <MyPageLayout style={{ padding: "30px 150px"}}>
                     <Descriptions title="" layout="vertical" bordered>
                         <Descriptions.Item label="이름">{user.name}</Descriptions.Item>
                         <Descriptions.Item label="직급">{user.position}</Descriptions.Item>
@@ -92,19 +109,20 @@ const MyPage = () => {
 
                         <Descriptions.Item label="이메일">
                             <Form.Item rules={[{ type: 'email', message: '이메일형식을 맞게 입력하세요.' }]}>
-                                <input defaultValue={user.email} onChange={emailHandler} />
+                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={user.email} onChange={emailHandler} />
                             </Form.Item>
                         </Descriptions.Item>
 
                         <Descriptions.Item label="연락처" span={2}>
                             <Form.Item rules={[{ required: true, message: '연락처를 입력하세요.' }]}>
-                                <input defaultValue={user.phone} onChange={phoneHandler} />
+                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={user.phone} onChange={phoneHandler} />
                             </Form.Item>
                         </Descriptions.Item>
                         <Descriptions.Item label="근무 상태" span={3}>
                             <Badge status="processing" text="근무 중" />
                         </Descriptions.Item>
                     </Descriptions>
+                    </MyPageLayout>
                     <br />
                     <Form.Item>
                         <Button type='Primary' htmlType="submit">수정</Button>

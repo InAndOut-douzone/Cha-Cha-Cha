@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
-import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Modal } from 'antd';
+import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Badge } from 'antd';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction";
-import Alert from "sweetalert2";
 import axios from 'axios';
 import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 import styled from 'styled-components';
 import moment from 'moment';
 
-// 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
-// 
 
 const FullCal2 = () => {
-
   const [leaves, setLeaves] = useState([]);
   const [내일정, 내일정체크] = useState(false);
   const [연차, 연차체크] = useState(false);
   const [출장, 출장체크] = useState(false);
   const [외근, 외근체크] = useState(false);
-
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [no1, setNo1] = useState();
+  const [category1, setCategory1] = useState();
+  const [content1, setContent1] = useState();
+  const [fromDate1, setFromDate1] = useState();
+  const [toDate1, setToDate1] = useState();
+  const [user, setUser] = useState({}); 
+  
   const header = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("Authorization"),
@@ -38,14 +43,6 @@ const FullCal2 = () => {
   }, []);
 
   // 
-  const [visible, setVisible] = useState(false);
-  const [visible2, setVisible2] = useState(false);
-  const [no1, setNo1] = useState();
-  const [category1, setCategory1] = useState();
-  const [content1, setContent1] = useState();
-  const [fromDate1, setFromDate1] = useState();
-  const [toDate1, setToDate1] = useState();
-  const [user, setUser] = useState({});
   const handleDateClick = () => {
     setVisible(true);
   };
@@ -53,12 +50,29 @@ const FullCal2 = () => {
     setVisible(false);
   };
   const handleDateClick2 = (eventClick) => {
-    setVisible2(true);
-    setNo1(eventClick.event.id);  
+    console.log(eventClick.event)
+    setNo1(eventClick.event.id);
     setCategory1(eventClick.event.extendedProps.category);
     setContent1(eventClick.event.extendedProps.content);
     setFromDate1(eventClick.event.start);
     setToDate1(eventClick.event.end);
+    setVisible2(true);
+  };
+  const 드래그 = async (eventClick) => {
+    console.log(eventClick.event)
+    console.log(eventClick.event.id)
+    console.log(eventClick.event.start)
+    let data3 = {
+      id: eventClick.event.id, // 수정할 이벤트 번호
+      category: eventClick.event.extendedProps.category,
+      content: eventClick.event.extendedProps.content,
+      fromDate: eventClick.event.start,
+      toDate: eventClick.event.end,
+    }
+
+      await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+        alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
+      })
   };
   const onClose2 = () => {
     setVisible2(false);
@@ -66,12 +80,13 @@ const FullCal2 = () => {
   const getUser = () => {
     axios.get("http://localhost:8080/api/user", header).then(res => {
       setUser(res.data);
+      console.log(res.data.id)
     }).catch();
   }
   useEffect(() => {
     getUser();
   }, [])
-  const onFinish = (value) => {
+  const onFinish = (value) => { // 일정 등록
     let data3 = {
       category: value.category,
       content: value.content,
@@ -85,10 +100,9 @@ const FullCal2 = () => {
       window.location.replace("/")
     }).catch();
   }
-  const update = async (value) => {
-    console.log(value);
+  const onUpdate = async (value) => { // 일정 수정
     let data3 = {
-      id: {no1},
+      id: no1, // 수정할 이벤트 번호
       category: value.category,
       content: value.content,
       toDate: value.date[1],
@@ -96,10 +110,20 @@ const FullCal2 = () => {
     }
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
-      console.log(res);
       alert("일정 수정이 완료되었습니다.");
       window.location.replace("/")
     })
+  }
+  const onDelete = async (value) => { // 일정 삭제
+    let ch = window.confirm("정말 삭제하시겠습니까?");
+    if(ch){
+      await axios.delete("http://localhost:8080/api/leaves/" + no1, header).then((res) => {
+        alert("일정 삭제가 완료되었습니다.");
+        window.location.replace("/")
+      });
+    } else {
+      alert("일정 삭제가 취소되었습니다.");
+    }
   }
   // 
 
@@ -239,6 +263,7 @@ const FullCal2 = () => {
       }
     }
   }
+
   function onChange4(e) {
     외근체크(!외근);
     if (e.target.checked) {
@@ -280,90 +305,29 @@ const FullCal2 = () => {
     }
   }
 
-  const eventClick = eventClick => {
-    Alert.fire({
-      id: eventClick.event.id,
-      title: eventClick.event.title,
-      html:
-        `<div class="table-responsive">
-      <table class="table">
-      <tbody>
-      <tr >
-      <td>제목</td>
-      <td><strong>` +
-        eventClick.event.title +
-        `</strong></td>
-      </tr>
-      <tr >
-      <td>시작</td>
-      <td><strong>
-      ` +
-        moment(eventClick.event.start, "YYYY.MM.DD").format("YYYY-MM-DD") +
-        // eventClick.event.start +
-        `</strong></td>
-      </tr>
-      <tr >
-      <td>종료</td>
-      <td><strong>
-      ` +
-        moment(eventClick.event.end, "YYYY.MM.DD").format("YYYY-MM-DD") +
-        `</strong></td>
-      </tr>
-      <tr >
-      <td>내용</td>
-      <td><strong>
-      ` +
-        eventClick.event.content +
-        `</strong></td>
-      </tr>
-      </tbody>
-      </table>
-      </div>`,
-
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "삭제",
-      cancelButtonText: "닫기"
-    }).then(result => {
-      if (result.value) {
-        //   let leaves = { // 수정
-        //     headers: { "Content-Type": "application/json; charset=utf-8" },
-        //     fromDate: ,
-        //     toDate: ,
-        // };
-
-        axios.delete("http://localhost:8080/api/leaves/" + eventClick.event.id, header).then((res) => {
-          console.log(res)
-          console.log(res.data)
-        });
-
-        eventClick.event.remove(); // It will remove event from the calendar
-        Alert.fire("삭제!", "삭제가   완료되었습니다.", "success");
-      }
-    });
-  };
-
   let data = []; // 연차
   leaves.map((leave) => data.push({
     id: leave.no,
     title: '[' + leave.user.name + '] ' + leave.category,
-    color : leave.category === "연차" ? "skyblue" :
-               leave.category === "오후 반차" ? "#ff9aa3" : 
-               leave.category === "오전 반차" ? "lightgrey" :
-               leave.category === "출장" ? "yellowgreen" : "gold", 
-    // textColor: leave.category === "출장" ? "gold" : "red",
+    color: leave.category === "연차" ? "skyblue" :
+      leave.category === "오후 반차" ? "#ff9aa3" :
+        leave.category === "오전 반차" ? "lightgrey" :
+          leave.category === "출장" ? "yellowgreen" : "gold",
+    // textColor: leave.category === "출장" ? "blue" : "red",
     start: leave.fromDate,
     end: leave.toDate,
     category: leave.category,
     content: leave.content,
-
+    allDay : leave.category === "연차" ? 1 :  leave.category === "오후 반차" ? 1 :  leave.category === "오전 반차" ? 1 : 0
   }))
 
   const CalendarLayout = styled.div`
     .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
-    .fc-daygrid-day-number { color: black; font-weight: 400; }
+    .fc-daygrid-day-number { color: black; font-weight: 400; },
+  `;
+  const CalendarLayout2 = styled.div`
+    .fc-toolbar-chunk {display: flex; align-items: center;}
   `;
 
   return (
@@ -373,35 +337,51 @@ const FullCal2 = () => {
           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
               <CalendarLayout>
+                <CalendarLayout2>
                 <FullCalendar
                   defaultView="dayGridMonth"
+                  plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
 
                   // eventColor="skyblue"
-
-                  header={{
-                    left: "prev,next today",
-                    center: "title",
-                    right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                  height="750px"
+                  locale='ko'
+                  headerToolbar={{
+                    right: "today",
+                    // center: "dayGridMonth,timeGridWeek",
+                    center: "prev title next",
+                    left: "dayGridMonth,timeGridWeek,listWeek"
                   }}
+                  buttonText={{
+                    today: '오늘',
+                    month:    '월',
+                    week:     '주',
+                    day:      '일',
+                    list:     '목록'
+                  }}
+                  // allDayText=""
+                  // header={{
+                  //   left: "prev,next today",
+                  //   center: "title",
+                  //   right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                  // }}
+                  dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                   rerenderDelay={10}
                   eventDurationEditable={false}
                   editable={true}
-                  droppable={true}
-                  plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                   dateClick={handleDateClick} // 날짜 클릭시 함수 실행
-                  // eventClick={eventClick} // 이벤트 클릭시 함수 실행
                   eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
                   selectable={true}
                   events={data} // 이벤트 데이터
+                  droppable={true}
+                  eventDrop={드래그}
+                  drop={드래그}
                 // calendarEvents={data}
                 // events={data2} // 일정
-
                 // ref={calendarComponentRef}
                 // weekends={this.state.calendarWeekends}
-                // eventDrop={this.drop}
-                // drop={this.drop}
                 // eventReceive={this.eventReceive}
                 />
+                </CalendarLayout2>
               </CalendarLayout>
             </div>
           </CalendarLayout>
@@ -413,22 +393,12 @@ const FullCal2 = () => {
             <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
           </div><br />
           <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+          <Badge color="skyblue"/><Badge color="#d3d3d3"/><Badge color="#ff9aa3"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
+          <Badge status="success"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
+          <Badge status="warning"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
           </div>
           <br />
           <EmployeeOnOffList />
-
-
-
-
-
-
-
-
-
-
 
           <Drawer
             title="일정 등록"
@@ -468,8 +438,8 @@ const FullCal2 = () => {
                     label="일시"
                   >
                     <RangePicker
-                      showTime={{ format: 'HH' }}
-                      format="YYYY-MM-DD HH"
+                      showTime={{ format: 'HH mm' }}
+                      format="YYYY-MM-DD HH mm"
                     />
                   </Form.Item>
                 </Col>
@@ -504,19 +474,19 @@ const FullCal2 = () => {
           </Drawer>
 
           <Drawer
-            title="일정 수정"
+            title="일정 관리"
             width="40%"
             onClose={onClose2}
             visible={visible2}
             bodyStyle={{ paddingBottom: 80 }}
           >
-            <Form layout="vertical" hideRequiredMark onFinish={update}>
+            <Form layout="vertical" hideRequiredMark onFinish={onUpdate}>
               <Row gutter={16}>
                 <Col span={12}>
                   <Form.Item
                     name="category"
                     label="일정 구분"
-                    
+
                     rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                   >
                     <Select value={category1} placeholder={category1}>
@@ -542,9 +512,9 @@ const FullCal2 = () => {
                     label="일시"
                   >
                     <RangePicker
-                      showTime={{ format: 'HH' }}
-                      format="YYYY-MM-DD HH"
-                      placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"),moment(toDate1).format("YYYY-MM-DD HH")]}
+                      showTime={{ format: 'HH mm' }}
+                      format="YYYY-MM-DD HH mm"
+                      placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
                     />
                   </Form.Item>
                 </Col>
@@ -564,16 +534,22 @@ const FullCal2 = () => {
                     {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
                     <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                   </Form.Item>
+
+                  {/*  */}
+                  <Form.Item>
+
+                  </Form.Item>
+                  {/*  */}
+
                 </Col>
-                
               </Row>
               <div style={{ display: "flex", textAlign: "right" }}>
                 <Form.Item>
                   <Button type="primary" htmlType="submit">
-                    등록
+                    수정
                   </Button>
                 </Form.Item>
-                <Button onClick={onClose2} style={{ marginLeft: "10px" }}>
+                <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
                   삭제
                 </Button>
                 <Button onClick={onClose2} style={{ marginLeft: "10px" }}>
@@ -582,14 +558,6 @@ const FullCal2 = () => {
               </div>
             </Form>
           </Drawer>
-
-
-
-
-
-
-
-
         </Col>
       </Row>
     </div>

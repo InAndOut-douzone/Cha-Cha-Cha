@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -65,8 +67,16 @@ public class UserController {
 	
 	@CrossOrigin(origins = {"http://localhost:3000"})
 	@PostMapping("/user/update")
-	public ResponseEntity<Object> update(MultipartFile file, String userData){
-		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/webapp/images/";
+	public ResponseEntity<Object> update(HttpServletRequest request, MultipartFile file, String userData, Authentication authentication){
+
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		
+//		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/webapp/images/";
+		
+		// webapp 경로
+		String abc = request.getServletContext().getRealPath(""); 
+		String UPLOAD_PATH = abc+"images";
+		System.out.println(UPLOAD_PATH);
 		
 		User user = new User();
 		try {
@@ -85,7 +95,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		userService.userUpdate(user);
+		userService.userUpdate(user,principal.getUser().getId());
 		return new ResponseEntity<Object>("Success",HttpStatus.OK);
 
 	}

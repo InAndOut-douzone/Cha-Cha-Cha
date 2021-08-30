@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { List, Avatar,Typography, Space } from 'antd';
+import { List, Avatar,Typography, Space, Badge } from 'antd';
 import image from '../../assets/images/nurse.jpg'
 import styled from 'styled-components';
 import axios from 'axios';
@@ -61,6 +61,7 @@ const EmployeeOnOffList = () => {
                     <List.Item
                         actions={ item.offTime === null ? [<Text style={{fontSize:"12px", color:"#40BCFF"}}>출근</Text>] : [<Text style={{fontSize:"12px", color:"#ff0000"}}>퇴근</Text>]}
                     >
+                      { item.offTime === null ? <Badge status="processing"/> : <Badge status="error "/>}
                         <List.Item.Meta
                         avatar={<Avatar src={'images/'+item.user.profile}/>}
                         title={<a href="#">{item.user.name}</a>}

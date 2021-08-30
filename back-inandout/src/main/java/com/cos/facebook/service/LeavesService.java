@@ -149,10 +149,11 @@ public class LeavesService {
 	}
 
 	public void update(LeavesReqDto leavesReqDto) {
-//		Leaves leavesEntity = leavesRepository.findByWeek(leavesReqDto.getNo());
-//		leavesEntity.setCategory(leavesReqDto.getCategory());
-//		leavesEntity.setContent(leavesReqDto.getContent());
-//		leavesRepository.save(leavesEntity);
-		
+		Leaves leavesEntity = leavesRepository.findById(leavesReqDto.getId()).get();
+		leavesEntity.setCategory(leavesReqDto.getCategory());
+		leavesEntity.setContent(leavesReqDto.getContent());
+		leavesEntity.setFromDate(leavesReqDto.getFromDate());
+		leavesEntity.setToDate(leavesReqDto.getToDate());
+		leavesRepository.save(leavesEntity);
 	}	
 }

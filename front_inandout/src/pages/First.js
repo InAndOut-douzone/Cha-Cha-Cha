@@ -3,10 +3,8 @@ import { Layout,Breadcrumb } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import '../assets/css/app.css';
-import Cal from '../components/cal/Cal2';
 import SiteLayout from './SiteLayout';
 import FullCal2 from '../components/cal/FullCal2';
-import EmployeeOnOffList from './user/EmployeeOnOffList';
 
 
 const { Content } = Layout;
@@ -24,7 +22,7 @@ export default function First() {
                 <Breadcrumb.Item>홈화면</Breadcrumb.Item>
         </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }}/>
-            <br />
+            {/* <br /> */}
       <Content
         className="site-layout-background"
         style={{
@@ -35,8 +33,6 @@ export default function First() {
         }}
       >
         {/* [캘린더] [접속자 권한: {role} ] */}
-        {/* <Cal /> */}
-        {/* <FullCal /> */}
         <FullCal2 />
       </Content>
       </Layout>
