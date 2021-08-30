@@ -54,11 +54,16 @@ const FullCal2 = () => {
   };
   const handleDateClick2 = (eventClick) => {
     setVisible2(true);
-    setNo1(eventClick.event.id);  
+    setNo1(eventClick.event.no);  
     setCategory1(eventClick.event.extendedProps.category);
     setContent1(eventClick.event.extendedProps.content);
     setFromDate1(eventClick.event.start);
     setToDate1(eventClick.event.end);
+    console.log(eventClick.event)
+    console.log({no1});
+    console.log({category1})
+    console.log({content1})
+    console.log({fromDate1})
   };
   const onClose2 = () => {
     setVisible2(false);
@@ -86,7 +91,7 @@ const FullCal2 = () => {
     }).catch();
   }
   const update = async (value) => {
-    console.log(value);
+    // console.log(value);
     let data3 = {
       id: {no1},
       category: value.category,
@@ -313,7 +318,7 @@ const FullCal2 = () => {
       <td>내용</td>
       <td><strong>
       ` +
-        eventClick.event.content +
+        eventClick.event.extendedProps.content +
         `</strong></td>
       </tr>
       </tbody>
@@ -360,6 +365,8 @@ const FullCal2 = () => {
 
   }))
 
+  console.log(data);
+
   const CalendarLayout = styled.div`
     .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
@@ -389,8 +396,8 @@ const FullCal2 = () => {
                   droppable={true}
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                   dateClick={handleDateClick} // 날짜 클릭시 함수 실행
-                  // eventClick={eventClick} // 이벤트 클릭시 함수 실행
-                  eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
+                  eventClick={eventClick} // 이벤트 클릭시 함수 실행
+                  // eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
                   selectable={true}
                   events={data} // 이벤트 데이터
                 // calendarEvents={data}
@@ -564,8 +571,14 @@ const FullCal2 = () => {
                     {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
                     <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                   </Form.Item>
+
+                  {/*  */}
+                  <Form.Item>
+
+                  </Form.Item>
+                  {/*  */}
+
                 </Col>
-                
               </Row>
               <div style={{ display: "flex", textAlign: "right" }}>
                 <Form.Item>
