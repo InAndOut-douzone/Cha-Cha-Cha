@@ -7,9 +7,9 @@ import { InputGroup, FormControl, Image } from 'react-bootstrap';
 import SiteLayout from './SiteLayout';
 
 const HIM = () => {
-    const imgPath = "/images/";
     const [hospital, setHospital] = useState({});
     const [form] = Form.useForm();
+
     const [name, setName] = useState();
     const [address, setAddress] = useState();
     const [telNum, setTelNum] = useState();
@@ -69,11 +69,6 @@ const HIM = () => {
             setLogo(res.data.logo);
             setTelNum(res.data.telNum);
             setCeoName(res.data.ceoName);
-            if(res.data.logo != null) {
-                setLogo(imgPath + res.data.logo);
-            } else {
-                setLogo(null);
-            }
         });
     }, []);
 
