@@ -95,6 +95,8 @@ public class LeavesService {
 		leavesEntity.setUser(userEntity);
 		leavesEntity.setFromUser(doctoryEntity);
 		
+		System.out.println("===================");
+		System.out.println(leavesEntity);
 		return leavesRepository.save(leavesEntity);
 	}
 

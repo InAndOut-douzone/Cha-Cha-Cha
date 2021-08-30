@@ -318,6 +318,7 @@ const FullCal2 = () => {
     // textColor: leave.category === "출장" ? "blue" : "red",
     start: leave.fromDate,
     end: leave.toDate,
+    // end: moment(leave.toDate).add(1, 'days').toDate(),
     category: leave.category,
     content: leave.content,
     allDay : 1
