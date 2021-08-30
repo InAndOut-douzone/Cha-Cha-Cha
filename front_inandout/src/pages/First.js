@@ -24,7 +24,7 @@ export default function First() {
                 <Breadcrumb.Item>홈화면</Breadcrumb.Item>
         </Breadcrumb>
             <div style={{ borderTop: "1px solid #eee" }}/>
-            <br />
+            {/* <br /> */}
       <Content
         className="site-layout-background"
         style={{
