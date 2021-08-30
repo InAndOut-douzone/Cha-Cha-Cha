@@ -399,9 +399,9 @@ const FullCal2 = () => {
             <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
           </div><br />
           <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-          <Badge color="skyblue"/><Badge color="#d3d3d3"/><Badge color="#ff9aa3"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
-          <Badge color="#9acd32"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
-          <Badge color="gold"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+          <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><Badge color="skyblue"/><Badge color="#d3d3d3"/><Badge color="#ff9aa3"/><br />
+          <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><Badge color="#9acd32"/><br />
+          <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><Badge color="gold"/><br /><br /><br /><br />
           </div>
           <br />
           <EmployeeOnOffList />
