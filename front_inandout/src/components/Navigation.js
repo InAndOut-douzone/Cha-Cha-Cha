@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Image, Button } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import profile from '../assets/images/doctor.jpg';
-import profile2 from '../assets/images/nurse.jpg';
+import DefaultProfile from '../assets/images/defaultProfile.png';
+// import Profile from '../assets/images/doctor.jpg';
+
 import Drawer from './_Drawer';
+import axios from 'axios';
 
 // import Nstate from '../components/Nstate';
 // import { Provider } from 'react-redux';
@@ -18,10 +20,26 @@ const Navigation = (name) => {
     const role = localStorage.getItem('userRole');
 
     const [collapsed, setCollapsed] = useState();
+    const [user,setUser] = useState();
+    const [profileState, setProfileState] = useState();
 
     const toggleCollapsed = () => {
         setCollapsed(!collapsed)
     };
+
+    const header = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+        },
+      };
+
+    useEffect(()=>{
+        axios.get("http://localhost:8080/api/user", header).then(res=>{            
+            setUser(res.data);
+            setProfileState(!!res.data.profile)
+            console.log(profileState);
+        }).catch();
+    },[])
 
     // const [openKeys, setOpenkeys] = useState(); //펼쳐져 있을 메뉴
     // sessionStorage.setItem('ok', JSON.stringify(openKeys));
@@ -37,11 +55,11 @@ const Navigation = (name) => {
             <Sider width={200} className="site-layout-background2">
                 {/* <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }} */}
                 <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
-                    width={200}
-                    src={profile}
+                    width={200} height={220}
+                    src={profileState ? 'images/'+user.profile : DefaultProfile}
                 />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
-                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
+                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>
 
                 {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
@@ -91,11 +109,11 @@ const Navigation = (name) => {
             :
             <Sider width={200} className="site-layout-background2">
                 <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
-                    width={200}
-                    src={profile2}
+                    width={200} height={220}
+                    src={profileState ? 'images/'+user.profile : DefaultProfile}
                 />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
-                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div>
+                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={['1']}
