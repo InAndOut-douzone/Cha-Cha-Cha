@@ -15,9 +15,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public void userUpdate(User user) {
-		
-		 long id = 1; // 여기서 현재 로그인 한 유저의 id를 얻어온다.
+	public void userUpdate(User user, long id) {
 		User user1 = userRepository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("없");
 		});   
