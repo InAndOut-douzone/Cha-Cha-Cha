@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
-import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Popover } from 'antd';
+import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Badge } from 'antd';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from "@fullcalendar/interaction";
 import axios from 'axios';
 import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 import styled from 'styled-components';
@@ -26,7 +27,7 @@ const FullCal2 = () => {
   const [content1, setContent1] = useState();
   const [fromDate1, setFromDate1] = useState();
   const [toDate1, setToDate1] = useState();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({}); 
   
   const header = {
     headers: {
@@ -49,6 +50,7 @@ const FullCal2 = () => {
     setVisible(false);
   };
   const handleDateClick2 = (eventClick) => {
+    console.log(eventClick.event)
     setNo1(eventClick.event.id);
     setCategory1(eventClick.event.extendedProps.category);
     setContent1(eventClick.event.extendedProps.content);
@@ -68,15 +70,9 @@ const FullCal2 = () => {
       toDate: eventClick.event.end,
     }
 
-    // let ch = window.confirm("정말 일정을 수정하시겠습니까?");
-    // if(ch){
       await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
         alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
       })
-    // } else {
-    //   alert("일정 수정이 취소되었습니다.");
-    //   window.location.replace("/")
-    // }
   };
   const onClose2 = () => {
     setVisible2(false);
@@ -84,6 +80,7 @@ const FullCal2 = () => {
   const getUser = () => {
     axios.get("http://localhost:8080/api/user", header).then(res => {
       setUser(res.data);
+      console.log(res.data.id)
     }).catch();
   }
   useEffect(() => {
@@ -266,6 +263,7 @@ const FullCal2 = () => {
       }
     }
   }
+
   function onChange4(e) {
     외근체크(!외근);
     if (e.target.checked) {
@@ -317,19 +315,24 @@ const FullCal2 = () => {
           leave.category === "출장" ? "yellowgreen" : "gold",
     // textColor: leave.category === "출장" ? "blue" : "red",
     start: leave.fromDate,
-    end: leave.toDate,
-    // end: moment(leave.toDate).add(1, 'days').toDate(),
+    
+// 수정중
+    // end: leave.toDate,
+    // end: moment(leave.toDate).add(1, "days").toDate(),
+    end: leave.category === "연차" ? leave.toDate = moment(leave.toDate).add(1, 'days').toDate() : leave.toDate,
+
     category: leave.category,
     content: leave.content,
-    allDay : 1
+    allDay : leave.category === "연차" ? 1 :  leave.category === "오후 반차" ? 1 :  leave.category === "오전 반차" ? 1 : 0
   }))
 
   const CalendarLayout = styled.div`
     .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
     .fc-daygrid-day-number { color: black; font-weight: 400; },
-    .fc-day-number.fc-sat.fc-past { color:red; },
-    .fc-day-number.fc-sun.fc-past { color:red; }
+  `;
+  const CalendarLayout2 = styled.div`
+    .fc-toolbar-chunk {display: flex; align-items: center;}
   `;
 
   return (
@@ -339,38 +342,52 @@ const FullCal2 = () => {
           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
               <CalendarLayout>
+                <CalendarLayout2>
                 <FullCalendar
                   defaultView="dayGridMonth"
+                  plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
 
                   // eventColor="skyblue"
-                  headerToolbar={{
-                    center: "dayGridMonth,timeGridWeek",
-                  }}
-                  header={{
-                    left: "prev,next today",
-                    center: "title",
-                    right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-                  }}
+                  height="750px"
                   locale='ko'
+                  headerToolbar={{
+                    right: "today",
+                    // center: "dayGridMonth,timeGridWeek",
+                    // center: "prevYear prev title next nextYear",
+                    center: "prev title next",
+                    left: "dayGridMonth,timeGridWeek,listWeek"
+                  }}
+                  buttonText={{
+                    today: '오늘',
+                    month:    '월',
+                    week:     '주',
+                    day:      '일',
+                    list:     '목록'
+                  }}
+                  // allDayText=""
+                  // header={{
+                  //   left: "prev,next today",
+                  //   center: "title",
+                  //   right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                  // }}
                   dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                   rerenderDelay={10}
                   eventDurationEditable={false}
                   editable={true}
-                  droppable={true}
-                  plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                   dateClick={handleDateClick} // 날짜 클릭시 함수 실행
                   eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
                   selectable={true}
                   events={data} // 이벤트 데이터
+                  droppable={true}
                   eventDrop={드래그}
                   drop={드래그}
                 // calendarEvents={data}
                 // events={data2} // 일정
-
                 // ref={calendarComponentRef}
                 // weekends={this.state.calendarWeekends}
                 // eventReceive={this.eventReceive}
                 />
+                </CalendarLayout2>
               </CalendarLayout>
             </div>
           </CalendarLayout>
@@ -382,9 +399,9 @@ const FullCal2 = () => {
             <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
           </div><br />
           <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+          <Badge color="skyblue"/><Badge color="#d3d3d3"/><Badge color="#ff9aa3"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
+          <Badge color="#9acd32"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
+          <Badge color="gold"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
           </div>
           <br />
           <EmployeeOnOffList />
@@ -427,8 +444,8 @@ const FullCal2 = () => {
                     label="일시"
                   >
                     <RangePicker
-                      showTime={{ format: 'HH' }}
-                      format="YYYY-MM-DD HH"
+                      showTime={{ format: 'HH mm' }}
+                      format="YYYY-MM-DD HH mm"
                     />
                   </Form.Item>
                 </Col>
@@ -501,8 +518,8 @@ const FullCal2 = () => {
                     label="일시"
                   >
                     <RangePicker
-                      showTime={{ format: 'HH' }}
-                      format="YYYY-MM-DD HH"
+                      showTime={{ format: 'HH mm' }}
+                      format="YYYY-MM-DD HH mm"
                       placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
                     />
                   </Form.Item>
@@ -523,12 +540,6 @@ const FullCal2 = () => {
                     {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
                     <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                   </Form.Item>
-
-                  {/*  */}
-                  <Form.Item>
-
-                  </Form.Item>
-                  {/*  */}
 
                 </Col>
               </Row>
