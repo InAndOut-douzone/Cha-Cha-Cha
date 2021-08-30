@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
-import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker } from 'antd';
+import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Badge } from 'antd';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -50,6 +50,7 @@ const FullCal2 = () => {
     setVisible(false);
   };
   const handleDateClick2 = (eventClick) => {
+    console.log(eventClick.event)
     setNo1(eventClick.event.id);
     setCategory1(eventClick.event.extendedProps.category);
     setContent1(eventClick.event.extendedProps.content);
@@ -79,6 +80,7 @@ const FullCal2 = () => {
   const getUser = () => {
     axios.get("http://localhost:8080/api/user", header).then(res => {
       setUser(res.data);
+      console.log(res.data.id)
     }).catch();
   }
   useEffect(() => {
@@ -261,6 +263,7 @@ const FullCal2 = () => {
       }
     }
   }
+
   function onChange4(e) {
     외근체크(!외근);
     if (e.target.checked) {
@@ -340,8 +343,8 @@ const FullCal2 = () => {
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
 
                   // eventColor="skyblue"
+                  height="750px"
                   locale='ko'
-                  lang='ko'
                   headerToolbar={{
                     right: "today",
                     // center: "dayGridMonth,timeGridWeek",
@@ -365,16 +368,15 @@ const FullCal2 = () => {
                   rerenderDelay={10}
                   eventDurationEditable={false}
                   editable={true}
-                  droppable={true}
                   dateClick={handleDateClick} // 날짜 클릭시 함수 실행
                   eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
                   selectable={true}
                   events={data} // 이벤트 데이터
+                  droppable={true}
                   eventDrop={드래그}
                   drop={드래그}
                 // calendarEvents={data}
                 // events={data2} // 일정
-
                 // ref={calendarComponentRef}
                 // weekends={this.state.calendarWeekends}
                 // eventReceive={this.eventReceive}
@@ -391,9 +393,9 @@ const FullCal2 = () => {
             <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
           </div><br />
           <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+          <Badge color="skyblue"/><Badge color="#d3d3d3"/><Badge color="#ff9aa3"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
+          <Badge status="success"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
+          <Badge status="warning"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
           </div>
           <br />
           <EmployeeOnOffList />
