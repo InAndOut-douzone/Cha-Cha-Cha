@@ -357,7 +357,7 @@ const FullCal2 = () => {
                leave.category === "오후 반차" ? "#ff9aa3" : 
                leave.category === "오전 반차" ? "lightgrey" :
                leave.category === "출장" ? "yellowgreen" : "gold", 
-    // textColor: leave.category === "출장" ? "gold" : "red",
+    // textColor: leave.category === "출장" ? "blue" : "red",
     start: leave.fromDate,
     end: leave.toDate,
     category: leave.category,
@@ -382,7 +382,7 @@ const FullCal2 = () => {
               <CalendarLayout>
                 <FullCalendar
                   defaultView="dayGridMonth"
-
+                  
                   // eventColor="skyblue"
 
                   header={{
@@ -390,6 +390,8 @@ const FullCal2 = () => {
                     center: "title",
                     right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
                   }}
+                  locale='ko'
+                  dayMaxEvents= {true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                   rerenderDelay={10}
                   eventDurationEditable={false}
                   editable={true}
