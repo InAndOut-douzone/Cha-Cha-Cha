@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
-import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Modal } from 'antd';
+import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Popover } from 'antd';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import Alert from "sweetalert2";
+import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
 import axios from 'axios';
 import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 import styled from 'styled-components';
 import moment from 'moment';
 
-// 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
-// 
 
 const FullCal2 = () => {
-
   const [leaves, setLeaves] = useState([]);
   const [내일정, 내일정체크] = useState(false);
   const [연차, 연차체크] = useState(false);
   const [출장, 출장체크] = useState(false);
   const [외근, 외근체크] = useState(false);
-
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [no1, setNo1] = useState();
+  const [category1, setCategory1] = useState();
+  const [content1, setContent1] = useState();
+  const [fromDate1, setFromDate1] = useState();
+  const [toDate1, setToDate1] = useState();
+  const [user, setUser] = useState({});
+  
   const header = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("Authorization"),
@@ -38,14 +42,6 @@ const FullCal2 = () => {
   }, []);
 
   // 
-  const [visible, setVisible] = useState(false);
-  const [visible2, setVisible2] = useState(false);
-  const [no1, setNo1] = useState();
-  const [category1, setCategory1] = useState();
-  const [content1, setContent1] = useState();
-  const [fromDate1, setFromDate1] = useState();
-  const [toDate1, setToDate1] = useState();
-  const [user, setUser] = useState({});
   const handleDateClick = () => {
     setVisible(true);
   };
@@ -58,12 +54,29 @@ const FullCal2 = () => {
     setContent1(eventClick.event.extendedProps.content);
     setFromDate1(eventClick.event.start);
     setToDate1(eventClick.event.end);
-    console.log(eventClick.event)
-    console.log(eventClick.event.id);
-    console.log(eventClick.event.extendedProps.category)
-    console.log(eventClick.event.extendedProps.content)
-    console.log(eventClick.event.start)
     setVisible2(true);
+  };
+  const 드래그 = async (eventClick) => {
+    console.log(eventClick.event)
+    console.log(eventClick.event.id)
+    console.log(eventClick.event.start)
+    let data3 = {
+      id: eventClick.event.id, // 수정할 이벤트 번호
+      category: eventClick.event.extendedProps.category,
+      content: eventClick.event.extendedProps.content,
+      fromDate: eventClick.event.start,
+      toDate: eventClick.event.end,
+    }
+
+    // let ch = window.confirm("정말 일정을 수정하시겠습니까?");
+    // if(ch){
+      await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+        alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
+      })
+    // } else {
+    //   alert("일정 수정이 취소되었습니다.");
+    //   window.location.replace("/")
+    // }
   };
   const onClose2 = () => {
     setVisible2(false);
@@ -105,10 +118,15 @@ const FullCal2 = () => {
     })
   }
   const onDelete = async (value) => { // 일정 삭제
-    await axios.delete("http://localhost:8080/api/leaves/" + no1, header).then((res) => {
-      alert("일정 삭제가 완료되었습니다.");
-      window.location.replace("/")
-    });
+    let ch = window.confirm("정말 삭제하시겠습니까?");
+    if(ch){
+      await axios.delete("http://localhost:8080/api/leaves/" + no1, header).then((res) => {
+        alert("일정 삭제가 완료되었습니다.");
+        window.location.replace("/")
+      });
+    } else {
+      alert("일정 삭제가 취소되었습니다.");
+    }
   }
   // 
 
@@ -289,70 +307,6 @@ const FullCal2 = () => {
     }
   }
 
-  const eventClick = eventClick => {
-    Alert.fire({
-      id: eventClick.event.id,
-      title: eventClick.event.title,
-      html:
-        `<div class="table-responsive">
-      <table class="table">
-      <tbody>
-      <tr >
-      <td>제목</td>
-      <td><strong>` +
-        eventClick.event.title +
-        `</strong></td>
-      </tr>
-      <tr >
-      <td>시작</td>
-      <td><strong>
-      ` +
-        moment(eventClick.event.start, "YYYY.MM.DD").format("YYYY-MM-DD") +
-        // eventClick.event.start +
-        `</strong></td>
-      </tr>
-      <tr >
-      <td>종료</td>
-      <td><strong>
-      ` +
-        moment(eventClick.event.end, "YYYY.MM.DD").format("YYYY-MM-DD") +
-        `</strong></td>
-      </tr>
-      <tr >
-      <td>내용</td>
-      <td><strong>
-      ` +
-        eventClick.event.extendedProps.content +
-        `</strong></td>
-      </tr>
-      </tbody>
-      </table>
-      </div>`,
-
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "삭제",
-      cancelButtonText: "닫기"
-    }).then(result => {
-      if (result.value) {
-        //   let leaves = { // 수정
-        //     headers: { "Content-Type": "application/json; charset=utf-8" },
-        //     fromDate: ,
-        //     toDate: ,
-        // };
-
-        axios.delete("http://localhost:8080/api/leaves/" + eventClick.event.id, header).then((res) => {
-          console.log(res)
-          console.log(res.data)
-        });
-
-        eventClick.event.remove(); // It will remove event from the calendar
-        Alert.fire("삭제!", "삭제가   완료되었습니다.", "success");
-      }
-    });
-  };
-
   let data = []; // 연차
   leaves.map((leave) => data.push({
     id: leave.no,
@@ -366,15 +320,15 @@ const FullCal2 = () => {
     end: leave.toDate,
     category: leave.category,
     content: leave.content,
-
+    allDay : 1
   }))
-
-  console.log(data);
 
   const CalendarLayout = styled.div`
     .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
-    .fc-daygrid-day-number { color: black; font-weight: 400; }
+    .fc-daygrid-day-number { color: black; font-weight: 400; },
+    .fc-day-number.fc-sat.fc-past { color:red; },
+    .fc-day-number.fc-sun.fc-past { color:red; }
   `;
 
   return (
@@ -388,7 +342,9 @@ const FullCal2 = () => {
                   defaultView="dayGridMonth"
 
                   // eventColor="skyblue"
-
+                  headerToolbar={{
+                    center: "dayGridMonth,timeGridWeek",
+                  }}
                   header={{
                     left: "prev,next today",
                     center: "title",
@@ -402,17 +358,16 @@ const FullCal2 = () => {
                   droppable={true}
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                   dateClick={handleDateClick} // 날짜 클릭시 함수 실행
-                  // eventClick={eventClick} // 이벤트 클릭시 함수 실행
                   eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
                   selectable={true}
                   events={data} // 이벤트 데이터
+                  eventDrop={드래그}
+                  drop={드래그}
                 // calendarEvents={data}
                 // events={data2} // 일정
 
                 // ref={calendarComponentRef}
                 // weekends={this.state.calendarWeekends}
-                // eventDrop={this.drop}
-                // drop={this.drop}
                 // eventReceive={this.eventReceive}
                 />
               </CalendarLayout>
@@ -579,7 +534,7 @@ const FullCal2 = () => {
               <div style={{ display: "flex", textAlign: "right" }}>
                 <Form.Item>
                   <Button type="primary" htmlType="submit">
-                    등록
+                    수정
                   </Button>
                 </Form.Item>
                 <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
@@ -591,12 +546,6 @@ const FullCal2 = () => {
               </div>
             </Form>
           </Drawer>
-
-
-
-
-
-
         </Col>
       </Row>
     </div>

@@ -100,43 +100,69 @@ export default class FullCal2 extends Component {
   /**
    * when we click on event we are displaying event details
    */
-  eventClick = eventClick => {
-    Alert.fire({
-      title: eventClick.event.title,
-      html:
-        `<div class="table-responsive">
-      <table class="table">
-      <tbody>
-      <tr >
-      <td>이름</td>
-      <td><strong>` +
-        eventClick.event.title +
-        `</strong></td>
-      </tr>
-      <tr >
-      <td>날짜</td>
-      <td><strong>
-      ` +
-        eventClick.event.start +
-        `
-      </strong></td>
-      </tr>
-      </tbody>
-      </table>
-      </div>`,
+  // const eventClick = eventClick => {
+  //   Alert.fire({
+  //     id: eventClick.event.id,
+  //     title: eventClick.event.title,
+  //     html:
+  //       `<div class="table-responsive">
+  //     <table class="table">
+  //     <tbody>
+  //     <tr >
+  //     <td>제목</td>
+  //     <td><strong>` +
+  //       eventClick.event.title +
+  //       `</strong></td>
+  //     </tr>
+  //     <tr >
+  //     <td>시작</td>
+  //     <td><strong>
+  //     ` +
+  //       moment(eventClick.event.start, "YYYY.MM.DD").format("YYYY-MM-DD") +
+  //       // eventClick.event.start +
+  //       `</strong></td>
+  //     </tr>
+  //     <tr >
+  //     <td>종료</td>
+  //     <td><strong>
+  //     ` +
+  //       moment(eventClick.event.end, "YYYY.MM.DD").format("YYYY-MM-DD") +
+  //       `</strong></td>
+  //     </tr>
+  //     <tr >
+  //     <td>내용</td>
+  //     <td><strong>
+  //     ` +
+  //       eventClick.event.extendedProps.content +
+  //       `</strong></td>
+  //     </tr>
+  //     </tbody>
+  //     </table>
+  //     </div>`,
 
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "삭제",
-      cancelButtonText: "닫기"
-    }).then(result => {
-      if (result.value) {
-        eventClick.event.remove(); // It will remove event from the calendar
-        Alert.fire("Deleted!", "Your Event has been deleted.", "success");
-      }
-    });
-  };
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#d33",
+  //     cancelButtonColor: "#3085d6",
+  //     confirmButtonText: "삭제",
+  //     cancelButtonText: "닫기"
+  //   }).then(result => {
+  //     if (result.value) {
+  //       //   let leaves = { // 수정
+  //       //     headers: { "Content-Type": "application/json; charset=utf-8" },
+  //       //     fromDate: ,
+  //       //     toDate: ,
+  //       // };
+
+  //       axios.delete("http://localhost:8080/api/leaves/" + eventClick.event.id, header).then((res) => {
+  //         console.log(res)
+  //         console.log(res.data)
+  //       });
+
+  //       eventClick.event.remove(); // It will remove event from the calendar
+  //       Alert.fire("삭제!", "삭제가   완료되었습니다.", "success");
+  //     }
+  //   });
+  // };
 
   handleDateClick = eventClick => {
     Alert.fire({
