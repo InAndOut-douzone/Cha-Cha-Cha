@@ -1,6 +1,9 @@
 package com.cos.facebook.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,10 @@ import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
 import com.cos.facebook.model.HospitalOnOff;
 import com.cos.facebook.model.Leaves;
+import com.cos.facebook.model.OnOff;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.LeavesRepository;
+import com.cos.facebook.repository.OnOffRepository;
 import com.cos.facebook.repository.UserRepository;
 
 @Service
@@ -23,6 +28,9 @@ public class LeavesService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private OnOffRepository onOffRepository;
 	
 	public List<Leaves> findAll() {
 		return leavesRepository.findAll();
@@ -105,7 +113,27 @@ public class LeavesService {
 	public void leaveUpdate(LeaveUpdateReqDto leaveUpdateReqDto) {
 		Leaves leaveEntity = leavesRepository.findById(leaveUpdateReqDto.getNo()).get();
 		leaveEntity.setState(leaveUpdateReqDto.getState());
+		
 		if(leaveUpdateReqDto.getState().equals("success")) {
+			
+			Calendar fromDate = Calendar.getInstance();
+			fromDate.setTime(leaveEntity.getFromDate());
+			
+			Calendar toDate = Calendar.getInstance();
+			toDate.setTime(leaveEntity.getToDate());
+			
+			
+			while(fromDate.compareTo(toDate) != 1) {
+				fromDate.add(Calendar.DATE,1);
+				OnOff onOffEntity = new OnOff();
+				Date d = new Date(fromDate.getTimeInMillis());
+				
+				onOffEntity.setUser(leaveEntity.getUser());
+				onOffEntity.setDate(d);
+				onOffEntity.setState(leaveEntity.getCategory());
+				onOffRepository.save(onOffEntity);
+			}
+			
 			if(leaveEntity.getCategory().equals("연차")) {
 				
 				// 두 기간의 차이 구하기

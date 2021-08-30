@@ -27,7 +27,7 @@ public class OnOffController {
 		return new ResponseEntity<>(onOffService.insertOnTime(principal.getUser().getId()),HttpStatus.OK);		
 	}
 	
-	@GetMapping("/onoff")
+	@GetMapping("/onoff") // 퇴근
 	public ResponseEntity<?> offTime(Authentication authentication){
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		return new ResponseEntity<>(onOffService.insertOffTime(principal.getUser().getId()),HttpStatus.OK);		

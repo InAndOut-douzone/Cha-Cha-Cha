@@ -70,9 +70,9 @@ const NoticeList = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }}/>
                 <br /><br />
-                <div style={{textAlign:"center"}}>
-                    공지사항 화면입니다. <br/><br/><br/>
-                </div>
+                <h2>
+                    공지사항
+                </h2>
                 <Table style={{textAlign:"center"}} dataSource={data} columns={columns} />
             </Layout>
         </SiteLayout>
