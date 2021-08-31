@@ -88,10 +88,10 @@ const Work = () => {
                 <br /><br />
 
                 <div>
-                    <h1>{data[0]}{" 월요일 ~ "}{data[1]}{" 일요일"}</h1>
+                    <h1 style={{textAlign:'center'}}>{data[0]}{" 월요일 ~ "}{data[1]}{" 일요일"}</h1>
                     <br/><br/>
                     <p>{data[4]}{"님은 이번주 "}{data[2]}{"시간 일했습니다."}</p>
-                    <p>{"이번주 "}{52-data[2]}{" 시간 더 일할 수 있습니다."}</p>
+                    <p>{52-data[2]}{" 시간 더 일할 수 있습니다."}</p>
                 </div>
 
                 <Progress

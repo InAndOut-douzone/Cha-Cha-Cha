@@ -148,7 +148,7 @@ const _Header = () => {
             // console.log(res);
         }).catch();
 
-        axios.get("http://localhost:8080/api/notice/list", header).then(res => {
+        axios.get("http://localhost:8080/api/notice/listFour", header).then(res => {
             const title = [];
             for (var i in res.data) {
                 title.push({

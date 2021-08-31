@@ -37,6 +37,13 @@ public class NoticeController {
 		return new ResponseEntity<>(lists,HttpStatus.OK);
 	}
 	
+	@GetMapping("/listFour")
+	public ResponseEntity<?> four() {
+		List<Notice> lists = noticeRepository.findFour();
+		// System.out.println("lists : " + lists);
+		return new ResponseEntity<>(lists,HttpStatus.OK);
+	}
+	
 	@GetMapping("/{no}")
 	public ResponseEntity<?> notice(@PathVariable long no){
 		

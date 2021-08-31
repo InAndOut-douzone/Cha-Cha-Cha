@@ -73,7 +73,7 @@ const WTM = () => {
 
   return (
     <SiteLayout>
-      <Layout style={{ padding: '0 24px 24px', maxWidth: "960px" }}>
+      <Layout style={{ padding: '0 24px 24px' }}>
         <br />
         <Breadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
