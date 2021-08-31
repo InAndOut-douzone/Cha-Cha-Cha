@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
 import axios from 'axios';
+import moment from 'moment';
 
 const { Option } = Select;
 
@@ -46,18 +47,7 @@ const _Drawer = () => {
     }).catch();
   }
 
-  const onFinish = (value) => {
-    let data = {
-      category: value.category,
-      content: value.content,
-      toDate: value.date[1],
-      fromDate: value.date[0],
-      state: "wait",
-      fromUser: value.name
-    }
-
-    console.log(data);
-
+  const leavePost = (data) => {
     axios.post("http://localhost:8080/api/leave", data, header).then(res => {
       alert("연차 신청이 완료되었습니다.");
       formRef.current.setFieldsValue({
@@ -67,12 +57,41 @@ const _Drawer = () => {
         fromDate: "",
         name: ""
       });
-      window.location.replace("/")
+      // window.location.replace("/")
     }).catch();
 
-    // setState1({
-    //   visible: false,
-    // });
+    setState1({
+      visible: false,
+    });
+  }
+
+  const onFinish = (value) => {
+    let data = {
+      category: value.category,
+      content: value.content,
+      toDate: moment(value.date[1]).add(1, 'm'),
+      fromDate: value.date[0],
+      state: "wait",
+      fromUser: value.name
+    }
+    if(value.category === "연차"){
+      // 두 기간간의 일 수     
+      const day = moment.duration(value.date[1].diff(value.date[0])).asDays()+1;
+      if(user.aleave >= day ){
+        leavePost(data);
+      } else{
+        alert("휴가가 부족합니다.");
+      }
+    } else {
+      const day = moment.duration(value.date[1].diff(value.date[0])).asDays()+0.5;
+      if(moment.duration(value.date[1].diff(value.date[0])).asDays() > 0){
+        alert("반차는 하루만 신청해주세요.");
+      } else if (user.aleave >= day ) {
+        leavePost(data);
+      } else {
+        alert("휴가가 부족합니다.");
+      } 
+    }
   }
 
   return (

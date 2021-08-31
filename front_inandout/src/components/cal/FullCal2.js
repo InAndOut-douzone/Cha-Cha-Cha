@@ -315,7 +315,12 @@ const FullCal2 = () => {
           leave.category === "출장" ? "yellowgreen" : "gold",
     // textColor: leave.category === "출장" ? "blue" : "red",
     start: leave.fromDate,
-    end: leave.toDate,
+    
+// 수정중
+    // end: leave.toDate,
+    // end: moment(leave.toDate).add(1, "days").toDate(),
+    end: leave.category === "연차" ? leave.toDate = moment(leave.toDate).add(1, 'days').toDate() : leave.toDate,
+
     category: leave.category,
     content: leave.content,
     allDay : leave.category === "연차" ? 1 :  leave.category === "오후 반차" ? 1 :  leave.category === "오전 반차" ? 1 : 0
@@ -348,6 +353,7 @@ const FullCal2 = () => {
                   headerToolbar={{
                     right: "today",
                     // center: "dayGridMonth,timeGridWeek",
+                    // center: "prevYear prev title next nextYear",
                     center: "prev title next",
                     left: "dayGridMonth,timeGridWeek,listWeek"
                   }}
@@ -393,9 +399,9 @@ const FullCal2 = () => {
             <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
           </div><br />
           <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-          <Badge color="skyblue"/><Badge color="#d3d3d3"/><Badge color="#ff9aa3"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><br />
-          <Badge status="success"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><br />
-          <Badge status="warning"/><Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><br /><br /><br /><br />
+          <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><Badge color="skyblue"/><Badge color="#d3d3d3"/><Badge color="#ff9aa3"/><br />
+          <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><Badge color="#9acd32"/><br />
+          <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><Badge color="gold"/><br /><br /><br /><br />
           </div>
           <br />
           <EmployeeOnOffList />
@@ -534,12 +540,6 @@ const FullCal2 = () => {
                     {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
                     <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                   </Form.Item>
-
-                  {/*  */}
-                  <Form.Item>
-
-                  </Form.Item>
-                  {/*  */}
 
                 </Col>
               </Row>

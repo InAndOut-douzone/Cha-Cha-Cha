@@ -80,6 +80,7 @@ const Add_Employee = () => {
                     width: 70,
                 }}
             >
+                <Option value="82">+82</Option>
                 <Option value="86">+86</Option>
                 <Option value="87">+87</Option>
             </Select>
@@ -120,7 +121,7 @@ const Add_Employee = () => {
                         ref={formRef}
                         initialValues={{
                             residence: ['zhejiang', 'hangzhou', 'xihu'],
-                            prefix: '86',
+                            prefix: '82',
                         }}
                         scrollToFirstError
                     >
