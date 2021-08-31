@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import '../assets/css/app.css';
 import SiteLayout from './SiteLayout';
 import FullCal2 from '../components/cal/FullCal2';
+// import Media from 'react-media';
 
 
 const { Content } = Layout;

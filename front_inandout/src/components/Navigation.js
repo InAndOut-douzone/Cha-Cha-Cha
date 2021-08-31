@@ -3,8 +3,6 @@ import { Layout, Menu, Image } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import DefaultProfile from '../assets/images/defaultProfile.png';
-// import Profile from '../assets/images/doctor.jpg';
-
 import Drawer from './_Drawer';
 import axios from 'axios';
 
