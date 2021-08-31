@@ -4,18 +4,21 @@ import { Form, Layout, Breadcrumb, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import { InputGroup, FormControl, Image } from 'react-bootstrap';
+import DefaultLogo from '../assets/images/defaultProfile.png';
 import SiteLayout from './SiteLayout';
 
 const HIM = () => {
+    const imgPath = "/images/";
     const [hospital, setHospital] = useState({});
-    const [form] = Form.useForm();
+    // const [form] = Form.useForm();
+    const formData = new FormData();
 
     const [name, setName] = useState();
     const [address, setAddress] = useState();
     const [telNum, setTelNum] = useState();
     const [ceoName, setCeoName] = useState();
-
     const [logo, setLogo] = useState();
+    const [image, setImage] = useState();
 
     const HIM_name = (e) => {
         e.preventDefault();
@@ -31,7 +34,10 @@ const HIM = () => {
         e.preventDefault();
         const imageFile = e.target.files[0];
         const imageUrl = URL.createObjectURL(imageFile);
-        setLogo(imageUrl);
+
+        console.log(imageUrl);
+        setLogo(imageFile); // formdata에 선택된 이미지 파일을 넣기 위해 저장
+        setImage(imageUrl);// 프로필 미리보기를 출력하기 위해 이미지 url 저장
     };
 
     // const normFile = (e) => {
@@ -56,8 +62,9 @@ const HIM = () => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
-        },
+            'Content-Type': 'multipart/form-data',
+            Authorization: "Bearer " + localStorage.getItem("Authorization")
+        }
     };
 
     useEffect(() => {
@@ -66,26 +73,31 @@ const HIM = () => {
             setHospital(res.data);
             setName(res.data.name);
             setAddress(res.data.address);
-            setLogo(res.data.logo);
             setTelNum(res.data.telNum);
             setCeoName(res.data.ceoName);
+            if(res.data.logo != null) {
+                setImage(imgPath + res.data.logo);
+            } else {
+                setImage(null);
+            }
         });
     }, []);
 
     const dataUpdate = (e) => {
-        let hospital = {
-            headers: { "Content-Type": "application/json; charset=utf-8" },
+        
+        let hospitalData = {
+            logo:null,
             name: name,
             address: address,
-            logo: logo,
             telNum: telNum,
             ceoName: ceoName
         };
-
-        axios.put("http://localhost:8080/api/hospital2", hospital, header).then((res) => {
-            console.log(res)
-            console.log(res.data)
-            console.log(res.data.logo)
+        
+        formData.append('file', logo);
+        formData.append('hospitalData', JSON.stringify(hospitalData));
+        
+        axios.post("http://localhost:8080/api/hospital2", formData, header).then((res) => {
+            console.log("수정완료");    
         });
     }
 
@@ -102,7 +114,7 @@ const HIM = () => {
                 <br /><br />
 
                 <Form style={{ width: "350px", alignSelf: "center" }} onFinish={dataUpdate}>
-                    <Image style={{ width: "200px" }} src={logo} roundedCircle />
+                    <Image style={{ width: "200px" }} src={image === null ? DefaultLogo : image} roundedCircle />
                     <br /><br />
                     <input type="file" accept="image/*" onChange={HIM_logo}></input>
                     {/* <Form.Item

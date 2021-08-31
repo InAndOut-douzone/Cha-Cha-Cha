@@ -65,7 +65,7 @@ public class UserController {
 		return new ResponseEntity<>(userRepository.findById(id),HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = {"http://localhost:3000"})
+	// @CrossOrigin(origins = {"http://localhost:3000"})
 	@PostMapping("/user/update")
 	public ResponseEntity<Object> update(HttpServletRequest request, MultipartFile file, String userData, Authentication authentication){
 
