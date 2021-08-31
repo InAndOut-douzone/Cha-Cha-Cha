@@ -10,13 +10,9 @@ import SiteLayout from './SiteLayout';
 const HIM = () => {
     const imgPath = "/images/";
     const [hospital, setHospital] = useState({});
-<<<<<<< HEAD
     // const [form] = Form.useForm();
     const formData = new FormData();
 
-=======
-    const [form] = Form.useForm();
->>>>>>> 0c9cf2e982cf00c6cf606569fa478903a8c403ce
     const [name, setName] = useState();
     const [address, setAddress] = useState();
     const [telNum, setTelNum] = useState();
