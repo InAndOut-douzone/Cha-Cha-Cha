@@ -11,7 +11,7 @@ const { Content } = Layout;
 
 export default function First() {
 
-  const role = localStorage.getItem('userRole');
+  // const role = localStorage.getItem('userRole');
 
   return (
     <SiteLayout>

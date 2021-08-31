@@ -12,16 +12,6 @@ import SiteLayout from '../SiteLayout';
 
 const { Title, Text } = Typography;
 
-const config = {
-  rules: [
-    {
-      type: 'object',
-      required: true,
-      message: 'Please select time!',
-    },
-  ],
-};
-
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -70,6 +60,7 @@ const WTM = () => {
 
   useEffect(() => {
     fetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const Monday = (moment, week) => { updateApi(week, moment); }

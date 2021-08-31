@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Layout, Descriptions, Table, Breadcrumb, Select, Form, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
@@ -44,7 +45,7 @@ const Employee_Details = (props) => {
 
     const [user, setUser] = useState({});
     const [works, setWorks] = useState([]);
-    const [state, setState] = useState(true);
+    // const [state, setState] = useState(true);
 
     useEffect(() => {
         userFetch();
@@ -55,9 +56,9 @@ const Employee_Details = (props) => {
         axios.get("http://localhost:8080/api/user/" + id, header).then(res => {
             setUser(res.data);
             console.log(res.data)
-            if(res.data.leaveDate !== null) {
-                setState(false);
-            }
+            // if(res.data.leaveDate !== null) {
+            //     setState(false);
+            // }
         }).catch();
     }
 
@@ -90,7 +91,7 @@ const Employee_Details = (props) => {
             leaveDate : value
         }
         axios.put("http://localhost:8080/api/user/updateLeaveDate/"+user.id,data,header).then(res=>{
-            setState(false);
+            // setState(false);
         }).catch();
     }
 

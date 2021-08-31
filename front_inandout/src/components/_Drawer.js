@@ -33,6 +33,7 @@ const _Drawer = () => {
   useEffect(() => {
     getDoctor();
     getUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getDoctor = () => {
