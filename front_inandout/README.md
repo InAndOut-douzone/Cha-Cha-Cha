@@ -17,5 +17,7 @@
 - npm i @fullcalendar/interaction
 - npm i @material-ui/core
 - npm i redux react-redux
+- npm i stompjs
+- npm i sockjs-client
 
 ### 📀 설치할 것
