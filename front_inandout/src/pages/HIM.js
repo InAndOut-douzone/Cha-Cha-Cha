@@ -9,7 +9,7 @@ import SiteLayout from './SiteLayout';
 const HIM = () => {
     const imgPath = "/images/";
     const [hospital, setHospital] = useState({});
-    const [form] = Form.useForm();
+    // const [form] = Form.useForm();
     const [name, setName] = useState();
     const [address, setAddress] = useState();
     const [telNum, setTelNum] = useState();
@@ -75,6 +75,7 @@ const HIM = () => {
                 setLogo(null);
             }
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const dataUpdate = (e) => {

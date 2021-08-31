@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const DoctorItem = (props) => {
 
-    const { name, username, address } = props.doctor;
+    const { address } = props.doctor;
 
     console.log("닥터아이템입니ㅏ다");
     console.log(props);

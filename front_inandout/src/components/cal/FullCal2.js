@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
 import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Badge } from 'antd';
@@ -13,6 +14,15 @@ import moment from 'moment';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
+
+  const CalendarLayout = styled.div`
+    .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
+    .fc-col-header-cell-cushion { color: black; font-weight: 400; },
+    .fc-daygrid-day-number { color: black; font-weight: 400; },
+  `;
+  const CalendarLayout2 = styled.div`
+    .fc-toolbar-chunk {display: flex; align-items: center;}
+  `;
 
 const FullCal2 = () => {
   const [leaves, setLeaves] = useState([]);
@@ -38,12 +48,10 @@ const FullCal2 = () => {
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/leaves", header).then((res) => {
-      console.log(res);
       setLeaves(res.data);
     });
   }, []);
 
-  // 
   const handleDateClick = () => {
     setVisible(true);
   };
@@ -81,7 +89,6 @@ const FullCal2 = () => {
   const getUser = () => {
     axios.get("http://localhost:8080/api/user", header).then(res => {
       setUser(res.data);
-      console.log(res.data.id)
     }).catch();
   }
   useEffect(() => {
@@ -126,18 +133,15 @@ const FullCal2 = () => {
       alert("일정 삭제가 취소되었습니다.");
     }
   }
-  // 
 
   const fetch = (no) => {
     axios.get("http://localhost:8080/api/leaves/" + no, header).then((res) => {
-      console.log(res);
       setLeaves(res.data);
     });
   }
 
   const dd = () => {
     axios.get("http://localhost:8080/api/leaves", header).then((res) => {
-      console.log(res);
       setLeaves(res.data);
     });
   }
@@ -324,25 +328,15 @@ const FullCal2 = () => {
     allDay: leave.category === "연차" ? 1 : leave.category === "오후 반차" ? 1 : leave.category === "오전 반차" ? 1 : 0
   }))
 
-  const CalendarLayout = styled.div`
-    .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
-    .fc-col-header-cell-cushion { color: black; font-weight: 400; },
-    .fc-daygrid-day-number { color: black; font-weight: 400; },
-  `;
-  const CalendarLayout2 = styled.div`
-    .fc-toolbar-chunk {display: flex; align-items: center;}
-  `;
-
   return (
     <div className="animated fadeIn p-4 demo-app">
       <Row>
         <Col lg={10} sm={10} md={10}>
           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
-              <CalendarLayout>
                 <CalendarLayout2>
                   <FullCalendar
-                    defaultView="dayGridMonth"
+                    // defaultView="dayGridMonth"
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
 
                     // height="750px"
@@ -383,7 +377,6 @@ const FullCal2 = () => {
                   // eventReceive={this.eventReceive}
                   />
                 </CalendarLayout2>
-              </CalendarLayout>
             </div>
           </CalendarLayout>
         </Col>

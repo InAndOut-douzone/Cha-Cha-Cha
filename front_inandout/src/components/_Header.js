@@ -9,10 +9,54 @@ import styled from 'styled-components';
 
 const { Header } = Layout;
 
+const DIV = styled.div`
+        .ant-card{
+            text-align: left;
+            margin-right: 10px;
+            display: inline-block;
+        }
+        
+        
+        .ant-card-body{
+            padding: 5px !important;
+            height: 38px;
+            overflow: hidden;
+        }
+        
+        .ant-card-bordered {
+            border: 0px solid !important;
+        }
+        
+        .animation{
+            animation:text-scroll 20s linear infinite;
+        }
+        .animation a {
+            color:white;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes text-scroll{
+            from{
+              transform:translateY(30%);
+              -moz-transform:translateY(30%);
+              -webkit-transform:translateY(30%);
+              -o-transform:translateY(30%);
+              -ms-transform:translateY(30%);
+            }
+            to{
+              transform:translateY(-100%);
+              -moz-transform:translateY(-100%);
+              -webkit-transform:translateY(-100%);
+              -o-transform:translateY(-100%);
+              -ms-transform:translateY(-100%);
+            }
+        }
+        `
+
 const _Header = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);
-    const [isModalVisible3, setIsModalVisible3] = useState(false); // 알림 자세히
+    // const [isModalVisible3, setIsModalVisible3] = useState(false); // 알림 자세히
     const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
@@ -114,56 +158,13 @@ const _Header = () => {
             }
             setNotice(title);
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const noticeList = notice.map((title, index) =>
         <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
-
-    const DIV = styled.div`
-    .ant-card{
-        text-align: left;
-        margin-right: 10px;
-        display: inline-block;
-    }
-    
-    
-    .ant-card-body{
-        padding: 5px !important;
-        height: 38px;
-        overflow: hidden;
-    }
-    
-    .ant-card-bordered {
-        border: 0px solid !important;
-    }
-    
-    .animation{
-        animation:text-scroll 20s linear infinite;
-    }
-    .animation a {
-        color:white;
-        margin-bottom: 10px;
-    }
-    
-    @keyframes text-scroll{
-        from{
-          transform:translateY(30%);
-          -moz-transform:translateY(30%);
-          -webkit-transform:translateY(30%);
-          -o-transform:translateY(30%);
-          -ms-transform:translateY(30%);
-        }
-        to{
-          transform:translateY(-100%);
-          -moz-transform:translateY(-100%);
-          -webkit-transform:translateY(-100%);
-          -o-transform:translateY(-100%);
-          -ms-transform:translateY(-100%);
-        }
-    }
-    `
-
-    return (
+        
+        return (
         <DIV>
             <Header className="header">
                 {/* <div className="logo" /> */}
@@ -210,19 +211,19 @@ const _Header = () => {
                         onClose={onClose}
                         visible={visible}
                     >
-                        <Card size="small" title="제목" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                        <Card size="small" title="제목" style={{ width: 300 }}>
                             <p>내용</p>
                         </Card>
                         <br />
-                        <Card size="small" title="제목" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                        <Card size="small" title="제목" style={{ width: 300 }}>
                             <p>내용</p>
                         </Card>
                         <br />
-                        <Card size="small" title="제목" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                        <Card size="small" title="제목" style={{ width: 300 }}>
                             <p>내용</p>
                         </Card>
                         <br />
-                        <Card size="small" title="제목" extra={<a href="#">More</a>} style={{ width: 300 }}>
+                        <Card size="small" title="제목" style={{ width: 300 }}>
                             <p>내용</p>
                         </Card>
                         <br />

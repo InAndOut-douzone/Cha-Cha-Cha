@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Image, Button } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { Layout, Menu, Image } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import DefaultProfile from '../assets/images/defaultProfile.png';
 // import Profile from '../assets/images/doctor.jpg';
@@ -19,13 +19,13 @@ const Navigation = (name) => {
 
     const role = localStorage.getItem('userRole');
 
-    const [collapsed, setCollapsed] = useState();
+    // const [collapsed, setCollapsed] = useState();
     const [user,setUser] = useState();
     const [profileState, setProfileState] = useState();
 
-    const toggleCollapsed = () => {
-        setCollapsed(!collapsed)
-    };
+    // const toggleCollapsed = () => {
+    //     setCollapsed(!collapsed)
+    // };
 
     const header = {
         headers: {
@@ -37,8 +37,8 @@ const Navigation = (name) => {
         axios.get("http://localhost:8080/api/user", header).then(res=>{            
             setUser(res.data);
             setProfileState(!!res.data.profile)
-            console.log(profileState);
         }).catch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     // const [openKeys, setOpenkeys] = useState(); //펼쳐져 있을 메뉴
@@ -66,7 +66,7 @@ const Navigation = (name) => {
                 </Button> */}
 
                 <Menu
-                    inlineCollapsed={collapsed}
+                    // inlineCollapsed={collapsed}
                     // selectedKeys={['1', 'sub2']}
                     mode="inline"
                     // defaultSelectedKeys={['1']}
