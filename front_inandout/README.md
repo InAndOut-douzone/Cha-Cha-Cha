@@ -21,3 +21,4 @@
 - npm i react-media
 - npm i stompjs
 - npm i sockjs-client
+- npm i react-reveal
