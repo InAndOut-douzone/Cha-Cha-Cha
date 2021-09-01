@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Breadcrumb, Form, Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
@@ -9,9 +9,7 @@ import axios from 'axios';
 import TimeItem from '../../components/HospitalOnOff/TimeItem'
 import FormItem from '../../components/HospitalOnOff/FormItem'
 import SiteLayout from '../SiteLayout';
-import SockJsClient from 'react-stomp';
-import { Badge, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+
 
 const { Title, Text } = Typography;
 
@@ -74,14 +72,6 @@ const WTM = () => {
   // const Saturday = (moment) => { updateApi("Saturday", moment); }
   // const Sunday = (moment) => { updateApi("Sunday", moment); }
 
-  const $websocket = useRef (null); 
-  const abb = () => {
-    alert(123);
-  }
-
-  const [ab, setAb] = useState();
-  const [count, setCount] = useState(0);
-
   return (
     <SiteLayout>
       <Layout style={{ padding: '0 24px 24px' }}>
@@ -93,13 +83,7 @@ const WTM = () => {
         </Breadcrumb>
         <div style={{ borderTop: "1px solid #eee" }} />
         <br /><br />
-        
-        <SockJsClient 
-                url="http://localhost:8080/webSocket" 
-                topics={['/topics/sendTo', '/topics/template', '/topics/api']} 
-                onMessage={msg => { setCount(count+1) }} 
-                ref={$websocket} /> 
-                <div>{ab}</div>
+
         <div style={{ textAlign: "center" }}>
           <Title level={2}>현재 근무 시간</Title>
           {time.map((time) => (<TimeItem key={time.no} time={time} />))}

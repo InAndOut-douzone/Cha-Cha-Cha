@@ -5,9 +5,9 @@ const Message = () => {
 
     const $websocket = useRef (null); 
     
-    const handleMsg = msg => { 
-        console.log (msg); 
-    }; 
+    // const handleMsg = msg => { 
+    //     console.log (msg); 
+    // }; 
     
     const handleClickSendTo = () => { 
         $websocket.current.sendMessage ('/sendTo'); 
