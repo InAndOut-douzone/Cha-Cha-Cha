@@ -7,10 +7,11 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cos.facebook.model.Message;
+import com.cos.facebook.model.Leaves;
+
 
 @RestController
-public class MessageController {
+public class AlarmController {
 	
 	@Autowired 
 	private SimpMessagingTemplate webSocket; 
@@ -18,14 +19,19 @@ public class MessageController {
 	@MessageMapping("/sendTo") 
 	@SendTo("/topics/sendTo") 
 	public String SendToMessage() throws Exception { 
-		System.out.println("메시지 실핼도미123??");
 		return "SendTo"; 
 	}
+
+//	@MessageMapping("/Template") 
+//	public void SendTemplateMessage() { 
+//		webSocket.convertAndSend("/topics/template" , "Template"); 
+//	}
 	
 	@MessageMapping("/Template") 
-	public void SendTemplateMessage() { 
-		System.out.println("메시지 실핼도미??");
-		webSocket.convertAndSend("/topics/template" , "Template"); 
+	public void SendTemplateMessage(Leaves leaves) { 
+		int no = (int) leaves.getFromUser() .getId();
+		System.out.println(no);
+		webSocket.convertAndSend("/topics/template"+no, leaves); 
 	} 
 	
 	@RequestMapping(value="/api") 
@@ -33,10 +39,9 @@ public class MessageController {
 		webSocket.convertAndSend("/topics/api" , "API"); 
 	}
 
-	@MessageMapping("/hello")
-    @SendTo("/topic/roomId")
-    public Message boradCast(Message message){
-		System.out.println("메시지 실핼도미??" + message);
-        return message;
-    }
+//	@MessageMapping("/hello")
+//    @SendTo("/topic/roomId")
+//    public Message boradCast(Message message){
+//        return message;
+//    }
 }

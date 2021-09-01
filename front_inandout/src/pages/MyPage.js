@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Layout, Descriptions, Badge, Breadcrumb, Form, Button } from 'antd';
@@ -76,6 +77,7 @@ const MyPage = () => {
         formData.append('userData', JSON.stringify(userData));
         axios.post("http://localhost:8080/api/user/update", formData, header).then((res) => {
             alert("수정 되었습니다.");
+            window.location.replace("/");
         });
 
     }

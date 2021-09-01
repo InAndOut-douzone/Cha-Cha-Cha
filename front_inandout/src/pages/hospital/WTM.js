@@ -80,13 +80,10 @@ const WTM = () => {
   }
 
   const [ab, setAb] = useState();
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
 
   return (
     <SiteLayout>
-      <Badge count={count}>
-          <Avatar icon={<UserOutlined />} shape="square" size="large" />
-        </Badge>
       <Layout style={{ padding: '0 24px 24px' }}>
         <br />
         <Breadcrumb style={{ margin: '16px 0' }}>
