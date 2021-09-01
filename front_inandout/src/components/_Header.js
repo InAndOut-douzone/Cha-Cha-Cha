@@ -59,14 +59,16 @@ const _Header = () => {
     const [isModalVisible2, setIsModalVisible2] = useState(false);
     const [visible, setVisible] = useState(false); // 알림 drawer
     const [alarm, setAlarm] = useState([]);
+    const [onTime, setOnTime] = useState("IN");
+    const [offTime, setOffTime] = useState("OUT");
 
-    const showDrawer = () => {
+    const showDrawer = () => { // 알림창 열기
         alarm_fatch()
         setVisible(true);
         setCount(0);
     };
 
-    const onClose = () => {
+    const onClose = () => { // 알림창 닫기
         setVisible(false);
         axios.put("http://localhost:8080/api/alarm", data, header).then(res => {
         })
@@ -93,7 +95,7 @@ const _Header = () => {
         //borderRadius:"5px",
     }
 
-    const showModalOn = () => {
+    const showModalOn = () => { // 출근 버튼 모달
         if (onTime === "IN") {
             setIsModalVisible(true);
         } else {
@@ -101,8 +103,12 @@ const _Header = () => {
         }
     };
 
-    const [onTime, setOnTime] = useState("IN");
-    const [offTime, setOffTime] = useState("OUT");
+    const alarmDelete = async (no) => { // 알림 삭제
+        await axios.delete("http://localhost:8080/api/alarm/" + no, header).then((res) => {
+        alert("알림이 삭제되었습니다.");
+        alarm_fatch()
+      });
+    }
 
     const handleOk = async () => {
         await axios.get("http://localhost:8080/api/onoff/" + localStorage.getItem("username"), header).then(res => {
@@ -280,10 +286,12 @@ const _Header = () => {
                         :
                         <Card style={{ width: "100%", marginBottom: "10px", color: "gray" }}
                             size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
-                            extra={<a href="#">삭제</a>} key={al.no}>
+                            extra={
+                                <div>
+                                    <button onClick={ () => alarmDelete(al.no)} style={{color:"#4EAFFF", background:"white", border:"0px"}}>삭제</button>
+                                </div>} key={al.no}>
                             <p>{al.message + "신청을 등록 하였습니다."}</p>
                         </Card>
-                        
                         )}
                         <br />
                     </Drawer>

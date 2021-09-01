@@ -24,5 +24,9 @@ public class AlarmService {
 	public Long findCount(long id) {
 		return alarmRepository.findCount(id);
 	}
+	
+	public void alarmDelete(Integer no) {
+		alarmRepository.deleteById(no);
+	}
 }
 
