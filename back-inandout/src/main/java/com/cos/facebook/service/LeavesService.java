@@ -1,7 +1,5 @@
 package com.cos.facebook.service;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,10 +11,11 @@ import com.cos.facebook.controller.AlarmController;
 import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
-import com.cos.facebook.model.HospitalOnOff;
+import com.cos.facebook.model.Alarm;
 import com.cos.facebook.model.Leaves;
 import com.cos.facebook.model.OnOff;
 import com.cos.facebook.model.User;
+import com.cos.facebook.repository.AlarmRepository;
 import com.cos.facebook.repository.LeavesRepository;
 import com.cos.facebook.repository.OnOffRepository;
 import com.cos.facebook.repository.UserRepository;
@@ -32,6 +31,9 @@ public class LeavesService {
 	
 	@Autowired
 	private OnOffRepository onOffRepository;
+	
+	@Autowired
+	private AlarmRepository alarmRepository;
 	
 	@Autowired
 	private AlarmController alarmController;
@@ -107,7 +109,16 @@ public class LeavesService {
 		System.out.println("===================");
 		System.out.println(leavesEntity);
 		
+		
+		
 		alarmController.SendTemplateMessage(leavesEntity);
+		
+		Alarm alarmEntitiy = new Alarm();
+		alarmEntitiy.setMessage(leaveAddReqDto.getCategory());
+		alarmEntitiy.setFromUser(userEntity.getId());
+		alarmEntitiy.setUser(doctoryEntity);
+		alarmEntitiy.setState(true);
+		alarmRepository.save(alarmEntitiy);
 		
 		return leavesRepository.save(leavesEntity);
 	}
