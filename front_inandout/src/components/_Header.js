@@ -61,6 +61,7 @@ const _Header = () => {
     const [alarm, setAlarm] = useState([]);
 
     const showDrawer = () => {
+        alarm_fatch()
         setVisible(true);
         setCount(0);
     };
@@ -171,6 +172,11 @@ const _Header = () => {
             setNotice(title);
         })
 
+        axios.get("http://localhost:8080/api/alarm/count", header).then(res => { // 알림 개수 찾아오기
+            setCount(res.data);
+            console.log("asdasdsa", res.data)
+        })
+
         alarm_fatch()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -187,7 +193,7 @@ const _Header = () => {
 
     //
     const $websocket = useRef(null);
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0); // 알림 개수
     const userNo = localStorage.getItem('userNo');
     //
 
@@ -266,12 +272,15 @@ const _Header = () => {
                     >
                         {alarm.map((al) =>
                         al.state === true ?
-                        <Card size="small" title={al.message}  style={{ border:"1px solid black", width: "100%", marginBottom: "10px" }} key={al.no}>
-                            <p>신청한 사람 : {al.fromUser.name}</p>
-                            <p>{moment(al.regDate).format("YYYY-MM-DD HH:mm")}</p>
+                        <Card style={{ border:"1px solid black", width: "100%", marginBottom: "10px", color: "black" }}
+                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
+                            extra={<a href="#">삭제</a>} key={al.no}>
+                            <p>{al.message + "신청을 등록 하였습니다."}</p>
                         </Card>
                         :
-                        <Card size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } extra={<a href="#">X</a>} style={{ width: "100%", marginBottom: "10px" }} key={al.no}>
+                        <Card style={{ width: "100%", marginBottom: "10px", color: "gray" }}
+                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
+                            extra={<a href="#">삭제</a>} key={al.no}>
                             <p>{al.message + "신청을 등록 하였습니다."}</p>
                         </Card>
                         

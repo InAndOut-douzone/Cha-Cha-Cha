@@ -60,7 +60,13 @@ public class AlarmController {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		alarmService.update(principal.getUser().getId());
 		return new ResponseEntity<>(HttpStatus.OK);
-	}	
+	}
+	
+	@GetMapping("/api/alarm/count")
+	public ResponseEntity<?> getAlarmCount(Authentication authentication){
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		return new ResponseEntity<>(alarmService.findCount(principal.getUser().getId()),HttpStatus.OK);
+	}
 
 //	@MessageMapping("/hello")
 //    @SendTo("/topic/roomId")

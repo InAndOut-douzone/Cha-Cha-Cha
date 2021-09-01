@@ -19,4 +19,7 @@ public interface AlarmRepository extends JpaRepository<Alarm, Integer>{
 	@Transactional
 	@Query(value = "update Alarm set state = 0 where toUser = :id and state = 1",nativeQuery = true)
 	public int updateState(long id);
+	
+	@Query(value = "select count(*) from Alarm where toUser = :id and state = 1", nativeQuery = true)
+	public Long findCount(long id);
 }
