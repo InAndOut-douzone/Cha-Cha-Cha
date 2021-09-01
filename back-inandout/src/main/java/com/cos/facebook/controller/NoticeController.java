@@ -37,6 +37,14 @@ public class NoticeController {
 		return new ResponseEntity<>(lists,HttpStatus.OK);
 	}
 	
+	@GetMapping("/prev/{no}")
+	public ResponseEntity<?> prev(@PathVariable long no) {
+
+		List<Notice> lists = noticeRepository.findPrev(no);
+		
+		return new ResponseEntity<>(lists,HttpStatus.OK);
+	}
+	
 	@GetMapping("/listFour")
 	public ResponseEntity<?> four() {
 		List<Notice> lists = noticeRepository.findFour();

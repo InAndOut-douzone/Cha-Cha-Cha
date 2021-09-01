@@ -45,11 +45,11 @@ public class HospitalService {
 			
 				File fileSave = new File(UPLOAD_PATH, image + "." + imgExtension);
 				file.transferTo(fileSave); // 파일저장
-				System.out.println("*******"+fileSave);
+				// zSystem.out.println("*******"+fileSave);
 				hospitalEntity.setLogo(image +"."+imgExtension);
 			}
 
-			System.out.println("**********"+hospitalInfoReqDto);
+			// System.out.println("**********"+hospitalInfoReqDto);
 			hospitalEntity.setName(hospitalInfoReqDto.getName());
 			hospitalEntity.setAddress(hospitalInfoReqDto.getAddress());
 			hospitalEntity.setCeoName(hospitalInfoReqDto.getCeoName());

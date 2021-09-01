@@ -338,8 +338,7 @@ const FullCal2 = () => {
                   <FullCalendar
                     // defaultView="dayGridMonth"
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-
-                    // height="750px"
+                    height="750px"
                     locale='ko'
                     headerToolbar={{
                       right: "today",
@@ -421,7 +420,7 @@ const FullCal2 = () => {
                     label="대상"
                   // rules={[{ required: true, message: 'Please choose the user' }]}
                   >
-                    <Input placeholder="이름입니다." value={user.name} defaultValue={user.name} readOnly />
+                    <Input placeholder="이름입니다." value={user.name} initialvalues={user.name} readOnly />
                   </Form.Item>
                 </Col>
               </Row>
@@ -495,7 +494,7 @@ const FullCal2 = () => {
                     label="대상"
                   // rules={[{ required: true, message: 'Please choose the user' }]}
                   >
-                    <Input placeholder="이름입니다." value={user.name} defaultValue={user.name} readOnly />
+                    <Input placeholder="이름입니다." value={user.name} initialvalues={user.name} readOnly />
                   </Form.Item>
                 </Col>
               </Row>

@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SiteLayout from './SiteLayout';
+import SiteLayout from '../pages/SiteLayout';
 import styled from 'styled-components'
-import { Layout, Breadcrumb, Descriptions, Input, Button, Form } from 'antd';
+import { Layout, Breadcrumb, Descriptions, Button, Form } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import FormItem from 'antd/lib/form/FormItem';
 
 const Container = styled.div`
-    width: 800px;
+    width: 900px;
     height: 80%;
+    padding: 30px 10px 10px 100px;
     `;
 const header = {
     headers: {
@@ -17,10 +18,19 @@ const header = {
     }
 };
 
-const Add_Notice = () => {
+const Add_Notice = (props) => {
 
+    const { no } = props.match.params;
+    const [notice,setNotice]=useState({});
     const [title, setTitle] = useState({});
     const [contents, setContents] = useState({});
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/notice/"+no, header).then((res)=>{
+            console.log(res.data);
+            setNotice(res.data);
+            })
+    },[])
 
     const titleHandler = (e) => {
         e.preventDefault();
@@ -33,13 +43,13 @@ const Add_Notice = () => {
     }
 
     const add = (e) => {
-
+    
         let notice = {
             title: title,
             contents: contents
         }
         console.log(notice);
-        axios.post("http://localhost:8080/api/notice/add", notice, header).then((res) => {
+        axios.post("http://localhost:8080/api/notice/update", notice, header).then((res) => {
             console.log(res);
         });
         window.location.reload("/")
@@ -54,23 +64,23 @@ const Add_Notice = () => {
                     <Breadcrumb.Item>사원 등록</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
-                <br />
+
                 <Container>
-                    <Form onFinish={add} >
-                        <Descriptions title="공지사항 등록" column={1} bordered size='small'>
-                            <Descriptions.Item label="제목">
+                    <Form onFinish={add} style={{textAlign:'center'}}>
+                        <Descriptions title="공지사항 등록" column={1} bordered size='small' style={{textAlign:'left'}}>
+                            <Descriptions.Item label="제목" style={{textAlign:'center'}}>
                                 <FormItem>
-                                    <Input name='title' onChange={titleHandler} style={{ width: '100%' }} />
+                                    <input name='title' onChange={titleHandler} style={{ width: '100%' }} defaultValue={notice.title} />
                                 </FormItem>
                             </Descriptions.Item>
-                            <Descriptions.Item label="내용">
+                            <Descriptions.Item label="내용" style={{textAlign:'center'}}>
                                 <FormItem>
-                                    <Input.TextArea name='contents' onChange={contentsHandler} style={{ height: '400px' }} />
+                                    <textarea name='contents' onChange={contentsHandler} style={{ height: '400px' }} defaultValue={notice.contents}/>
                                 </FormItem>
                             </Descriptions.Item>
                         </Descriptions>
                         <br />
-                        <Button type='primary' htmlType='submit' >등록</Button>
+                        <Button type='default' htmlType='submit' >등록</Button>
                     </Form>
                 </Container>
             </Layout>

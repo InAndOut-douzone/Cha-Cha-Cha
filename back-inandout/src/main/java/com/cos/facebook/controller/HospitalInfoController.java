@@ -31,9 +31,6 @@ public class HospitalInfoController {
 	@PostMapping("/hospital2")
 	public ResponseEntity<Object> updateHospital(HttpServletRequest request, MultipartFile file, String hospitalData) {
 		
-		if(file== null) {
-			System.out.println("*************************************");
-		}
 		hospitalService.update(request, file, hospitalData);
 
 		// String -> Date 변환

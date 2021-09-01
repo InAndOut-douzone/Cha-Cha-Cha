@@ -30,7 +30,7 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		Date start = calendar.getTime();
 		calendar.add(calendar.DATE,6);
 		Date end = calendar.getTime();
-		
+		System.out.println("*******************"+start);
 		return workRepository.findAllByDate(id, start, end);
 	}
 	

@@ -118,6 +118,7 @@ const HIM = () => {
                     <Image style={{ width: "200px" }} src={image === null ? DefaultLogo : image} roundedCircle />
                     <br /><br />
                     <input type="file" accept="image/*" onChange={HIM_logo}></input>
+                    <br />
                     {/* <Form.Item
                     // name="upload"
                     label="Upload"
