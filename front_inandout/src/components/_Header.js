@@ -246,18 +246,6 @@ const _Header = () => {
                             <p>내용</p>
                         </Card>
                         <br />
-                        <Card size="small" title="제목" style={{ width: 300 }}>
-                            <p>내용</p>
-                        </Card>
-                        <br />
-                        <Card size="small" title="제목" style={{ width: 300 }}>
-                            <p>내용</p>
-                        </Card>
-                        <br />
-                        <Card size="small" title="제목" style={{ width: 300 }}>
-                            <p>내용</p>
-                        </Card>
-                        <br />
                     </Drawer>
                 </div>
             </Header>
