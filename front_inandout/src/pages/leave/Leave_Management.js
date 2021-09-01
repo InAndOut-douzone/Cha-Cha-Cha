@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { HomeOutlined } from '@ant-design/icons';
-import { Layout, Breadcrumb, Space, Table, Typography } from 'antd';
+import { Layout, Breadcrumb, Table, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import SiteLayout from '../SiteLayout';
 import LeaveItem from '../../components/leave/LeaveItem';

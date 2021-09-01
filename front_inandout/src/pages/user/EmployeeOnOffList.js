@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { List, Avatar,Typography, Space, Badge } from 'antd';
-import image from '../../assets/images/nurse.jpg'
+import { List, Avatar,Typography } from 'antd';
+// import image from '../../assets/images/nurse.jpg'
 import styled from 'styled-components';
 import axios from 'axios';
 

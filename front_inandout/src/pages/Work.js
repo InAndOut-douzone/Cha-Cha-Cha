@@ -59,6 +59,7 @@ const Work = () => {
 
         axios.get("/api/work", header).then((res) => {
             setOnoff(res.data);
+            console.log(res.data);
         });
 
     }, []);
