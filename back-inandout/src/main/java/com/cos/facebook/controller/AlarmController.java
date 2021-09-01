@@ -7,10 +7,9 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cos.facebook.model.Message;
 
 @RestController
-public class MessageController {
+public class AlarmController {
 	
 	@Autowired 
 	private SimpMessagingTemplate webSocket; 
@@ -31,9 +30,9 @@ public class MessageController {
 		webSocket.convertAndSend("/topics/api" , "API"); 
 	}
 
-	@MessageMapping("/hello")
-    @SendTo("/topic/roomId")
-    public Message boradCast(Message message){
-        return message;
-    }
+//	@MessageMapping("/hello")
+//    @SendTo("/topic/roomId")
+//    public Message boradCast(Message message){
+//        return message;
+//    }
 }
