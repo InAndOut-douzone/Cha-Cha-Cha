@@ -13,6 +13,7 @@ import com.cos.facebook.controller.AlarmController;
 import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
+import com.cos.facebook.model.Alarm;
 import com.cos.facebook.model.HospitalOnOff;
 import com.cos.facebook.model.Leaves;
 import com.cos.facebook.model.OnOff;

@@ -84,9 +84,6 @@ const WTM = () => {
 
   return (
     <SiteLayout>
-      <Badge count={count}>
-          <Avatar icon={<UserOutlined />} shape="square" size="large" />
-        </Badge>
       <Layout style={{ padding: '0 24px 24px' }}>
         <br />
         <Breadcrumb style={{ margin: '16px 0' }}>
