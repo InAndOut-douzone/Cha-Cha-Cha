@@ -81,8 +81,27 @@ const FullCal2 = () => {
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
       alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
+      check(내일정,연차,출장,외근);
     })
   };
+
+  const check = (a,b,c,d) => {
+    if(a === true) {
+      a = 1;
+    } else { a = "" };
+    if (b === true) {
+      b = 2;
+    } else { b = "" };
+    if (c === true) {
+      c = 3;
+    } else { c = "" };
+    if (d === true) {
+      d = 4
+    } else { d = "" };
+
+    fetch(a+b+c+d);
+  }
+
   const onClose2 = () => {
     setVisible2(false);
   };
