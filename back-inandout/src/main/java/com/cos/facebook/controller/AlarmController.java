@@ -7,6 +7,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cos.facebook.model.Leaves;
+
 
 @RestController
 public class AlarmController {
@@ -19,10 +21,17 @@ public class AlarmController {
 	public String SendToMessage() throws Exception { 
 		return "SendTo"; 
 	}
+
+//	@MessageMapping("/Template") 
+//	public void SendTemplateMessage() { 
+//		webSocket.convertAndSend("/topics/template" , "Template"); 
+//	}
 	
 	@MessageMapping("/Template") 
-	public void SendTemplateMessage() { 
-		webSocket.convertAndSend("/topics/template" , "Template"); 
+	public void SendTemplateMessage(Leaves leaves) { 
+		int no = (int) leaves.getFromUser() .getId();
+		System.out.println(no);
+		webSocket.convertAndSend("/topics/template"+no, leaves); 
 	} 
 	
 	@RequestMapping(value="/api") 

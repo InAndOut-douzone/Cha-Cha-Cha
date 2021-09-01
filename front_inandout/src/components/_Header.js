@@ -169,6 +169,7 @@ const _Header = () => {
     //
     const $websocket = useRef(null);
     const [count, setCount] = useState(0);
+    const userNo = localStorage.getItem('userNo');
     //
 
     return (
@@ -216,15 +217,16 @@ const _Header = () => {
                     </Badge>
                     <SockJsClient
                         url="http://localhost:8080/webSocket"
-                        topics={['/topics/sendTo', '/topics/template', '/topics/api']}
+                        topics={[`/topics/template${userNo}`]}
                         // onMessage={msg => { setCount(count + 1) }}
                         onMessage={
                             (msg) => {
+                                console.log(msg)
                                 setCount(count + 1)
                                 notification.open({
-                                  message: '이재성',
+                                  message: msg.user.name,
                                   description:
-                                    '연차가 승인되었습니다.',
+                                    '연차신청을 등록하였습니다.',
                                   onClick: () => {
                                     console.log('Notification Clicked!');
                                   },

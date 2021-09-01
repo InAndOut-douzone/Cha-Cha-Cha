@@ -21,14 +21,10 @@ public class Alarm {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int no;
 	private long fromUser;				// 보내는 사람
-	
+	 
 	@ManyToOne
 	@JoinColumn(name="toUser")
 	private User user;						// 받는 사람
-	
-	@ManyToOne
-	@JoinColumn(name="leaveId")
-	private Leaves leaves;
 	
 	private String message;
 	private boolean state;
