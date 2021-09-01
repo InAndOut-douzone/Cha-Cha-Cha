@@ -16,6 +16,7 @@ import com.cos.facebook.config.auth.PrincipalDetails;
 import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
+import com.cos.facebook.model.User;
 import com.cos.facebook.service.LeavesService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,7 @@ public class LeavesController {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		System.out.println("principal : " + principal.getUser().getUsername());
 		System.out.println("leaveAddReqDto" + leaveAddReqDto);
-		
+	
 		return new ResponseEntity<>(leavesService.add(leaveAddReqDto,principal.getUser().getUsername()), HttpStatus.OK);
 	}	
 	

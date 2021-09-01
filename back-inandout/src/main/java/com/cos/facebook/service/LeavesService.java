@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cos.facebook.controller.AlarmController;
 import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
@@ -31,6 +32,9 @@ public class LeavesService {
 	
 	@Autowired
 	private OnOffRepository onOffRepository;
+	
+	@Autowired
+	private AlarmController alarmController;
 	
 	public List<Leaves> findAll() {
 		return leavesRepository.findAll();
@@ -102,6 +106,9 @@ public class LeavesService {
 		
 		System.out.println("===================");
 		System.out.println(leavesEntity);
+		
+		alarmController.SendTemplateMessage(leavesEntity);
+		
 		return leavesRepository.save(leavesEntity);
 	}
 
