@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 import '../assets/css/app.css';
 import SiteLayout from './SiteLayout';
 import FullCal2 from '../components/cal/FullCal2';
+// import Media from 'react-media';
 
 
 const { Content } = Layout;
 
 export default function First() {
 
-  const role = localStorage.getItem('userRole');
+  // const role = localStorage.getItem('userRole');
 
   return (
     <SiteLayout>

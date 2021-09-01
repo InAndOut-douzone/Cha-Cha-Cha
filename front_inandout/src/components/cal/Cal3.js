@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Badge } from 'antd';
+import { Calendar } from 'antd';
 import '../../assets/css/Cal.css';
 
 

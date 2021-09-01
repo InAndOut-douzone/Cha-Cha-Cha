@@ -96,8 +96,6 @@ const Add_Employee = () => {
             width: 100px;
         }
     `
-    const dd = "aa";
-
     return (
         <SiteLayout>
             <DIV>

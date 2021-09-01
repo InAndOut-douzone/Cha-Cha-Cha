@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { List, Avatar,Typography } from 'antd';
 // import image from '../../assets/images/nurse.jpg'
 import styled from 'styled-components';
 import axios from 'axios';
 
-const { Text, Link } = Typography;
+const { Text } = Typography;
 
 // const data = [
 //     {
@@ -64,7 +65,7 @@ const EmployeeOnOffList = () => {
                       {/* { item.offTime === null ? <Badge status="processing"/> : <Badge status="error "/>} */}
                         <List.Item.Meta
                         avatar={<Avatar src={'images/'+item.user.profile}/>}
-                        title={<a href="#">{item.user.name}</a>}
+                        title={item.user.name}
                         // title={<a href="#">{item.title}</a>}
                         description={item.user.position}
                         />

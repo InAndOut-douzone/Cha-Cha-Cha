@@ -81,6 +81,7 @@ const HIM = () => {
                 setImage(null);
             }
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const dataUpdate = (e) => {

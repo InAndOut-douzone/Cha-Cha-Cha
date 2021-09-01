@@ -14,11 +14,11 @@ const HIM = () => {
         },
     };
 
-    const config = {
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-    };
+    // const config = {
+    //     headers: {
+    //         "Content-Type": "application/json; charset=utf-8",
+    //     },
+    // };
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/hospital", header).then((res) => {
@@ -26,6 +26,7 @@ const HIM = () => {
             setHospital(res.data);
             JSON.stringify(res.data)
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

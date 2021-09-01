@@ -7,8 +7,6 @@
 - npm i react-router-dom
 - npm i react-live-clock
 - npm i styled-component
-- npm i react-redux
-- npm i redux
 - npm i react-highlight-words
 - npm i bootstrap
 - npm i react-bootstrap
@@ -17,5 +15,8 @@
 - npm i @fullcalendar/interaction
 - npm i @material-ui/core
 - npm i redux react-redux
+- npm i react-media
+- npm i stompjs
+- npm i sockjs-client
 
 ### 📀 설치할 것

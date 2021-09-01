@@ -8,7 +8,7 @@ import SiteLayout from './SiteLayout';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
-    const [form] = Form.useForm();
+    // const [form] = Form.useForm();
 
     const [name, setName] = useState();
     const [address, setAddress] = useState();
