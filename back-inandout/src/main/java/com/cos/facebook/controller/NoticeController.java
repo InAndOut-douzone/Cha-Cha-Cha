@@ -55,16 +55,37 @@ public class NoticeController {
 	@GetMapping("/{no}")
 	public ResponseEntity<?> notice(@PathVariable long no){
 		
-		return new ResponseEntity<>(noticeRepository.findByNo(no),HttpStatus.OK);
+		Notice notice = noticeRepository.findByNo(no);
+		
+		return new ResponseEntity<>(notice,HttpStatus.OK);
 	}
 
 	@PostMapping("/add")
-	public String home(@RequestBody Notice notice, Authentication authentication) {
-		// System.out.println("notice : " + notice);
-		// System.out.println("authentication : " +authentication);
+	public ResponseEntity<?> home(@RequestBody Notice notice, Authentication authentication) {
+		
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		notice.setUser(principal.getUser());
 		noticeRepository.save(notice);
-		return "redirect:localhost:3000/addNotice";
+		return  new ResponseEntity<>("add",HttpStatus.OK);
+	}
+	
+	@PostMapping("/update/{no}")
+	public ResponseEntity<?> update(@PathVariable int no, @RequestBody Notice notice, Authentication authentication) {
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		
+		notice.setNo(no);
+		notice.setUser(principal.getUser());
+		noticeRepository.save(notice);
+		return new ResponseEntity<> ("success",HttpStatus.OK);
+	}
+	
+	@GetMapping("/delete/{no}")
+	public ResponseEntity<?> delete(@PathVariable int no) {
+		Notice notice = new Notice();
+		notice = noticeRepository.findByNo(no);
+		System.out.println("**************"+notice);
+		noticeRepository.delete(notice);
+		
+		return new ResponseEntity<> ("delete success",HttpStatus.OK);
 	}
 }

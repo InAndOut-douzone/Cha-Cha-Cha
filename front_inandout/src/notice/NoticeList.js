@@ -4,6 +4,7 @@ import SiteLayout from '../pages/SiteLayout';
 import { Layout,Breadcrumb, Table, Space } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const columns = [
 
@@ -69,9 +70,9 @@ const NoticeList = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }}/>
                 <br /><br />
-                <h2>
-                    공지사항
-                </h2>
+                <div style={{textAlign:"center"}}>
+                    공지사항 화면입니다. <br/><br/><br/>
+                </div>
                 <Table style={{textAlign:"center"}} dataSource={data} columns={columns} />
             </Layout>
         </SiteLayout>

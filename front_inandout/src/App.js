@@ -46,7 +46,7 @@ export default function App() {
             <PrivateRoute component={Add_Notice} path="/addnotice" exact={true} />
             <PrivateRoute component={NoticeList} path="/notice" exact={true} />
             <PrivateRoute component={Notice} path="/notice/:no" exact={true} />
-            <PrivateRoute component={NoticeModi} path="/noticemodi/:no" exact={true} />
+            <PrivateRoute component={NoticeModi} path="/notice/modi/:no" exact={true} />
             <PrivateRoute component={Employee_Details} path="/employeedetails/:id" exact={true} />
             <LogoutRoute component={Login} path="/logout" exact={true} />
             <Route component={Message} path="/message" exact={true} />
