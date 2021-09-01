@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import SiteLayout from '../pages/SiteLayout';
-import { Layout,Breadcrumb, Descriptions, Button } from 'antd';
+import { Layout,Breadcrumb, Descriptions, Button, Modal } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
@@ -30,36 +30,62 @@ const Notice = (props) => {
     const [notice,setNotice]=useState({});
     var moment = require('moment');
     const date = moment(notice.regDate).format('YY년 MM월 DD일');
-    const [prev,setPrev] = useState({
-        no: null,
-        title: null
-    });
-    const [next,setNext] = useState({
-        no: null,
-        title: null
-    });
+    const [prev,setPrev] = useState([]);
+
+    const [isModalVisible,setIsModalVisible] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/notice/"+no, header).then((res)=>{
-            setNotice(res.data);
-            
-            })
-
-        axios.get("http://localhost:8080/api/notice/prev/"+no, header).then((res)=>{   
-            setPrev(res.data[0]);
-            setNext(res.data[1]);
-            console.log(next.no);
-            })
+        ab();
+        bb();        
 
         setUser(localStorage.getItem('username'));
     },[no])
 
-    const nextReturn = () => {
-        return (
-            <Cell><Link to={"/notice/" + next.no}>{next.title}</Link></Cell>
-        );
-        console.log(next.no);
+    const ab = async () => { // 페이지 로딩시작하면 공지사항 가져오기
+        await axios.get("http://localhost:8080/api/notice/"+no, header).then((res)=>{
+            setNotice(res.data);
+            
+            // console.log(notice.user.username);
+            })
     }
+
+    const bb = async () => { // 페이지로딩 시작하면 이전글, 다음글 목록 가져오기
+        await axios.get("http://localhost:8080/api/notice/prev/"+no, header).then((res)=>{   
+            setPrev(res.data);
+            })
+    }
+
+    const nextReturn = () => { // 다음글이 없을 경우 처리
+        if(prev[1] == null){
+            return(<Cell></Cell>)
+        } else {
+            return (<Cell><Link to={"/notice/" + prev[1].no}>{prev[1].title}</Link></Cell>);
+        }
+    }
+
+    const prevReturn = () => { // 이전글이 없을 경우 처리
+        if(prev[0] == null){
+            return(<Cell></Cell>)
+        } else {
+            return (<Cell><Link to={"/notice/" + prev[0].no}>{prev[0].title}</Link></Cell>);
+        }
+    }
+
+    const isModal = () => { // 삭제버튼 클릭하면 모달 보여줌
+        setIsModalVisible(true);
+    }
+
+    const handleOk = () => { // 모달 ok  버튼 누를 시 공지사항 삭제
+        axios.get("http://localhost:8080/api/notice/delete/"+no, header).then((res)=>{   
+            
+        })
+        window.location.href="/notice";
+    }
+
+    const handleCancel = () => { // 모달 취소버튼 누를 시 삭제취소
+        setIsModalVisible(false);
+    }
+
     return (
         <SiteLayout>
             <Layout style={{padding: '0 24px 24px'}}>
@@ -90,19 +116,25 @@ const Notice = (props) => {
                 <br /><br /><br />
                 <Descriptions title="" bordered>
                     <Descriptions.Item label="이전 글" span={4} style={{width:'120px',textAlign:'center'}}>
-                        <Cell><Link to={"/notice/" + prev.no}>{prev.title}</Link></Cell>
+                        {prevReturn()}
                     </Descriptions.Item>
                     <Descriptions.Item label="다음 글" span={4} style={{width:'120px',textAlign:'center'}}>
-                        {next.no === null ? "" : <Cell><Link to={"/notice/" + next.no}>{next.title}</Link></Cell>}
+                        {nextReturn()}
                     </Descriptions.Item>
                 </Descriptions>
                 <br /><br />
                 <div style={{textAlign:'center', display:'inline-block', width:'100%'}}>
                     <Button type='default' style={{width:'60px'}}><Link to={"/notice/"}>목록</Link></Button>
-                    <div style={{position:'absolute',right:'60px'}}>
-                        <Button type='default' style={{width:'60px'}}><Link to={"/notice/modi/" + notice.no}>수정</Link></Button>
-                        <Button type='default' style={{width:'60px'}}><Link to={"/notice/del/" + notice.no}>삭제</Link></Button>
-                    </div>
+                    {notice.user && notice.user.username === user ? 
+                        <div style={{position:'absolute',right:'60px'}}>
+                        <Button type='default' style={{width:'60px'}}>
+                            <Link to={"/notice/modi/" + notice.no}>수정</Link></Button>
+                        <Button type='default' style={{width:'60px'}} onClick={isModal}>삭제</Button>
+                        <Modal title="delete" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                            <p>삭제 하시겠습니까?</p>
+                        </Modal>
+                        </div> : null
+                    }
                 </div>
             </Layout>
         </SiteLayout>

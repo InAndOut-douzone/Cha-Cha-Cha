@@ -3,6 +3,7 @@ package com.cos.facebook.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.cos.facebook.model.Leaves;
@@ -23,4 +24,8 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer>{
 	
 	@Query(value = "select * from Notice where Notice.no=:no",nativeQuery = true)
 	Notice findByNo(long no);
+
+	public Object deleteByNo(int no);
+
+	
 }
