@@ -43,7 +43,7 @@ const Add_Notice = () => {
         axios.post("http://localhost:8080/api/notice/add", notice, header).then((res) => {
             console.log(res);
         });
-        window.location.reload("/")
+        window.location.href="/notice";
     }
     return (
         <SiteLayout>
@@ -60,12 +60,12 @@ const Add_Notice = () => {
                     <Form onFinish={add} style={{textAlign:'center'}}>
                         <Descriptions title="공지사항 등록" column={1} bordered size='small' style={{textAlign:'left'}}>
                             <Descriptions.Item label="제목" style={{textAlign:'center'}}>
-                                <FormItem>
-                                    <Input name='title' onChange={titleHandler} style={{ width: '100%' }} />
+                                <FormItem style={{margin:'0'}}>
+                                    <Input name='title' onChange={titleHandler} style={{ width: '100%'}} />
                                 </FormItem>
                             </Descriptions.Item>
                             <Descriptions.Item label="내용" style={{textAlign:'center'}}>
-                                <FormItem>
+                                <FormItem style={{margin:'0'}}>
                                     <Input.TextArea name='contents' onChange={contentsHandler} style={{ height: '400px' }} />
                                 </FormItem>
                             </Descriptions.Item>

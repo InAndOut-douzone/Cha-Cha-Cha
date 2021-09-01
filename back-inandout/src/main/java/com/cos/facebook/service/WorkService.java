@@ -27,10 +27,13 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		Calendar calendar = Calendar.getInstance(); // 달력 가져오기
 		
 		calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY); // 이번주 월요일 날짜 구하기
+		calendar.set(Calendar.HOUR_OF_DAY,00);
+		calendar.set(Calendar.MINUTE, 01);
 		Date start = calendar.getTime();
 		calendar.add(calendar.DATE,6);
+		calendar.set(Calendar.HOUR_OF_DAY,23);
+		calendar.set(Calendar.MINUTE, 59);
 		Date end = calendar.getTime();
-		System.out.println("*******************"+start);
 		return workRepository.findAllByDate(id, start, end);
 	}
 	

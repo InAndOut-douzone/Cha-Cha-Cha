@@ -18,17 +18,19 @@ const header = {
     }
 };
 
-const Add_Notice = (props) => {
+const NoticeModify = (props) => {
 
     const { no } = props.match.params;
-    const [notice,setNotice]=useState({});
-    const [title, setTitle] = useState({});
-    const [contents, setContents] = useState({});
+    const [title, setTitle] = useState();
+    const [contents, setContents] = useState();
+    const [noti, setNoti] = useState();
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/notice/"+no, header).then((res)=>{
-            console.log(res.data);
-            setNotice(res.data);
+            setNoti(res.data);
+            setTitle(res.data.title);
+            setContents(res.data.contents);
+
             })
     },[])
 
@@ -42,17 +44,18 @@ const Add_Notice = (props) => {
         setContents(e.target.value);
     }
 
-    const add = (e) => {
-    
+    const update = (e) => {
+
         let notice = {
             title: title,
-            contents: contents
+            contents: contents,
+            regDate: noti.regDate
         }
-        console.log(notice);
-        axios.post("http://localhost:8080/api/notice/update", notice, header).then((res) => {
-            console.log(res);
+        
+        axios.post("http://localhost:8080/api/notice/update/"+no, notice, header).then((res) => {
+            
         });
-        window.location.reload("/")
+        window.location.href="/notice/"+no;
     }
     return (
         <SiteLayout>
@@ -60,31 +63,33 @@ const Add_Notice = (props) => {
                 <br />
                 <Breadcrumb style={{ margin: '16px 0' }}>
                     <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
-                    <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
-                    <Breadcrumb.Item>사원 등록</Breadcrumb.Item>
+                    <Breadcrumb.Item>공지사항</Breadcrumb.Item>
+                    <Breadcrumb.Item>공지사항 수정</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
 
                 <Container>
-                    <Form onFinish={add} style={{textAlign:'center'}}>
-                        <Descriptions title="공지사항 등록" column={1} bordered size='small' style={{textAlign:'left'}}>
+                    <Form onFinish={update} style={{textAlign:'center'}}>
+                        <Descriptions title="공지사항 수정" column={1} bordered size='small' style={{textAlign:'left'}}>
                             <Descriptions.Item label="제목" style={{textAlign:'center'}}>
-                                <FormItem>
-                                    <input name='title' onChange={titleHandler} style={{ width: '100%' }} defaultValue={notice.title} />
+                                <FormItem style={{margin:'0'}}>
+                                    <input name='title' onChange={titleHandler}
+                                    style={{ width: '100%' }} defaultValue={title} />
                                 </FormItem>
                             </Descriptions.Item>
                             <Descriptions.Item label="내용" style={{textAlign:'center'}}>
-                                <FormItem>
-                                    <textarea name='contents' onChange={contentsHandler} style={{ height: '400px' }} defaultValue={notice.contents}/>
+                                <FormItem style={{margin:'0'}}>
+                                    <textarea name='contents' onChange={contentsHandler}
+                                    style={{ height: '400px',width:'100%'}} defaultValue={contents}/>
                                 </FormItem>
                             </Descriptions.Item>
                         </Descriptions>
                         <br />
-                        <Button type='default' htmlType='submit' >등록</Button>
+                        <Button type='default' htmlType='submit' >수정</Button>
                     </Form>
                 </Container>
             </Layout>
         </SiteLayout>
     );
 }
-export default Add_Notice;
+export default NoticeModify;
