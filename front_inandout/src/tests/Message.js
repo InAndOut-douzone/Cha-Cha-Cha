@@ -37,7 +37,7 @@ const Message = () => {
             {localStorage.getItem('userRole')}
             <button onClick={handleClickSendTemplate}>SendTemplate</button> 
         </div>
-
+        
     );
 };
 

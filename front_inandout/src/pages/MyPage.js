@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Layout, Descriptions, Badge, Breadcrumb, Form, Button } from 'antd';
@@ -96,7 +97,7 @@ const MyPage = () => {
                         프로필을 수정 할 수 있는 화면입니다. <br/> ( *이메일과 연락처만 수정 가능합니다.) <br /><br /><br />
                     </div>
                     <div style={{textAlign:"center"}}>
-                        <image style={{width:"200px", height:"200px"}} src={profile === null ? DefaultProfile : profile} />
+                        <img style={{width:"200px", height:"200px"}} src={profile === null ? DefaultProfile : profile} />
                         <br/><br/>   
                         <div style={{ textAlign: "-webkit-center"}}>
                             <input style={{textAlignLast:"center"}} type="file" accept="image/*" name="file" onChange={profileHandler}></input>
