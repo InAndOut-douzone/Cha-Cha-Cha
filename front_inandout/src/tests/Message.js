@@ -27,7 +27,7 @@ const Message = () => {
             <button onClick={handleClickSendTo}>SendTo</button> 
             <button onClick={handleClickSendTemplate}>SendTemplate</button> 
         </div>
-
+        
     );
 };
 

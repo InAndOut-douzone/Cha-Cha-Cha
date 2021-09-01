@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Layout, Button, Modal, Card, Drawer } from 'antd';
+import React, { useState, useEffect, useRef } from 'react';
+import { Layout, Button, Modal, Card, Drawer, Badge, notification } from 'antd';
 import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import styled from 'styled-components';
+import SockJsClient from 'react-stomp';
 
 const { Header } = Layout;
 
@@ -61,6 +62,7 @@ const _Header = () => {
 
     const showDrawer = () => {
         setVisible(true);
+        setCount(0);
     };
 
     const onClose = () => {
@@ -158,13 +160,18 @@ const _Header = () => {
             }
             setNotice(title);
         })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const noticeList = notice.map((title, index) =>
         <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
-        
-        return (
+
+    //
+    const $websocket = useRef(null);
+    const [count, setCount] = useState(0);
+    //
+
+    return (
         <DIV>
             <Header className="header">
                 {/* <div className="logo" /> */}
@@ -200,9 +207,33 @@ const _Header = () => {
                     <Button style={buttonStyle2} className="button" type="primary" shape="circle">
                         <Link to="/logout"><LogoutOutlined /></Link>
                     </Button>
-                    <Button onClick={showDrawer} style={buttonStyle2} className="button" type="primary" shape="circle">
-                        <BellOutlined />
-                    </Button>
+
+
+                    <Badge count={count}>
+                        <Button onClick={showDrawer} style={buttonStyle2} className="button" type="primary" shape="circle">
+                            <BellOutlined />
+                        </Button>
+                    </Badge>
+                    <SockJsClient
+                        url="http://localhost:8080/webSocket"
+                        topics={['/topics/sendTo', '/topics/template', '/topics/api']}
+                        // onMessage={msg => { setCount(count + 1) }}
+                        onMessage={
+                            (msg) => {
+                                setCount(count + 1)
+                                notification.open({
+                                  message: '이재성',
+                                  description:
+                                    '연차가 승인되었습니다.',
+                                  onClick: () => {
+                                    console.log('Notification Clicked!');
+                                  },
+                                })
+                              }
+                        }
+                        ref={$websocket} />
+
+
                     <Drawer
                         title="알림"
                         width="18%"

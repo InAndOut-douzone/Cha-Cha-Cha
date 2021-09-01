@@ -67,9 +67,6 @@ public class LeavesService {
 			 return leavesRepository.findByNo23();
 		} else if(no == 24) {
 			 return leavesRepository.findByNo24();
-			 
-		} else if(no == 1234) {
-			 return leavesRepository.findAll();
 		}
 		return leavesRepository.findByNo(category);
 	}

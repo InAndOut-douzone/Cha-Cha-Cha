@@ -80,7 +80,7 @@ const WTM = () => {
   }
 
   const [ab, setAb] = useState();
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
 
   return (
     <SiteLayout>
