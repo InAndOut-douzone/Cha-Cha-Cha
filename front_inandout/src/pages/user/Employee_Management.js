@@ -157,7 +157,8 @@ const Employee_Management = () => {
                     <div style={{ textAlign: "center" }}>
                         사원 목록이 나오는 화면입니다. 자세히 버튼을 통해서 해당 사원 상세 정보를 볼 수 있습니다. <br/> 하단에서는 퇴사자 목록을 볼 수 있습니다.<br /><br /><br />
                     </div>
-                    <Table style={{ textAlign: "center" }} dataSource={data} columns={columns} />
+                    <Table style={{ textAlign: "center" }} dataSource={data} columns={columns}
+                    pagination={{hideOnSinglePage: true, position: ["bottomCenter"]}} />
 
                     <br/><br/><br/>
                     <div style={{ textAlign: "center" }}>
@@ -165,7 +166,8 @@ const Employee_Management = () => {
                         &nbsp;  &nbsp; <button onClick={openState} style={{color:"#4EAFFF", border:"0px solid gray", background:"white" }}>펼치기</button><br/><br/><br/>
                     </div>
                     <div>
-                    { open ? <Table style={{ textAlign: "center" }} dataSource={data2} columns={columns2} /> : null }
+                    { open ? <Table style={{ textAlign: "center" }} dataSource={data2} columns={columns2} 
+                    pagination={{hideOnSinglePage:true, position: ["bottomCenter"]}} /> : null }
                     </div>  
                 </Layout>
             </ManagementLayout>
