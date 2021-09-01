@@ -57,8 +57,8 @@ const DIV = styled.div`
 const _Header = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);
-    // const [isModalVisible3, setIsModalVisible3] = useState(false); // 알림 자세히
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(false); // 알림 drawer
+    const [alarm, setAlarm] = useState([]);
 
     const showDrawer = () => {
         setVisible(true);
@@ -67,6 +67,8 @@ const _Header = () => {
 
     const onClose = () => {
         setVisible(false);
+        axios.put("http://localhost:8080/api/alarm", data, header).then(res => {
+        })
     };
 
     const header = {
@@ -121,6 +123,14 @@ const _Header = () => {
         }
     };
 
+    const alarm_fatch = () => {
+        axios.get("http://localhost:8080/api/alarm", header).then((res) => {
+            setAlarm(res.data);
+            console.log(res.data);
+            console.log(alarm);
+        })
+    };
+
     const handleOk2 = async () => {
         await axios.get("http://localhost:8080/api/onoff", header).then(res => {
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
@@ -160,8 +170,17 @@ const _Header = () => {
             }
             setNotice(title);
         })
+
+        alarm_fatch()
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const data = [];
+    alarm.map((alarm, index) => data.push({
+    key: index + 1,
+    ...alarm
+  }))
 
     const noticeList = notice.map((title, index) =>
         <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
@@ -221,6 +240,7 @@ const _Header = () => {
                         // onMessage={msg => { setCount(count + 1) }}
                         onMessage={
                             (msg) => {
+                                alarm_fatch()
                                 console.log(msg)
                                 setCount(count + 1)
                                 notification.open({
@@ -244,9 +264,18 @@ const _Header = () => {
                         onClose={onClose}
                         visible={visible}
                     >
-                        <Card size="small" title="제목" style={{ width: 300 }}>
-                            <p>내용</p>
+                        {alarm.map((al) =>
+                        al.state === true ?
+                        <Card size="small" title={al.message}  style={{ border:"1px solid black", width: "100%", marginBottom: "10px" }} key={al.no}>
+                            <p>신청한 사람 : {al.fromUser.name}</p>
+                            <p>{moment(al.regDate).format("YYYY-MM-DD HH:mm")}</p>
                         </Card>
+                        :
+                        <Card size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } extra={<a href="#">X</a>} style={{ width: "100%", marginBottom: "10px" }} key={al.no}>
+                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                        </Card>
+                        
+                        )}
                         <br />
                     </Drawer>
                 </div>

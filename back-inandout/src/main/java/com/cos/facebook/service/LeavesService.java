@@ -115,7 +115,7 @@ public class LeavesService {
 		
 		Alarm alarmEntitiy = new Alarm();
 		alarmEntitiy.setMessage(leaveAddReqDto.getCategory());
-		alarmEntitiy.setFromUser(userEntity.getId());
+		alarmEntitiy.setFromUser(userEntity);
 		alarmEntitiy.setUser(doctoryEntity);
 		alarmEntitiy.setState(true);
 		alarmRepository.save(alarmEntitiy);
