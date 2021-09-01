@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { List, Avatar,Typography } from 'antd';
+// import image from '../../assets/images/nurse.jpg'
 import styled from 'styled-components';
 import axios from 'axios';
 

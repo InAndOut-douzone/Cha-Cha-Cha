@@ -9,9 +9,10 @@ import Employee_Management from './pages/user/Employee_Management';
 import Employee_Details from './pages/user/Employee_Details';
 import Leave_Management from './pages/leave/Leave_Management';
 import Add_Employee from './pages/user/Add_Employee';
-import Add_Notice from './pages/Add_Notice';
+import Add_Notice from './notice/Add_Notice';
 import NoticeList from './notice/NoticeList';
-import Notice from './pages/Notice';
+import Notice from './notice/Notice';
+import NoticeModi from './notice/NoticeModify';
 import MyPage from './pages/MyPage';
 import First from './pages/First';
 import Login from './pages/Login';
@@ -45,6 +46,7 @@ export default function App() {
             <PrivateRoute component={Add_Notice} path="/addnotice" exact={true} />
             <PrivateRoute component={NoticeList} path="/notice" exact={true} />
             <PrivateRoute component={Notice} path="/notice/:no" exact={true} />
+            <PrivateRoute component={NoticeModi} path="/noticemodi/:no" exact={true} />
             <PrivateRoute component={Employee_Details} path="/employeedetails/:id" exact={true} />
             <LogoutRoute component={Login} path="/logout" exact={true} />
             <Route component={Message} path="/message" exact={true} />

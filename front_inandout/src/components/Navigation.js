@@ -54,7 +54,7 @@ const Navigation = (name) => {
                 {/* <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }} */}
                 <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
                     width={200} height={220}
-                    src={profileState ? 'images/'+user.profile : DefaultProfile}
+                    src={profileState ? '/images/'+user.profile : DefaultProfile}
                 />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
                 <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>

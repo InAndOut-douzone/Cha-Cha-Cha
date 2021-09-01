@@ -82,7 +82,7 @@ const HIM = () => {
             ceoName: ceoName
         };
 
-        axios.put("http://localhost:8080/api/hospital2", hospital, header).then((res) => {
+        axios.post("http://localhost:8080/api/hospital2", hospital, header).then((res) => {
             console.log(res)
             console.log(res.data)
             console.log(res.data.logo)
