@@ -130,11 +130,9 @@ const _Header = () => {
         }
     };
 
-    const alarm_fatch = () => {
+    const alarm_fatch = () => { // 알림 데이터 받아오기
         axios.get("http://localhost:8080/api/alarm", header).then((res) => {
             setAlarm(res.data);
-            console.log(res.data);
-            console.log(alarm);
         })
     };
 
@@ -164,7 +162,6 @@ const _Header = () => {
                     setOffTime(moment(res.data.offTime).format("HH mm"));
                 }
             }
-            // console.log(res);
         }).catch();
 
         axios.get("http://localhost:8080/api/notice/listFour", header).then(res => {
@@ -180,7 +177,6 @@ const _Header = () => {
 
         axios.get("http://localhost:8080/api/alarm/count", header).then(res => { // 알림 개수 찾아오기
             setCount(res.data);
-            console.log("asdasdsa", res.data)
         })
 
         alarm_fatch()
@@ -260,7 +256,7 @@ const _Header = () => {
                                   description:
                                     '연차신청을 등록하였습니다.',
                                   onClick: () => {
-                                    console.log('Notification Clicked!');
+                                    console.log('알림 클릭함!');
                                   },
                                 })
                               }
@@ -280,7 +276,10 @@ const _Header = () => {
                         al.state === true ?
                         <Card style={{ border:"1px solid black", width: "100%", marginBottom: "10px", color: "black" }}
                             size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
-                            extra={<a href="#">삭제</a>} key={al.no}>
+                            extra={
+                                <div>
+                                    <button onClick={ () => alarmDelete(al.no)} style={{color:"#4EAFFF", background:"white", border:"0px"}}>삭제</button>
+                                </div>} key={al.no}>
                             <p>{al.message + "신청을 등록 하였습니다."}</p>
                         </Card>
                         :
