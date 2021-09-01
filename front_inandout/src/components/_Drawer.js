@@ -49,7 +49,7 @@ const _Drawer = () => {
   }
 
   const leavePost = (data) => {
-    axios.post("http://192.168.254.10:8080/api/leave", data, header).then(res => {
+    axios.post("http://localhost:8080/api/leave", data, header).then(res => {
     // axios.post("http://localhost:8080/api/leave", data, header).then(res => {
       alert("연차 신청이 완료되었습니다.");
       formRef.current.setFieldsValue({

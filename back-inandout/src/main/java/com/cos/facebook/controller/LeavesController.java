@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
+import com.cos.facebook.dto.AlarmAddReqDto;
 import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
-import com.cos.facebook.model.User;
 import com.cos.facebook.service.LeavesService;
 
 import lombok.RequiredArgsConstructor;
@@ -52,7 +52,7 @@ public class LeavesController {
 		System.out.println("leaveAddReqDto" + leaveAddReqDto);
 	
 		return new ResponseEntity<>(leavesService.add(leaveAddReqDto,principal.getUser().getUsername()), HttpStatus.OK);
-	}	
+	}
 	
 	@GetMapping("/leave")
 	public ResponseEntity<?> getLeave(Authentication authentication){
