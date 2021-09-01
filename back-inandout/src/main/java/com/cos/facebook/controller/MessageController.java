@@ -18,13 +18,11 @@ public class MessageController {
 	@MessageMapping("/sendTo") 
 	@SendTo("/topics/sendTo") 
 	public String SendToMessage() throws Exception { 
-		System.out.println("메시지 실핼도미123??");
 		return "SendTo"; 
 	}
 	
 	@MessageMapping("/Template") 
 	public void SendTemplateMessage() { 
-		System.out.println("메시지 실핼도미??");
 		webSocket.convertAndSend("/topics/template" , "Template"); 
 	} 
 	
@@ -36,7 +34,6 @@ public class MessageController {
 	@MessageMapping("/hello")
     @SendTo("/topic/roomId")
     public Message boradCast(Message message){
-		System.out.println("메시지 실핼도미??" + message);
         return message;
     }
 }
