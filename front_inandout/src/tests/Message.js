@@ -17,14 +17,24 @@ const Message = () => {
         $websocket.current.sendMessage ('/Template'); 
     };
 
+    const no = localStorage.getItem('userNo');
+
     return (
         <div> 
-            <SockJsClient 
+            {/* <SockJsClient 
                 url="http://localhost:8080/webSocket" 
                 topics={['/topics/sendTo', '/topics/template', '/topics/api']} 
                 onMessage={msg => { console.log (msg); }} 
-                ref={$websocket} /> 
+                ref={$websocket} />  */}
+
+            <SockJsClient 
+                url="http://localhost:8080/webSocket" 
+                topics={[`/topics/template${no}`,'/topics/sendTo']} 
+                onMessage={msg => { console.log (msg); }} 
+                ref={$websocket} />
             <button onClick={handleClickSendTo}>SendTo</button> 
+            {localStorage.getItem('userNo')}
+            {localStorage.getItem('userRole')}
             <button onClick={handleClickSendTemplate}>SendTemplate</button> 
         </div>
 

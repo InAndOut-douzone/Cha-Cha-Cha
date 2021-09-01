@@ -17,12 +17,19 @@ public class AlarmController {
 	@MessageMapping("/sendTo") 
 	@SendTo("/topics/sendTo") 
 	public String SendToMessage() throws Exception { 
+		int a = 3;
+		SendTemplateMessage(a);
 		return "SendTo"; 
 	}
+
+//	@MessageMapping("/Template") 
+//	public void SendTemplateMessage() { 
+//		webSocket.convertAndSend("/topics/template" , "Template"); 
+//	}
 	
 	@MessageMapping("/Template") 
-	public void SendTemplateMessage() { 
-		webSocket.convertAndSend("/topics/template" , "Template"); 
+	public void SendTemplateMessage(int a) { 
+		webSocket.convertAndSend("/topics/template"+a , "Template"); 
 	} 
 	
 	@RequestMapping(value="/api") 

@@ -26,10 +26,6 @@ public class Alarm {
 	@JoinColumn(name="toUser")
 	private User user;						// 받는 사람
 	
-	@ManyToOne
-	@JoinColumn(name="leaveId")
-	private Leaves leaves;
-	
 	private String message;
 	private boolean state;
 	
