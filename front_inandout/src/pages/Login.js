@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Form, Input } from 'antd';
+import { Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import "../assets/css/loginForm.css"
 import styled from 'styled-components'
@@ -14,6 +14,43 @@ const Container = styled.div`
   height: 100%;
   background-image: url(${img});
   background-size: cover;
+
+  Form {
+    background: $white;
+    padding: 2em;
+    border-radius: 20px;
+    border-left: 1px solid $white;
+    border-top: 1px solid $white;
+    backdrop-filter: blur(30px);
+    box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
+    text-align: center;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+
+    input, Form.Item, button {
+      text-align: center;
+      background: transparent;
+      padding: 0.75em;
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
+      border: none;
+      border-left: 1px solid $white;
+      border-top: 1px solid $white;
+      border-radius: 5000px;
+      backdrop-filter: blur(5px);
+      box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+      color: #3F5EFB;
+      font-family: Montserrat, sans-serif;
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+
+      &:hover {
+        padding: 1.3em;
+      }
+    }
+  }
+
   `;
 
 const config = {
@@ -63,9 +100,10 @@ export default function Login({ history, location }) {
         onFinish={onfinish}
       >
         <Form.Item name="no">
-          <Input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} />
+          {/* <input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> */}
+          <input maxLength="8" required placeholder="사원번호" prefix={<UserOutlined />} />
         </Form.Item>
-        <Button className="btn1" type='Primary' htmlType="submit">LOGIN</Button>
+        <button className="btn1" type='Primary' htmlType="submit">LOGIN</button>
       </Form>
     </Container>
   )

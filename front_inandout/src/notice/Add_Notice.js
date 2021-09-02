@@ -40,7 +40,7 @@ const Add_Notice = () => {
             contents: contents
         }
         console.log(notice);
-        axios.post("http://192.168.254.66:8080/api/notice/add", notice, header).then((res) => {
+        axios.post("http://localhost:8080/api/notice/add", notice, header).then((res) => {
             console.log(res);
         });
         window.location.href="/notice";
