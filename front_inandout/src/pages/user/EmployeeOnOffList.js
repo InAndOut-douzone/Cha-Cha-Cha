@@ -78,19 +78,22 @@ const EmployeeOnOffList = () => {
                     itemLayout="horizontal"
                     dataSource={onUsers}
                     renderItem={item => (
-                    <List.Item
-                        actions={ 
-                          item.offTime === null ? 
-                          [<Text style={{fontSize:"12px", color:"#40BCFF"}}>출근</Text>] : [<Text style={{fontSize:"12px", color:"#ff0000"}}>퇴근</Text>]}
-                    >
-                      {/* { item.offTime === null ? <Badge status="processing"/> : <Badge status="error "/>} */}
-                        <List.Item.Meta
-                        avatar={<Avatar src={'images/'+item.user.profile}/>}
-                        title={item.user.name}
-                        // title={<a href="#">{item.title}</a>}
-                        description={item.user.position}
-                        />
-                    </List.Item>
+                      item.onTime === null ? null : 
+                      
+                          <List.Item
+                          actions={ 
+                            item.offTime === null ? 
+                            [<Text style={{fontSize:"12px", color:"#40BCFF"}}>출근</Text>] : [<Text style={{fontSize:"12px", color:"#ff0000"}}>퇴근</Text>]}
+                      >
+                        {/* { item.offTime === null ? <Badge status="processing"/> : <Badge status="error "/>} */}
+                          <List.Item.Meta
+                          avatar={<Avatar src={'images/'+item.user.profile}/>}
+                          title={item.user.name}
+                          // title={<a href="#">{item.title}</a>}
+                          description={item.user.position}
+                          />
+                      </List.Item>
+                      
                     )}
                 />
             </div>
