@@ -47,12 +47,8 @@ const EmployeeOnOffList = () => {
   },[])
 
   const getOnUser = async () => {
-    console.log("getOnuSEURerㄴ싫ㄷ래ㅗㅁ딤ㄹㅇㅎ??")
     await axios.get("http://localhost:8080/api/onoff/onuser", header).then((res) => {
-      console.log("getOnUser api 싫애돔니이ㅣ??")
       setOnUsers(res.data);
-      console.log(res.data);
-      console.log(onUsers);
     });
   }
   const $websocket = useRef(null);
