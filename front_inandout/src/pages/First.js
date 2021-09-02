@@ -7,7 +7,6 @@ import SiteLayout from './SiteLayout';
 import FullCal2 from '../components/cal/FullCal2';
 // import Media from 'react-media';
 
-
 const { Content } = Layout;
 
 export default function First() {

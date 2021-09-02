@@ -80,18 +80,6 @@ public class LeavesService {
 	public void delete(int id) {
 		leavesRepository.deleteById(id);
 	}
-
-//	public void update(LeavesReqDto leavesReqDto) {
-//		Leaves leavesEntity = leavesRepository.findById();
-//		leavesEntity.setFromDate(leavesReqDto.getFromDate());
-//		leavesEntity.setToDate(leavesReqDto.getToDate());
-////		leavesEntity.setContent(leavesReqDto.getContent());
-////		leavesEntity.setCategory(leavesReqDto.getCategory());
-////		leavesEntity.setState(leavesReqDto.getState());
-//
-//		Leaves result = leavesRepository.save(leavesEntity);
-//		System.out.println("result" + result);
-//	}
 	
 	public Leaves add(LeaveAddReqDto leaveAddReqDto, String username) {
 		User userEntity = userRepository.findByUsername(username);
@@ -119,6 +107,25 @@ public class LeavesService {
 		alarmEntitiy.setUser(doctoryEntity);
 		alarmEntitiy.setState(true);
 		alarmRepository.save(alarmEntitiy);
+		
+		return leavesRepository.save(leavesEntity);
+	}
+	
+	public Leaves add2(LeaveAddReqDto leaveAddReqDto, String username) {
+		User userEntity = userRepository.findByUsername(username);
+		User doctoryEntity = userRepository.findById(Long.parseLong(leaveAddReqDto.getFromUser())).get();
+		
+		Leaves leavesEntity = new Leaves();
+		leavesEntity.setCategory(leaveAddReqDto.getCategory());
+		leavesEntity.setContent(leaveAddReqDto.getContent());
+		leavesEntity.setToDate(leaveAddReqDto.getToDate());
+		leavesEntity.setFromDate(leaveAddReqDto.getFromDate());
+		leavesEntity.setState(leaveAddReqDto.getState());
+		leavesEntity.setUser(userEntity);
+		leavesEntity.setFromUser(doctoryEntity);
+		
+		System.out.println("===================");
+		System.out.println(leavesEntity);
 		
 		return leavesRepository.save(leavesEntity);
 	}
