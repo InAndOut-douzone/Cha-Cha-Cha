@@ -14,6 +14,7 @@ const Container = styled.div`
   height: 100%;
   background-image: url(${img});
   background-size: cover;
+  font-family: LingWai TC;
 
   Form {
     background: $white;
@@ -43,6 +44,7 @@ const Container = styled.div`
       font-family: Montserrat, sans-serif;
       font-weight: 500;
       transition: all 0.2s ease-in-out;
+      font-family: LingWai TC;
 
       &:hover {
         font-size: 1.2em;
@@ -93,16 +95,6 @@ export default function Login({ history, location }) {
   }
   return (
     <Container>
-      <svg width="775" height="600">
-  <text 
-    x="15" y="150" fill="black" 
-    font-size="60" font-family="'Leckerli One', cursive">
-    IN
-    <tspan dy="-30" fill="gray" font-size="60">&</tspan>
-    <tspan dy="46" dx="-14" font-size="100">OUT</tspan>
-  </text>
-</svg>
-
       <Form
         name="global_state"
         layout="inline"
