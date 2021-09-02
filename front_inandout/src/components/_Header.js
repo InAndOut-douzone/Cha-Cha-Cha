@@ -263,7 +263,6 @@ const _Header = () => {
                         }
                         ref={$websocket} />
 
-
                     <Drawer
                         title="알림"
                         width="18%"

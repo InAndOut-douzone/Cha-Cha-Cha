@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cos.facebook.controller.AlarmController;
 import com.cos.facebook.model.HospitalOnOff;
 import com.cos.facebook.model.OnOff;
 import com.cos.facebook.model.User;
@@ -25,6 +26,8 @@ public class OnOffService {
 	private UserRepository userRepository;
 	@Autowired
 	private HospitalOnOffRepository hospitalRepository;
+	@Autowired
+	private AlarmController alarmController;
 
 	public OnOff insertOnTime(long id) {  // 출근기록
 		
@@ -33,8 +36,6 @@ public class OnOffService {
 		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 		String dated = day.format(today);
 		OnOff onOffEntity = null;
-		
-		
 		
 		if(onOffRepository.findByIdAndDate(id,dated) != null) { // 오늘날짜의 데이터가 있는지 없는지 검색
 			onOffEntity = onOffRepository.findByIdAndDate(id,dated);
@@ -56,6 +57,8 @@ public class OnOffService {
 		if (strWeek.equals("토")) { strWeek = "Sat"; }
 		if (strWeek.equals("일")) { strWeek = "Sun"; }
 		
+		
+		
 		HospitalOnOff hospitalTime = hospitalRepository.findByWeek(strWeek); // 오늘 요일 출근시간 검색하기
 		SimpleDateFormat dateTo = new SimpleDateFormat("HH:mm");
 		Date onTime;
@@ -69,8 +72,11 @@ public class OnOffService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
-		return onOffRepository.save(onOffEntity);
+		
+		OnOff onOff = onOffRepository.save(onOffEntity);
+		alarmController.SendToMessage();
+		return onOff;
+		
 	}
 
 	public OnOff insertOffTime(long id) { // 퇴근기록
