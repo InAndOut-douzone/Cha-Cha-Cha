@@ -34,6 +34,8 @@ public class OnOffService {
 		String dated = day.format(today);
 		OnOff onOffEntity = null;
 		
+		
+		
 		if(onOffRepository.findByIdAndDate(id,dated) != null) { // 오늘날짜의 데이터가 있는지 없는지 검색
 			onOffEntity = onOffRepository.findByIdAndDate(id,dated);
 			onOffEntity.setOnTime(new Date());
@@ -46,6 +48,13 @@ public class OnOffService {
 		
 		SimpleDateFormat week = new SimpleDateFormat("E");  // 오늘 요일 받아오기
 		String strWeek = week.format(onOffEntity.getDate());
+		if(strWeek.equals("목")) { strWeek = "Thu"; } 
+		if (strWeek.equals("월")) { strWeek = "Mon"; }
+		if (strWeek.equals("화")) { strWeek = "Tue"; }
+		if (strWeek.equals("수")) { strWeek = "Wed"; }
+		if (strWeek.equals("금")) { strWeek = "Fri"; }
+		if (strWeek.equals("토")) { strWeek = "Sat"; }
+		if (strWeek.equals("일")) { strWeek = "Sun"; }
 		
 		HospitalOnOff hospitalTime = hospitalRepository.findByWeek(strWeek); // 오늘 요일 출근시간 검색하기
 		SimpleDateFormat dateTo = new SimpleDateFormat("HH:mm");
