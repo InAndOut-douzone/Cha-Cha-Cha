@@ -20,7 +20,6 @@ import Work from './pages/Work';
 import HIM from './pages/HIM';
 import HI from './pages/HI';
 import WTM from './pages/hospital/WTM';
-import Message from './tests/Message'
 
 export default function App() {
 
@@ -49,7 +48,6 @@ export default function App() {
             <PrivateRoute component={NoticeModi} path="/notice/modi/:no" exact={true} />
             <PrivateRoute component={Employee_Details} path="/employeedetails/:id" exact={true} />
             <LogoutRoute component={Login} path="/logout" exact={true} />
-            <Route component={Message} path="/message" exact={true} />
             {/* 매칭되는 페이지가 없을 때 실행됨 switch가 있기에 가능 */}
             <Route component={PageNotFound} />
           </Switch>
