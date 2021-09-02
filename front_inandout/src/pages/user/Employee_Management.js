@@ -100,6 +100,10 @@ const columns2 = [
     },
 ];
 
+const Pagi = styled.div`
+    .ant-pagination { margin-right:100px}
+`;
+
 const Employee_Management = () => {
 
     const header = {
@@ -165,10 +169,10 @@ const Employee_Management = () => {
                         퇴사자 목록이 나오는 화면입니다. 
                         &nbsp;  &nbsp; <button onClick={openState} style={{color:"#4EAFFF", border:"0px solid gray", background:"white" }}>펼치기</button><br/><br/><br/>
                     </div>
-                    <div>
+                    <Pagi>
                     { open ? <Table style={{ textAlign: "center" }} dataSource={data2} columns={columns2} 
                     pagination={{hideOnSinglePage:true, position: ["bottomCenter"]}} /> : null }
-                    </div>  
+                    </Pagi>
                 </Layout>
             </ManagementLayout>
         </SiteLayout>

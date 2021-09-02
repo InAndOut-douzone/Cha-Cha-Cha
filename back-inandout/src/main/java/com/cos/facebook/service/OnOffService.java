@@ -61,7 +61,7 @@ public class OnOffService {
 		
 		HospitalOnOff hospitalTime = hospitalRepository.findByWeek(strWeek); // 오늘 요일 출근시간 검색하기
 		SimpleDateFormat dateTo = new SimpleDateFormat("HH:mm");
-		Date onTime;
+		Date onTime= new Date();
 		try {
 			onTime = dateTo.parse(hospitalTime.getOnTime());
 			

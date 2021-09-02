@@ -6,6 +6,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import SiteLayout from '../SiteLayout';
 import moment from 'moment';
+import styled from 'styled-components';
 
 const { Option } = Select;
 
@@ -32,6 +33,10 @@ const columns = [
         key: 'state',
     },
 ];
+
+const Pagi = styled.div`
+    .ant-pagination { margin-right:100px}
+`;
 
 const Employee_Details = (props) => {
 
@@ -157,7 +162,9 @@ const Employee_Details = (props) => {
                 </Descriptions>
                 <br /><br />
                 [근무 현황]
-                <Table dataSource={data} columns={columns} />
+                <Pagi>
+                    <Table dataSource={data} columns={columns} pagination={{position:['bottomCenter']}} />
+                </Pagi>
             </Layout>
         </SiteLayout>
     );

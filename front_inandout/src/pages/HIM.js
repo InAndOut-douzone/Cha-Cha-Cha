@@ -6,6 +6,14 @@ import { HomeOutlined } from '@ant-design/icons';
 import { InputGroup, FormControl, Image } from 'react-bootstrap';
 import DefaultLogo from '../assets/images/defaultProfile.png';
 import SiteLayout from './SiteLayout';
+import styled from 'styled-components';
+
+const InputLayout = styled.div`
+    .input-group-text {text-align: center; width: 104px;}
+    .input-group-sm { width: 350px;}
+    .rounded-circle{ margin-left : 70px;}
+    .ant-form-item-control-input-content{ margin-left : 130px; }
+    `;
 
 const HIM = () => {
     const imgPath = "/images/";
@@ -114,53 +122,55 @@ const HIM = () => {
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
 
-                <Form style={{ width: "350px", alignSelf: "center" }} onFinish={dataUpdate}>
-                    <Image style={{ width: "200px" }} src={image === null ? DefaultLogo : image} roundedCircle />
-                    <br /><br />
-                    <input type="file" accept="image/*" onChange={HIM_logo}></input>
-                    <br />
-                    {/* <Form.Item
-                    // name="upload"
-                    label="Upload"
-                    valuePropName="fileList"
-                    getValueFromEvent={HIM_logo}
-                // extra="logo"
-                >
-                    <Upload name="logo" action="/upload.do" listType="picture">
-                        <Button icon={<UploadOutlined />}>Logo 변경</Button>
-                    </Upload>
-                </Form.Item> */}
-                    {/* <input type="file" onClick={HIM_logo}/> */}
+                <Form style={{ width: "450px", alignSelf: "center" }} onFinish={dataUpdate}>
+                    <InputLayout>
+                        <Image style={{ width: "200px" }} src={image === null ? DefaultLogo : image} roundedCircle />
+                        <br /><br />
+                        <input type="file" accept="image/*" onChange={HIM_logo}></input>
+                        <br />
+                        {/* <Form.Item
+                        // name="upload"
+                        label="Upload"
+                        valuePropName="fileList"
+                        getValueFromEvent={HIM_logo}
+                    // extra="logo"
+                    >
+                        <Upload name="logo" action="/upload.do" listType="picture">
+                            <Button icon={<UploadOutlined />}>Logo 변경</Button>
+                        </Upload>
+                    </Form.Item> */}
+                        {/* <input type="file" onClick={HIM_logo}/> */}
 
-
-                    <InputGroup size="sm" className="mb-3">
-                        <InputGroup.Text id="inputGroup-sizing-sm">의원 번호</InputGroup.Text>
-                        <FormControl aria-label="의원 번호" aria-describedby="inputGroup-sizing-sm" value={hospital.no} />
-                    </InputGroup>
-                    <InputGroup size="sm" className="mb-3">
-                        <InputGroup.Text id="inputGroup-sizing-sm">의원명</InputGroup.Text>
-                        <FormControl aria-label="의원명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.name} onChange={HIM_name} />
-                    </InputGroup>
-                    <InputGroup size="sm" className="mb-3">
-                        <InputGroup.Text id="inputGroup-sizing-sm">의원 주소</InputGroup.Text>
-                        <FormControl aria-label="의원 주소" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.address} onChange={HIM_address} />
-                    </InputGroup>
-                    {/* <InputGroup size="sm" className="mb-3">
-                    <InputGroup.Text id="inputGroup-sizing-sm">의원 로고</InputGroup.Text>
-                    <FormControl aria-label="의원 로고" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.logo} onChange={HIM_logo} />
-                </InputGroup> */}
-                    <InputGroup size="sm" className="mb-3">
-                        <InputGroup.Text id="inputGroup-sizing-sm">의원 전화번호</InputGroup.Text>
-                        <FormControl aria-label="의원 전화번호" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.telNum} onChange={HIM_telNum} />
-                    </InputGroup>
-                    <InputGroup size="sm" className="mb-3">
-                        <InputGroup.Text id="inputGroup-sizing-sm">대표자명</InputGroup.Text>
-                        <FormControl aria-label="대표자명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.ceoName} onChange={HIM_ceoName} />
-                    </InputGroup>
-                    <Form.Item>
-                        {/* <Button variant="dark" type='Primary' htmlType="submit">수정</Button> */}
-                        <Button type='Primary' htmlType="submit">수정</Button>
-                    </Form.Item>
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-sm">의원 번호</InputGroup.Text>
+                            <FormControl aria-label="의원 번호" aria-describedby="inputGroup-sizing-sm" value={hospital.no} />
+                        </InputGroup>
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-sm">의원명</InputGroup.Text>
+                            <FormControl aria-label="의원명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.name} onChange={HIM_name} />
+                        </InputGroup>
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-sm">의원 주소</InputGroup.Text>
+                            <FormControl aria-label="의원 주소" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.address} onChange={HIM_address} />
+                        </InputGroup>
+                        {/* <InputGroup size="sm" className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-sm">의원 로고</InputGroup.Text>
+                        <FormControl aria-label="의원 로고" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.logo} onChange={HIM_logo} />
+                    </InputGroup> */}
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-sm">의원 전화번호</InputGroup.Text>
+                            <FormControl aria-label="의원 전화번호" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.telNum} onChange={HIM_telNum} />
+                        </InputGroup>
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-sm">대표자명</InputGroup.Text>
+                            <FormControl aria-label="대표자명" aria-describedby="inputGroup-sizing-sm" defaultValue={hospital.ceoName} onChange={HIM_ceoName} />
+                        </InputGroup>
+                    
+                        <Form.Item>
+                            {/* <Button variant="dark" type='Primary' htmlType="submit">수정</Button> */}
+                            <Button type='Primary' htmlType="submit">수정</Button>
+                        </Form.Item>
+                    </InputLayout>
                 </Form>
             </Layout>
         </SiteLayout>
