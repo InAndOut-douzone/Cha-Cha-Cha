@@ -86,6 +86,13 @@ public class OnOffService {
 		
 		SimpleDateFormat week = new SimpleDateFormat("E");
 		String strWeek = week.format(onOffEntity.getDate());
+		if(strWeek.equals("목")) { strWeek = "Thu"; } 
+		if (strWeek.equals("월")) { strWeek = "Mon"; }
+		if (strWeek.equals("화")) { strWeek = "Tue"; }
+		if (strWeek.equals("수")) { strWeek = "Wed"; }
+		if (strWeek.equals("금")) { strWeek = "Fri"; }
+		if (strWeek.equals("토")) { strWeek = "Sat"; }
+		if (strWeek.equals("일")) { strWeek = "Sun"; }
 		
 		HospitalOnOff hospitalTime = hospitalRepository.findByWeek(strWeek);
 		SimpleDateFormat dateTo = new SimpleDateFormat("HH:mm");
@@ -102,8 +109,9 @@ public class OnOffService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		return onOffRepository.save(onOffEntity);
+		OnOff onOff = onOffRepository.save(onOffEntity);
+		alarmController.SendToMessage();
+		return onOff;
 	}
 
 	public OnOff getOnOff(long id) {
