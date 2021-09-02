@@ -11,6 +11,7 @@ import axios from 'axios';
 import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 import styled from 'styled-components';
 import moment from 'moment';
+import Fade from 'react-reveal/Fade';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -39,6 +40,7 @@ const FullCal2 = () => {
   const [toDate1, setToDate1] = useState();
   const [user, setUser] = useState({});
   const [userId1, setUserId1] = useState({});
+  const [username, setUsername] = useState();
 
   const header = {
     headers: {
@@ -65,6 +67,7 @@ const FullCal2 = () => {
     setContent1(eventClick.event.extendedProps.content);
     setFromDate1(eventClick.event.start);
     setToDate1(eventClick.event.end);
+    setUsername(eventClick.event.extendedProps.username);
     setVisible2(true);
   };
   const 드래그 = async (eventClick) => {
@@ -122,7 +125,7 @@ const FullCal2 = () => {
       state: "success",
       fromUser: 2 // 일단 1번 으로 해놓음
     }
-    axios.post("http://localhost:8080/api/leave", data3, header).then(res => {
+    axios.post("http://localhost:8080/api/leave2", data3, header).then(res => {
       alert("일정 등록이 완료되었습니다.");
       window.location.replace("/")
     }).catch();
@@ -331,6 +334,7 @@ const FullCal2 = () => {
 
   let data = []; // 연차
   leaves.map((leave) => data.push({
+    username: leave.user.name,
     userId: leave.user.id,
     roles: leave.user.roles,
     id: leave.no,
@@ -354,6 +358,7 @@ const FullCal2 = () => {
           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
                 <CalendarLayout2>
+                  <Fade bottom>
                   <FullCalendar
                     // defaultView="dayGridMonth"
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
@@ -394,6 +399,7 @@ const FullCal2 = () => {
                   // weekends={this.state.calendarWeekends}
                   // eventReceive={this.eventReceive}
                   />
+                  </Fade>
                 </CalendarLayout2>
             </div>
           </CalendarLayout>
@@ -401,6 +407,7 @@ const FullCal2 = () => {
         <Col lg={2} sm={2} md={2}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
           <br /><br /><br />
+          <Fade right>
           <div style={{ marginTop: "-7.5px", height: "40px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
             <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
           </div><br />
@@ -409,8 +416,12 @@ const FullCal2 = () => {
             <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><Badge color="#9acd32" /><br />
             <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><Badge color="gold" /><br /><br /><br /><br />
           </div>
+          </Fade>
           <br />
+          <Fade right>
           <EmployeeOnOffList />
+          </Fade>
+          
 
           <Drawer
             title="일정 등록"
@@ -439,7 +450,8 @@ const FullCal2 = () => {
                     label="대상"
                   // rules={[{ required: true, message: 'Please choose the user' }]}
                   >
-                    <Input placeholder="이름입니다." value={user.name} initialvalues={user.name} readOnly />
+
+                    <Input placeholder="이름입니다." value={user.name} defaultValue={user.name} readOnly />
                   </Form.Item>
                 </Col>
               </Row>
@@ -513,7 +525,7 @@ const FullCal2 = () => {
                     label="대상"
                   // rules={[{ required: true, message: 'Please choose the user' }]}
                   >
-                    <Input placeholder="이름입니다." value={user.name} initialvalues={user.name} readOnly />
+                    <Input placeholder={username} value={username} initialvalues={username} readOnly />
                   </Form.Item>
                 </Col>
               </Row>

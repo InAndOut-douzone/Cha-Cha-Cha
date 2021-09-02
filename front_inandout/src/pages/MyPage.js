@@ -7,6 +7,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import DefaultProfile from '../assets/images/defaultProfile.png';
 import SiteLayout from './SiteLayout';
 import styled from 'styled-components';
+import Fade from 'react-reveal/Fade';
 
 const MyPageLayout = styled.div`
     .ant-descriptions-item-label { text-align:center }

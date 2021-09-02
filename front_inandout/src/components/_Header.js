@@ -254,6 +254,7 @@ const _Header = () => {
                                 notification.open({
                                     message: msg.user.name,
                                     description:
+
                                         '연차신청을 등록하였습니다.',
                                     onClick: () => {
                                         console.log('알림 클릭함!');

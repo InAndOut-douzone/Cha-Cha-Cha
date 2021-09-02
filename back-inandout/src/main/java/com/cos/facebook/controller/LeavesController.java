@@ -54,6 +54,13 @@ public class LeavesController {
 		return new ResponseEntity<>(leavesService.add(leaveAddReqDto,principal.getUser().getUsername()), HttpStatus.OK);
 	}
 	
+	@PostMapping("/leave2")
+	public ResponseEntity<?> addLeave2(@RequestBody LeaveAddReqDto leaveAddReqDto, Authentication authentication){ // 일정
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+	
+		return new ResponseEntity<>(leavesService.add2(leaveAddReqDto,principal.getUser().getUsername()), HttpStatus.OK);
+	}
+	
 	@GetMapping("/leave")
 	public ResponseEntity<?> getLeave(Authentication authentication){
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
