@@ -75,9 +75,6 @@ const Navigation = (name) => {
                     // onOpenChange={(openKeys) => setOpenkeys(openKeys)}
                     defaultOpenKeys={['1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6']}
                 >
-                    {/* {
-                            console.log(openKeys)
-                        } */}
                     <Menu.Item key="1" icon={<HomeOutlined />}>
                         <Link to="/">홈화면</Link>
                     </Menu.Item>

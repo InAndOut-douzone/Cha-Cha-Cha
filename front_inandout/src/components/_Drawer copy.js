@@ -56,8 +56,6 @@ const _Drawer = () => {
       fromUser: value.name
     }
 
-    console.log(data);
-
     axios.post("http://localhost:8080/api/leave", data, header).then(res => {
       alert("연차 신청이 완료되었습니다.");
       formRef.current.setFieldsValue({

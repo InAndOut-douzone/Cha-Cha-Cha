@@ -59,13 +59,16 @@ const _Header = () => {
     const [isModalVisible2, setIsModalVisible2] = useState(false);
     const [visible, setVisible] = useState(false); // 알림 drawer
     const [alarm, setAlarm] = useState([]);
+    const [onTime, setOnTime] = useState("IN");
+    const [offTime, setOffTime] = useState("OUT");
 
-    const showDrawer = () => {
+    const showDrawer = () => { // 알림창 열기
+        alarm_fatch()
         setVisible(true);
         setCount(0);
     };
 
-    const onClose = () => {
+    const onClose = () => { // 알림창 닫기
         setVisible(false);
         axios.put("http://localhost:8080/api/alarm", data, header).then(res => {
         })
@@ -92,7 +95,7 @@ const _Header = () => {
         //borderRadius:"5px",
     }
 
-    const showModalOn = () => {
+    const showModalOn = () => { // 출근 버튼 모달
         if (onTime === "IN") {
             setIsModalVisible(true);
         } else {
@@ -100,8 +103,12 @@ const _Header = () => {
         }
     };
 
-    const [onTime, setOnTime] = useState("IN");
-    const [offTime, setOffTime] = useState("OUT");
+    const alarmDelete = async (no) => { // 알림 삭제
+        await axios.delete("http://localhost:8080/api/alarm/" + no, header).then((res) => {
+        alert("알림이 삭제되었습니다.");
+        alarm_fatch()
+      });
+    }
 
     const handleOk = async () => {
         await axios.get("http://localhost:8080/api/onoff/" + localStorage.getItem("username"), header).then(res => {
@@ -123,11 +130,9 @@ const _Header = () => {
         }
     };
 
-    const alarm_fatch = () => {
+    const alarm_fatch = () => { // 알림 데이터 받아오기
         axios.get("http://localhost:8080/api/alarm", header).then((res) => {
             setAlarm(res.data);
-            console.log(res.data);
-            console.log(alarm);
         })
     };
 
@@ -157,7 +162,6 @@ const _Header = () => {
                     setOffTime(moment(res.data.offTime).format("HH mm"));
                 }
             }
-            // console.log(res);
         }).catch();
 
         axios.get("http://localhost:8080/api/notice/listFour", header).then(res => {
@@ -169,6 +173,10 @@ const _Header = () => {
                 })
             }
             setNotice(title);
+        })
+
+        axios.get("http://localhost:8080/api/alarm/count", header).then(res => { // 알림 개수 찾아오기
+            setCount(res.data);
         })
 
         alarm_fatch()
@@ -187,7 +195,7 @@ const _Header = () => {
 
     //
     const $websocket = useRef(null);
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0); // 알림 개수
     const userNo = localStorage.getItem('userNo');
     //
 
@@ -248,7 +256,7 @@ const _Header = () => {
                                   description:
                                     '연차신청을 등록하였습니다.',
                                   onClick: () => {
-                                    console.log('Notification Clicked!');
+                                    console.log('알림 클릭함!');
                                   },
                                 })
                               }
@@ -266,15 +274,23 @@ const _Header = () => {
                     >
                         {alarm.map((al) =>
                         al.state === true ?
-                        <Card size="small" title={al.message}  style={{ border:"1px solid black", width: "100%", marginBottom: "10px" }} key={al.no}>
-                            <p>신청한 사람 : {al.fromUser.name}</p>
-                            <p>{moment(al.regDate).format("YYYY-MM-DD HH:mm")}</p>
-                        </Card>
-                        :
-                        <Card size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } extra={<a href="#">X</a>} style={{ width: "100%", marginBottom: "10px" }} key={al.no}>
+                        <Card style={{ border:"1px solid black", width: "100%", marginBottom: "10px", color: "black" }}
+                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
+                            extra={
+                                <div>
+                                    <button onClick={ () => alarmDelete(al.no)} style={{color:"#4EAFFF", background:"white", border:"0px"}}>삭제</button>
+                                </div>} key={al.no}>
                             <p>{al.message + "신청을 등록 하였습니다."}</p>
                         </Card>
-                        
+                        :
+                        <Card style={{ width: "100%", marginBottom: "10px", color: "gray" }}
+                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
+                            extra={
+                                <div>
+                                    <button onClick={ () => alarmDelete(al.no)} style={{color:"#4EAFFF", background:"white", border:"0px"}}>삭제</button>
+                                </div>} key={al.no}>
+                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                        </Card>
                         )}
                         <br />
                     </Drawer>

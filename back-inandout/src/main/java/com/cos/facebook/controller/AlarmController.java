@@ -7,7 +7,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,11 +62,16 @@ public class AlarmController {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		alarmService.update(principal.getUser().getId());
 		return new ResponseEntity<>(HttpStatus.OK);
-	}	
-
-//	@MessageMapping("/hello")
-//    @SendTo("/topic/roomId")
-//    public Message boradCast(Message message){
-//        return message;
-//    }
+	}
+	
+	@GetMapping("/api/alarm/count")
+	public ResponseEntity<?> getAlarmCount(Authentication authentication){
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		return new ResponseEntity<>(alarmService.findCount(principal.getUser().getId()),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/api/alarm/{no}")
+	public void alarmDelete(@PathVariable int no) {
+		alarmService.alarmDelete(no);
+	}
 }

@@ -20,5 +20,13 @@ public class AlarmService {
 	public void update(long id) {
 		alarmRepository.updateState(id);
 	}
+	
+	public Long findCount(long id) {
+		return alarmRepository.findCount(id);
+	}
+	
+	public void alarmDelete(Integer no) {
+		alarmRepository.deleteById(no);
+	}
 }
 
