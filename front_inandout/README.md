@@ -16,9 +16,9 @@
 - npm i @material-ui/core
 - npm i redux react-redux
 - npm i react-stomp
+- npm i react-reveal
 
 ### 📀 설치할 것
 - npm i react-media
 - npm i stompjs
 - npm i sockjs-client
-- npm i react-reveal

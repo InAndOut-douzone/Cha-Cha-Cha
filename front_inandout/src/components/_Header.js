@@ -53,6 +53,12 @@ const DIV = styled.div`
             }
         }
         `
+const Card2 = styled.div`
+        .ant-card-head-title{
+            color: lightgray;
+        }
+        `
+
 
 const _Header = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -274,22 +280,22 @@ const _Header = () => {
                                 alarm_fatch()
                                 setCount(count + 1)
                                 msg.state === "success" ?
-                                notification.open({
-                                    message: msg.user.name,
-                                    description:
-                                        '승인되었습니다.',
-                                    onClick: () => {
-                                        console.log('알림 클릭함!');
-                                    },
-                                }) :
-                                notification.open({
-                                    message: msg.user.name + "님",
-                                    description:
-                                        msg.category + ' 신청이 반려되었습니다.',
-                                    onClick: () => {
-                                        console.log('알림 클릭함!');
-                                    },
-                                })
+                                    notification.open({
+                                        message: msg.user.name,
+                                        description:
+                                            '승인되었습니다.',
+                                        onClick: () => {
+                                            console.log('알림 클릭함!');
+                                        },
+                                    }) :
+                                    notification.open({
+                                        message: msg.user.name + "님",
+                                        description:
+                                            msg.category + ' 신청이 반려되었습니다.',
+                                        onClick: () => {
+                                            console.log('알림 클릭함!');
+                                        },
+                                    })
                             }
                         }
                         ref={$websocket} />
@@ -304,7 +310,7 @@ const _Header = () => {
                     >
                         {alarm.map((al) =>
                             al.state === true ?
-                                <Card style={{ border: "1px solid black", width: "100%", marginBottom: "10px", color: "black" }}
+                                <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black" }}
                                     size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
                                     extra={
                                         <div>
@@ -313,14 +319,16 @@ const _Header = () => {
                                     <p>{al.message + "신청을 등록 하였습니다."}</p>
                                 </Card>
                                 :
-                                <Card style={{ width: "100%", marginBottom: "10px", color: "gray" }}
-                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                    extra={
-                                        <div>
-                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                        </div>} key={al.no}>
-                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                </Card>
+                                <Card2>
+                                    <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray" }}
+                                        size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                        extra={
+                                            <div>
+                                                <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                            </div>} key={al.no}>
+                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                    </Card>
+                                </Card2>
                         )}
                         <br />
                     </Drawer>

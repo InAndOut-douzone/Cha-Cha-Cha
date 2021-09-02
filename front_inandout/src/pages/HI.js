@@ -4,6 +4,7 @@ import { Descriptions, Layout, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import SiteLayout from './SiteLayout';
+import Fade from 'react-reveal/Fade';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
@@ -40,6 +41,7 @@ const HIM = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
+                <Fade bottom>
                 <Descriptions title="의원 정보 관리" bordered>
                     <Descriptions.Item label="의원 번호" span={3}>{hospital.no}</Descriptions.Item>
                     <Descriptions.Item label="의원명" span={3}>{hospital.name}</Descriptions.Item>
@@ -48,6 +50,7 @@ const HIM = () => {
                     <Descriptions.Item label="의원 주소" span={3}>{hospital.address}</Descriptions.Item>
                     <Descriptions.Item label="대표자+명" span={3}>{hospital.ceoName}</Descriptions.Item>
                 </Descriptions>
+                </Fade>
             </Layout>
         </SiteLayout>
     );

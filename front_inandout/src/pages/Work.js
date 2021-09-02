@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import SiteLayout from './SiteLayout';
 import styled from 'styled-components';
+import Fade from 'react-reveal/Fade';
 
 const { RangePicker } = DatePicker
 const header = {
@@ -92,6 +93,7 @@ const Work = () => {
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
 
+                <Fade bottom>
                 <div>
                     <h1 style={{textAlign:'center'}}>{data[0]}{" 월요일 ~ "}{data[1]}{" 일요일"}</h1>
                     <br/><br/>
@@ -113,6 +115,7 @@ const Work = () => {
                 <Pagi>
                 <Table dataSource={onoff} columns={columns} pagination={{position:['bottomCenter']}} />
                 </Pagi>
+                </Fade>
             </Layout>
         </SiteLayout>
     );

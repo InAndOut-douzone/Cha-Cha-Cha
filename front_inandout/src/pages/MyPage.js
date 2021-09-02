@@ -94,6 +94,7 @@ const MyPage = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
+                <Fade bottom>
                 <Form style={{ width: '90%', textAlign:"center" }} onFinish={dataUpdate} >    
                     <div style={{ textAlign: "center" }}>
                         프로필을 수정 할 수 있는 화면입니다. <br/> ( *이메일과 연락처만 수정 가능합니다.) <br /><br /><br />
@@ -132,6 +133,7 @@ const MyPage = () => {
                         <Button type='Primary' htmlType="submit">수정</Button>
                     </Form.Item>
                 </Form>
+                </Fade>
             </Layout>
         </SiteLayout>
     );

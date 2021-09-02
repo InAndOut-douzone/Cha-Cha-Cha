@@ -9,6 +9,7 @@ import axios from 'axios';
 import TimeItem from '../../components/HospitalOnOff/TimeItem'
 import FormItem from '../../components/HospitalOnOff/FormItem'
 import SiteLayout from '../SiteLayout';
+import Fade from 'react-reveal/Fade';
 
 
 const { Title, Text } = Typography;
@@ -84,6 +85,7 @@ const WTM = () => {
         <div style={{ borderTop: "1px solid #eee" }} />
         <br /><br />
 
+        <Fade bottom>
         <div style={{ textAlign: "center" }}>
           <Title level={2}>현재 근무 시간</Title>
           {time.map((time) => (<TimeItem key={time.no} time={time} />))}
@@ -161,6 +163,7 @@ const WTM = () => {
               : " - 관리자만 변경 할 수 있습니다. - "
           }
         </div>
+        </Fade>
       </Layout>
     </SiteLayout>
   );

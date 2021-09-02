@@ -7,6 +7,7 @@ import SiteLayout from '../SiteLayout';
 import LeaveItem from '../../components/leave/LeaveItem';
 import styled from 'styled-components';
 import axios from 'axios';
+import Fade from 'react-reveal/Fade';
 
 const { Text } = Typography;
 
@@ -104,6 +105,7 @@ const Leave_Management = () => {
           </Breadcrumb>
           <div style={{ borderTop: "1px solid #eee" }} />
           <br /><br />
+          <Fade bottom>
           <div style={{ textAlign: "center" }}>
             사원들의 연차 현황을 볼 수 있고, 사원들의 연차 승인, 거절을 할 수 있습니다.
           </div>
@@ -116,6 +118,7 @@ const Leave_Management = () => {
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>
             {leaves.map((leave) => (<LeaveItem key={leave.no} leave={leave} onClick={getLeaves} />))}
           </div>
+          </Fade>
         </Layout>
       </SiteLayout>
     </LeaveManagementLayout>

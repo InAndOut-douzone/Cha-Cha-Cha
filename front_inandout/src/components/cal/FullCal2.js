@@ -127,7 +127,8 @@ const FullCal2 = () => {
     }
     axios.post("http://localhost:8080/api/leave2", data3, header).then(res => {
       alert("일정 등록이 완료되었습니다.");
-      window.location.replace("/")
+      check(내일정, 연차, 출장, 외근)
+      setVisible(0)
     }).catch();
   }
   const onUpdate = async (value) => { // 일정 수정
@@ -141,7 +142,8 @@ const FullCal2 = () => {
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
       alert("일정 수정이 완료되었습니다.");
-      window.location.replace("/")
+      check(내일정, 연차, 출장, 외근)
+      setVisible2(0)
     })
   }
   const onDelete = async (value) => { // 일정 삭제
@@ -149,7 +151,8 @@ const FullCal2 = () => {
     if (ch) {
       await axios.delete("http://localhost:8080/api/leaves/" + no1, header).then((res) => {
         alert("일정 삭제가 완료되었습니다.");
-        window.location.replace("/")
+        check(내일정, 연차, 출장, 외근)
+        setVisible2(0)
       });
     } else {
       alert("일정 삭제가 취소되었습니다.");
