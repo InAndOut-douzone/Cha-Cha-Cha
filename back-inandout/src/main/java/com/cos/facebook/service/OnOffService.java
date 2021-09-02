@@ -46,10 +46,10 @@ public class OnOffService {
 		
 		SimpleDateFormat week = new SimpleDateFormat("E");  // 오늘 요일 받아오기
 		String strWeek = week.format(onOffEntity.getDate());
-		
+		System.out.println(strWeek);
 		HospitalOnOff hospitalTime = hospitalRepository.findByWeek(strWeek); // 오늘 요일 출근시간 검색하기
 		SimpleDateFormat dateTo = new SimpleDateFormat("HH:mm");
-		Date onTime;
+		Date onTime= new Date();
 		try {
 			onTime = dateTo.parse(hospitalTime.getOnTime());
 			

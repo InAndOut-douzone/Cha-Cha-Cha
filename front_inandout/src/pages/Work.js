@@ -4,6 +4,7 @@ import { Layout, Progress, Breadcrumb, Table, DatePicker, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import SiteLayout from './SiteLayout';
+import styled from 'styled-components';
 
 const { RangePicker } = DatePicker
 const header = {
@@ -35,6 +36,9 @@ const columns = [
     }
 ];
 
+const Pagi = styled.div`
+    .ant-pagination { margin-right:100px}
+`;
 const Work = () => {
 
     const [onoff, setOnoff] = useState([]);
@@ -59,7 +63,7 @@ const Work = () => {
 
         axios.get("/api/work", header).then((res) => {
             setOnoff(res.data);
-            console.log(res.data);
+            // console.log(res.data);
         });
 
     }, []);
@@ -72,7 +76,7 @@ const Work = () => {
         }
 
         axios.post("/api/workdate", data, header).then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setOnoff(res.data);
         });
     }
@@ -106,7 +110,9 @@ const Work = () => {
                     <RangePicker onChange={dateHandler} />
                 </Space>
                 <br />
-                <Table dataSource={onoff} columns={columns} />
+                <Pagi>
+                <Table dataSource={onoff} columns={columns} pagination={{position:['bottomCenter']}} />
+                </Pagi>
             </Layout>
         </SiteLayout>
     );

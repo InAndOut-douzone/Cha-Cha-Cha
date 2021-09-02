@@ -28,6 +28,8 @@ import com.cos.facebook.dto.user.UserLeaveDateReqUpdateDto;
 import com.cos.facebook.model.User;
 import com.cos.facebook.repository.UserRepository;
 import com.cos.facebook.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -71,31 +73,16 @@ public class UserController {
 
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		
-//		String UPLOAD_PATH="/Users/jeongin/Documents/InandOut/Cha-Cha-Cha/back-inandout/src/main/webapp/images/";
-		
-		// webapp 경로
-		String abc = request.getServletContext().getRealPath(""); 
-		String UPLOAD_PATH = abc+"images";
-		System.out.println(UPLOAD_PATH);
-		
 		User user = new User();
 		try {
 			user= new ObjectMapper().readValue(userData,User.class); // string 을 user 객체로 바꿈
-			
-			String image = (new Date().getTime())+ "" + (new Random().ints(1000,9999).findAny().getAsInt()); // 파일 이름 날자 + 랜덤으로 설정
-			String originName = file.getOriginalFilename();
-			String imgExtension = originName.substring(originName.lastIndexOf(".")+1); // 파일 확장자명 알아냄
-		
-			File fileSave = new File(UPLOAD_PATH, image + "." + imgExtension);
-			file.transferTo(fileSave); // 파일저장
-			
-			user.setProfile(image +"."+imgExtension);
-			// System.out.println(image);
-		} catch(IOException e) {
+		} catch (JsonMappingException e) {
 			e.printStackTrace();
-		}
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}			
 		
-		userService.userUpdate(user,principal.getUser().getId());
+		userService.userUpdate(request, user, file, principal.getUser().getId());
 		return new ResponseEntity<Object>("Success",HttpStatus.OK);
 
 	}

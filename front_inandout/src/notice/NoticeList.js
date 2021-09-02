@@ -46,7 +46,7 @@ const header = {
 
 const NoticeListLayout = styled.div `
 
-.ant-pagination { margin-right:100px}
+.ant-pagination { margin-right:120px}
 `
 
 const NoticeList = () => {
