@@ -43,10 +43,9 @@ const Container = styled.div`
       font-family: Montserrat, sans-serif;
       font-weight: 500;
       transition: all 0.2s ease-in-out;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 
       &:hover {
-        padding: 1.3em;
+        font-size: 1.2em;
       }
     }
   }
@@ -94,6 +93,16 @@ export default function Login({ history, location }) {
   }
   return (
     <Container>
+      <svg width="775" height="600">
+  <text 
+    x="15" y="150" fill="#e13137" 
+    font-size="60" font-family="'Leckerli One', cursive">
+    IN
+    <tspan dy="-30 30 30" dx="-10" fill="#dfdfdf" font-size="60">&</tspan>
+    <tspan dy="45" dx="-14" font-size="100">OUT</tspan>
+  </text>
+</svg>
+
       <Form
         name="global_state"
         layout="inline"

@@ -208,19 +208,9 @@ const _Header = () => {
     return (
         <DIV>
             <Header className="header">
-                {/* <div className="logo" /> */}
-                <div style={{ width: "30%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div>
+                {/* <div style={{ width: "20%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div> */}
 
-                {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
-                <div style={{ textAlign: "right", width: "40%" }}>
-                    <Card style={{ width: "100%", height: 50, marginTop: 12, backgroundColor: "#001528" }}>
-                        <ul className='animation'>
-                            { /* <p><a style={{ color: "white" }} href="/notice">{notice}</a></p> */}
-                            {noticeList}
-                        </ul>
-                    </Card>
-                </div>
-                <div style={{ width: "40%", textAlign: "right" }}>
+                <div style={{ width: "80%", textAlign: "right" }}>
 
                     <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
                         <div>{onTime}</div>
