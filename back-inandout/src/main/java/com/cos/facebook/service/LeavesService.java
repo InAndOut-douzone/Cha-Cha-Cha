@@ -115,7 +115,7 @@ public class LeavesService {
 		
 		Alarm alarmEntitiy = new Alarm();
 		alarmEntitiy.setMessage(leaveAddReqDto.getCategory());
-		alarmEntitiy.setFromUser(userEntity.getId());
+		alarmEntitiy.setFromUser(userEntity);
 		alarmEntitiy.setUser(doctoryEntity);
 		alarmEntitiy.setState(true);
 		alarmRepository.save(alarmEntitiy);
@@ -138,7 +138,6 @@ public class LeavesService {
 			
 			Calendar toDate = Calendar.getInstance();
 			toDate.setTime(leaveEntity.getToDate());
-			
 			
 			while(fromDate.compareTo(toDate) != 1) {
 				fromDate.add(Calendar.DATE,1);
@@ -163,6 +162,14 @@ public class LeavesService {
 		}
 
 		leavesRepository.save(leaveEntity);
+		
+		alarmController.SendTemplateMessage2(leaveEntity);
+		Alarm alarmEntitiy = new Alarm();
+		alarmEntitiy.setMessage(leaveEntity.getCategory());
+		alarmEntitiy.setFromUser(leaveEntity.getFromUser());
+		alarmEntitiy.setUser(leaveEntity.getUser());
+		alarmEntitiy.setState(true);
+		alarmRepository.save(alarmEntitiy);
 	}
 
 	public void update(LeavesReqDto leavesReqDto) {
@@ -172,5 +179,13 @@ public class LeavesService {
 		leavesEntity.setFromDate(leavesReqDto.getFromDate());
 		leavesEntity.setToDate(leavesReqDto.getToDate());
 		leavesRepository.save(leavesEntity);
+		
+		alarmController.SendTemplateMessage2(leavesEntity);
+		Alarm alarmEntitiy = new Alarm();
+		alarmEntitiy.setMessage(leavesEntity.getCategory());
+		alarmEntitiy.setFromUser(leavesEntity.getFromUser());
+		alarmEntitiy.setUser(leavesEntity.getUser());
+		alarmEntitiy.setState(true);
+		alarmRepository.save(alarmEntitiy);
 	}	
 }

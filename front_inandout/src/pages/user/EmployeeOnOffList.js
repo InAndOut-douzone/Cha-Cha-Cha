@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { List, Avatar,Typography } from 'antd';
 // import image from '../../assets/images/nurse.jpg'
 import styled from 'styled-components';
 import axios from 'axios';
+import SockJsClient from 'react-stomp';
 
 const { Text } = Typography;
 
@@ -50,9 +51,27 @@ const EmployeeOnOffList = () => {
       setOnUsers(res.data);
     });
   }
+  const $websocket = useRef(null);
+
+
+  //   const handleClickSendTo = () => { 
+  //     $websocket.current.sendMessage ('/sendTo'); 
+  // }; 
 
     return (
         <EmployeeOnOffListLayout>
+          
+        <SockJsClient
+          url="http://localhost:8080/webSocket"
+          topics={['/topics/sendTo', '/topics/sendTo2']}
+          // onMessage={msg => { setCount(count + 1) }}
+          onMessage={
+              (msg) => { 
+                getOnUser();
+                console.log("msg : " + msg);
+              }
+          }
+          ref={$websocket} />
             <div style={{height:"100%", width:"200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock"}}>
                 <div style={{textAlign:"center", fontSize:"12px", background:"aliceblue"}}>출근 현황</div>
                 <List
@@ -60,7 +79,9 @@ const EmployeeOnOffList = () => {
                     dataSource={onUsers}
                     renderItem={item => (
                     <List.Item
-                        actions={ item.offTime === null ? [<Text style={{fontSize:"12px", color:"#40BCFF"}}>출근</Text>] : [<Text style={{fontSize:"12px", color:"#ff0000"}}>퇴근</Text>]}
+                        actions={ 
+                          item.offTime === null ? 
+                          [<Text style={{fontSize:"12px", color:"#40BCFF"}}>출근</Text>] : [<Text style={{fontSize:"12px", color:"#ff0000"}}>퇴근</Text>]}
                     >
                       {/* { item.offTime === null ? <Badge status="processing"/> : <Badge status="error "/>} */}
                         <List.Item.Meta

@@ -20,7 +20,10 @@ public class Alarm {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int no;
-	private long fromUser;				// 보내는 사람
+	
+	@ManyToOne
+	@JoinColumn(name="fromUser")
+	private User fromUser;				// 보내는 사람
 	 
 	@ManyToOne
 	@JoinColumn(name="toUser")
