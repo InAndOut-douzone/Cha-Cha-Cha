@@ -95,11 +95,11 @@ export default function Login({ history, location }) {
     <Container>
       <svg width="775" height="600">
   <text 
-    x="15" y="150" fill="#e13137" 
+    x="15" y="150" fill="black" 
     font-size="60" font-family="'Leckerli One', cursive">
     IN
-    <tspan dy="-30 30 30" dx="-10" fill="#dfdfdf" font-size="60">&</tspan>
-    <tspan dy="45" dx="-14" font-size="100">OUT</tspan>
+    <tspan dy="-30" fill="gray" font-size="60">&</tspan>
+    <tspan dy="46" dx="-14" font-size="100">OUT</tspan>
   </text>
 </svg>
 
