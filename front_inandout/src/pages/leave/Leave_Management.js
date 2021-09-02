@@ -83,8 +83,8 @@ const Leave_Management = () => {
     ...user
   }))
 
-  const getLeaves = () => {
-    axios.get("http://localhost:8080/api/leave", header).then(res => {
+  const getLeaves = async () => {
+    await axios.get("http://localhost:8080/api/leave", header).then(res => {
       setLeaves(res.data);
     }).catch()
   }

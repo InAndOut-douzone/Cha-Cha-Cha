@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cos.facebook.model.Alarm;
+import com.cos.facebook.model.Leaves;
 import com.cos.facebook.repository.AlarmRepository;
 
 @Service

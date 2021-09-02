@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Layout, Button, Modal, Card, Drawer, Badge, notification } from 'antd';
+import { Layout, Button, Modal, Card, Drawer, Badge, notification, message } from 'antd';
 import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
@@ -105,9 +105,9 @@ const _Header = () => {
 
     const alarmDelete = async (no) => { // 알림 삭제
         await axios.delete("http://localhost:8080/api/alarm/" + no, header).then((res) => {
-        alert("알림이 삭제되었습니다.");
-        alarm_fatch()
-      });
+            alert("알림이 삭제되었습니다.");
+            alarm_fatch()
+        });
     }
 
     const handleOk = async () => {
@@ -130,8 +130,8 @@ const _Header = () => {
         }
     };
 
-    const alarm_fatch = () => { // 알림 데이터 받아오기
-        axios.get("http://localhost:8080/api/alarm", header).then((res) => {
+    const alarm_fatch = async () => { // 알림 데이터 받아오기
+        await axios.get("http://localhost:8080/api/alarm", header).then((res) => {
             setAlarm(res.data);
         })
     };
@@ -186,9 +186,9 @@ const _Header = () => {
 
     const data = [];
     alarm.map((alarm, index) => data.push({
-    key: index + 1,
-    ...alarm
-  }))
+        key: index + 1,
+        ...alarm
+    }))
 
     const noticeList = notice.map((title, index) =>
         <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
@@ -248,49 +248,78 @@ const _Header = () => {
                         // onMessage={msg => { setCount(count + 1) }}
                         onMessage={
                             (msg) => {
-                                alarm_fatch()
                                 console.log(msg)
+                                alarm_fatch()
                                 setCount(count + 1)
                                 notification.open({
-                                  message: msg.user.name,
-                                  description:
-                                    '연차신청을 등록하였습니다.',
-                                  onClick: () => {
-                                    console.log('알림 클릭함!');
-                                  },
+                                    message: msg.user.name,
+                                    description:
+                                        '연차신청을 등록하였습니다.',
+                                    onClick: () => {
+                                        console.log('알림 클릭함!');
+                                    },
                                 })
-                              }
+                            }
                         }
                         ref={$websocket} />
 
+                    <SockJsClient
+                        url="http://localhost:8080/webSocket"
+                        topics={[`/topics/template2${userNo}`]}
+                        // onMessage={msg => { setCount(count + 1) }}
+                        onMessage={
+                            (msg) => {
+                                console.log(msg)
+                                alarm_fatch()
+                                setCount(count + 1)
+                                msg.state === "success" ?
+                                notification.open({
+                                    message: msg.user.name,
+                                    description:
+                                        '승인되었습니다.',
+                                    onClick: () => {
+                                        console.log('알림 클릭함!');
+                                    },
+                                }) :
+                                notification.open({
+                                    message: msg.user.name + "님",
+                                    description:
+                                        msg.category + ' 신청이 반려되었습니다.',
+                                    onClick: () => {
+                                        console.log('알림 클릭함!');
+                                    },
+                                })
+                            }
+                        }
+                        ref={$websocket} />
 
                     <Drawer
                         title="알림"
-                        width="18%"
+                        width="350px"
                         placement="right"
                         closable={true}
                         onClose={onClose}
                         visible={visible}
                     >
                         {alarm.map((al) =>
-                        al.state === true ?
-                        <Card style={{ border:"1px solid black", width: "100%", marginBottom: "10px", color: "black" }}
-                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
-                            extra={
-                                <div>
-                                    <button onClick={ () => alarmDelete(al.no)} style={{color:"#4EAFFF", background:"white", border:"0px"}}>삭제</button>
-                                </div>} key={al.no}>
-                            <p>{al.message + "신청을 등록 하였습니다."}</p>
-                        </Card>
-                        :
-                        <Card style={{ width: "100%", marginBottom: "10px", color: "gray" }}
-                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm") } 
-                            extra={
-                                <div>
-                                    <button onClick={ () => alarmDelete(al.no)} style={{color:"#4EAFFF", background:"white", border:"0px"}}>삭제</button>
-                                </div>} key={al.no}>
-                            <p>{al.message + "신청을 등록 하였습니다."}</p>
-                        </Card>
+                            al.state === true ?
+                                <Card style={{ border: "1px solid black", width: "100%", marginBottom: "10px", color: "black" }}
+                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                    extra={
+                                        <div>
+                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                        </div>} key={al.no}>
+                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                </Card>
+                                :
+                                <Card style={{ width: "100%", marginBottom: "10px", color: "gray" }}
+                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                    extra={
+                                        <div>
+                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                        </div>} key={al.no}>
+                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                </Card>
                         )}
                         <br />
                     </Drawer>
