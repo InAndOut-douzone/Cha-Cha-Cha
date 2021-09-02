@@ -28,16 +28,20 @@ public class AlarmController {
 	@Autowired 
 	private AlarmService alarmService;
 	
-	@MessageMapping("/sendTo") 
-	@SendTo("/topics/sendTo") 
-	public String SendToMessage() throws Exception { 
-		return "SendTo"; 
-	}
-
-//	@MessageMapping("/Template") 
-//	public void SendTemplateMessage() { 
-//		webSocket.convertAndSend("/topics/template" , "Template"); 
+	// 예시
+//	@MessageMapping("/sendTo") 
+//	@SendTo("/topics/sendTo") 
+//	public String SendToMessage() throws Exception { 
+//		System.out.println("실행됨?");
+//		return "SendTo"; 
 //	}
+
+	// 출근하면 전원 출근 현황 최신화 시키는 소켓
+	@MessageMapping("/sendTo") 
+	public void SendToMessage() { 
+		System.out.println("SendToMessage 실행됨?");
+		webSocket.convertAndSend("/topics/sendTo","sendTo"); 
+	} 
 	
 	@MessageMapping("/Template") 
 	public void SendTemplateMessage(Leaves leaves) { 

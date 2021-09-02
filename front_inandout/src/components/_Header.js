@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Layout, Button, Modal, Card, Drawer, Badge, notification, message } from 'antd';
+import { Layout, Button, Modal, Card, Drawer, Badge, notification } from 'antd';
 import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
