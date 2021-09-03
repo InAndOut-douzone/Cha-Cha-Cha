@@ -14,6 +14,7 @@ const { Text } = Typography;
 const LeaveManagementLayout = styled.div`
   .ant-card-bordered{ margin-bottom: 40px }
   .ant-table-cell { text-align:center }
+  // .react-reveal { text-align:center }
 `
 const Pagi = styled.div`
     .ant-pagination { margin-right:100px}
@@ -114,7 +115,9 @@ const Leave_Management = () => {
             <Table style={{ textAlign: "center" }} dataSource={data} columns={columns}
             pagination={{position:['bottomCenter']}}/><br /><br /><br />
           </Pagi>
-          <Text style={{ textAlign: "center" }}>현재 의원님한테 들어온 휴가신청 목록 입니다.  <button onClick={getLeaves} style={{ border: "0px", background: "white", color: "cadetblue" }}>*새로 고침*</button></Text><br /><br />
+          <div style={{ textAlign:"center" }}>
+            <Text style={{ textAlign: "center" }}>현재 의원님한테 들어온 휴가신청 목록 입니다.  <button onClick={getLeaves} style={{ border: "0px", background: "white", color: "cadetblue" }}>*새로 고침*</button></Text><br /><br />
+          </div>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>
             {leaves.map((leave) => (<LeaveItem key={leave.no} leave={leave} onClick={getLeaves} />))}
           </div>

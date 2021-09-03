@@ -6,6 +6,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import SiteLayout from './SiteLayout';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
+import { Chart } from "react-google-charts";
 
 const { RangePicker } = DatePicker
 const header = {
@@ -92,7 +93,6 @@ const Work = () => {
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
-
                 <Fade bottom>
                 <div>
                     <h1 style={{textAlign:'center'}}>{data[0]}{" 월요일 ~ "}{data[1]}{" 일요일"}</h1>
@@ -100,7 +100,6 @@ const Work = () => {
                     <p>{data[4]}{"님은 이번주 "}{data[2]}{"시간 일했습니다."}</p>
                     <p>{52-data[2]}{" 시간 더 일할 수 있습니다."}</p>
                 </div>
-
                 <Progress
                     strokeColor={{
                         '0%': '#108ee9',
@@ -108,6 +107,78 @@ const Work = () => {
                     }}
                     percent={data[3]}/>
                 <br />
+
+                <div className="chart" style={{display:"flex", alignSelf:"center"}}>
+                    <Chart
+                        width={"300px"}
+                        height={"300px"}
+                        chartType="PieChart"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                        ["Task", "Hours per Day"],
+                        ["Work", 25],
+                        ["Eat", 10],
+                        ["Commute", 10],
+                        ["Watch TV", 10],
+                        ["Sleep", 45],
+                        ]}
+                        options={{
+                            title: "My Daily Activities",
+                            backgroundColor: "transparent",
+                            legend: "none",
+                            pieHole: 0.3,
+                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"]
+                        }}
+                    />
+
+
+                <Chart
+                        width={"300px"}
+                        height={"300px"}
+                        chartType="PieChart"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                        ["Task", "Hours per Day"],
+                        ["Work", 25],
+                        ["Eat", 10],
+                        ["Commute", 10],
+                        ["Watch TV", 10],
+                        ["Sleep", 45],
+                        ]}
+                        options={{
+                            title: "My Daily Activities",
+                            backgroundColor: "transparent",
+                            legend: "none",
+                            pieHole: 0.3,
+                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"]
+                        }}
+                    />
+
+                    <Chart
+                        width={"300px"}
+                        height={"300px"}
+                        chartType="PieChart"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                        ["Task", "Hours per Day"],
+                        ["Work", 25],
+                        ["Eat", 10],
+                        ["Commute", 10],
+                        ["Watch TV", 10],
+                        ["Sleep", 45],
+                        ]}
+                        options={{
+                            title: "My Daily Activities",
+                            backgroundColor: "transparent",
+                            legend: "none",
+                            pieHole: 0.3,
+                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"]
+                        }}
+                    />               
+                     
+                </div>
+
+
                 <Space direction="vertical" size={12}>
                     <RangePicker onChange={dateHandler} />
                 </Space>

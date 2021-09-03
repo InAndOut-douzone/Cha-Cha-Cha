@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Col, Row } from "reactstrap";
 import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Badge } from 'antd';
 import FullCalendar from "@fullcalendar/react";
@@ -12,6 +12,7 @@ import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
 import styled from 'styled-components';
 import moment from 'moment';
 import Fade from 'react-reveal/Fade';
+import SockJsClient from 'react-stomp';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -79,7 +80,7 @@ const FullCal2 = () => {
       category: eventClick.event.extendedProps.category,
       content: eventClick.event.extendedProps.content,
       fromDate: eventClick.event.start,
-      toDate: eventClick.event.end,
+      toDate: eventClick.event.extendedProps.category === "연차" ? moment(eventClick.event.end).add(-1, 'd').toDate() : eventClick.event.end,
     }
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
@@ -88,6 +89,7 @@ const FullCal2 = () => {
     })
   };
 
+  // 현재 달력 옵션 클릭 상태를 유지하면서 달력 데이터 초기화
   const check = (a,b,c,d) => {
     if(a === true) {
       a = 1;
@@ -348,14 +350,27 @@ const FullCal2 = () => {
           leave.category === "출장" ? "yellowgreen" : "gold",
 
     start: leave.fromDate,
+    // end: leave.toDate,
     end: leave.category === "연차" ? moment(leave.toDate).add(1, 'd').toDate() : leave.toDate,
     category: leave.category,
     content: leave.content,
     allDay: leave.category === "연차" ? 1 : leave.category === "오후 반차" ? 1 : leave.category === "오전 반차" ? 1 : 0
   }))
 
+  const $websocket = useRef(null);
+
   return (
     <div className="animated fadeIn p-4 demo-app">
+      <SockJsClient
+        url="http://localhost:8080/webSocket"
+        topics={['/topics/sendTo2']}
+        // onMessage={msg => { setCount(count + 1) }}
+        onMessage={
+            (msg) => {
+              check(내일정, 연차, 출장, 외근);
+            }
+        }
+        ref={$websocket} />
       <Row>
         <Col lg={10} sm={10} md={10}>
           <CalendarLayout>

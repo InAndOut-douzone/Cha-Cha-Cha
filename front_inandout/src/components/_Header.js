@@ -281,9 +281,9 @@ const _Header = () => {
                                 setCount(count + 1)
                                 msg.state === "success" ?
                                     notification.open({
-                                        message: msg.user.name,
+                                        message: msg.user.name + "님",
                                         description:
-                                            '승인되었습니다.',
+                                        msg.category + ' 승인 되었습니다.',
                                         onClick: () => {
                                             console.log('알림 클릭함!');
                                         },
