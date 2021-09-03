@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Layout, Button, Modal, Card, Drawer, Badge, notification } from 'antd';
-import { HomeOutlined, LogoutOutlined, BellOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, BellOutlined, NotificationOutlined, LaptopOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -187,6 +187,11 @@ const _Header = () => {
 
         alarm_fatch()
 
+        axios.get("http://localhost:8080/api/user", header).then(res=>{            
+            setUser(res.data);
+            setProfileState(!!res.data.profile)
+        }).catch();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -203,14 +208,19 @@ const _Header = () => {
     const $websocket = useRef(null);
     const [count, setCount] = useState(0); // 알림 개수
     const userNo = localStorage.getItem('userNo');
+    const [profileState, setProfileState] = useState();
+    const [user,setUser] = useState();
     //
 
     return (
         <DIV>
-            <Header className="header">
-                {/* <div style={{ width: "20%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div> */}
-
-                <div style={{ width: "80%", textAlign: "right" }}>
+            <Header className="header" style={{width: '100%', padding: '0'}}>
+            <div style={{ paddingLeft:'10px', width: "10px", display: "inline-block", background: "#001529", color: "silver", fontSize: "15px", fontStyle: "oblique" }}><Button style={buttonStyle} className="inbutton" type="primary"><Link to="/">In&Out</Link></Button></div>
+                {/* <Image style={{ borderRadius: "80%", width: '100%', height: '100%' }}
+                    height='90%' width='50px'
+                    src={profileState ? '/images/' + user.profile : DefaultProfile}
+                /> */}
+                <div style={{ paddingRight:'15px', width: "100%", textAlign: "right" }}>
 
                     <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
                         <div>{onTime}</div>
@@ -230,6 +240,9 @@ const _Header = () => {
                     </Button>
                     <Button style={buttonStyle2} className="button" type="primary" shape="circle">
                         <Link to="/logout"><LogoutOutlined /></Link>
+                    </Button>
+                    <Button style={buttonStyle2} className="button" type="primary" shape="circle">
+                        <Link to="/notice"><NotificationOutlined /></Link>
                     </Button>
 
 
@@ -292,7 +305,7 @@ const _Header = () => {
 
                     <Drawer
                         title="알림"
-                        width="350px"
+                        width="250px"
                         placement="right"
                         closable={true}
                         onClose={onClose}

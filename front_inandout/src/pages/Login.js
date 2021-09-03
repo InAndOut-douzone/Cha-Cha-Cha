@@ -14,11 +14,13 @@ const Container = styled.div`
   height: 100%;
   background-image: url(${img});
   background-size: cover;
-  font-family: LingWai TC;
+  
+  p {text-align: center;}
 
   Form {
+    width: 300px;
     background: $white;
-    padding: 2em;
+    padding: 1.5em;
     border-radius: 20px;
     border-left: 1px solid $white;
     border-top: 1px solid $white;
@@ -26,25 +28,22 @@ const Container = styled.div`
     box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
     text-align: center;
     position: relative;
-    transition: all 0.2s ease-in-out;
-
+    
     input, Form.Item, button {
       text-align: center;
-      background: transparent;
+      background: bottom;
       padding: 0.75em;
       margin-top: 1.5em;
-      margin-bottom: 1.5em;
       border: none;
       border-left: 1px solid $white;
       border-top: 1px solid $white;
-      border-radius: 5000px;
+      border-radius: 10px;
       backdrop-filter: blur(5px);
       box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
       color: #3F5EFB;
       font-family: Montserrat, sans-serif;
       font-weight: 500;
       transition: all 0.2s ease-in-out;
-      font-family: LingWai TC;
 
       &:hover {
         font-size: 1.2em;
@@ -99,10 +98,11 @@ export default function Login({ history, location }) {
         name="global_state"
         layout="inline"
         onFinish={onfinish}
-      >
+        >
+        <div style={{width:'100%', textAlign:'center', fontSize:'2em', marginBottom:'30px', fontFamily: 'system-ui', color: 'lightslategrey'}}>IN AND OUT</div>
         <Form.Item name="no">
           {/* <input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> */}
-          <input maxLength="8" required placeholder="사원번호" prefix={<UserOutlined />} />
+          <input style={{width:'100%'}} maxLength="8" required placeholder="사원번호" prefix={<UserOutlined />} />
         </Form.Item>
         <button className="btn1" type='Primary' htmlType="submit">LOGIN</button>
       </Form>
