@@ -43,7 +43,7 @@ const Notice = (props) => {
     },[no])
 
     const ab = async () => { // 페이지 로딩시작하면 공지사항 가져오기
-        await axios.get("http://192.168.254.66:8080/api/notice/"+no, header).then((res)=>{
+        await axios.get("http://localhost:8080/api/notice/"+no, header).then((res)=>{
             setNotice(res.data);
             
             // console.log(notice.user.username);
@@ -51,7 +51,7 @@ const Notice = (props) => {
     }
 
     const bb = async () => { // 페이지로딩 시작하면 이전글, 다음글 목록 가져오기
-        await axios.get("http://192.168.254.66:8080/api/notice/prev/"+no, header).then((res)=>{   
+        await axios.get("http://localhost:8080/api/notice/prev/"+no, header).then((res)=>{   
             setPrev(res.data);
             })
     }
@@ -77,7 +77,7 @@ const Notice = (props) => {
     }
 
     const handleOk = () => { // 모달 ok  버튼 누를 시 공지사항 삭제
-        axios.get("http://192.168.254.66:8080/api/notice/delete/"+no, header).then((res)=>{   
+        axios.get("http://localhost:8080/api/notice/delete/"+no, header).then((res)=>{   
             
         })
         window.location.href="/notice";
