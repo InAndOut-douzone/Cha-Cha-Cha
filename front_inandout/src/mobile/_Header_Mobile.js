@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Layout, Button, Modal, Card, Drawer, Badge, notification } from 'antd';
-import { HomeOutlined, LogoutOutlined, BellOutlined, NotificationOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, BellOutlined, NotificationOutlined, LaptopOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -214,13 +214,13 @@ const _Header = () => {
 
     return (
         <DIV>
-            <Header className="header" style={{paddingLeft: '20px'}}>
-                {/* <div style={{ width: "20%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div> */}
+            <Header className="header" style={{width: '100%', padding: '0'}}>
+            <div style={{ paddingLeft:'10px', width: "10px", display: "inline-block", background: "#001529", color: "silver", fontSize: "15px", fontStyle: "oblique" }}><Button style={buttonStyle} className="inbutton" type="primary"><Link to="/">In&Out</Link></Button></div>
                 {/* <Image style={{ borderRadius: "80%", width: '100%', height: '100%' }}
                     height='90%' width='50px'
                     src={profileState ? '/images/' + user.profile : DefaultProfile}
                 /> */}
-                <div style={{ width: "100%", textAlign: "center" }}>
+                <div style={{ paddingRight:'15px', width: "100%", textAlign: "right" }}>
 
                     <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
                         <div>{onTime}</div>
