@@ -123,11 +123,11 @@ const Work = () => {
                         ["Sleep", 45],
                         ]}
                         options={{
-                            title: "My Daily Activities",
+                            title: "근무 시간",
                             backgroundColor: "transparent",
                             legend: "none",
                             pieHole: 0.3,
-                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"]
+                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"],    
                         }}
                     />
 
@@ -161,23 +161,19 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["Work", 25],
-                        ["Eat", 10],
-                        ["Commute", 10],
-                        ["Watch TV", 10],
-                        ["Sleep", 45],
+                        ["Work", data[2]],
+                        ["Eat", 52-data[2]],
                         ]}
                         options={{
-                            title: "My Daily Activities",
+                            title:"주간 근무 시간",
                             backgroundColor: "transparent",
                             legend: "none",
                             pieHole: 0.3,
-                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"]
+                            colors: ["skyblue", "#ff9aa3", "lightgrey", "yellowgreen", "gold"]
                         }}
                     />               
                      
                 </div>
-
 
                 <Space direction="vertical" size={12}>
                     <RangePicker onChange={dateHandler} />
