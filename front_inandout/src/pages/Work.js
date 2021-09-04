@@ -82,6 +82,8 @@ const Work = () => {
             setOnoff(res.data);
         });
     }
+
+    const a = 16;
     return (
         <SiteLayout>
             <Layout style={{ padding: '0 24px 24px' }}>
@@ -161,8 +163,9 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["Work", data[2]],
-                        ["Eat", 52-data[2]],
+                        ["일한 시간", parseInt(data[2])],
+                        ["최대 남은 시간", 52-data[2]],
+
                         ]}
                         options={{
                             title:"주간 근무 시간",
