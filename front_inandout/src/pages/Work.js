@@ -168,11 +168,14 @@ const Work = () => {
 
                         ]}
                         options={{
+                            // pieStartAngle: 135, // 엥글 각도 바꾸기
+                            // tooltip: { trigger: 'none' },   // 툴팁 안보이게 하기
+                            pieSliceText: 'label',  // 퍼센트 말고 타이틀로 적히기
                             title:"주간 근무 시간",
                             backgroundColor: "transparent",
                             legend: "none",
                             pieHole: 0.3,
-                            colors: ["skyblue", "#ff9aa3", "lightgrey", "yellowgreen", "gold"]
+                            colors: ["skyblue", "#ff9aa3", "lightgrey", "yellowgreen", "gold"],
                         }}
                     />               
                      
