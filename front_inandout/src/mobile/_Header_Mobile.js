@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Layout, Button, Modal, Card, Drawer, Badge, notification } from 'antd';
-import { HomeOutlined, LogoutOutlined, BellOutlined, NotificationOutlined, LaptopOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, BellOutlined, NotificationOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -154,7 +154,7 @@ const _Header = () => {
         setIsModalVisible2(false);
     };
 
-    const [notice, setNotice] = useState([]);
+    // const [notice, setNotice] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/getonoff", header).then(res => {
@@ -178,7 +178,7 @@ const _Header = () => {
                     title: res.data[i].title
                 })
             }
-            setNotice(title);
+            // setNotice(title);
         })
 
         axios.get("http://localhost:8080/api/alarm/count", header).then(res => { // 알림 개수 찾아오기
@@ -188,8 +188,8 @@ const _Header = () => {
         alarm_fatch()
 
         axios.get("http://localhost:8080/api/user", header).then(res=>{            
-            setUser(res.data);
-            setProfileState(!!res.data.profile)
+            // setUser(res.data);
+            // setProfileState(!!res.data.profile)
         }).catch();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -201,15 +201,15 @@ const _Header = () => {
         ...alarm
     }))
 
-    const noticeList = notice.map((title, index) =>
-        <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
+    // const noticeList = notice.map((title, index) =>
+    //     <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
 
     //
     const $websocket = useRef(null);
     const [count, setCount] = useState(0); // 알림 개수
     const userNo = localStorage.getItem('userNo');
-    const [profileState, setProfileState] = useState();
-    const [user,setUser] = useState();
+    // const [profileState, setProfileState] = useState();
+    // const [user,setUser] = useState();
     //
 
     return (

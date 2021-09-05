@@ -83,7 +83,7 @@ const Work = () => {
         });
     }
 
-    const a = 16;
+    // const a = 16;
     return (
         <SiteLayout>
             <Layout style={{ padding: '0 24px 24px' }}>
