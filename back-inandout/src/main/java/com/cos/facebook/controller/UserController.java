@@ -129,6 +129,12 @@ public class UserController {
 		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
 	}
 	
+	// 간호사 사원 리스트 
+	@GetMapping("/user/nurse")
+	public ResponseEntity<?> getNurse() {
+		return new ResponseEntity<>(userService.findAllNurse(),HttpStatus.OK);
+	}
+	
 	// 사원 리스트 
 	@GetMapping("/user/leavelist")
 	public ResponseEntity<?> getLeaveUser() {

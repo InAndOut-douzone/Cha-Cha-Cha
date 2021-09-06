@@ -20,6 +20,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query( value = "select * from User where leaveDate is null", nativeQuery = true)
 	public List<User> findAllLive();
+
+	@Query( value = "select * from User where leaveDate is null and position ='간호사'", nativeQuery = true)
+	public List<User> findAllNurse();
 	
 //	@Query(value = "select asdfsadf", nativeQuery = true)
 //	public User findzxcv(String name);

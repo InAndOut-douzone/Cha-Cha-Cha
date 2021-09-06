@@ -45,6 +45,9 @@ const Work = () => {
 
     const [onoff, setOnoff] = useState([]);
     const [data,setData] = useState([]);
+    const [user,setUser] = useState([]);
+    const [nurse,setNurse] = useState([]);
+
     // const [mon,setMon] = useState({});
     // const [sun,setSun] = useState({});
     // const [workTime,setWorkTime] = useState({});
@@ -54,21 +57,36 @@ const Work = () => {
     useEffect(() => { // user정보 get, useEffect를 사용하여 한번만 get 하도록 설정
 
         axios.get("/api/wokrpercent", header).then((res) => {
-            console.log(res.data);
             setData(res.data);
-            // setMon(res.data[0]);
-            // setSun(res.data[1]);
-            // setWorkTime(res.data[2]);
-            // setWorkPercent(res.data[3]);
-            // setUserName(res.data[4]);
         });
 
         axios.get("/api/work", header).then((res) => {
             setOnoff(res.data);
-            // console.log(res.data);
         });
 
+        // 현재 로그인한 사람 데이터 가져오기
+        axios.get("/api/user", header).then((res) => {
+            setUser(res.data);
+        });
+
+        getNurse();
+
     }, []);
+
+    // 간호사 목록 가져오기
+    const getNurse = async () => {
+        await axios.get("/api/user/nurse", header).then((res) => {
+            setNurse(res.data);
+        });
+    }
+
+    let nurses = [
+        ["Task", "Hours per Day"],
+    ]
+
+    nurse.map((nurse) => nurses.push([
+        nurse.name,nurse.aleave
+    ]));
 
     const dateHandler = (value, dateString) => {
 
@@ -78,7 +96,7 @@ const Work = () => {
         }
 
         axios.post("/api/workdate", data, header).then((res) => {
-            // console.log(res.data);
+            console.log(res.data);
             setOnoff(res.data);
         });
     }
@@ -118,14 +136,14 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["Work", 25],
-                        ["Eat", 10],
-                        ["Commute", 10],
-                        ["Watch TV", 10],
-                        ["Sleep", 45],
+                        ["남은 연차", user.aleave],
+                        ["사용 연차", 12-user.aleave],
                         ]}
                         options={{
-                            title: "근무 시간",
+                            pieStartAngle: 30, // 엥글 각도 바꾸기
+                            // tooltip: { trigger: 'none' },   // 툴팁 안보이게 하기
+                            pieSliceText: 'label',  // 퍼센트 말고 타이틀로 적히기
+                            title: "나의 연차 현황",
                             backgroundColor: "transparent",
                             legend: "none",
                             pieHole: 0.3,
@@ -139,20 +157,14 @@ const Work = () => {
                         height={"300px"}
                         chartType="PieChart"
                         loader={<div>Loading Chart</div>}
-                        data={[
-                        ["Task", "Hours per Day"],
-                        ["Work", 25],
-                        ["Eat", 10],
-                        ["Commute", 10],
-                        ["Watch TV", 10],
-                        ["Sleep", 45],
-                        ]}
+                        data={nurses}
                         options={{
-                            title: "My Daily Activities",
+                            pieSliceText: 'label',  // 퍼센트 말고 타이틀로 적히기
+                            title: "간호사 미사용 연차 현황",
                             backgroundColor: "transparent",
                             legend: "none",
                             pieHole: 0.3,
-                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"]
+                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87","red","blue","gold","silver"]
                         }}
                     />
 
@@ -177,9 +189,34 @@ const Work = () => {
                             pieHole: 0.3,
                             colors: ["skyblue", "#ff9aa3", "lightgrey", "yellowgreen", "gold"],
                         }}
-                    />               
-                     
+                    />     
                 </div>
+
+                
+                {
+                // 기본 옵션 차트
+                /* <Chart
+                        width={"300px"}
+                        height={"300px"}
+                        chartType="PieChart"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                        ["Task", "Hours per Day"],
+                        ["Work", 25],
+                        ["Eat", 10],
+                        ["Commute", 10],
+                        ["Watch TV", 10],
+                        ["Sleep", 45],
+                        ]}
+                        options={{
+                            title: "My Daily Activities",
+                            backgroundColor: "transparent",
+                            legend: "none",
+                            pieHole: 0.3,
+                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"]
+                        }}
+                    />           */}
+                     
 
                 <Space direction="vertical" size={12}>
                     <RangePicker onChange={dateHandler} />
