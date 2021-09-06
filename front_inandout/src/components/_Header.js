@@ -258,6 +258,7 @@ const _Header = () => {
 
                                                 '연차신청을 등록하였습니다.',
                                             onClick: () => {
+                                                window.location.replace("/leavemanagement")
                                                 console.log('알림 클릭함!');
                                             },
                                         })
@@ -297,6 +298,7 @@ const _Header = () => {
                                                 description:
                                                     msg.category + ' 신청이 반려되었습니다.',
                                                 onClick: () => {
+                                                    window.location.replace("/leavemanagement")
                                                     console.log('알림 클릭함!');
                                                 },
                                             })

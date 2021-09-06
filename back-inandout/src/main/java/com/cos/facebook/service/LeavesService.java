@@ -79,6 +79,7 @@ public class LeavesService {
 	
 	public void delete(int id) {
 		leavesRepository.deleteById(id);
+		alarmController.SendToMessage2();
 	}
 	
 	public Leaves add(LeaveAddReqDto leaveAddReqDto, String username) {
@@ -96,17 +97,16 @@ public class LeavesService {
 		
 		System.out.println("===================");
 		System.out.println(leavesEntity);
-		
-		
-		
-		alarmController.SendTemplateMessage(leavesEntity);
-		
+				
 		Alarm alarmEntitiy = new Alarm();
 		alarmEntitiy.setMessage(leaveAddReqDto.getCategory());
 		alarmEntitiy.setFromUser(userEntity);
 		alarmEntitiy.setUser(doctoryEntity);
 		alarmEntitiy.setState(true);
 		alarmRepository.save(alarmEntitiy);
+		
+		alarmController.SendTemplateMessage(leavesEntity);
+		alarmController.SendToMessage2();
 		
 		return leavesRepository.save(leavesEntity);
 	}
@@ -124,10 +124,10 @@ public class LeavesService {
 		leavesEntity.setUser(userEntity);
 		leavesEntity.setFromUser(doctoryEntity);
 		
-		System.out.println("===================");
-		System.out.println(leavesEntity);
+		Leaves leaves = leavesRepository.save(leavesEntity);
+		alarmController.SendToMessage2();
 		
-		return leavesRepository.save(leavesEntity);
+		return leaves;
 	}
 
 	public List<Leaves> getLeavesByDoctor(long doctorId) {
@@ -162,6 +162,7 @@ public class LeavesService {
 				// 두 기간의 차이 구하기
 				long leaveTime = leaveEntity.getToDate().getTime() - leaveEntity.getFromDate().getTime(); 
 				long leaveDay = leaveTime / (24 *60*60*1000);
+				System.out.println("leaveDay : " +leaveDay);
 				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-(leaveDay+1));
 			} else {
 				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-0.5);
@@ -170,13 +171,14 @@ public class LeavesService {
 
 		leavesRepository.save(leaveEntity);
 		
-		alarmController.SendTemplateMessage2(leaveEntity);
 		Alarm alarmEntitiy = new Alarm();
 		alarmEntitiy.setMessage(leaveEntity.getCategory());
 		alarmEntitiy.setFromUser(leaveEntity.getFromUser());
 		alarmEntitiy.setUser(leaveEntity.getUser());
 		alarmEntitiy.setState(true);
 		alarmRepository.save(alarmEntitiy);
+		alarmController.SendTemplateMessage2(leaveEntity);
+		alarmController.SendToMessage2();
 	}
 
 	public void update(LeavesReqDto leavesReqDto) {
