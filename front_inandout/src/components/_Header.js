@@ -212,7 +212,7 @@ const _Header = () => {
                 {/* <div className="logo" /> */}
                 <Link to="/"><div style={{ width: "130px", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div></Link>
 
-                <Media query="(max-width: 1061px)" render={() =>
+                <Media query="(max-width: 1060px)" render={() =>
                 (
                     <>
                         <div style={{ width: "100%", textAlign: "right" }}>
@@ -275,14 +275,23 @@ const _Header = () => {
                                         alarm_fatch()
                                         setCount(count + 1)
                                         msg.state === "success" ?
-                                            notification.open({
-                                                message: msg.user.name,
-                                                description:
-                                                    '승인되었습니다.',
-                                                onClick: () => {
-                                                    console.log('알림 클릭함!');
-                                                },
-                                            }) :
+                                            msg.category === '출장' || msg.category === '외근' ?
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + ' 일정이 변경되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + '가 승인되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
                                             notification.open({
                                                 message: msg.user.name + "님",
                                                 description:
@@ -331,6 +340,7 @@ const _Header = () => {
                     </>
                 )}
                 />
+
 
                 <Media query="(min-width: 1061px)" render={() =>
                 (
@@ -404,14 +414,23 @@ const _Header = () => {
                                         alarm_fatch()
                                         setCount(count + 1)
                                         msg.state === "success" ?
-                                            notification.open({
-                                                message: msg.user.name,
-                                                description:
-                                                    msg.category + ' 승인 되었습니다.',
-                                                onClick: () => {
-                                                    console.log('알림 클릭함!');
-                                                },
-                                            }) :
+                                            msg.category === '출장' || msg.category === '외근' ?
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + ' 일정이 변경되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + '가 승인되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
                                             notification.open({
                                                 message: msg.user.name + "님",
                                                 description:

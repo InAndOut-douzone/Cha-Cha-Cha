@@ -180,6 +180,7 @@ public class LeavesService {
 	}
 
 	public void update(LeavesReqDto leavesReqDto) {
+		System.out.println("여기 실행됐난ㅁㅇㄹㄴㅁㅇㄹ");
 		Leaves leavesEntity = leavesRepository.findById(leavesReqDto.getId()).get();
 		leavesEntity.setCategory(leavesReqDto.getCategory());
 		leavesEntity.setContent(leavesReqDto.getContent());
