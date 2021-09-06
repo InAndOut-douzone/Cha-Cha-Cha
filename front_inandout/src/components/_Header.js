@@ -11,6 +11,8 @@ import Media from 'react-media';
 
 const { Header } = Layout;
 
+const userNo = localStorage.getItem('userNo');
+
 const DIV = styled.div`
         .ant-card{
             text-align: left;
@@ -113,6 +115,13 @@ const _Header = () => {
     const alarmDelete = async (no) => { // 알림 삭제
         await axios.delete("http://localhost:8080/api/alarm/" + no, header).then((res) => {
             alert("알림이 삭제되었습니다.");
+            alarm_fatch()
+        });
+    }
+
+    const alarmAllDelete = async () => { // 알림 모두 삭제
+        await axios.delete("http://localhost:8080/api/alarm", header).then((res) => {
+            alert("알림이 모두 삭제되었습니다.");
             alarm_fatch()
         });
     }
@@ -305,39 +314,6 @@ const _Header = () => {
                                     }
                                 }
                                 ref={$websocket} />
-
-                            <Drawer
-                                title="알림"
-                                width="350px"
-                                placement="right"
-                                closable={true}
-                                onClose={onClose}
-                                visible={visible}
-                            >
-                                {alarm.map((al) =>
-                                    al.state === true ?
-                                        <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                            extra={
-                                                <div>
-                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                </div>} key={al.no}>
-                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        </Card>
-                                        :
-                                        <Card2>
-                                            <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
-                                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                                extra={
-                                                    <div>
-                                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                    </div>} key={al.no}>
-                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                            </Card>
-                                        </Card2>
-                                )}
-                                <br />
-                            </Drawer>
                         </div>
                     </>
                 )}
@@ -444,43 +420,45 @@ const _Header = () => {
                                     }
                                 }
                                 ref={$websocket} />
-
-                            <Drawer
-                                title="알림"
-                                width="350px"
-                                placement="right"
-                                closable={true}
-                                onClose={onClose}
-                                visible={visible}
-                            >
-                                {alarm.map((al) =>
-                                    al.state === true ?
-                                        <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                            extra={
-                                                <div>
-                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                </div>} key={al.no}>
-                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        </Card>
-                                        :
-                                        <Card2>
-                                            <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
-                                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                                extra={
-                                                    <div>
-                                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                    </div>} key={al.no}>
-                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                            </Card>
-                                        </Card2>
-                                )}
-                                <br />
-                            </Drawer>
                         </div>
                     </>
                 )}
                 />
+                <Drawer
+                    title="알림"
+                    width="350px"
+                    placement="right"
+                    closable={true}
+                    onClose={onClose}
+                    visible={visible}
+                >
+                    <div style={{textAlign: "center", marginBottom: "20px"}}>
+                        <button onClick={() => alarmAllDelete()} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>모두 삭제</button>
+                    </div>
+                    {alarm.map((al) =>
+                        al.state === true ?
+                            <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
+                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                extra={
+                                    <div>
+                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                    </div>} key={al.no}>
+                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                            </Card>
+                            :
+                            <Card2>
+                                <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                    extra={
+                                        <div>
+                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                        </div>} key={al.no}>
+                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                </Card>
+                            </Card2>
+                    )}
+                    <br />
+                </Drawer>
             </Header>
         </DIV>
     );

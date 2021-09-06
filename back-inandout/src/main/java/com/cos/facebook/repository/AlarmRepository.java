@@ -22,4 +22,9 @@ public interface AlarmRepository extends JpaRepository<Alarm, Integer>{
 	
 	@Query(value = "select count(*) from Alarm where toUser = :id and state = 1", nativeQuery = true)
 	public Long findCount(long id);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "delete from Alarm where toUser = :id",nativeQuery = true)
+	public void allDeleteById(long id);
 }
