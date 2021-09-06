@@ -95,9 +95,11 @@ export default function Login({ history, location }) {
   return (
     <Container>
       <Form
+
         name="global_state"
         layout="inline"
         onFinish={onfinish}
+      
         >
         <div style={{width:'100%', textAlign:'center', fontSize:'2em', marginBottom:'30px', fontFamily: 'system-ui', color: 'lightslategrey'}}>IN AND OUT</div>
         <Form.Item name="no">
