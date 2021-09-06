@@ -89,8 +89,14 @@ public class AlarmController {
 		return new ResponseEntity<>(alarmService.findCount(principal.getUser().getId()),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/api/alarm/{no}")
+	@DeleteMapping("/api/alarm/{no}") // 알림 하나 삭제
 	public void alarmDelete(@PathVariable int no) {
 		alarmService.alarmDelete(no);
+	}
+	
+	@DeleteMapping("/api/alarm") // 알림 모두 삭제
+	public void alarmAllDelete(Authentication authentication) {
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		alarmService.alarmAllDelete(principal.getUser().getId());
 	}
 }
