@@ -212,7 +212,7 @@ const _Header = () => {
                 {/* <div className="logo" /> */}
                 <Link to="/"><div style={{ width: "130px", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div></Link>
 
-                <Media query="(max-width: 1061px)" render={() =>
+                <Media query="(max-width: 1060px)" render={() =>
                 (
                     <>
                         <div style={{ width: "100%", textAlign: "right" }}>
@@ -340,6 +340,7 @@ const _Header = () => {
                     </>
                 )}
                 />
+
 
                 <Media query="(min-width: 1061px)" render={() =>
                 (
