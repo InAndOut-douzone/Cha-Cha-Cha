@@ -416,7 +416,7 @@ const _Header = () => {
                                             notification.open({
                                                 message: msg.user.name,
                                                 description:
-                                                    '승인되었습니다.',
+                                                    msg.category + ' 승인 되었습니다.',
                                                 onClick: () => {
                                                     console.log('알림 클릭함!');
                                                 },
