@@ -76,7 +76,7 @@ const Leave_Management = () => {
   const [leaves, setLeaves] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/user/list", header).then(res => {
+    axios.get("http://localhost:8080/api/user/nurse", header).then(res => {
       setUsers(res.data);
     }).catch();
     getLeaves();
@@ -108,7 +108,7 @@ const Leave_Management = () => {
           <br /><br />
           <Fade bottom>
           <div style={{ textAlign: "center" }}>
-            사원들의 연차 현황을 볼 수 있고, 사원들의 연차 승인, 거절을 할 수 있습니다.
+            사원(간호사)들의 연차 현황을 볼 수 있고, 사원들의 연차 승인, 거절을 할 수 있습니다.
           </div>
           <br /><br />
           <Pagi>
