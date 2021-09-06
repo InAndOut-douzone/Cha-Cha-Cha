@@ -274,11 +274,20 @@ const _Header = () => {
                                         console.log(msg)
                                         alarm_fatch()
                                         setCount(count + 1)
-                                        msg.state === "success" ?
+                                        msg.state === "success" ? 
+                                            msg.category === '출장' || msg.category === '외근'? 
                                             notification.open({
                                                 message: msg.user.name,
                                                 description:
-                                                    '승인되었습니다.',
+                                                msg.category + ' 일정이 변경되었습니다.',
+                                                onClick: () => {
+                                                    console.log('알림 클릭함!');
+                                                },
+                                            }) : 
+                                            notification.open({
+                                                message: msg.user.name,
+                                                description:
+                                                msg.category + '가 승인되었습니다.',
                                                 onClick: () => {
                                                     console.log('알림 클릭함!');
                                                 },
