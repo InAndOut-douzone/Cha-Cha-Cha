@@ -7,6 +7,7 @@ import axios from 'axios';
 import moment from 'moment';
 import styled from 'styled-components';
 import SockJsClient from 'react-stomp';
+import Media from 'react-media';
 
 const { Header } = Layout;
 
@@ -207,132 +208,258 @@ const _Header = () => {
 
     return (
         <DIV>
-            <Header className="header">
+            <Header className="header" style={{ width: '100%', paddingLeft: '40px', paddingRight: '20px' }}>
                 {/* <div className="logo" /> */}
-                <div style={{ width: "30%", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div>
+                <Link to="/"><div style={{ width: "130px", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div></Link>
 
-                {/* <Clock className="clock" format={'YYYY 년 MM 월 DD 일 HH:mm:ss'} ticking={true} timezone={'KR/Pacific'}/> */}
-                <div style={{ textAlign: "right", width: "40%" }}>
-                    <Card style={{ width: "100%", height: 50, marginTop: 12, backgroundColor: "#001528" }}>
-                        <ul className='animation'>
-                            { /* <p><a style={{ color: "white" }} href="/notice">{notice}</a></p> */}
-                            {noticeList}
-                        </ul>
-                    </Card>
-                </div>
-                <div style={{ width: "40%", textAlign: "right" }}>
+                <Media query="(max-width: 1061px)" render={() =>
+                (
+                    <>
+                        <div style={{ width: "100%", textAlign: "right" }}>
 
-                    <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
-                        <div>{onTime}</div>
-                    </Button>
-                    <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                        <p>정말 출근하시겠습니까?</p>
-                    </Modal>
+                            <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
+                                <div>{onTime}</div>
+                            </Button>
+                            <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                                <p>정말 출근하시겠습니까?</p>
+                            </Modal>
 
-                    <Button style={buttonStyle} className="button" type="primary" onClick={showModalOff}>
-                        <div>{offTime}</div>
-                    </Button>
-                    <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
-                        <p>정말 퇴근하시겠습니까?</p>
-                    </Modal>
-                    <Button style={buttonStyle2} className="button" type="primary" shape="circle">
-                        <Link to="/"><HomeOutlined /></Link>
-                    </Button>
-                    <Button style={buttonStyle2} className="button" type="primary" shape="circle">
-                        <Link to="/logout"><LogoutOutlined /></Link>
-                    </Button>
+                            <Button style={buttonStyle} className="button" type="primary" onClick={showModalOff}>
+                                <div>{offTime}</div>
+                            </Button>
+                            <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
+                                <p>정말 퇴근하시겠습니까?</p>
+                            </Modal>
+                            <Button style={buttonStyle2} className="button" type="primary" shape="circle">
+                                <Link to="/"><HomeOutlined /></Link>
+                            </Button>
+                            <Button style={buttonStyle2} className="button" type="primary" shape="circle">
+                                <Link to="/logout"><LogoutOutlined /></Link>
+                            </Button>
 
 
-                    <Badge count={count}>
-                        <Button onClick={showDrawer} style={buttonStyle2} className="button" type="primary" shape="circle">
-                            <BellOutlined />
-                        </Button>
-                    </Badge>
-                    <SockJsClient
-                        url="http://localhost:8080/webSocket"
-                        topics={[`/topics/template${userNo}`]}
-                        // onMessage={msg => { setCount(count + 1) }}
-                        onMessage={
-                            (msg) => {
-                                console.log(msg)
-                                alarm_fatch()
-                                setCount(count + 1)
-                                notification.open({
-                                    message: msg.user.name,
-                                    description:
+                            <Badge count={count}>
+                                <Button onClick={showDrawer} style={buttonStyle2} className="button" type="primary" shape="circle">
+                                    <BellOutlined />
+                                </Button>
+                            </Badge>
+                            <SockJsClient
+                                url="http://localhost:8080/webSocket"
+                                topics={[`/topics/template${userNo}`]}
+                                // onMessage={msg => { setCount(count + 1) }}
+                                onMessage={
+                                    (msg) => {
+                                        console.log(msg)
+                                        alarm_fatch()
+                                        setCount(count + 1)
+                                        notification.open({
+                                            message: msg.user.name,
+                                            description:
 
-                                        '연차신청을 등록하였습니다.',
-                                    onClick: () => {
-                                        console.log('알림 클릭함!');
-                                    },
-                                })
-                            }
-                        }
-                        ref={$websocket} />
+                                                '연차신청을 등록하였습니다.',
+                                            onClick: () => {
+                                                console.log('알림 클릭함!');
+                                            },
+                                        })
+                                    }
+                                }
+                                ref={$websocket} />
 
-                    <SockJsClient
-                        url="http://localhost:8080/webSocket"
-                        topics={[`/topics/template2${userNo}`]}
-                        // onMessage={msg => { setCount(count + 1) }}
-                        onMessage={
-                            (msg) => {
-                                console.log(msg)
-                                alarm_fatch()
-                                setCount(count + 1)
-                                msg.state === "success" ?
-                                    notification.open({
-                                        message: msg.user.name,
-                                        description:
-                                            '승인되었습니다.',
-                                        onClick: () => {
-                                            console.log('알림 클릭함!');
-                                        },
-                                    }) :
-                                    notification.open({
-                                        message: msg.user.name + "님",
-                                        description:
-                                            msg.category + ' 신청이 반려되었습니다.',
-                                        onClick: () => {
-                                            console.log('알림 클릭함!');
-                                        },
-                                    })
-                            }
-                        }
-                        ref={$websocket} />
+                            <SockJsClient
+                                url="http://localhost:8080/webSocket"
+                                topics={[`/topics/template2${userNo}`]}
+                                // onMessage={msg => { setCount(count + 1) }}
+                                onMessage={
+                                    (msg) => {
+                                        console.log(msg)
+                                        alarm_fatch()
+                                        setCount(count + 1)
+                                        msg.state === "success" ?
+                                            notification.open({
+                                                message: msg.user.name,
+                                                description:
+                                                    '승인되었습니다.',
+                                                onClick: () => {
+                                                    console.log('알림 클릭함!');
+                                                },
+                                            }) :
+                                            notification.open({
+                                                message: msg.user.name + "님",
+                                                description:
+                                                    msg.category + ' 신청이 반려되었습니다.',
+                                                onClick: () => {
+                                                    console.log('알림 클릭함!');
+                                                },
+                                            })
+                                    }
+                                }
+                                ref={$websocket} />
 
-                    <Drawer
-                        title="알림"
-                        width="350px"
-                        placement="right"
-                        closable={true}
-                        onClose={onClose}
-                        visible={visible}
-                    >
-                        {alarm.map((al) =>
-                            al.state === true ?
-                                <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                    extra={
-                                        <div>
-                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                        </div>} key={al.no}>
-                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                </Card>
-                                :
-                                <Card2>
-                                    <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
-                                        size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                        extra={
-                                            <div>
-                                                <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                            </div>} key={al.no}>
-                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                    </Card>
-                                </Card2>
-                        )}
-                        <br />
-                    </Drawer>
-                </div>
+                            <Drawer
+                                title="알림"
+                                width="350px"
+                                placement="right"
+                                closable={true}
+                                onClose={onClose}
+                                visible={visible}
+                            >
+                                {alarm.map((al) =>
+                                    al.state === true ?
+                                        <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
+                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                            extra={
+                                                <div>
+                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                </div>} key={al.no}>
+                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        </Card>
+                                        :
+                                        <Card2>
+                                            <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                                extra={
+                                                    <div>
+                                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                    </div>} key={al.no}>
+                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                            </Card>
+                                        </Card2>
+                                )}
+                                <br />
+                            </Drawer>
+                        </div>
+                    </>
+                )}
+                />
+
+                <Media query="(min-width: 1061px)" render={() =>
+                (
+                    <>
+                        <div style={{ textAlign: "right", width: "60%" }}>
+                            <Card style={{ width: "100%", height: 50, marginTop: 12, backgroundColor: "#001528" }}>
+                                <ul className='animation'>
+                                    { /* <p><a style={{ color: "white" }} href="/notice">{notice}</a></p> */}
+                                    {noticeList}
+                                </ul>
+                            </Card>
+                        </div>
+
+                        <div style={{ width: "40%", textAlign: "right" }}>
+
+                            <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
+                                <div>{onTime}</div>
+                            </Button>
+                            <Modal title="출근" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                                <p>정말 출근하시겠습니까?</p>
+                            </Modal>
+
+                            <Button style={buttonStyle} className="button" type="primary" onClick={showModalOff}>
+                                <div>{offTime}</div>
+                            </Button>
+                            <Modal title="퇴근" visible={isModalVisible2} onOk={handleOk2} onCancel={handleCancel2}>
+                                <p>정말 퇴근하시겠습니까?</p>
+                            </Modal>
+                            <Button style={buttonStyle2} className="button" type="primary" shape="circle">
+                                <Link to="/"><HomeOutlined /></Link>
+                            </Button>
+                            <Button style={buttonStyle2} className="button" type="primary" shape="circle">
+                                <Link to="/logout"><LogoutOutlined /></Link>
+                            </Button>
+
+
+                            <Badge count={count}>
+                                <Button onClick={showDrawer} style={buttonStyle2} className="button" type="primary" shape="circle">
+                                    <BellOutlined />
+                                </Button>
+                            </Badge>
+                            <SockJsClient
+                                url="http://localhost:8080/webSocket"
+                                topics={[`/topics/template${userNo}`]}
+                                // onMessage={msg => { setCount(count + 1) }}
+                                onMessage={
+                                    (msg) => {
+                                        console.log(msg)
+                                        alarm_fatch()
+                                        setCount(count + 1)
+                                        notification.open({
+                                            message: msg.user.name,
+                                            description:
+
+                                                '연차신청을 등록하였습니다.',
+                                            onClick: () => {
+                                                console.log('알림 클릭함!');
+                                            },
+                                        })
+                                    }
+                                }
+                                ref={$websocket} />
+
+                            <SockJsClient
+                                url="http://localhost:8080/webSocket"
+                                topics={[`/topics/template2${userNo}`]}
+                                // onMessage={msg => { setCount(count + 1) }}
+                                onMessage={
+                                    (msg) => {
+                                        console.log(msg)
+                                        alarm_fatch()
+                                        setCount(count + 1)
+                                        msg.state === "success" ?
+                                            notification.open({
+                                                message: msg.user.name,
+                                                description:
+                                                    msg.category + ' 승인 되었습니다.',
+                                                onClick: () => {
+                                                    console.log('알림 클릭함!');
+                                                },
+                                            }) :
+                                            notification.open({
+                                                message: msg.user.name + "님",
+                                                description:
+                                                    msg.category + ' 신청이 반려되었습니다.',
+                                                onClick: () => {
+                                                    console.log('알림 클릭함!');
+                                                },
+                                            })
+                                    }
+                                }
+                                ref={$websocket} />
+
+                            <Drawer
+                                title="알림"
+                                width="350px"
+                                placement="right"
+                                closable={true}
+                                onClose={onClose}
+                                visible={visible}
+                            >
+                                {alarm.map((al) =>
+                                    al.state === true ?
+                                        <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
+                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                            extra={
+                                                <div>
+                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                </div>} key={al.no}>
+                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        </Card>
+                                        :
+                                        <Card2>
+                                            <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                                extra={
+                                                    <div>
+                                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                    </div>} key={al.no}>
+                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                            </Card>
+                                        </Card2>
+                                )}
+                                <br />
+                            </Drawer>
+                        </div>
+                    </>
+                )}
+                />
             </Header>
         </DIV>
     );

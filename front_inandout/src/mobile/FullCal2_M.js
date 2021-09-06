@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
 import { Checkbox, Drawer, Input, Select, Form, Button, DatePicker, Badge } from 'antd';
 import FullCalendar from "@fullcalendar/react";
@@ -8,11 +8,10 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction";
 import axios from 'axios';
-import EmployeeOnOffList from "../../pages/user/EmployeeOnOffList";
+import EmployeeOnOffListM from "../pages/user/EmployeeOnOffListM";
 import styled from 'styled-components';
 import moment from 'moment';
 import Fade from 'react-reveal/Fade';
-import SockJsClient from 'react-stomp';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -80,7 +79,7 @@ const FullCal2 = () => {
       category: eventClick.event.extendedProps.category,
       content: eventClick.event.extendedProps.content,
       fromDate: eventClick.event.start,
-      toDate: eventClick.event.extendedProps.category === "연차" ? moment(eventClick.event.end).add(-1, 'd').toDate() : eventClick.event.end,
+      toDate: eventClick.event.end,
     }
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
@@ -89,7 +88,6 @@ const FullCal2 = () => {
     })
   };
 
-  // 현재 달력 옵션 클릭 상태를 유지하면서 달력 데이터 초기화
   const check = (a,b,c,d) => {
     if(a === true) {
       a = 1;
@@ -343,50 +341,45 @@ const FullCal2 = () => {
     userId: leave.user.id,
     roles: leave.user.roles,
     id: leave.no,
-    title: '[' + leave.user.name + '] ' + leave.category,
+    title: leave.user.name,
     color: leave.category === "연차" ? "skyblue" :
       leave.category === "오후 반차" ? "#ff9aa3" :
         leave.category === "오전 반차" ? "lightgrey" :
           leave.category === "출장" ? "yellowgreen" : "gold",
 
     start: leave.fromDate,
-    // end: leave.toDate,
     end: leave.category === "연차" ? moment(leave.toDate).add(1, 'd').toDate() : leave.toDate,
     category: leave.category,
     content: leave.content,
-    allDay: leave.category === "연차" ? 1 : leave.category === "오후 반차" ? 1 : leave.category === "오전 반차" ? 1 : 0
+    allDay: 1
   }))
 
-  const $websocket = useRef(null);
-
   return (
-    <div className="animated fadeIn p-4 demo-app">
-      <SockJsClient
-        url="http://localhost:8080/webSocket"
-        topics={['/topics/sendTo2']}
-        // onMessage={msg => { setCount(count + 1) }}
-        onMessage={
-            (msg) => {
-              check(내일정, 연차, 출장, 외근);
-            }
-        }
-        ref={$websocket} />
+    // <div className="animated fadeIn p-4 demo-app">
       <Row>
         <Col lg={10} sm={10} md={10}>
           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
                 <CalendarLayout2>
+                <Fade right>
+          <div style={{ textAlign:"center", marginTop: "-7.5px", height: "40px", width: "100%", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
+            <Checkbox onChange={onChange1}>내 일정</Checkbox>
+            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><Badge color="skyblue" /><Badge color="#d3d3d3" /><Badge color="#ff9aa3" />
+            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><Badge color="#9acd32" />
+            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><Badge color="gold" />
+          </div><br/>
+          </Fade>
                   <Fade bottom>
                   <FullCalendar
                     // defaultView="dayGridMonth"
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-                    height="750px"
+                    height="560px"
                     locale='ko'
                     headerToolbar={{
-                      right: "today",
+                      // right: "today",
                       // center: "prevYear prev title next nextYear",
-                      center: "prev title next",
-                      left: "dayGridMonth,timeGridWeek,listWeek"
+                      // center: "prev title next",
+                      left: "dayGridMonth,listWeek"
                     }}
                     buttonText={{
                       today: '오늘',
@@ -401,7 +394,7 @@ const FullCal2 = () => {
                     //   center: "title",
                     //   right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
                     // }}
-                    dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+                    // dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                     rerenderDelay={10}
                     eventDurationEditable={false}
                     editable={true}
@@ -424,26 +417,16 @@ const FullCal2 = () => {
         </Col>
         <Col lg={2} sm={2} md={2}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
-          <br /><br /><br />
-          <Fade right>
-          <div style={{ marginTop: "-7.5px", height: "40px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-            <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
-          </div><br />
-          <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><Badge color="skyblue" /><Badge color="#d3d3d3" /><Badge color="#ff9aa3" /><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><Badge color="#9acd32" /><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><Badge color="gold" /><br /><br /><br /><br />
-          </div>
-          </Fade>
+          
           <br />
           <Fade right>
-          <EmployeeOnOffList />
+          <EmployeeOnOffListM />
           </Fade>
           
 
           <Drawer
             title="일정 등록"
-            width="40%"
+            width="80%"
             onClose={onClose}
             visible={visible}
             bodyStyle={{ paddingBottom: 80 }}
@@ -517,7 +500,7 @@ const FullCal2 = () => {
 
           <Drawer
             title="일정 관리"
-            width="40%"
+            width="80%"
             onClose={onClose2}
             visible={visible2}
             bodyStyle={{ paddingBottom: 80 }}
@@ -608,7 +591,7 @@ const FullCal2 = () => {
           </Drawer>
         </Col>
       </Row>
-    </div>
+    // </div>
   );
 }
 

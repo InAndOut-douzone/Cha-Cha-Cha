@@ -194,5 +194,6 @@ public class LeavesService {
 		alarmEntitiy.setUser(leavesEntity.getUser());
 		alarmEntitiy.setState(true);
 		alarmRepository.save(alarmEntitiy);
+		alarmController.SendToMessage2();
 	}	
 }
