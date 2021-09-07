@@ -11,7 +11,6 @@ import Fade from 'react-reveal/Fade';
 
 const MyPageLayout = styled.div`
     .ant-descriptions-item-label { text-align:center }
-
 `
 
 const MyPage = () => {

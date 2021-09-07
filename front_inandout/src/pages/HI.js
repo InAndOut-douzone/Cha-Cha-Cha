@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Descriptions, Layout, Breadcrumb } from 'antd';
+import { Descriptions, Layout, Breadcrumb, Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import SiteLayout from './SiteLayout';
 import Fade from 'react-reveal/Fade';
+import DefaultLogo from '../assets/images/defaultProfile.png';
 
 const HIM = () => {
+    const imgPath = "/images/";
     const [hospital, setHospital] = useState({});
+    const [image, setImage] = useState();
 
     const header = {
         headers: {
@@ -25,9 +28,14 @@ const HIM = () => {
         axios.get("http://localhost:8080/api/hospital", header).then((res) => {
             console.log(res);
             setHospital(res.data);
+            if(res.data.logo != null) {
+                setImage(imgPath + res.data.logo);
+            } else {
+                setImage(null);
+            }
             JSON.stringify(res.data)
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -42,14 +50,16 @@ const HIM = () => {
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
                 <Fade bottom>
-                <Descriptions title="의원 정보 관리" bordered>
-                    <Descriptions.Item label="의원 번호" span={3}>{hospital.no}</Descriptions.Item>
-                    <Descriptions.Item label="의원명" span={3}>{hospital.name}</Descriptions.Item>
-                    <Descriptions.Item label="의원 로고" span={3}>{hospital.logo}</Descriptions.Item>
-                    <Descriptions.Item label="의원 연락처" span={3}>{hospital.telNum}</Descriptions.Item>
-                    <Descriptions.Item label="의원 주소" span={3}>{hospital.address}</Descriptions.Item>
-                    <Descriptions.Item label="대표자+명" span={3}>{hospital.ceoName}</Descriptions.Item>
-                </Descriptions>
+                    <div style={{ textAlign: "-webkit-center", width: "100%" }}>
+                        <Descriptions title="의원 정보 관리" bordered style={{ textAlign: "-webkit-center", width: "50%" }}>
+                            <Descriptions.Item label="의원 로고" span={3}><Image style={{ width: "200px" }} src={image === null ? DefaultLogo : image} roundedCircle /></Descriptions.Item>
+                            <Descriptions.Item label="의원 번호" span={3}>{hospital.no}</Descriptions.Item>
+                            <Descriptions.Item label="의원명" span={3}>{hospital.name}</Descriptions.Item>
+                            <Descriptions.Item label="의원 주소" span={3}>{hospital.address}</Descriptions.Item>
+                            <Descriptions.Item label="의원 연락처" span={3}>{hospital.telNum}</Descriptions.Item>
+                            <Descriptions.Item label="대표자명" span={3}>{hospital.ceoName}</Descriptions.Item>
+                        </Descriptions>
+                    </div>
                 </Fade>
             </Layout>
         </SiteLayout>

@@ -55,8 +55,7 @@ const _Drawer = () => {
       formRef.current.setFieldsValue({
         category: "",
         content: "",
-        toDate: "",
-        fromDate: "",
+        date: "",
         name: ""
       });
       // window.location.replace("/")
