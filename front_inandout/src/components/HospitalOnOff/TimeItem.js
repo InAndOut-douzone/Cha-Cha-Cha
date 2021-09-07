@@ -18,7 +18,9 @@ const TimeComponent = (props) => {
 
   return (
     <Form name="time_related_controls" {...formItemLayout} style={{ textAlign: "initial", marginLeft: "23%", marginBottom: "-20px" }}>
-      <Form.Item name={week} label={week} >{onTime}~ {offTime}</Form.Item>
+      {onTime === "00:00" ? 
+        <Form.Item name={week} label={week} >휴 진</Form.Item> : 
+        <Form.Item name={week} label={week} >{onTime}~ {offTime}</Form.Item> }
     </Form>
   );
 };

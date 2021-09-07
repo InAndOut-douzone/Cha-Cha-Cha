@@ -12,6 +12,7 @@ import SiteLayout from '../SiteLayout';
 import Fade from 'react-reveal/Fade';
 import HolidayItem from '../../components/holiday/HolidayItem'
 import { Timeline } from 'antd';
+import moment from 'moment'
 
 const { Title, Text } = Typography;
 
@@ -92,6 +93,8 @@ const WTM = () => {
     await axios.get("http://localhost:8080/api/holiday/all",header).then(res => {console.log(res.data); setHolidays(res.data);}).catch(err => {});
   }
 
+  const today = moment().format("YYYY MM DD");
+
   return (
     <SiteLayout>
       <Layout style={{ padding: '0 24px 24px' }}>
@@ -105,13 +108,25 @@ const WTM = () => {
         <br /><br />
 
         <Fade bottom>
-        <div style={{ textAlign: "center" }}>
-          <Title level={2}>현재 근무 시간</Title>
-          {time.map((time) => (<TimeItem key={time.no} time={time} />))}
-          <br />
-          <Text type="danger">주 52시간제</Text>
-          <Text>를 적용하고 있습니다.</Text>
+        <div style={{display:"flex", width:"100%"}}>
+          <div style={{ textAlign: "center", width:"50%" }}>
+            <Title level={2}>현재 근무 시간</Title>
+            {time.map((time) => (<TimeItem key={time.no} time={time} />))}
+            <br />
+            <Text type="danger">주 52시간제</Text>
+            <Text>를 적용하고 있습니다.</Text>
+          </div>
+          <div style={{marginLeft:"10%"}}>
+              <Title level={2}>휴무일 현황</Title>    
+              <Text>* 휴무일 현황을 볼 수 있습니다. ( {today} ~ {moment(today).add(30,'days').format("MM DD")} )</Text> <br/><br/><br/>
+              <div>
+                <Timeline>
+                    {holidays.map((holiday) => (<HolidayItem key={holiday.no} holiday={holiday}/>))}
+                  </Timeline>
+              </div>
+          </div>
         </div>
+
 
         <section id="about-fifty-two-hours-work-week">
           <div className="container">
@@ -240,16 +255,7 @@ const WTM = () => {
               </Form.Item>
             </Form>
               : " - 관리자만 변경 할 수 있습니다. - "
-          }
-          
-          <br/><br/><br/><br/>
-          <Title level={3}>휴무일 현황</Title> <br/>    
-          <Text>* 휴무일 현황을 볼 수 있습니다.</Text> <br/>
-        </div><br/><br/>
-        <div style={{alignSelf:"center"}}>
-        <Timeline>
-            {holidays.map((holiday) => (<HolidayItem key={holiday.no} holiday={holiday}/>))}
-        </Timeline>
+          }          
         </div>
         </Fade>
         
