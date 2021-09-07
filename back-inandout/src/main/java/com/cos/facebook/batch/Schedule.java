@@ -1,11 +1,8 @@
 package com.cos.facebook.batch;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
@@ -32,7 +29,7 @@ public class Schedule {
 	private final BatchConfig batch;
 	
     // 5초마다 실행
-    @Scheduled(cron="00 * * * * *")
+    @Scheduled(cron="00 57 23 * * *")
     public void executeJob () {
     	
     	 Map<String, JobParameter> confMap = new HashMap<>();
@@ -42,9 +39,6 @@ public class Schedule {
     	try {
 			jobLauncher.run(batch.job(), jobParameters);
 			System.out.println("*******");			
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			String date = LocalDateTime.now().format(formatter);
-			System.out.println(date);
 			
 		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
 				| JobParametersInvalidException e) {
