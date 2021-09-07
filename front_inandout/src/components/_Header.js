@@ -70,6 +70,7 @@ const _Header = () => {
     const [alarm, setAlarm] = useState([]);
     const [onTime, setOnTime] = useState("IN");
     const [offTime, setOffTime] = useState("OUT");
+    const [user, setUser] = useState({});
 
     const showDrawer = () => { // 알림창 열기
         alarm_fatch()
@@ -193,6 +194,10 @@ const _Header = () => {
 
         axios.get("http://localhost:8080/api/alarm/count", header).then(res => { // 알림 개수 찾아오기
             setCount(res.data);
+        })
+
+        axios.get("http://localhost:8080/api/user", header).then(res => { // 알림 개수 찾아오기
+            setUser(res.data);
         })
 
         alarm_fatch()
@@ -443,7 +448,11 @@ const _Header = () => {
                                     <div>
                                         <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                     </div>} key={al.no}>
-                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        {user.position === '간호사' ? 
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
+                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
+                                
                             </Card>
                             :
                             <Card2>
@@ -453,7 +462,10 @@ const _Header = () => {
                                         <div>
                                             <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                         </div>} key={al.no}>
-                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        {user.position === '간호사' ? 
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
+                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
                                 </Card>
                             </Card2>
                     )}

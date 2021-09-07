@@ -77,7 +77,29 @@ public class LeavesService {
 		return leavesRepository.findByNo(category);
 	}
 	
+	// 휴가 삭제 시 휴가 개수 복구
 	public void delete(int id) {
+		Leaves leavesEntity = leavesRepository.findById(id).get();
+		System.out.println("leavesEntity : " + leavesEntity);
+		
+		long leaveTime = leavesEntity.getToDate().getTime() - leavesEntity.getFromDate().getTime(); 
+		long leaveDay = leaveTime / (24 *60*60*1000);
+		
+		System.out.println("leaveDay :" + leaveDay);
+		// 휴가 신청 한 유저 찾고 +시키기
+		User userEntity = userRepository.findById(leavesEntity.getUser().getId()).get();
+				
+		if(leavesEntity.getCategory().equals("연차")) {
+			userEntity.setALeave(userEntity.getALeave() + (leaveDay+1));
+		}
+		if(leavesEntity.getCategory().equals("오전 반차")) {
+			userEntity.setALeave(userEntity.getALeave() + (leaveDay+0.5));
+		}
+		if(leavesEntity.getCategory().equals("오후 반차")) {
+			userEntity.setALeave(userEntity.getALeave() + (leaveDay+0.5));
+		}
+		
+		userRepository.save(userEntity);
 		leavesRepository.deleteById(id);
 		alarmController.SendToMessage2();
 	}
