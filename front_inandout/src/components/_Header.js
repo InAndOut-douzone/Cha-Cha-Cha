@@ -77,9 +77,9 @@ const _Header = () => {
     };
 
     const onClose = () => { // 알림창 닫기
-        setVisible(false);
         axios.put("http://localhost:8080/api/alarm", data, header).then(res => {
         })
+        setVisible(false);
     };
 
     const header = {
