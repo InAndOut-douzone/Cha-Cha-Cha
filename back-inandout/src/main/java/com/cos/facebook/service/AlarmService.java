@@ -29,5 +29,9 @@ public class AlarmService {
 	public void alarmDelete(Integer no) {
 		alarmRepository.deleteById(no);
 	}
+	
+	public void alarmAllDelete(long id) {
+		alarmRepository.allDeleteById(id);
+	}
 }
 

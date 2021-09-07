@@ -11,6 +11,8 @@ import Media from 'react-media';
 
 const { Header } = Layout;
 
+const userNo = localStorage.getItem('userNo');
+
 const DIV = styled.div`
         .ant-card{
             text-align: left;
@@ -68,6 +70,7 @@ const _Header = () => {
     const [alarm, setAlarm] = useState([]);
     const [onTime, setOnTime] = useState("IN");
     const [offTime, setOffTime] = useState("OUT");
+    const [user, setUser] = useState({});
 
     const showDrawer = () => { // 알림창 열기
         alarm_fatch()
@@ -113,6 +116,13 @@ const _Header = () => {
     const alarmDelete = async (no) => { // 알림 삭제
         await axios.delete("http://localhost:8080/api/alarm/" + no, header).then((res) => {
             alert("알림이 삭제되었습니다.");
+            alarm_fatch()
+        });
+    }
+
+    const alarmAllDelete = async () => { // 알림 모두 삭제
+        await axios.delete("http://localhost:8080/api/alarm", header).then((res) => {
+            alert("알림이 모두 삭제되었습니다.");
             alarm_fatch()
         });
     }
@@ -186,6 +196,10 @@ const _Header = () => {
             setCount(res.data);
         })
 
+        axios.get("http://localhost:8080/api/user", header).then(res => { // 알림 개수 찾아오기
+            setUser(res.data);
+        })
+
         alarm_fatch()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -212,7 +226,7 @@ const _Header = () => {
                 {/* <div className="logo" /> */}
                 <Link to="/"><div style={{ width: "130px", display: "inline-block", background: "#001529", color: "silver", fontSize: "25px", fontStyle: "oblique" }}>IN-N-OUT</div></Link>
 
-                <Media query="(max-width: 1061px)" render={() =>
+                <Media query="(max-width: 1060px)" render={() =>
                 (
                     <>
                         <div style={{ width: "100%", textAlign: "right" }}>
@@ -258,6 +272,7 @@ const _Header = () => {
 
                                                 '연차신청을 등록하였습니다.',
                                             onClick: () => {
+                                                window.location.replace("/leavemanagement")
                                                 console.log('알림 클릭함!');
                                             },
                                         })
@@ -275,62 +290,40 @@ const _Header = () => {
                                         alarm_fatch()
                                         setCount(count + 1)
                                         msg.state === "success" ?
-                                            notification.open({
-                                                message: msg.user.name,
-                                                description:
-                                                    '승인되었습니다.',
-                                                onClick: () => {
-                                                    console.log('알림 클릭함!');
-                                                },
-                                            }) :
+                                            msg.category === '출장' || msg.category === '외근' ?
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + ' 일정이 변경되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + '가 승인되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
                                             notification.open({
                                                 message: msg.user.name + "님",
                                                 description:
                                                     msg.category + ' 신청이 반려되었습니다.',
                                                 onClick: () => {
+                                                    window.location.replace("/leavemanagement")
                                                     console.log('알림 클릭함!');
                                                 },
                                             })
                                     }
                                 }
                                 ref={$websocket} />
-
-                            <Drawer
-                                title="알림"
-                                width="350px"
-                                placement="right"
-                                closable={true}
-                                onClose={onClose}
-                                visible={visible}
-                            >
-                                {alarm.map((al) =>
-                                    al.state === true ?
-                                        <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                            extra={
-                                                <div>
-                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                </div>} key={al.no}>
-                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        </Card>
-                                        :
-                                        <Card2>
-                                            <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
-                                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                                extra={
-                                                    <div>
-                                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                    </div>} key={al.no}>
-                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                            </Card>
-                                        </Card2>
-                                )}
-                                <br />
-                            </Drawer>
                         </div>
                     </>
                 )}
                 />
+
 
                 <Media query="(min-width: 1061px)" render={() =>
                 (
@@ -404,14 +397,23 @@ const _Header = () => {
                                         alarm_fatch()
                                         setCount(count + 1)
                                         msg.state === "success" ?
-                                            notification.open({
-                                                message: msg.user.name,
-                                                description:
-                                                    msg.category + ' 승인 되었습니다.',
-                                                onClick: () => {
-                                                    console.log('알림 클릭함!');
-                                                },
-                                            }) :
+                                            msg.category === '출장' || msg.category === '외근' ?
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + ' 일정이 변경되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + '가 승인되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
                                             notification.open({
                                                 message: msg.user.name + "님",
                                                 description:
@@ -423,43 +425,52 @@ const _Header = () => {
                                     }
                                 }
                                 ref={$websocket} />
-
-                            <Drawer
-                                title="알림"
-                                width="350px"
-                                placement="right"
-                                closable={true}
-                                onClose={onClose}
-                                visible={visible}
-                            >
-                                {alarm.map((al) =>
-                                    al.state === true ?
-                                        <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                            extra={
-                                                <div>
-                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                </div>} key={al.no}>
-                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        </Card>
-                                        :
-                                        <Card2>
-                                            <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
-                                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                                extra={
-                                                    <div>
-                                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                                    </div>} key={al.no}>
-                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                            </Card>
-                                        </Card2>
-                                )}
-                                <br />
-                            </Drawer>
                         </div>
                     </>
                 )}
                 />
+                <Drawer
+                    title="알림"
+                    width="350px"
+                    placement="right"
+                    closable={true}
+                    onClose={onClose}
+                    visible={visible}
+                >
+                    <div style={{textAlign: "center", marginBottom: "20px"}}>
+                        <button onClick={() => alarmAllDelete()} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>모두 삭제</button>
+                    </div>
+                    {alarm.map((al) =>
+                        al.state === true ?
+                            <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
+                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                extra={
+                                    <div>
+                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                    </div>} key={al.no}>
+                                        {user.position === '간호사' ? 
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
+                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
+                                
+                            </Card>
+                            :
+                            <Card2>
+                                <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                    extra={
+                                        <div>
+                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                        </div>} key={al.no}>
+                                        {user.position === '간호사' ? 
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
+                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
+                                </Card>
+                            </Card2>
+                    )}
+                    <br />
+                </Drawer>
             </Header>
         </DIV>
     );

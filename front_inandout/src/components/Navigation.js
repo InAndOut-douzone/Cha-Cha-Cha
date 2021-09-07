@@ -68,7 +68,7 @@ const Navigation = (name) => {
                     // selectedKeys={['1', 'sub2']}
                     mode="inline"
                     // defaultSelectedKeys={['1']}
-                    style={{ height: '100%', borderRight: 0 }}
+                    style={{ height: '110%', borderRight: 0 }}
                     // openKeys={openKeys}
                     // openKeys={openKeys}
                     // selectedKeys={selectedKeys}
