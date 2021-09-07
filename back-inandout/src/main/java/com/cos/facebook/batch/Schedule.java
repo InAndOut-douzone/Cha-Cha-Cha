@@ -1,5 +1,7 @@
 package com.cos.facebook.batch;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +41,10 @@ public class Schedule {
 
     	try {
 			jobLauncher.run(batch.job(), jobParameters);
-			System.out.println("*******");
+			System.out.println("*******");			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String date = LocalDateTime.now().format(formatter);
+			System.out.println(date);
 			
 		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
 				| JobParametersInvalidException e) {

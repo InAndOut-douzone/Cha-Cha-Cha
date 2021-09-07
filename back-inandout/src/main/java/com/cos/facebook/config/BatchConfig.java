@@ -49,16 +49,16 @@ public class BatchConfig {
 	public Step step1() {
 		return stepBuilderFactory.get("Step1")
 				.<User, Long>chunk(chunkSize) 
-				.reader(jpaPagingItemReader())
+				.reader(hospitalReader())
 				.processor(jpaPagingItemProcessor())
                 .writer(jpaPagingItemWriter())
                 .build();
 		}
 	
 	 @Bean
-	    public JpaPagingItemReader<User> jpaPagingItemReader() {
+	    public JpaPagingItemReader<User> hospitalReader() {
 	        return new JpaPagingItemReaderBuilder<User>()
-	                .name("jpaPagingItemReader")
+	                .name("hospitalReader")
 	                .entityManagerFactory(entityManagerFactory) //DataSource가 아닌 EntityManagerFactory를 통한 접근  
 	                .pageSize(chunkSize)
 	                .queryString("SELECT u FROM User u order by id asc")  //ORDER 조건은 필수!  
