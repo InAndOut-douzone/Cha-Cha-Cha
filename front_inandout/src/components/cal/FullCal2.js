@@ -21,12 +21,13 @@ const CalendarLayout = styled.div`
     .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
     .fc-daygrid-day-number { color: black; font-weight: 400; },
-  `;
-const CalendarLayout2 = styled.div`
+    `;
+    const CalendarLayout2 = styled.div`
     .fc-toolbar-chunk {display: flex; align-items: center;}
   `;
 
 const FullCal2 = () => {
+  const formRef = useRef(null);
   const [leaves, setLeaves] = useState([]);
   const [내일정, 내일정체크] = useState(false);
   const [연차, 연차체크] = useState(false);
@@ -56,10 +57,10 @@ const FullCal2 = () => {
     });
   }, []);
 
-  const handleDateClick = () => {
+  const handleDateClick = (eventClick) => {
     setVisible(true);
   };
-  const onClose = () => {
+  const onClose = (eventClick) => {
     setVisible(false);
   };
   const handleDateClick2 = (eventClick) => {
@@ -143,6 +144,11 @@ const FullCal2 = () => {
     }
     axios.post("http://localhost:8080/api/leave2", data3, header).then(res => {
       alert("일정 등록이 완료되었습니다.");
+      formRef.current.setFieldsValue({
+        category: "",
+        content: "",
+        date: "",
+      });
       check(내일정, 연차, 출장, 외근)
       setVisible(0)
     }).catch();
@@ -458,6 +464,7 @@ const FullCal2 = () => {
         <Col lg={2} sm={2} md={2}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
           <br /><br /><br />
+
           <Fade right>
             <div style={{ marginTop: "-7.5px", height: "40px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
               <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
@@ -472,6 +479,8 @@ const FullCal2 = () => {
           <Fade right>
             <EmployeeOnOffList />
           </Fade>
+          
+          
 
 
           <Drawer
@@ -481,7 +490,7 @@ const FullCal2 = () => {
             visible={visible}
             bodyStyle={{ paddingBottom: 80 }}
           >
-            <Form layout="vertical" hideRequiredMark onFinish={onFinish}>
+            <Form ref={formRef} layout="vertical" hideRequiredMark onFinish={onFinish}>
               <Row gutter={16}>
                 <Col span={12}>
                   <Form.Item
