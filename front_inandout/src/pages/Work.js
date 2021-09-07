@@ -136,18 +136,19 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["남은 연차", user.aleave],
                         ["사용 연차", 12-user.aleave],
+                        ["남은 연차", user.aleave],
+                        
                         ]}
                         options={{
-                            pieStartAngle: 30, // 엥글 각도 바꾸기
+                            // pieStartAngle: 30, // 엥글 각도 바꾸기
                             // tooltip: { trigger: 'none' },   // 툴팁 안보이게 하기
                             pieSliceText: 'label',  // 퍼센트 말고 타이틀로 적히기
                             title: "나의 연차 현황",
                             backgroundColor: "transparent",
                             legend: "none",
                             pieHole: 0.3,
-                            colors: ["#f3a683", "#f7d794", "#778beb", "#e77f67", "#cf6a87"],    
+                            colors: ["#f7d794", "#f3a683", "#778beb", "#e77f67", "#cf6a87"],    
                         }}
                     />
 

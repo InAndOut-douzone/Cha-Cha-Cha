@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
+import SockJsClient from 'react-stomp';
 
 const { Option } = Select;
 
@@ -95,8 +96,19 @@ const _Drawer = () => {
     }
   }
 
+  const $websocket = useRef(null);
+
   return (
     <div>
+      <SockJsClient
+        url="http://localhost:8080/webSocket"
+        topics={['/topics/sendTo2']}
+        onMessage={
+            (msg) => {
+              getUser();
+            }
+        }
+        ref={$websocket} />
       <div type="primary" onClick={showDrawer}>
         {/* <Link to="/" style={{color:'currentcolor'}}>휴가 등록</Link> */}
         휴가 등록

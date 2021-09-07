@@ -46,7 +46,6 @@ public class AlarmController {
 	// 드래그해서 수정을 하면 전원 달력 최신화 시키는 소켓
 	@MessageMapping("/sendTo2") 
 	public void SendToMessage2() { 
-		System.out.println("SendToMessage 실행됨?");
 		webSocket.convertAndSend("/topics/sendTo2","sendTo"); 
 	} 
 	

@@ -68,6 +68,7 @@ const _Header = () => {
     const [alarm, setAlarm] = useState([]);
     const [onTime, setOnTime] = useState("IN");
     const [offTime, setOffTime] = useState("OUT");
+    const [user, setUser] = useState({});
 
     const showDrawer = () => { // 알림창 열기
         alarm_fatch()
@@ -193,6 +194,10 @@ const _Header = () => {
             setCount(res.data);
         })
 
+        axios.get("http://localhost:8080/api/user", header).then(res => { // 알림 개수 찾아오기
+            setUser(res.data);
+        })
+
         alarm_fatch()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -265,6 +270,7 @@ const _Header = () => {
 
                                                 '연차신청을 등록하였습니다.',
                                             onClick: () => {
+                                                window.location.replace("/leavemanagement")
                                                 console.log('알림 클릭함!');
                                             },
                                         })
@@ -304,6 +310,7 @@ const _Header = () => {
                                                 description:
                                                     msg.category + ' 신청이 반려되었습니다.',
                                                 onClick: () => {
+                                                    window.location.replace("/leavemanagement")
                                                     console.log('알림 클릭함!');
                                                 },
                                             })
@@ -439,7 +446,11 @@ const _Header = () => {
                                     <div>
                                         <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                     </div>} key={al.no}>
-                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        {user.position === '간호사' ? 
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
+                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
+                                
                             </Card>
                             :
                             <Card2 key={al.no}>
@@ -448,8 +459,11 @@ const _Header = () => {
                                     extra={
                                         <div>
                                             <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                        </div>}>
-                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        </div>} key={al.no}>
+                                        {user.position === '간호사' ? 
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
+                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
                                 </Card>
                             </Card2>
                     )}
