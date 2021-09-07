@@ -116,6 +116,13 @@ const _Header = () => {
         });
     }
 
+    const alarmAllDelete = async () => { // 알림 모두 삭제
+        await axios.delete("http://localhost:8080/api/alarm", header).then((res) => {
+            alert("알림이 모두 삭제되었습니다.");
+            alarm_fatch()
+        });
+    }
+
     const handleOk = async () => {
         await axios.get("http://localhost:8080/api/onoff/" + localStorage.getItem("username"), header).then(res => {
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
@@ -311,6 +318,9 @@ const _Header = () => {
                         onClose={onClose}
                         visible={visible}
                     >
+                        <div style={{textAlign: "center", marginBottom: "20px"}}>
+                        <button onClick={() => alarmAllDelete()} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>모두 삭제</button>
+                    </div>
                         {alarm.map((al) =>
                             al.state === true ?
                                 <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}

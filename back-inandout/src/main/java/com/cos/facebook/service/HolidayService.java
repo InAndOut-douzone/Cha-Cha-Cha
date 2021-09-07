@@ -33,6 +33,6 @@ public class HolidayService {
 	}
 
 	public List<Holiday> findAll() {
-		return holidayRepository.findAll();
+		return holidayRepository.findAlOrderBy();
 	}
 }

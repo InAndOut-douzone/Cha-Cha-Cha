@@ -1,5 +1,7 @@
 package com.cos.facebook.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -9,5 +11,8 @@ public interface HolidayRepository extends JpaRepository<Holiday, Integer>{
 	
 	@Query(value = "select * from Holiday where holiday like CONCAT(:dated,'%') order by holiday desc limit 0,1", nativeQuery = true)
 	Holiday findByDate(String dated);
+
+	@Query(value = "select * from Holiday order by holiday asc",nativeQuery = true)
+	List<Holiday> findAlOrderBy();
 
 }

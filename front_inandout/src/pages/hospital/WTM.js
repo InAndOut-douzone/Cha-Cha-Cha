@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Layout, Breadcrumb, Form, Image, DatePicker, Button, Input, Calendar  } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Layout, Breadcrumb, Form, Image, DatePicker, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import image from "../../assets/images/double-right.jpg";
@@ -10,8 +10,8 @@ import TimeItem from '../../components/HospitalOnOff/TimeItem'
 import FormItem from '../../components/HospitalOnOff/FormItem'
 import SiteLayout from '../SiteLayout';
 import Fade from 'react-reveal/Fade';
-import HolidayItem from '../../components/holiday/HolidayItem';
-
+import HolidayItem from '../../components/holiday/HolidayItem'
+import { Timeline } from 'antd';
 
 const { Title, Text } = Typography;
 
@@ -245,11 +245,14 @@ const WTM = () => {
           <br/><br/><br/><br/>
           <Title level={3}>휴무일 현황</Title> <br/>    
           <Text>* 휴무일 현황을 볼 수 있습니다.</Text> <br/>
-          {/* <Calendar /> */}
-          <Calendar/>
-          {/* {holidays.map((holiday) => (<HolidayItem key={holiday.no} holiday={holiday}/>))} */}
+        </div><br/><br/>
+        <div style={{alignSelf:"center"}}>
+        <Timeline>
+            {holidays.map((holiday) => (<HolidayItem key={holiday.no} holiday={holiday}/>))}
+        </Timeline>
         </div>
         </Fade>
+        
       </Layout>
     </SiteLayout>
   );
