@@ -1,4 +1,4 @@
-package com.cos.facebook.config;
+package com.cos.facebook.batch;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @Configuration
 @AllArgsConstructor
-public class BatchConfig {
+public class YearBatchConfig {
 
 	@Autowired
 	public JobBuilderFactory jobBuilderFactory;
@@ -23,22 +23,22 @@ public class BatchConfig {
 	public StepBuilderFactory stepBuilderFactory;
 	
 	
-	@Bean public Job job(){
-		return jobBuilderFactory.get("job")
-								.start(step1())
+	@Bean public Job yearJob(){
+		return jobBuilderFactory.get("yearJob")
+								.start(yearStep())
 								.build();
 	}
 	
 	@Bean
 	@JobScope
-	public Step step1() {
-		return stepBuilderFactory.get("step1")
-                .tasklet(DayTasklet())
+	public Step yearStep() {
+		return stepBuilderFactory.get("yearStep")
+                .tasklet(YearTasklet())
                 .build();
 		}
 	
 	@Bean
-    public Tasklet DayTasklet() {
-        return new com.cos.facebook.batch.DayTasklet();
+    public Tasklet YearTasklet() {
+        return new com.cos.facebook.batch.YearTasklet();
     }
 }

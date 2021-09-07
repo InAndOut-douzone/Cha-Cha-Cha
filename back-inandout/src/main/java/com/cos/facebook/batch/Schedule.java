@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.cos.facebook.config.BatchConfig;
-
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -26,24 +24,63 @@ public class Schedule {
     private JobLauncher jobLauncher;
 	
 	@Autowired
-	private final BatchConfig batch;
+	private final DayBatchConfig dayBatch;
 	
-    // 5초마다 실행
-    @Scheduled(cron="00 57 23 * * *")
-    public void executeJob () {
+	@Autowired
+	private final MonthBatchConfig monthBatch;
+	
+	@Autowired
+	private final YearBatchConfig yearBatch;
+	
+    @Scheduled(cron="00 51 23 * * *") // 매일 00초 57분 23시 마다 실행됨  
+    public void dayJob () {
     	
     	 Map<String, JobParameter> confMap = new HashMap<>();
          confMap.put("time", new JobParameter(System.currentTimeMillis()));
          JobParameters jobParameters = new JobParameters(confMap);
 
     	try {
-			jobLauncher.run(batch.job(), jobParameters);
+			jobLauncher.run(dayBatch.dayJob(), jobParameters); //job 실행
 			System.out.println("*******");			
 			
 		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
 				| JobParametersInvalidException e) {
 			e.printStackTrace();
 		}
+  
+    }
+    
+    @Scheduled(cron="00 53 23 L * *") // 매달 마지막 날 00초 57분 23시 마다 실행됨  
+    public void monthJob () {
+    	
+    	 Map<String, JobParameter> confMap = new HashMap<>();
+         confMap.put("time", new JobParameter(System.currentTimeMillis()));
+         JobParameters jobParameters = new JobParameters(confMap);
+         
+         try {
+        	 jobLauncher.run(monthBatch.monthJob(), jobParameters); //job 실행	
+        	 
+        	 } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
+        			 | JobParametersInvalidException e) {
+        		 e.printStackTrace();
+        		 }
+  
+    }
+    
+    @Scheduled(cron="00 56 23 31 12 *") // 매년 마지막 날 00초 57분 23시 마다 실행됨  
+    public void yearJob () {
+    	
+    	 Map<String, JobParameter> confMap = new HashMap<>();
+         confMap.put("time", new JobParameter(System.currentTimeMillis()));
+         JobParameters jobParameters = new JobParameters(confMap);
+         
+         try {
+        	 jobLauncher.run(yearBatch.yearJob(), jobParameters); //job 실행	
+        	 
+        	 } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException
+        			 | JobParametersInvalidException e) {
+        		 e.printStackTrace();
+        		 }
   
     }
 

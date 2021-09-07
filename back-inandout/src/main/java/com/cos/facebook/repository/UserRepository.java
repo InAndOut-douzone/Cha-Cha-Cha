@@ -27,6 +27,12 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Query( value = "select * from User where id=:id",nativeQuery = true)
 	public User findById2(Long id);
 	
+	@Query( value = "select * from User where hireDate <= date_add(now(),INTERVAL -1 YEAR) and leaveDate is null", nativeQuery = true)
+	public List<User> findYearUser();
+	
+	@Query( value = "select * from User where hireDate <= date_add(now(),INTERVAL -1 MONTH) and leaveDate is null", nativeQuery = true)
+	public List<User> findMonthUser();
+	
 //	@Query(value = "select asdfsadf", nativeQuery = true)
 //	public User findzxcv(String name);
 
