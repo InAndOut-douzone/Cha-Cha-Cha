@@ -64,7 +64,6 @@ const Navigation = (name) => {
                 </Button> */}
 
                 <Menu
-                    inlineCollapsed={false}
                     // selectedKeys={['1', 'sub2']}
                     mode="inline"
                     // defaultSelectedKeys={['1']}
@@ -105,7 +104,7 @@ const Navigation = (name) => {
             <Sider width={200} className="site-layout-background2">
                 <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
                     width={200} height={220}
-                    src={profileState ? 'images/'+user.profile : DefaultProfile}
+                    src={profileState ? '/images/'+user.profile : DefaultProfile}
                 />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
                 <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>

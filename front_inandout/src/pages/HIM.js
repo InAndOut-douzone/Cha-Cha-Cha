@@ -40,7 +40,6 @@ const HIM = () => {
         const imageFile = e.target.files[0];
         const imageUrl = URL.createObjectURL(imageFile);
 
-        console.log(imageUrl);
         setLogo(imageFile); // formdata에 선택된 이미지 파일을 넣기 위해 저장
         setImage(imageUrl);// 프로필 미리보기를 출력하기 위해 이미지 url 저장
     };
@@ -74,7 +73,6 @@ const HIM = () => {
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/hospital2", header).then((res) => {
-            console.log(res);
             setHospital(res.data);
             setName(res.data.name);
             setAddress(res.data.address);

@@ -574,6 +574,7 @@ const FullCal2 = () => {
             visible={visible2}
             bodyStyle={{ paddingBottom: 80 }}
           >
+            
             <Form layout="vertical" hideRequiredMark onFinish={onUpdate}>
               <Row gutter={16}>
                 <Col span={12}>
