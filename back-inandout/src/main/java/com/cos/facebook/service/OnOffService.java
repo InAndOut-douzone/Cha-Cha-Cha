@@ -49,7 +49,7 @@ public class OnOffService {
 		
 		SimpleDateFormat week = new SimpleDateFormat("E");  // 오늘 요일 받아오기
 		String strWeek = week.format(onOffEntity.getDate());
-		if(strWeek.equals("목")) { strWeek = "Thu"; } 
+		if (strWeek.equals("목")) { strWeek = "Thu"; } 
 		if (strWeek.equals("월")) { strWeek = "Mon"; }
 		if (strWeek.equals("화")) { strWeek = "Tue"; }
 		if (strWeek.equals("수")) { strWeek = "Wed"; }

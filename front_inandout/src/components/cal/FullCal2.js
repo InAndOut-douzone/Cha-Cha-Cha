@@ -44,6 +44,7 @@ const FullCal2 = () => {
   const [userId1, setUserId1] = useState({});
   const [username, setUsername] = useState();
   const [userRole, setUserRole] = useState();
+  const [startDate, setStartDate] = useState();
 
   const header = {
     headers: {
@@ -58,11 +59,14 @@ const FullCal2 = () => {
   }, []);
 
   const handleDateClick = (eventClick) => {
+    setStartDate(eventClick.dateStr)
     setVisible(true);
   };
-  const onClose = (eventClick) => {
+
+  const onClose = () => {
     setVisible(false);
   };
+  
   const handleDateClick2 = (eventClick) => {
     console.log(eventClick)
     setNo1(eventClick.event.id);
@@ -133,6 +137,7 @@ const FullCal2 = () => {
   useEffect(() => {
     getUser();
   }, [])
+
   const onFinish = (value) => { // 일정 등록
     let data3 = {
       category: value.category,
@@ -522,6 +527,11 @@ const FullCal2 = () => {
                     label="일시"
                   >
                     <RangePicker
+                      // defaultValue={[
+                      //   moment(startDate, "YYYY-MM-DD HH mm"),
+                      //   moment("2022-01-01", "YYYY-MM-DD HH mm")
+                      // ]}
+                      placeholder={[startDate,null]}
                       showTime={{ format: 'HH mm' }}
                       format="YYYY-MM-DD HH mm"
                     />

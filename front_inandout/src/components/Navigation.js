@@ -82,7 +82,7 @@ const Navigation = (name) => {
                         <Menu.Item key="5"><Link to="/mypage">프로필 수정</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub3" icon={<LaptopOutlined />} title="내 근무">
-                        <Menu.Item key="6"><Drawer /></Menu.Item>
+                        {/* <Menu.Item key="6"><Drawer /></Menu.Item> */}
                         <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub4" icon={<FileSearchOutlined />} title="의원 관리">
