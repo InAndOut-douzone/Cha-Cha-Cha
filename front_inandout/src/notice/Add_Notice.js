@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 import FormItem from 'antd/lib/form/FormItem';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import { EditorState,convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+// import htmlToDraft from 'html-to-draftjs';
 
 
 const Container = styled.div`
