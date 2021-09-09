@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SiteLayout from '../pages/SiteLayout';
+import SiteLayout from '../SiteLayout';
 import styled from 'styled-components'
 import { Layout, Breadcrumb, Descriptions, Input, Button, Form } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';

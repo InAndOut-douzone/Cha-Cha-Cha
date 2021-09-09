@@ -4,8 +4,8 @@ import axios from 'axios';
 import { Layout, Descriptions, Badge, Breadcrumb, Form, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import DefaultProfile from '../assets/images/defaultProfile.png';
-import SiteLayout from './SiteLayout';
+import DefaultProfile from '../../assets/images/defaultProfile.png';
+import SiteLayout from '../SiteLayout';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 
