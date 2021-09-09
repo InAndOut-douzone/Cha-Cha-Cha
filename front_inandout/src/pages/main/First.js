@@ -2,10 +2,10 @@ import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import '../assets/css/app.css';
-import SiteLayout from './SiteLayout';
-import FullCal2 from '../components/cal/FullCal2';
-import FullCal2M from '../mobile/FullCal2_M';
+import '../../assets/css/app.css';
+import SiteLayout from '../SiteLayout';
+import FullCal2 from '../../components/cal/FullCal2';
+import FullCal2M from '../../mobile/FullCal2_M';
 import Fade from 'react-reveal/Fade';
 import Media from 'react-media';
 

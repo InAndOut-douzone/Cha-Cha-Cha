@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Layout, Progress, Breadcrumb, Table, DatePicker, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from './SiteLayout';
+import SiteLayout from '../SiteLayout';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import { Chart } from "react-google-charts";

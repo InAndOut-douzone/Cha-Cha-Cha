@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Form, Layout, Breadcrumb, Button, Descriptions, Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import DefaultLogo from '../assets/images/defaultProfile.png';
-import SiteLayout from './SiteLayout';
+import DefaultLogo from '../../assets/images/defaultProfile.png';
+import SiteLayout from '../SiteLayout';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 

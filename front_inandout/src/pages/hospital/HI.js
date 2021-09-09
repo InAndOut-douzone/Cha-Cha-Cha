@@ -3,9 +3,9 @@ import axios from 'axios';
 import { Descriptions, Layout, Breadcrumb, Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from './SiteLayout';
+import SiteLayout from '../SiteLayout';
 import Fade from 'react-reveal/Fade';
-import DefaultLogo from '../assets/images/defaultProfile.png';
+import DefaultLogo from '../../assets/images/defaultProfile.png';
 
 const HIM = () => {
     const imgPath = "/images/";

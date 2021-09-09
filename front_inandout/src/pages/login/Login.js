@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import "../assets/css/loginForm.css"
+import '../../assets/css/loginForm.css'
 import styled from 'styled-components'
-import img from '../assets/images/hospital.jpg';
+import img from '../../assets/images/hospital.jpg';
 import Bounce from 'react-reveal/Bounce';
 
 const Container = styled.div`
