@@ -14,11 +14,14 @@ import draftToHtml from 'draftjs-to-html';
 
 
 const Container = styled.div`
-    width: 900px;
+    width: 100%;
     height: 80%;
     padding: 30px 10px 10px 100px;
+    text-align: -webkit-center;
     .ant-descriptions-item-label{ width:100px };
+    .ant-form-horizontal { width:1000px };
     `;
+
 const header = {
     headers: {
         Authorization: "Bearer " + localStorage.getItem("Authorization")
@@ -89,8 +92,18 @@ const Add_Notice = () => {
     //   // eslint-disable-next-line
     //   },[]);
 
+    const DIV = styled.div`
+    .ant-form-item-control-input-content {
+    display: flex;
+    align-items: center;
+    }
+    label {
+        width: 100px;
+    }
+`
     return (
         <SiteLayout>
+            <DIV>
             <Layout style={{ padding: '0 24px 24px' }}>
                 <br />
                 <Breadcrumb style={{ margin: '16px 0' }}>
@@ -99,10 +112,16 @@ const Add_Notice = () => {
                     <Breadcrumb.Item>사원 등록</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
+                <br /><br />
+                <div style={{ textAlign: "center" }}>
+                    공지사항 등록 화면입니다. 공지사항 작성 시 상단에 스크롤 됩니다.<br />
+                    ( 공지사항은 의사 또는 권한이 관리자 인 사람만 작성 할 수 있습니다. )
+                    <br /><br />
+                </div>
 
                 <Container>
                     <Form onFinish={baa} style={{textAlign:'center'}}>
-                        <Descriptions title="공지사항 등록" column={1} bordered size='small' style={{textAlign:'left'}}>
+                        <Descriptions title="" column={1} bordered size='small' style={{textAlign:'left'}}>
                             <Descriptions.Item label="제목" style={{textAlign:'center'}}>
                                 <FormItem name="title" style={{margin:'0'}}>
                                     <Input placeholder="제목을 작성해주세요."/>
@@ -140,6 +159,7 @@ const Add_Notice = () => {
                     </Form>
                 </Container>
             </Layout>
+            </DIV>
         </SiteLayout>
     );
 }
