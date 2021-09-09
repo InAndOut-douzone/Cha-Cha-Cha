@@ -78,7 +78,7 @@ public class LeavesService {
 	}
 	
 	// 휴가 삭제 시 휴가 개수 복구
-	public void  (int id) {
+	public void delete(int id) {
 		Leaves leavesEntity = leavesRepository.findById(id).get();
 		System.out.println("leavesEntity : " + leavesEntity);
 		
