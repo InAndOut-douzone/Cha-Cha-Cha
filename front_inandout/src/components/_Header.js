@@ -435,74 +435,74 @@ const _Header = () => {
                     onClose={onClose}
                     visible={visible}
                 >
-                    <div style={{textAlign: "center", marginBottom: "20px"}}>
+                    <div style={{ textAlign: "center", marginBottom: "20px" }}>
                         <button onClick={() => alarmAllDelete()} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>모두 삭제</button>
                     </div>
-                    {user.position === '간호사' ? 
-                    alarm.map((al) =>
-                        al.state === true ?
-                            <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                extra={
-                                    <div>
-                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                    </div>} key={al.no}>
-                                        {user.position === '간호사' ? 
-                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
-                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        }
-                                
-                            </Card>
-                            :
-                            <Card2 key={al.no}>
-                                <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                    {user.position === '간호사' ?
+                        alarm.map((al) =>
+                            al.state === true ?
+                                <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
                                     size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
                                     extra={
                                         <div>
                                             <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                         </div>} key={al.no}>
-                                        {user.position === '간호사' ? 
-                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
+                                    {user.position === '간호사' ?
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p> :
                                         <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        }
-                                </Card>
-                            </Card2>
-                    )
-                    :
-                    alarm.map((al) =>
-                        al.state === true ?
-                        <Link to="/leaveManagement">
-                            <Card hoverable style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                extra={
-                                    <div>
-                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                    </div>} key={al.no}>
-                                        {user.position === '간호사' ? 
-                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
-                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        }
-                                
-                            </Card>
-                            </Link>
-                            :
-                            <Card2 key={al.no}>
-                                <Link to="/leaveManagement">
-                                <Card hoverable style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
-                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                    extra={
-                                        <div>
-                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                        </div>} key={al.no}>
-                                        {user.position === '간호사' ? 
-                                        <p>{al.message + "신청이 승인 되었습니다."}</p> : 
-                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                        }
-                                </Card>
-                                </Link>
-                            </Card2>
-                    )
                                     }
+
+                                </Card>
+                                :
+                                <Card2 key={al.no}>
+                                    <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                        size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                        extra={
+                                            <div>
+                                                <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                            </div>} key={al.no}>
+                                        {user.position === '간호사' ?
+                                            <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
+                                    </Card>
+                                </Card2>
+                        )
+                        :
+                        alarm.map((al) =>
+                            al.state === true ?
+                                <Link to="/leaveManagement">
+                                    <Card hoverable style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
+                                        size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                        extra={
+                                            <div>
+                                                <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                            </div>} key={al.no}>
+                                        {user.position === '간호사' ?
+                                            <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
+
+                                    </Card>
+                                </Link>
+                                :
+                                <Card2 key={al.no}>
+                                    <Link to="/leaveManagement">
+                                        <Card hoverable style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                            extra={
+                                                <div>
+                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                </div>} key={al.no}>
+                                            {user.position === '간호사' ?
+                                                <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                            }
+                                        </Card>
+                                    </Link>
+                                </Card2>
+                        )
+                    }
                     <br />
                 </Drawer>
             </Header>

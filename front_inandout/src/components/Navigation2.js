@@ -14,7 +14,7 @@ const Navigation = (name) => {
     const role = localStorage.getItem('userRole');
 
     // const [collapsed, setCollapsed] = useState();
-    const [user,setUser] = useState();
+    const [user, setUser] = useState();
     const [profileState, setProfileState] = useState();
 
     // const toggleCollapsed = () => {
@@ -23,17 +23,17 @@ const Navigation = (name) => {
 
     const header = {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + localStorage.getItem("Authorization"),
         },
-      };
+    };
 
-    useEffect(()=>{
-        axios.get("http://localhost:8080/api/user", header).then(res=>{            
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/user", header).then(res => {
             setUser(res.data);
             setProfileState(!!res.data.profile)
         }).catch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     // const [openKeys, setOpenkeys] = useState(); //펼쳐져 있을 메뉴
     // sessionStorage.setItem('ok', JSON.stringify(openKeys));
@@ -50,9 +50,9 @@ const Navigation = (name) => {
                 {/* <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}} */}
                 <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }}
                     width={75} height={75}
-                    src={profileState ? '/images/'+user.profile : DefaultProfile}
+                    src={profileState ? '/images/' + user.profile : DefaultProfile}
                 />
-                <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>
+                <div style={{ backgroundColor: '#001529', color: '#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>
                 {/* <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div> */}
 
                 {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
@@ -67,10 +67,10 @@ const Navigation = (name) => {
                     // inlineCollapsed={true}
                     // defaultSelectedKeys={['1']}
                     style={{ height: '100%', borderRight: 0 }}
-                    // openKeys={openKeys}
-                    // openKeys={openKeys}
-                    // selectedKeys={selectedKeys}
-                    // onOpenChange={(openKeys) => setOpenkeys(openKeys)}
+                // openKeys={openKeys}
+                // openKeys={openKeys}
+                // selectedKeys={selectedKeys}
+                // onOpenChange={(openKeys) => setOpenkeys(openKeys)}
                 >
                     <Menu.Item key="1" icon={<HomeOutlined />}>
                         <Link to="/"></Link>
@@ -100,9 +100,9 @@ const Navigation = (name) => {
             // </Provider>
             :
             <Sider width={200} className="site-layout-background2">
-                <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
+                <Image style={{ borderRadius: "0%", width: '100%', height: '100%' }}
                     width={200} height={220}
-                    src={profileState ? 'images/'+user.profile : DefaultProfile}
+                    src={profileState ? 'images/' + user.profile : DefaultProfile}
                 />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
                 <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>
