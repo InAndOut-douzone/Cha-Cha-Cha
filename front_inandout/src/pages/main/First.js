@@ -2,10 +2,10 @@ import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import '../assets/css/app.css';
-import SiteLayout from './SiteLayout';
-import FullCal2 from '../components/cal/FullCal2';
-import FullCal2M from '../mobile/FullCal2_M';
+import '../../assets/css/app.css';
+import SiteLayout from '../SiteLayout';
+import FullCal2 from '../../components/cal/FullCal2';
+import FullCal2M from '../../mobile/FullCal2_M';
 import Fade from 'react-reveal/Fade';
 import Media from 'react-media';
 
@@ -20,19 +20,19 @@ export default function First() {
       <SiteLayout>
         <Media query="(max-width: 600px)" render={() =>
         (
-            
-            <Content
-              className="site-layout-background"
-              style={{
-                padding: 24,
-                margin: 0,
-                height: 800
-                // minHeight: 280,
-              }}
-            >
-              {/* [캘린더] [접속자 권한: {role} ] */}
-              <FullCal2M />
-            </Content>
+
+          <Content
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              margin: 0,
+              height: 800
+              // minHeight: 280,
+            }}
+          >
+            {/* [캘린더] [접속자 권한: {role} ] */}
+            <FullCal2M />
+          </Content>
         )}
         />
 

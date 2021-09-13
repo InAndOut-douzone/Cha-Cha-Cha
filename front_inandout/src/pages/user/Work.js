@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Layout, Progress, Breadcrumb, Table, DatePicker, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import SiteLayout from './SiteLayout';
+import SiteLayout from '../SiteLayout';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import { Chart } from "react-google-charts";
@@ -144,7 +144,7 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["사용 연차", 12-user.aleave],
+                        ["사용 연차", 15-user.aleave],
                         ["남은 연차", user.aleave],
                         
                         ]}

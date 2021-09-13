@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SiteLayout from '../pages/SiteLayout';
+import SiteLayout from '../SiteLayout';
 import { Layout, Breadcrumb, Descriptions, Button, Modal } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ const Notice = (props) => {
     const ab = async () => { // 페이지 로딩시작하면 공지사항 가져오기
         await axios.get("http://localhost:8080/api/notice/" + no, header).then((res) => {
             setNotice(res.data);
-
+            // setHtmlToEditor(`${res.data.contents}`);
             // console.log(notice.user.username);
         })
     }
@@ -88,6 +88,7 @@ const Notice = (props) => {
         setIsModalVisible(false);
     }
 
+
     return (
         <SiteLayout>
             <Layout style={{ padding: '0 24px 24px' }}>
@@ -110,21 +111,18 @@ const Notice = (props) => {
                     </Descriptions.Item>
                 </Descriptions>
                 <br />
+
                 <Media query="(max-width: 600px)" render={() =>
                 (
                     <>
-                        {notice.contents && notice.contents.split("\n").map((line) => {
-                            return (<span>{line}<br /></span>);
-                        })}
+                       <div dangerouslySetInnerHTML={{__html:notice.contents}}></div>
                     </>
                 )}
                 />
                 <Media query="(min-width: 601px)" render={() =>
                 (
                     <Container>
-                        {notice.contents && notice.contents.split("\n").map((line) => {
-                            return (<span>{line}<br /></span>);
-                        })}
+                        <div dangerouslySetInnerHTML={{__html:notice.contents}}></div>
                     </Container>
                 )}
                 />

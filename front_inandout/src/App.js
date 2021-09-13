@@ -9,16 +9,16 @@ import Employee_Management from './pages/user/Employee_Management';
 import Employee_Details from './pages/user/Employee_Details';
 import Leave_Management from './pages/leave/Leave_Management';
 import Add_Employee from './pages/user/Add_Employee';
-import Add_Notice from './notice/Add_Notice';
-import NoticeList from './notice/NoticeList';
-import Notice from './notice/Notice';
-import NoticeModi from './notice/NoticeModify';
-import MyPage from './pages/MyPage';
-import First from './pages/First';
-import Login from './pages/Login';
-import Work from './pages/Work';
-import HIM from './pages/HIM';
-import HI from './pages/HI';
+import Add_Notice from './pages/notice/Add_Notice';
+import NoticeList from './pages/notice/NoticeList';
+import Notice from './pages/notice/Notice';
+import NoticeModi from './pages/notice/NoticeModify';
+import MyPage from './pages/user/MyPage';
+import First from './pages/main/First';
+import Login from './pages/login/Login';
+import Work from './pages/user/Work';
+import HIM from './pages/hospital/HIM';
+import HI from './pages/hospital/HI';
 import WTM from './pages/hospital/WTM';
 import Message from './tests/Message'
 
