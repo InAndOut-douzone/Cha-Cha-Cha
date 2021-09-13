@@ -20,19 +20,19 @@ export default function First() {
       <SiteLayout>
         <Media query="(max-width: 600px)" render={() =>
         (
-            
-            <Content
-              className="site-layout-background"
-              style={{
-                padding: 24,
-                margin: 0,
-                height: 800
-                // minHeight: 280,
-              }}
-            >
-              {/* [캘린더] [접속자 권한: {role} ] */}
-              <FullCal2M />
-            </Content>
+
+          <Content
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              margin: 0,
+              height: 800
+              // minHeight: 280,
+            }}
+          >
+            {/* [캘린더] [접속자 권한: {role} ] */}
+            <FullCal2M />
+          </Content>
         )}
         />
 

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,6 +26,8 @@ public class Notice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int no;
 	private String title;
+	
+	@Lob								// 대용량 데이터
 	private String contents;
 	
 	@CreationTimestamp	// 자동으로 현재시간이 들어간다.
