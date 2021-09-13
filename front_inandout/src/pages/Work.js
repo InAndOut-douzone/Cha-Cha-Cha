@@ -101,6 +101,14 @@ const Work = () => {
         });
     }
 
+    const week = () => {
+        if(data[2]>52){
+            return(<p>이번주 근무시간을 초과했습니다.</p>)
+        } else {
+            return(<p>{52-data[2]}{" 시간 더 일할 수 있습니다."}</p>)    
+        }
+    }
+
     // const a = 16;
     return (
         <SiteLayout>
@@ -118,7 +126,7 @@ const Work = () => {
                     <h1 style={{textAlign:'center'}}>{data[0]}{" 월요일 ~ "}{data[1]}{" 일요일"}</h1>
                     <br/><br/>
                     <p>{data[4]}{"님은 이번주 "}{data[2]}{"시간 일했습니다."}</p>
-                    <p>{52-data[2]}{" 시간 더 일할 수 있습니다."}</p>
+                    {week()}
                 </div>
                 <Progress
                     strokeColor={{
