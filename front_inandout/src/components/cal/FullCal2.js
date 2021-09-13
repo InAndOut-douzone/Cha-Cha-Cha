@@ -45,6 +45,7 @@ const FullCal2 = () => {
   const [username, setUsername] = useState();
   const [userRole, setUserRole] = useState();
   const [startDate, setStartDate] = useState();
+  const [holidays, setHolidays] = useState();
 
   const header = {
     headers: {
@@ -136,7 +137,15 @@ const FullCal2 = () => {
   }
   useEffect(() => {
     getUser();
+    holidayFetch();
   }, [])
+
+
+  const holidayFetch = async () => {
+    await axios.get("http://localhost:8080/api/holiday/all", header).then(res => {
+        setHolidays(res.data);
+    }).catch();
+  }
 
   const onFinish = (value) => { // 일정 등록
     let data3 = {
@@ -325,6 +334,7 @@ const FullCal2 = () => {
     외근체크(!외근);
     if (e.target.checked) {
       if (내일정 && 연차 && 출장) {
+        console.log("실행도미?ㄴ??" + 외근, 내일정, 연차, 출장)
         fetch(1234) // 내일정, 연차, 출장, 외근
       } else if (내일정 && 연차) {
         fetch(124) // 내일정, 연차, 외근
@@ -380,6 +390,15 @@ const FullCal2 = () => {
     category: leave.category,
     content: leave.content,
     allDay: leave.category === "연차" ? 1 : leave.category === "오후 반차" ? 1 : leave.category === "오전 반차" ? 1 : 0
+  }))
+
+  holidays && holidays.map((holiday) => data.push({
+    userId:holiday.id,
+    title:holiday.content,
+    // color:"#ff4646",
+    color:"#E9412D",
+    start: holiday.holiday,
+    allDay:1
   }))
 
   const $websocket = useRef(null);

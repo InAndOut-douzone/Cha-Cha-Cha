@@ -129,7 +129,9 @@ const Work = () => {
                 <br />
 
                 <div className="chart" style={{display:"flex", alignSelf:"center"}}>
-                    <Chart
+                    {localStorage.getItem("userRole") === 'ROLE_ADMIN' ? 
+                        null : 
+                        <Chart
                         width={"300px"}
                         height={"300px"}
                         chartType="PieChart"
@@ -151,7 +153,8 @@ const Work = () => {
                             colors: ["#f7d794", "#f3a683", "#778beb", "#e77f67", "#cf6a87"],    
                         }}
                     />
-
+}
+                    
 
                 <Chart
                         width={"300px"}
