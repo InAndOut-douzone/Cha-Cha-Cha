@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SiteLayout from '../pages/SiteLayout';
+import SiteLayout from '../SiteLayout';
 import { Layout, Breadcrumb, Descriptions, Button, Modal } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';

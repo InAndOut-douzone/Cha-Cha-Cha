@@ -18,7 +18,14 @@
 - npm i react-stomp
 - npm i react-reveal
 
+<!-- 구글 차트(파이 차트 사용) -->
+
+- npm i react-google-charts
+
+<!-- 웹 에디터 (공지사항 등록) -->
+
+- npm i draft-js
+- npm i draftjs-to-html
+- npm i react-draft-wysiwyg
+
 ### 📀 설치할 것
-- npm i react-media
-- npm i stompjs
-- npm i sockjs-client

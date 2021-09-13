@@ -22,7 +22,7 @@ const CalendarLayout = styled.div`
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
     .fc-daygrid-day-number { color: black; font-weight: 400; },
     `;
-    const CalendarLayout2 = styled.div`
+const CalendarLayout2 = styled.div`
     .fc-toolbar-chunk {display: flex; align-items: center;}
   `;
 
@@ -66,7 +66,7 @@ const FullCal2 = () => {
   const onClose = () => {
     setVisible(false);
   };
-  
+
   const handleDateClick2 = (eventClick) => {
     console.log(eventClick)
     setNo1(eventClick.event.id);
@@ -484,8 +484,8 @@ const FullCal2 = () => {
           <Fade right>
             <EmployeeOnOffList />
           </Fade>
-          
-          
+
+
 
 
           <Drawer
@@ -531,7 +531,7 @@ const FullCal2 = () => {
                       //   moment(startDate, "YYYY-MM-DD HH mm"),
                       //   moment("2022-01-01", "YYYY-MM-DD HH mm")
                       // ]}
-                      placeholder={[startDate,null]}
+                      placeholder={[startDate, null]}
                       showTime={{ format: 'HH mm' }}
                       format="YYYY-MM-DD HH mm"
                     />
@@ -574,6 +574,7 @@ const FullCal2 = () => {
             visible={visible2}
             bodyStyle={{ paddingBottom: 80 }}
           >
+
             <Form layout="vertical" hideRequiredMark onFinish={onUpdate}>
               <Row gutter={16}>
                 <Col span={12}>

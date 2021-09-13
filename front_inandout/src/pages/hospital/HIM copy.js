@@ -5,7 +5,7 @@ import { Form, Layout, Breadcrumb, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import { InputGroup, FormControl, Image } from 'react-bootstrap';
-import SiteLayout from './SiteLayout';
+import SiteLayout from '../SiteLayout';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
