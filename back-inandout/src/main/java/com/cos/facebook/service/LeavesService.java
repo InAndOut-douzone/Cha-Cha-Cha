@@ -101,6 +101,15 @@ public class LeavesService {
 		
 		userRepository.save(userEntity);
 		leavesRepository.deleteById(id);
+		
+		Alarm alarmEntitiy = new Alarm();
+		alarmEntitiy.setMessage(leavesEntity.getCategory());
+		alarmEntitiy.setFromUser(leavesEntity.getFromUser());
+		alarmEntitiy.setUser(leavesEntity.getUser());
+		alarmEntitiy.setState(true);
+		alarmRepository.save(alarmEntitiy);
+		alarmController.SendTemplateMessage3(leavesEntity);
+		
 		alarmController.SendToMessage2();
 	}
 	

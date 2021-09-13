@@ -317,6 +317,34 @@ const _Header = () => {
                                     }
                                 }
                                 ref={$websocket} />
+
+                            <SockJsClient
+                                url="http://localhost:8080/webSocket"
+                                topics={[`/topics/template3${userNo}`]}
+                                onMessage={
+                                    (msg) => {
+                                        alarm_fatch()
+                                        setCount(count + 1)
+                                            msg.category === '출장' || msg.category === '외근' ?
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + ' 일정이 삭제되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                }) :
+                                                notification.open({
+                                                    message: msg.user.name,
+                                                    description:
+                                                        msg.category + '가 삭제되었습니다.',
+                                                    onClick: () => {
+                                                        console.log('알림 클릭함!');
+                                                    },
+                                                })
+                                    }
+                                }
+                                ref={$websocket} />
                         </div>
                     </>
                 )}
@@ -416,6 +444,34 @@ const _Header = () => {
                                                 message: msg.user.name + "님",
                                                 description:
                                                     msg.category + ' 신청이 반려되었습니다.',
+                                                onClick: () => {
+                                                    console.log('알림 클릭함!');
+                                                },
+                                            })
+                                    }
+                                }
+                                ref={$websocket} />
+
+                            <SockJsClient
+                                url="http://localhost:8080/webSocket"
+                                topics={[`/topics/template3${userNo}`]}
+                                onMessage={
+                                    (msg) => {
+                                        alarm_fatch()
+                                        setCount(count + 1)
+                                        msg.category === '출장' || msg.category === '외근' ?
+                                            notification.open({
+                                                message: msg.user.name,
+                                                description:
+                                                    msg.category + ' 일정이 삭제되었습니다.',
+                                                onClick: () => {
+                                                    console.log('알림 클릭함!');
+                                                },
+                                            }) :
+                                            notification.open({
+                                                message: msg.user.name,
+                                                description:
+                                                    msg.category + '가 삭제되었습니다.',
                                                 onClick: () => {
                                                     console.log('알림 클릭함!');
                                                 },
