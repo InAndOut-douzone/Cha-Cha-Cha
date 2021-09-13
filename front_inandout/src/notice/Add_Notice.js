@@ -55,8 +55,9 @@ const Add_Notice = () => {
         console.log(notice);
         axios.post("http://localhost:8080/api/notice/add", notice, header).then((res) => {
             console.log(res);
-        });
-        window.location.href="/notice";
+            window.location.href="/notice";
+        }).catch((err) => {alert("이미지를 올릴 수 없습니다.")})
+        
     }
 
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
