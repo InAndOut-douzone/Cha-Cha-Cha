@@ -73,6 +73,12 @@ const Work = () => {
 
     }, []);
 
+    const data2 = [];
+    onoff.map((onoff,index) => data2.push({
+        ...onoff,
+        key: index
+    }))
+
     // 간호사 목록 가져오기
     const getNurse = async () => {
         await axios.get("/api/user/nurse", header).then((res) => {
@@ -235,7 +241,7 @@ const Work = () => {
                 </Space>
                 <br />
                 <Pagi>
-                <Table dataSource={onoff} columns={columns} pagination={{position:['bottomCenter']}} />
+                <Table dataSource={data2} columns={columns} pagination={{position:['bottomCenter']}} />
                 </Pagi>
                 </Fade>
             </Layout>
