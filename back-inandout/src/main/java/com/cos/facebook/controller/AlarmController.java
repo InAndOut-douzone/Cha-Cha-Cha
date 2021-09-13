@@ -64,6 +64,13 @@ public class AlarmController {
 		webSocket.convertAndSend("/topics/template2"+no, leaves);
 	}
 	
+	@MessageMapping("/Template3") 
+	public void SendTemplateMessage3(Leaves leaves) { 
+		
+		int no = (int) leaves.getUser().getId();
+		webSocket.convertAndSend("/topics/template3"+no, leaves);
+	}
+	
 	@RequestMapping(value="/api") 
 	public void SendAPI() { 
 		webSocket.convertAndSend("/topics/api" , "API"); 

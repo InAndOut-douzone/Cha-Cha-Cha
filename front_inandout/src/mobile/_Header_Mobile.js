@@ -194,7 +194,7 @@ const _Header = () => {
 
         alarm_fatch()
 
-        axios.get("http://localhost:8080/api/user", header).then(res=>{            
+        axios.get("http://localhost:8080/api/user", header).then(res => {
             // setUser(res.data);
             // setProfileState(!!res.data.profile)
         }).catch();
@@ -221,13 +221,13 @@ const _Header = () => {
 
     return (
         <DIV>
-            <Header className="header" style={{width: '100%', padding: '0'}}>
-            <div style={{ paddingLeft:'10px', width: "10px", display: "inline-block", background: "#001529", color: "silver", fontSize: "15px", fontStyle: "oblique" }}><Button style={buttonStyle} className="inbutton" type="primary"><Link to="/">In&Out</Link></Button></div>
+            <Header className="header" style={{ width: '100%', padding: '0' }}>
+                <div style={{ paddingLeft: '10px', width: "10px", display: "inline-block", background: "#001529", color: "silver", fontSize: "15px", fontStyle: "oblique" }}><Button style={buttonStyle} className="inbutton" type="primary"><Link to="/">In&Out</Link></Button></div>
                 {/* <Image style={{ borderRadius: "80%", width: '100%', height: '100%' }}
                     height='90%' width='50px'
                     src={profileState ? '/images/' + user.profile : DefaultProfile}
                 /> */}
-                <div style={{ paddingRight:'15px', width: "100%", textAlign: "right" }}>
+                <div style={{ paddingRight: '15px', width: "100%", textAlign: "right" }}>
 
                     <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
                         <div>{onTime}</div>
@@ -310,6 +310,34 @@ const _Header = () => {
                         }
                         ref={$websocket} />
 
+                    <SockJsClient
+                        url="http://localhost:8080/webSocket"
+                        topics={[`/topics/template3${userNo}`]}
+                        onMessage={
+                            (msg) => {
+                                alarm_fatch()
+                                setCount(count + 1)
+                                msg.category === '출장' || msg.category === '외근' ?
+                                    notification.open({
+                                        message: msg.user.name,
+                                        description:
+                                            msg.category + ' 일정이 삭제되었습니다.',
+                                        onClick: () => {
+                                            console.log('알림 클릭함!');
+                                        },
+                                    }) :
+                                    notification.open({
+                                        message: msg.user.name,
+                                        description:
+                                            msg.category + '가 삭제되었습니다.',
+                                        onClick: () => {
+                                            console.log('알림 클릭함!');
+                                        },
+                                    })
+                            }
+                        }
+                        ref={$websocket} />
+
                     <Drawer
                         title="알림"
                         width="250px"
@@ -318,9 +346,9 @@ const _Header = () => {
                         onClose={onClose}
                         visible={visible}
                     >
-                        <div style={{textAlign: "center", marginBottom: "20px"}}>
-                        <button onClick={() => alarmAllDelete()} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>모두 삭제</button>
-                    </div>
+                        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                            <button onClick={() => alarmAllDelete()} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>모두 삭제</button>
+                        </div>
                         {alarm.map((al) =>
                             al.state === true ?
                                 <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
