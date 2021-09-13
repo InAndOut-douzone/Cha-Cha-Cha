@@ -35,4 +35,8 @@ public class HolidayService {
 	public List<Holiday> findAll() {
 		return holidayRepository.findAlOrderBy();
 	}
+	
+	public List<Holiday> find() {
+		return holidayRepository.findAll();
+	}
 }

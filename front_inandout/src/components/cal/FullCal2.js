@@ -24,6 +24,7 @@ const CalendarLayout = styled.div`
     `;
 const CalendarLayout2 = styled.div`
     .fc-toolbar-chunk {display: flex; align-items: center;}
+    // .fc-event-title {color:red;}
   `;
 
 const FullCal2 = () => {
@@ -142,7 +143,7 @@ const FullCal2 = () => {
 
 
   const holidayFetch = async () => {
-    await axios.get("http://localhost:8080/api/holiday/all", header).then(res => {
+    await axios.get("http://localhost:8080/api/holiday/", header).then(res => {
         setHolidays(res.data);
     }).catch();
   }
@@ -395,10 +396,11 @@ const FullCal2 = () => {
   holidays && holidays.map((holiday) => data.push({
     userId:holiday.id,
     title:holiday.content,
-    // color:"#ff4646",
-    color:"#E9412D",
+    color:"white",
+    // color:"red",
     start: holiday.holiday,
-    allDay:1
+    allDay:1,
+    display:"background",
   }))
 
   const $websocket = useRef(null);
