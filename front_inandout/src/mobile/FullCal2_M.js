@@ -41,6 +41,9 @@ const FullCal2 = () => {
   const [user, setUser] = useState({});
   const [userId1, setUserId1] = useState({});
   const [username, setUsername] = useState();
+  const [userRole, setUserRole] = useState();
+  const [startDate, setStartDate] = useState();
+  const [holidays, setHolidays] = useState();
 
   const header = {
     headers: {
@@ -54,7 +57,8 @@ const FullCal2 = () => {
     });
   }, []);
 
-  const handleDateClick = () => {
+  const handleDateClick = (eventClick) => {
+    setStartDate(eventClick.dateStr)
     setVisible(true);
   };
   const onClose = () => {
@@ -68,6 +72,7 @@ const FullCal2 = () => {
     setFromDate1(eventClick.event.start);
     setToDate1(eventClick.event.end);
     setUsername(eventClick.event.extendedProps.username);
+    setUserRole(eventClick.event.extendedProps.roles)
     setVisible2(true);
   };
   const 드래그 = async (eventClick) => {
@@ -115,7 +120,15 @@ const FullCal2 = () => {
   }
   useEffect(() => {
     getUser();
+    holidayFetch();
   }, [])
+
+  const holidayFetch = async () => {
+    await axios.get("http://localhost:8080/api/holiday/all", header).then(res => {
+        setHolidays(res.data);
+    }).catch();
+  }
+
   const onFinish = (value) => { // 일정 등록
     let data3 = {
       category: value.category,
@@ -354,6 +367,15 @@ const FullCal2 = () => {
     allDay: 1
   }))
 
+  holidays && holidays.map((holiday) => data.push({
+    userId:holiday.id,
+    title:holiday.content,
+    // color:"#ff4646",
+    color:"#E9412D",
+    start: holiday.holiday,
+    allDay:1
+  }))
+
   return (
     // <div className="animated fadeIn p-4 demo-app">
       <Row>
@@ -463,6 +485,7 @@ const FullCal2 = () => {
                     label="일시"
                   >
                     <RangePicker
+                      placeholder={[startDate, null]}
                       showTime={{ format: 'HH mm' }}
                       format="YYYY-MM-DD HH mm"
                     />
@@ -506,87 +529,198 @@ const FullCal2 = () => {
             bodyStyle={{ paddingBottom: 80 }}
           >
             <Form layout="vertical" hideRequiredMark onFinish={onUpdate}>
-              <Row gutter={16}>
-                <Col span={12}>
-                  <Form.Item
-                    name="category"
-                    label="일정 구분"
+            <Form.Item>
+                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // 이벤트 주인 (userRole)
+                  <>
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          name="category"
+                          label="일정 구분"
 
-                    rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
-                  >
-                    <Select value={category1} placeholder={category1}>
-                      <Option value="출장">출장</Option>
-                      <Option value="외근">외근</Option>
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item
-                    name="user"
-                    label="대상"
-                  // rules={[{ required: true, message: 'Please choose the user' }]}
-                  >
-                    <Input placeholder={username} value={username} initialvalues={username} readOnly />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={16}>
-                <Col span={24}>
-                  <Form.Item
-                    name="date"
-                    label="일시"
-                  >
-                    <RangePicker
-                      showTime={{ format: 'HH mm' }}
-                      format="YYYY-MM-DD HH mm"
-                      placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={16}>
-                <Col span={24}>
-                  <Form.Item
-                    name="content"
-                    label="일정 내용"
-                    rules={[
-                      {
-                        required: true,
-                        message: '일정 내용을 입력해주세요',
-                      },
-                    ]}
-                  >
-                    {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
-                    <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
-                  </Form.Item>
+                          rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
+                        >
+                          <Select value={category1} placeholder={category1}>
+                            <Option value="출장">출장</Option>
+                            <Option value="외근">외근</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name="user"
+                          label="대상"
+                        // rules={[{ required: true, message: 'Please choose the user' }]}
+                        >
+                          <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={16}>
+                      <Col span={24}>
+                        <Form.Item
+                          name="date"
+                          label="일시"
+                        >
+                          <RangePicker
+                            showTime={{ format: 'HH mm' }}
+                            format="YYYY-MM-DD HH mm"
+                            placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={16}>
+                      <Col span={24}>
+                        <Form.Item
+                          name="content"
+                          label="일정 내용"
+                          rules={[
+                            {
+                              required: true,
+                              message: '일정 내용을 입력해주세요',
+                            },
+                          ]}
+                        >
+                          {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
+                          <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
+                        </Form.Item>
 
-                </Col>
-              </Row>
-              <div style={{ display: "flex", textAlign: "right" }}>
-                <Form.Item>
-                  {user.roles === 'ROLE_ADMIN' ? category1 !== '연차' ? category1 !== '오전 반차' ? category1 !== '오후 반차' ?
-                    <Button type="primary" htmlType="submit">
-                      수정
-                    </Button>
-                     : null : null : null : userId1 === user.id ?
-                     <Button type="primary" htmlType="submit">
-                       수정
-                     </Button> : null
-                  }
-                </Form.Item>
-                {user.roles === 'ROLE_ADMIN' ? 
-                    <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
-                    삭제
-                  </Button>
-                     : userId1 === user.id ?
-                     <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
-                     삭제
-                   </Button> : null
-                  }
-                {/* <Button onClick={onClose2} style={{ marginLeft: "10px" }}>
-                  취소
-                </Button> */}
-              </div>
+                      </Col>
+                    </Row>
+                    <div style={{ textAlign: "right" }}>
+                      <Button type="primary" htmlType="submit">
+                        수정
+                      </Button>
+                      <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
+                        삭제
+                      </Button>
+                    </div>
+                  </>
+                  : userId1 === user.id && category1 !== '연차' && category1 !== '오전 반차' && category1 !== '오후 반차' ?
+                    <>
+                      <Row gutter={16}>
+                        <Col span={12}>
+                          <Form.Item
+                            name="category"
+                            label="일정 구분"
+
+                            rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
+                          >
+                            <Select value={category1} placeholder={category1}>
+                              <Option value="출장">출장</Option>
+                              <Option value="외근">외근</Option>
+                            </Select>
+                          </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                          <Form.Item
+                            name="user"
+                            label="대상"
+                          // rules={[{ required: true, message: 'Please choose the user' }]}
+                          >
+                            <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                      <Row gutter={16}>
+                        <Col span={24}>
+                          <Form.Item
+                            name="date"
+                            label="일시"
+                          >
+                            <RangePicker
+                              showTime={{ format: 'HH mm' }}
+                              format="YYYY-MM-DD HH mm"
+                              placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                      <Row gutter={16}>
+                        <Col span={24}>
+                          <Form.Item
+                            name="content"
+                            label="일정 내용"
+                            rules={[
+                              {
+                                required: true,
+                                message: '일정 내용을 입력해주세요',
+                              },
+                            ]}
+                          >
+                            {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
+                            <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
+                          </Form.Item>
+
+                        </Col>
+                      </Row>
+                      <div style={{ textAlign: "right" }}>
+                        <Button type="primary" htmlType="submit">
+                          수정
+                        </Button>
+                        <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
+                          삭제
+                        </Button>
+                      </div>
+                    </> : <>
+                      <Row gutter={16}>
+                        <Col span={12}>
+                          <Form.Item
+                            name="category"
+                            label="일정 구분"
+
+                            rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
+                          >
+                            <Input placeholder={category1} value={category1} initialvalues={category1} readOnly />
+                          </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                          <Form.Item
+                            name="user"
+                            label="대상"
+                          // rules={[{ required: true, message: 'Please choose the user' }]}
+                          >
+                            <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                      <Row gutter={16}>
+                        <Col span={24}>
+                          <Form.Item
+                            name="date"
+                            label="일시"
+                          >
+                            <RangePicker
+                              disabled
+                              showTime={{ format: 'HH mm' }}
+                              format="YYYY-MM-DD HH mm"
+                              placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                      <Row gutter={16}>
+                        <Col span={24}>
+                          <Form.Item
+                            name="content"
+                            label="일정 내용"
+                            rules={[
+                              {
+                                required: true,
+                                message: '일정 내용을 입력해주세요',
+                              },
+                            ]}
+                          >
+                            {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
+                            <Input.TextArea readOnly rows={4} placeholder={content1} ></Input.TextArea>
+                          </Form.Item>
+
+                        </Col>
+                      </Row>
+                    </>
+                }
+              </Form.Item>
             </Form>
           </Drawer>
         </Col>

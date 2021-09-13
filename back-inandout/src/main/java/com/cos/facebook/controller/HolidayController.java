@@ -30,4 +30,9 @@ public class HolidayController {
 		System.out.println("asdfasdfsadf");
 		return new ResponseEntity<>(holidayService.findAll(),HttpStatus.OK);
 	}
+	
+	@GetMapping("/")
+	public ResponseEntity<?> find() {
+		return new ResponseEntity<>(holidayService.find(),HttpStatus.OK);
+	}
 }

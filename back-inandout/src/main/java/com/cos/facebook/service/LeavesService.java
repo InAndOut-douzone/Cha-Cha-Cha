@@ -73,6 +73,8 @@ public class LeavesService {
 			 return leavesRepository.findByNo23();
 		} else if(no == 24) {
 			 return leavesRepository.findByNo24();
+		} else if(no == 1234) {
+			 return leavesRepository.findAll();
 		}
 		return leavesRepository.findByNo(category);
 	}
@@ -101,6 +103,15 @@ public class LeavesService {
 		
 		userRepository.save(userEntity);
 		leavesRepository.deleteById(id);
+		
+		Alarm alarmEntitiy = new Alarm();
+		alarmEntitiy.setMessage(leavesEntity.getCategory());
+		alarmEntitiy.setFromUser(leavesEntity.getFromUser());
+		alarmEntitiy.setUser(leavesEntity.getUser());
+		alarmEntitiy.setState(true);
+		alarmRepository.save(alarmEntitiy);
+		alarmController.SendTemplateMessage3(leavesEntity);
+		
 		alarmController.SendToMessage2();
 	}
 	

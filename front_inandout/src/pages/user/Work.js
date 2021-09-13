@@ -73,6 +73,12 @@ const Work = () => {
 
     }, []);
 
+    const data2 = [];
+    onoff.map((onoff,index) => data2.push({
+        ...onoff,
+        key: index
+    }))
+
     // 간호사 목록 가져오기
     const getNurse = async () => {
         await axios.get("/api/user/nurse", header).then((res) => {
@@ -137,7 +143,9 @@ const Work = () => {
                 <br />
 
                 <div className="chart" style={{display:"flex", alignSelf:"center"}}>
-                    <Chart
+                    {localStorage.getItem("userRole") === 'ROLE_ADMIN' ? 
+                        null : 
+                        <Chart
                         width={"300px"}
                         height={"300px"}
                         chartType="PieChart"
@@ -159,7 +167,8 @@ const Work = () => {
                             colors: ["#f7d794", "#f3a683", "#778beb", "#e77f67", "#cf6a87"],    
                         }}
                     />
-
+}
+                    
 
                 <Chart
                         width={"300px"}
@@ -232,7 +241,7 @@ const Work = () => {
                 </Space>
                 <br />
                 <Pagi>
-                <Table dataSource={onoff} columns={columns} pagination={{position:['bottomCenter']}} />
+                <Table dataSource={data2} columns={columns} pagination={{position:['bottomCenter']}} />
                 </Pagi>
                 </Fade>
             </Layout>
