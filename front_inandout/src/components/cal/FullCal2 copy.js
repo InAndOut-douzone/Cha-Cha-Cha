@@ -17,16 +17,17 @@ import SockJsClient from 'react-stomp';
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-  const CalendarLayout = styled.div`
+const CalendarLayout = styled.div`
     .fc-next-button, .fc-prev-button, .fc-button-primary:disabled { background: white; color: black; border: 1px solid #d9d9d9 }, 
     .fc-col-header-cell-cushion { color: black; font-weight: 400; },
     .fc-daygrid-day-number { color: black; font-weight: 400; },
-  `;
-  const CalendarLayout2 = styled.div`
+    `;
+const CalendarLayout2 = styled.div`
     .fc-toolbar-chunk {display: flex; align-items: center;}
   `;
 
 const FullCal2 = () => {
+  const formRef = useRef(null);
   const [leaves, setLeaves] = useState([]);
   const [내일정, 내일정체크] = useState(false);
   const [연차, 연차체크] = useState(false);
@@ -42,6 +43,8 @@ const FullCal2 = () => {
   const [user, setUser] = useState({});
   const [userId1, setUserId1] = useState({});
   const [username, setUsername] = useState();
+  const [userRole, setUserRole] = useState();
+  const [startDate, setStartDate] = useState();
 
   const header = {
     headers: {
@@ -55,13 +58,17 @@ const FullCal2 = () => {
     });
   }, []);
 
-  const handleDateClick = () => {
+  const handleDateClick = (eventClick) => {
+    setStartDate(eventClick.dateStr)
     setVisible(true);
   };
+
   const onClose = () => {
     setVisible(false);
   };
+
   const handleDateClick2 = (eventClick) => {
+    console.log(eventClick)
     setNo1(eventClick.event.id);
     setUserId1(eventClick.event.extendedProps.userId);
     setCategory1(eventClick.event.extendedProps.category);
@@ -69,6 +76,7 @@ const FullCal2 = () => {
     setFromDate1(eventClick.event.start);
     setToDate1(eventClick.event.end);
     setUsername(eventClick.event.extendedProps.username);
+    setUserRole(eventClick.event.extendedProps.roles)
     setVisible2(true);
   };
 
@@ -87,22 +95,22 @@ const FullCal2 = () => {
     }
 
     eventClick.event.extendedProps.roles !== 'ROLE_ADMIN' ?
-    await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
-      alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
-    })
-    : 
-    eventClick.event.extendedProps.userId === user.id ?
-    await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
-      alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
-    })
-    : 
-    alert('일정 수정 권한이 없습니다.');
-    check(내일정,연차,출장,외근);
+      await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+        alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
+      })
+      :
+      eventClick.event.extendedProps.userId === user.id ?
+        await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+          alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
+        })
+        :
+        alert('일정 수정 권한이 없습니다.');
+    check(내일정, 연차, 출장, 외근);
   };
 
   // 현재 달력 옵션 클릭 상태를 유지하면서 달력 데이터 초기화
-  const check = (a,b,c,d) => {
-    if(a === true) {
+  const check = (a, b, c, d) => {
+    if (a === true) {
       a = 1;
     } else { a = "" };
     if (b === true) {
@@ -115,7 +123,7 @@ const FullCal2 = () => {
       d = 4
     } else { d = "" };
 
-    fetch(a+b+c+d);
+    fetch(a + b + c + d);
   }
 
   const onClose2 = () => {
@@ -129,6 +137,7 @@ const FullCal2 = () => {
   useEffect(() => {
     getUser();
   }, [])
+
   const onFinish = (value) => { // 일정 등록
     let data3 = {
       category: value.category,
@@ -140,6 +149,11 @@ const FullCal2 = () => {
     }
     axios.post("http://localhost:8080/api/leave2", data3, header).then(res => {
       alert("일정 등록이 완료되었습니다.");
+      formRef.current.setFieldsValue({
+        category: "",
+        content: "",
+        date: "",
+      });
       check(내일정, 연차, 출장, 외근)
       setVisible(0)
     }).catch();
@@ -377,99 +391,102 @@ const FullCal2 = () => {
         topics={['/topics/sendTo2']}
         // onMessage={msg => { setCount(count + 1) }}
         onMessage={
-            (msg) => {
-              check(내일정, 연차, 출장, 외근);
-            }
+          (msg) => {
+            check(내일정, 연차, 출장, 외근);
+          }
         }
         ref={$websocket} />
       <Row>
         <Col lg={10} sm={10} md={10}>
           <CalendarLayout>
             <div className="demo-app-calendar" id="mycalendartest">
-                <CalendarLayout2>
-                  <Fade bottom>
-                    {user.roles === 'ROLE_ADMIN' ? 
+              <CalendarLayout2>
+                <Fade bottom>
+                  {user.roles === 'ROLE_ADMIN' ?
                     <FullCalendar
-                    // defaultView="dayGridMonth"
-                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-                    height="750px"
-                    locale='ko'
-                    headerToolbar={{
-                      right: "today",
-                      // center: "prevYear prev title next nextYear",
-                      center: "prev title next",
-                      left: "dayGridMonth,timeGridWeek,listWeek"
-                    }}
-                    buttonText={{
-                      today: '오늘',
-                      month: '월',
-                      week: '주',
-                      day: '일',
-                      list: '목록'
-                    }}
-                    dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
-                    rerenderDelay={10}
-                    eventDurationEditable={false}
-                    editable={true}
-                    dateClick={handleDateClick} // 날짜 클릭시 함수 실행
-                    eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
-                    selectable={true}
-                    events={data} // 이벤트 데이터
-                    droppable={true}
-                    eventDrop={드래그}
-                    drop={드래그}
-                  />
-                  :
-                  <FullCalendar
-                    // defaultView="dayGridMonth"
-                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-                    height="750px"
-                    locale='ko'
-                    headerToolbar={{
-                      right: "today",
-                      // center: "prevYear prev title next nextYear",
-                      center: "prev title next",
-                      left: "dayGridMonth,timeGridWeek,listWeek"
-                    }}
-                    buttonText={{
-                      today: '오늘',
-                      month: '월',
-                      week: '주',
-                      day: '일',
-                      list: '목록'
-                    }}
-                    dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
-                    rerenderDelay={10}
-                    eventDurationEditable={false}
-                    editable={false} // 드래그 비활성화
-                    dateClick={handleDateClick} // 날짜 클릭시 함수 실행
-                    eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
-                    selectable={true}
-                    events={data} // 이벤트 데이터
-                  />}
-                  </Fade>
-                </CalendarLayout2>
+                      // defaultView="dayGridMonth"
+                      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+                      height="750px"
+                      locale='ko'
+                      headerToolbar={{
+                        right: "today",
+                        // center: "prevYear prev title next nextYear",
+                        center: "prev title next",
+                        left: "dayGridMonth,timeGridWeek,listWeek"
+                      }}
+                      buttonText={{
+                        today: '오늘',
+                        month: '월',
+                        week: '주',
+                        day: '일',
+                        list: '목록'
+                      }}
+                      dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+                      rerenderDelay={10}
+                      eventDurationEditable={false}
+                      editable={true}
+                      dateClick={handleDateClick} // 날짜 클릭시 함수 실행
+                      eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
+                      selectable={true}
+                      events={data} // 이벤트 데이터
+                      droppable={true}
+                      eventDrop={드래그}
+                      drop={드래그}
+                    />
+                    :
+                    <FullCalendar
+                      // defaultView="dayGridMonth"
+                      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+                      height="750px"
+                      locale='ko'
+                      headerToolbar={{
+                        right: "today",
+                        // center: "prevYear prev title next nextYear",
+                        center: "prev title next",
+                        left: "dayGridMonth,timeGridWeek,listWeek"
+                      }}
+                      buttonText={{
+                        today: '오늘',
+                        month: '월',
+                        week: '주',
+                        day: '일',
+                        list: '목록'
+                      }}
+                      dayMaxEvents={true} // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+                      rerenderDelay={10}
+                      eventDurationEditable={false}
+                      editable={false} // 드래그 비활성화
+                      dateClick={handleDateClick} // 날짜 클릭시 함수 실행
+                      eventClick={handleDateClick2} // 이벤트 클릭시 함수 실행
+                      selectable={true}
+                      events={data} // 이벤트 데이터
+                    />}
+                </Fade>
+              </CalendarLayout2>
             </div>
           </CalendarLayout>
         </Col>
         <Col lg={2} sm={2} md={2}>
           {/* <Checkbox defaultChecked onChange={onChange1}>내 일정</Checkbox><br /> */}
           <br /><br /><br />
+
           <Fade right>
-          <div style={{ marginTop: "-7.5px", height: "40px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-            <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
-          </div><br />
-          <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><Badge color="skyblue" /><Badge color="#d3d3d3" /><Badge color="#ff9aa3" /><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><Badge color="#9acd32" /><br />
-            <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><Badge color="gold" /><br /><br /><br /><br />
-          </div>
+            <div style={{ marginTop: "-7.5px", height: "40px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
+              <Checkbox onChange={onChange1}>내 일정</Checkbox><br />
+            </div><br />
+            <div style={{ height: "100px", width: "200px", border: "1px solid whitesmoke", padding: "10px", display: "inlineBlock" }}>
+              <Checkbox style={{ marginBottom: "5px" }} onChange={onChange2}>연차</Checkbox><Badge color="skyblue" /><Badge color="#d3d3d3" /><Badge color="#ff9aa3" /><br />
+              <Checkbox style={{ marginBottom: "5px" }} onChange={onChange3}>출장</Checkbox><Badge color="#9acd32" /><br />
+              <Checkbox style={{ marginBottom: "5px" }} onChange={onChange4}>외근</Checkbox><Badge color="gold" /><br /><br /><br /><br />
+            </div>
           </Fade>
           <br />
           <Fade right>
-          <EmployeeOnOffList />
+            <EmployeeOnOffList />
           </Fade>
-          
+
+
+
 
           <Drawer
             title="일정 등록"
@@ -478,7 +495,7 @@ const FullCal2 = () => {
             visible={visible}
             bodyStyle={{ paddingBottom: 80 }}
           >
-            <Form layout="vertical" hideRequiredMark onFinish={onFinish}>
+            <Form ref={formRef} layout="vertical" hideRequiredMark onFinish={onFinish}>
               <Row gutter={16}>
                 <Col span={12}>
                   <Form.Item
@@ -510,6 +527,11 @@ const FullCal2 = () => {
                     label="일시"
                   >
                     <RangePicker
+                      // defaultValue={[
+                      //   moment(startDate, "YYYY-MM-DD HH mm"),
+                      //   moment("2022-01-01", "YYYY-MM-DD HH mm")
+                      // ]}
+                      placeholder={[startDate, null]}
                       showTime={{ format: 'HH mm' }}
                       format="YYYY-MM-DD HH mm"
                     />
@@ -552,6 +574,7 @@ const FullCal2 = () => {
             visible={visible2}
             bodyStyle={{ paddingBottom: 80 }}
           >
+
             <Form layout="vertical" hideRequiredMark onFinish={onUpdate}>
               <Row gutter={16}>
                 <Col span={12}>
@@ -611,29 +634,27 @@ const FullCal2 = () => {
               </Row>
               <div style={{ display: "flex", textAlign: "right" }}>
                 <Form.Item>
-                  {/* {user.roles === 'ROLE_ADMIN' ? category1 !== '연차' ? category1 !== '오전 반차' ? category1 !== '오후 반차' ? */}
-                  {user.roles === 'ROLE_ADMIN' ?
-                    <Button type="primary" htmlType="submit">
-                      수정
-                    </Button>
-                     : userId1 === user.id ?
-                     <Button type="primary" htmlType="submit">
-                       수정
-                     </Button> : null
+                  {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // 이벤트 주인 (userRole)
+                    <>
+                      <Button type="primary" htmlType="submit">
+                        수정
+                      </Button>
+                      <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
+                        삭제
+                      </Button>
+                    </>
+                    : userId1 === user.id ?
+                      category1 !== '연차' ? category1 !== '오전 반차' ? category1 !== '오후 반차' ?
+                      <>
+                        <Button type="primary" htmlType="submit">
+                          수정
+                        </Button>
+                        <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
+                          삭제
+                        </Button>
+                      </> : null: null: null: null
                   }
                 </Form.Item>
-                {user.roles === 'ROLE_ADMIN' ? 
-                    <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
-                    삭제
-                  </Button>
-                     : userId1 === user.id ?
-                     <Button onClick={onDelete} style={{ marginLeft: "10px" }}>
-                     삭제
-                   </Button> : null
-                  }
-                {/* <Button onClick={onClose2} style={{ marginLeft: "10px" }}>
-                  취소
-                </Button> */}
               </div>
             </Form>
           </Drawer>
