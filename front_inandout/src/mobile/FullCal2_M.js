@@ -41,6 +41,7 @@ const FullCal2 = () => {
   const [user, setUser] = useState({});
   const [userId1, setUserId1] = useState({});
   const [username, setUsername] = useState();
+  const [holidays, setHolidays] = useState();
 
   const header = {
     headers: {
@@ -115,7 +116,15 @@ const FullCal2 = () => {
   }
   useEffect(() => {
     getUser();
+    holidayFetch();
   }, [])
+
+  const holidayFetch = async () => {
+    await axios.get("http://localhost:8080/api/holiday/all", header).then(res => {
+        setHolidays(res.data);
+    }).catch();
+  }
+
   const onFinish = (value) => { // 일정 등록
     let data3 = {
       category: value.category,
@@ -352,6 +361,15 @@ const FullCal2 = () => {
     category: leave.category,
     content: leave.content,
     allDay: 1
+  }))
+
+  holidays && holidays.map((holiday) => data.push({
+    userId:holiday.id,
+    title:holiday.content,
+    // color:"#ff4646",
+    color:"#E9412D",
+    start: holiday.holiday,
+    allDay:1
   }))
 
   return (
