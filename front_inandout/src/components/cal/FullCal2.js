@@ -86,8 +86,9 @@ const FullCal2 = () => {
 
   const 드래그 = async (eventClick) => {
     console.log(eventClick.event)
-    console.log(eventClick.event.id)
+    // console.log(eventClick.event.id)
     console.log(eventClick.event.start)
+    console.log(eventClick.event.end)
     let data3 = {
       id: eventClick.event.id, // 수정할 이벤트 번호
       category: eventClick.event.extendedProps.category,
@@ -97,17 +98,26 @@ const FullCal2 = () => {
       toDate: eventClick.event.extendedProps.category === "연차" ? moment(eventClick.event.end).add(-1, 'd').toDate() : eventClick.event.end,
     }
 
-    eventClick.event.extendedProps.roles !== 'ROLE_ADMIN' ?
-      await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
-        alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
-      })
-      :
-      eventClick.event.extendedProps.userId === user.id ?
+    eventClick.event.end !== null ?
+      eventClick.event.extendedProps.roles !== 'ROLE_ADMIN' ?
         await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
-          alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
+          eventClick.event.extendedProps.category === "연차" ?
+            alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).add(-1, 'd').format("YYYY-MM-DD")}`)
+            : alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`)
         })
         :
-        alert('일정 수정 권한이 없습니다.');
+        eventClick.event.extendedProps.userId === user.id ?
+          await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+            eventClick.event.extendedProps.category === "연차" ?
+              alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).add(-1, 'd').format("YYYY-MM-DD")}`)
+              : alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`)
+          })
+          :
+          alert('일정 수정 권한이 없습니다.')
+      :
+      await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+        alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")}`);
+      })
     check(내일정, 연차, 출장, 외근);
   };
 
@@ -145,7 +155,7 @@ const FullCal2 = () => {
 
   const holidayFetch = async () => {
     await axios.get("http://localhost:8080/api/holiday/", header).then(res => {
-        setHolidays(res.data);
+      setHolidays(res.data);
     }).catch();
   }
 
@@ -209,169 +219,43 @@ const FullCal2 = () => {
     });
   }
 
+  const 체크박스 = (a, b, c, d) => {
+    if (a && b && c && d) dd()
+    else if (a && b && c) fetch(123)
+    else if (a && b && d) fetch(124)
+    else if (a && c && d) fetch(134)
+    else if (b && c && d) fetch(234)
+    else if (a && b) fetch(12)
+    else if (a && c) fetch(13)
+    else if (a && d) fetch(14)
+    else if (b && c) fetch(23)
+    else if (b && d) fetch(24)
+    else if (c && d) fetch(34)
+    else if (a) fetch(1)
+    else if (b) fetch(2)
+    else if (c) fetch(3)
+    else if (d) fetch(4)
+    else dd()
+  }
+
   function onChange1(e) {
     내일정체크(!내일정);
-    if (e.target.checked) {
-      if (연차 && 출장 && 외근) {
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (연차 && 출장) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (연차 && 외근) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (출장 && 외근) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (연차) {
-        fetch(12) // 내일정, 연차
-      } else if (출장) {
-        fetch(13) // 내일정, 출장
-      } else if (외근) {
-        fetch(14) // 내일정, 외근
-      } else {
-        fetch(1) // 내일정
-      }
-    } else {
-      if (연차 && 출장 && 외근) {
-        fetch(234) // 연차, 출장, 외근
-      } else if (연차 && 출장) {
-        fetch(23) // 연차, 출장
-      } else if (연차 && 외근) {
-        fetch(24) // 연차, 외근
-      } else if (출장 && 외근) {
-        fetch(34) // 출장, 외근
-      } else if (연차) {
-        fetch(2) // 연차
-      } else if (출장) {
-        fetch(3) // 출장
-      } else if (외근) {
-        fetch(4) // 외근
-      } else {
-        dd()
-      }
-    }
+    체크박스(e.target.checked, 연차, 출장, 외근);
   }
 
   function onChange2(e) {
     연차체크(!연차);
-    if (e.target.checked) {
-      if (내일정 && 출장 && 외근) {
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (내일정 && 출장) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (내일정 && 외근) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (출장 && 외근) {
-        fetch(234) // 내일정, 출장, 외근
-      } else if (내일정) {
-        fetch(12) // 내일정, 연차
-      } else if (출장) {
-        fetch(23) // 연차, 출장
-      } else if (외근) {
-        fetch(24) // 연차, 외근
-      } else {
-        fetch(2) // 연차
-      }
-    } else {
-      if (내일정 && 출장 && 외근) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (내일정 && 출장) {
-        fetch(13) // 내일정, 출장
-      } else if (내일정 && 외근) {
-        fetch(14) // 내일정, 외근
-      } else if (출장 && 외근) {
-        fetch(34) // 내일정, 출장, 외근
-      } else if (내일정) {
-        fetch(1) // 내일정
-      } else if (출장) {
-        fetch(3) // 출장
-      } else if (외근) {
-        fetch(4) // 외근
-      } else {
-        dd()
-      }
-    }
+    체크박스(내일정, e.target.checked, 출장, 외근);
   }
 
   function onChange3(e) {
     출장체크(!출장);
-    if (e.target.checked) {
-      if (내일정 && 연차 && 외근) {
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (내일정 && 연차) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (내일정 && 외근) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (연차 && 외근) {
-        fetch(234) // 연차, 출장, 외근
-      } else if (내일정) {
-        fetch(13) // 내일정, 출장
-      } else if (연차) {
-        fetch(23) // 연차, 출장
-      } else if (외근) {
-        fetch(34) // 출장, 외근
-      } else {
-        fetch(3) // 출장
-      }
-    } else {
-      if (내일정 && 연차 && 외근) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (내일정 && 연차) {
-        fetch(12) // 내일정, 연차 
-      } else if (내일정 && 외근) {
-        fetch(14) // 내일정, 외근
-      } else if (연차 && 외근) {
-        fetch(24) // 연차, 외근
-      } else if (내일정) {
-        fetch(1) // 내일정
-      } else if (연차) {
-        fetch(2) // 연차
-      } else if (외근) {
-        fetch(4) // 외근
-      } else {
-        dd()
-      }
-    }
+    체크박스(내일정, 연차, e.target.checked, 외근);
   }
 
   function onChange4(e) {
     외근체크(!외근);
-    if (e.target.checked) {
-      if (내일정 && 연차 && 출장) {
-        console.log("실행도미?ㄴ??" + 외근, 내일정, 연차, 출장)
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (내일정 && 연차) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (내일정 && 출장) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (연차 && 출장) {
-        fetch(234) // 연차, 출장, 외근
-      } else if (내일정) {
-        fetch(14) // 내일정, 외근
-      } else if (연차) {
-        fetch(24) // 연차, 외근
-      } else if (출장) {
-        fetch(34) // 출장, 외근
-      } else {
-        fetch(4) // 외근
-      }
-    } else {
-      if (내일정 && 연차 && 출장) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (내일정 && 연차) {
-        fetch(12) // 내일정, 연차
-      } else if (내일정 && 출장) {
-        fetch(13) // 내일정, 출장
-      } else if (연차 && 출장) {
-        fetch(23) // 연차, 출장
-      } else if (내일정) {
-        fetch(1) // 내일정
-      } else if (연차) {
-        fetch(2) // 연차
-      } else if (출장) {
-        fetch(3) // 출장
-      } else {
-        dd()
-      }
-    }
+    체크박스(내일정, 연차, 출장, e.target.checked);
   }
 
   let data = []; // 연차
@@ -395,13 +279,13 @@ const FullCal2 = () => {
   }))
 
   holidays && holidays.map((holiday) => data.push({
-    userId:holiday.id,
-    title:holiday.content,
-    color:"white",
+    userId: holiday.id,
+    title: holiday.content,
+    color: "white",
     // color:"red",
     start: holiday.holiday,
-    allDay:1,
-    display:"background",
+    allDay: 1,
+    display: "background",
   }))
 
   const $websocket = useRef(null);

@@ -536,7 +536,7 @@ const _Header = () => {
                                             </div>} key={al.no}>
                                         {user.position === '간호사' ?
                                             <p>{al.message + "신청이 승인 되었습니다."}</p> :
-                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                            <p>{al.message + " 일정이 변경 되었습니다."}</p>
                                         }
 
                                     </Card>
@@ -552,7 +552,7 @@ const _Header = () => {
                                                 </div>} key={al.no}>
                                             {user.position === '간호사' ?
                                                 <p>{al.message + "신청이 승인 되었습니다."}</p> :
-                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                                <p>{al.message + " 일정이 변경 되었습니다."}</p>
                                             }
                                         </Card>
                                     </Link>

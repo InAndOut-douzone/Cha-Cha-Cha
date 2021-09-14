@@ -45,13 +45,13 @@ const HIM = () => {
                 <Breadcrumb style={{ margin: '16px 0' }}>
                     <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
                     <Breadcrumb.Item>의원 관리</Breadcrumb.Item>
-                    <Breadcrumb.Item>의원 정보 관리</Breadcrumb.Item>
+                    <Breadcrumb.Item>의원 정보</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
                 <Fade bottom>
                     <div style={{ textAlign: "-webkit-center", width: "100%" }}>
-                        <Descriptions title="의원 정보 관리" bordered style={{ textAlign: "-webkit-center", width: "50%" }}>
+                        <Descriptions title="의원 정보" bordered style={{ textAlign: "-webkit-center", width: "50%" }}>
                             <Descriptions.Item label="의원 로고" span={3}><Image style={{ width: "200px" }} src={image === null ? DefaultLogo : image} roundedCircle /></Descriptions.Item>
                             <Descriptions.Item label="의원 번호" span={3}>{hospital.no}</Descriptions.Item>
                             <Descriptions.Item label="의원명" span={3}>{hospital.name}</Descriptions.Item>

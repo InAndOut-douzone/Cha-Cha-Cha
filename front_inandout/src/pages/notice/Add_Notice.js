@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import SiteLayout from '../SiteLayout';
 import styled from 'styled-components'
@@ -11,7 +11,6 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState,convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 // import htmlToDraft from 'html-to-draftjs';
-
 
 const Container = styled.div`
     width: 100%;
