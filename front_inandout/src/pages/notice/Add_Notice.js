@@ -12,7 +12,6 @@ import { EditorState,convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 // import htmlToDraft from 'html-to-draftjs';
 
-
 const Container = styled.div`
     width: 100%;
     height: 80%;

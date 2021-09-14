@@ -184,168 +184,43 @@ const FullCal2 = () => {
     });
   }
 
+  const 체크박스 = (a, b, c, d) => {
+    if (a && b && c && d) dd()
+    else if (a && b && c) fetch(123)
+    else if (a && b && d) fetch(124)
+    else if (a && c && d) fetch(134)
+    else if (b && c && d) fetch(234)
+    else if (a && b) fetch(12)
+    else if (a && c) fetch(13)
+    else if (a && d) fetch(14)
+    else if (b && c) fetch(23)
+    else if (b && d) fetch(24)
+    else if (c && d) fetch(34)
+    else if (a) fetch(1)
+    else if (b) fetch(2)
+    else if (c) fetch(3)
+    else if (d) fetch(4)
+    else dd()
+  }
+
   function onChange1(e) {
     내일정체크(!내일정);
-    if (e.target.checked) {
-      if (연차 && 출장 && 외근) {
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (연차 && 출장) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (연차 && 외근) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (출장 && 외근) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (연차) {
-        fetch(12) // 내일정, 연차
-      } else if (출장) {
-        fetch(13) // 내일정, 출장
-      } else if (외근) {
-        fetch(14) // 내일정, 외근
-      } else {
-        fetch(1) // 내일정
-      }
-    } else {
-      if (연차 && 출장 && 외근) {
-        fetch(234) // 연차, 출장, 외근
-      } else if (연차 && 출장) {
-        fetch(23) // 연차, 출장
-      } else if (연차 && 외근) {
-        fetch(24) // 연차, 외근
-      } else if (출장 && 외근) {
-        fetch(34) // 출장, 외근
-      } else if (연차) {
-        fetch(2) // 연차
-      } else if (출장) {
-        fetch(3) // 출장
-      } else if (외근) {
-        fetch(4) // 외근
-      } else {
-        dd()
-      }
-    }
+    체크박스(e.target.checked, 연차, 출장, 외근);
   }
 
   function onChange2(e) {
     연차체크(!연차);
-    if (e.target.checked) {
-      if (내일정 && 출장 && 외근) {
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (내일정 && 출장) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (내일정 && 외근) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (출장 && 외근) {
-        fetch(234) // 내일정, 출장, 외근
-      } else if (내일정) {
-        fetch(12) // 내일정, 연차
-      } else if (출장) {
-        fetch(23) // 연차, 출장
-      } else if (외근) {
-        fetch(24) // 연차, 외근
-      } else {
-        fetch(2) // 연차
-      }
-    } else {
-      if (내일정 && 출장 && 외근) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (내일정 && 출장) {
-        fetch(13) // 내일정, 출장
-      } else if (내일정 && 외근) {
-        fetch(14) // 내일정, 외근
-      } else if (출장 && 외근) {
-        fetch(34) // 내일정, 출장, 외근
-      } else if (내일정) {
-        fetch(1) // 내일정
-      } else if (출장) {
-        fetch(3) // 출장
-      } else if (외근) {
-        fetch(4) // 외근
-      } else {
-        dd()
-      }
-    }
+    체크박스(내일정, e.target.checked, 출장, 외근);
   }
 
   function onChange3(e) {
     출장체크(!출장);
-    if (e.target.checked) {
-      if (내일정 && 연차 && 외근) {
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (내일정 && 연차) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (내일정 && 외근) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (연차 && 외근) {
-        fetch(234) // 연차, 출장, 외근
-      } else if (내일정) {
-        fetch(13) // 내일정, 출장
-      } else if (연차) {
-        fetch(23) // 연차, 출장
-      } else if (외근) {
-        fetch(34) // 출장, 외근
-      } else {
-        fetch(3) // 출장
-      }
-    } else {
-      if (내일정 && 연차 && 외근) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (내일정 && 연차) {
-        fetch(12) // 내일정, 연차 
-      } else if (내일정 && 외근) {
-        fetch(14) // 내일정, 외근
-      } else if (연차 && 외근) {
-        fetch(24) // 연차, 외근
-      } else if (내일정) {
-        fetch(1) // 내일정
-      } else if (연차) {
-        fetch(2) // 연차
-      } else if (외근) {
-        fetch(4) // 외근
-      } else {
-        dd()
-      }
-    }
+    체크박스(내일정, 연차, e.target.checked, 외근);
   }
 
   function onChange4(e) {
     외근체크(!외근);
-    if (e.target.checked) {
-      if (내일정 && 연차 && 출장) {
-        fetch(1234) // 내일정, 연차, 출장, 외근
-      } else if (내일정 && 연차) {
-        fetch(124) // 내일정, 연차, 외근
-      } else if (내일정 && 출장) {
-        fetch(134) // 내일정, 출장, 외근
-      } else if (연차 && 출장) {
-        fetch(234) // 연차, 출장, 외근
-      } else if (내일정) {
-        fetch(14) // 내일정, 외근
-      } else if (연차) {
-        fetch(24) // 연차, 외근
-      } else if (출장) {
-        fetch(34) // 출장, 외근
-      } else {
-        fetch(4) // 외근
-      }
-    } else {
-      if (내일정 && 연차 && 출장) {
-        fetch(123) // 내일정, 연차, 출장
-      } else if (내일정 && 연차) {
-        fetch(12) // 내일정, 연차
-      } else if (내일정 && 출장) {
-        fetch(13) // 내일정, 출장
-      } else if (연차 && 출장) {
-        fetch(23) // 연차, 출장
-      } else if (내일정) {
-        fetch(1) // 내일정
-      } else if (연차) {
-        fetch(2) // 연차
-      } else if (출장) {
-        fetch(3) // 출장
-      } else {
-        dd()
-      }
-    }
+    체크박스(내일정, 연차, 출장, e.target.checked);
   }
 
   let data = []; // 연차

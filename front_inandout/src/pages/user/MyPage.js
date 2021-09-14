@@ -18,10 +18,10 @@ const MyPage = () => {
     //const imgPath = "profiles/";
     const imgPath = "/images/";
     const [user, setUser] = useState({});
-    const [profile, setProfile] = useState({});
     const [email, setEmail] = useState({});
     const [phone, setPhone] = useState({});
     const [image, setimage] = useState({});
+    const [profile, setProfile] = useState({});
     const formData = new FormData();
 
     const profileHandler = (e) => {
