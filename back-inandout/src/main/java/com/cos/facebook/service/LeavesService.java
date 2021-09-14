@@ -128,8 +128,8 @@ public class LeavesService {
 		leavesEntity.setUser(userEntity);
 		leavesEntity.setFromUser(doctoryEntity);
 		
-		System.out.println("===================");
-		System.out.println(leavesEntity);
+		// System.out.println("===================");
+		// System.out.println(leavesEntity);
 				
 		Alarm alarmEntitiy = new Alarm();
 		alarmEntitiy.setMessage(leaveAddReqDto.getCategory());
@@ -215,7 +215,7 @@ public class LeavesService {
 	}
 
 	public void update(LeavesReqDto leavesReqDto) {
-		System.out.println("여기 실행됐난ㅁㅇㄹㄴㅁㅇㄹ");
+		// System.out.println("여기 실행됐난ㅁㅇㄹㄴㅁㅇㄹ");
 		Leaves leavesEntity = leavesRepository.findById(leavesReqDto.getId()).get();
 		leavesEntity.setCategory(leavesReqDto.getCategory());
 		leavesEntity.setContent(leavesReqDto.getContent());

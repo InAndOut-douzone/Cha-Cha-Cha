@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Layout, Descriptions, Badge, Breadcrumb, Form, Button } from 'antd';
+import { Layout, Descriptions, Badge, Breadcrumb, Form, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import DefaultProfile from '../../assets/images/defaultProfile.png';
@@ -113,13 +113,13 @@ const MyPage = () => {
 
                         <Descriptions.Item label="이메일">
                             <Form.Item rules={[{ type: 'email', message: '이메일형식을 맞게 입력하세요.' }]}>
-                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={user.email} onChange={emailHandler} />
+                                <Input style={{border: "1px solid beige", textAlign: "center"}} value={email} onChange={emailHandler} />
                             </Form.Item>
                         </Descriptions.Item>
 
                         <Descriptions.Item label="연락처" span={2}>
                             <Form.Item rules={[{ required: true, message: '연락처를 입력하세요.' }]}>
-                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={user.phone} onChange={phoneHandler} />
+                                <Input style={{border: "1px solid beige", textAlign: "center"}} value={phone} onChange={phoneHandler} />
                             </Form.Item>
                         </Descriptions.Item>
                         <Descriptions.Item label="근무 상태" span={3}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Layout, Breadcrumb, Button, Descriptions, Image } from 'antd';
+import { Form, Layout, Breadcrumb, Button, Descriptions, Image, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import DefaultLogo from '../../assets/images/defaultProfile.png';
@@ -172,22 +172,22 @@ const HIM = () => {
 
                         <Descriptions.Item label="의원명">
                             <Form.Item>
-                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={hospital.name} onChange={HIM_name} />
+                                <Input style={{border: "1px solid beige", textAlign: "center"}} value={name} onChange={HIM_name} />
                             </Form.Item>
                         </Descriptions.Item>
                         <Descriptions.Item label="대표자명">
                             <Form.Item>
-                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={hospital.ceoName} onChange={HIM_ceoName} />
+                                <Input style={{border: "1px solid beige", textAlign: "center"}} value={ceoName} onChange={HIM_ceoName} />
                             </Form.Item>
                         </Descriptions.Item>
                         <Descriptions.Item label="의원 주소" span={2}>
                             <Form.Item>
-                                <input style={{border: "1px solid beige", textAlign: "center", width: "70%"}} defaultValue={hospital.address} onChange={HIM_address} />
+                                <Input style={{border: "1px solid beige", textAlign: "center", width: "70%"}} value={address} onChange={HIM_address} />
                             </Form.Item>
                         </Descriptions.Item>
                         <Descriptions.Item label="의원 전화번호">
                             <Form.Item>
-                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={hospital.telNum} onChange={HIM_telNum} />
+                                <Input style={{border: "1px solid beige", textAlign: "center"}} value={telNum} onChange={HIM_telNum} />
                             </Form.Item>
                         </Descriptions.Item>
                     </Descriptions>
