@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import SiteLayout from '../SiteLayout';
 import styled from 'styled-components'
@@ -47,6 +47,8 @@ const MyBlock = styled.div`
 
 const Add_Notice = () => {
 
+    console.log("asdfasdfasdfsadf")
+
     const baa = (value) => {        
         // editorState의 현재 contentState 값을 원시 JS 구조로 변환시킨뒤, HTML 태그로 변환시켜준다.
         console.log("onEditorStateChange : " +  draftToHtml(convertToRaw(editorState.getCurrentContent())));
@@ -72,39 +74,18 @@ const Add_Notice = () => {
 
     };
 
-    // 처음 데이터 설정
-    // const htmlToEditor = `<p><span style="color: rgb(209,72,65);"><strong>ㅁㄴㅇㅇㅇㅇ'</strong></span></p>
-    // <p>ㅁㄴㅇㅁㅁㄴㅇㅇㄴㅁㅇㄹㄹㄹㅁㅁㅁㅇㄹㄹㄹ</p>
-    // <p>ㄻㄴㅇㄻㄴㅇㄹ</p>`;
-
-    // useEffect(() => {
-    //     const blocksFromHtml = htmlToDraft(htmlToEditor);
-    //     if (blocksFromHtml) {
-    //       const { contentBlocks, entityMap } = blocksFromHtml;
-    //       // https://draftjs.org/docs/api-reference-content-state/#createfromblockarray
-    //       const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
-    //       // ContentState를 EditorState기반으로 새 개체를 반환.
-    //       // https://draftjs.org/docs/api-reference-editor-state/#createwithcontent
-    //       const editorState = EditorState.createWithContent(contentState);
-    //       setEditorState(editorState);
-    //     //   setDd(editorState);
-    //     }
-    //   // 처음 마운트 됐을때만 실행되야 된다.
-    //   // eslint-disable-next-line
-    //   },[]);
-
-    const DIV = styled.div`
-    .ant-form-item-control-input-content {
-    display: flex;
-    align-items: center;
-    }
-    label {
-        width: 100px;
-    }
-`
+//     const DIV = styled.div`
+//     .ant-form-item-control-input-content {
+//     display: flex;
+//     align-items: center;
+//     }
+//     label {
+//         width: 100px;
+//     }
+// `
     return (
         <SiteLayout>
-            <DIV>
+            {/* <DIV> */}
             <Layout style={{ padding: '0 24px 24px' }}>
                 <br />
                 <Breadcrumb style={{ margin: '16px 0' }}>
@@ -160,7 +141,7 @@ const Add_Notice = () => {
                     </Form>
                 </Container>
             </Layout>
-            </DIV>
+            {/* </DIV> */}
         </SiteLayout>
     );
 }
