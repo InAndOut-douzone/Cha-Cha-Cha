@@ -154,7 +154,7 @@ const NoticeModify = (props) => {
                                 </FormItem>
                             </Descriptions.Item>
                             <Descriptions.Item label="내용" style={{textAlign:'center'}}>
-                            {/* <MyBlock>  */}
+                            <MyBlock> 
                                     {/* react-draft-wysiwyg (What You See Is What You Get)*/}
                                     <Editor
                                         placeholder="내용을 작성해주세요."
@@ -176,7 +176,7 @@ const NoticeModify = (props) => {
                                         editorClassName="editorClassName"
                                         onEditorStateChange={onEditorStateChange}
                                     />
-                                {/* </MyBlock> */}
+                                </MyBlock>
                                 {/* <FormItem style={{margin:'0'}}>
                                     <textarea name='contents' onChange={contentsHandler}
                                     style={{ height: '400px',width:'100%'}} defaultValue={contents}/>
