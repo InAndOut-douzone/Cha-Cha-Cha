@@ -87,10 +87,27 @@ const FullCal2 = () => {
       toDate: eventClick.event.end,
     }
 
-    await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
-      alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`);
-      check(내일정,연차,출장,외근);
-    })
+    eventClick.event.end !== null ?
+      eventClick.event.extendedProps.roles !== 'ROLE_ADMIN' ?
+        await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+          eventClick.event.extendedProps.category === "연차" ?
+            alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).add(-1, 'd').format("YYYY-MM-DD")}`)
+            : alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`)
+        })
+        :
+        eventClick.event.extendedProps.userId === user.id ?
+          await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+            eventClick.event.extendedProps.category === "연차" ?
+              alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).add(-1, 'd').format("YYYY-MM-DD")}`)
+              : alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")} ~ ${moment(eventClick.event.end).format("YYYY-MM-DD")}`)
+          })
+          :
+          alert('일정 수정 권한이 없습니다.')
+      :
+      await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
+        alert(`일정 수정 : ${moment(eventClick.event.start).format("YYYY-MM-DD")}`);
+      })
+    check(내일정, 연차, 출장, 외근);
   };
 
   const check = (a,b,c,d) => {
@@ -248,7 +265,7 @@ const FullCal2 = () => {
     // color:"#ff4646",
     color:"#E9412D",
     start: holiday.holiday,
-    allDay:1
+    allDay:1,
   }))
 
   return (
