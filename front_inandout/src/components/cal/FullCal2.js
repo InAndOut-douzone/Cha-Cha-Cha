@@ -258,6 +258,10 @@ const FullCal2 = () => {
     체크박스(내일정, 연차, 출장, e.target.checked);
   }
 
+  function asd(e) {
+    setCategory1(e.target.value);
+  }
+
   let data = []; // 연차
   leaves.map((leave) => data.push({
     username: leave.user.name,
@@ -541,7 +545,7 @@ const FullCal2 = () => {
                           <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                         </Form.Item>
 
-                      </Col>
+                      </Col>  
                     </Row>
                     <div style={{ textAlign: "right" }}>
                       <Button type="primary" htmlType="submit">

@@ -89,8 +89,8 @@ const Add_Notice = () => {
                 <br />
                 <Breadcrumb style={{ margin: '16px 0' }}>
                     <Breadcrumb.Item><Link to="/"><HomeOutlined /></Link></Breadcrumb.Item>
-                    <Breadcrumb.Item>사원 관리</Breadcrumb.Item>
-                    <Breadcrumb.Item>사원 등록</Breadcrumb.Item>
+                    <Breadcrumb.Item>공지사항</Breadcrumb.Item>
+                    <Breadcrumb.Item>공지사항 등록</Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ borderTop: "1px solid #eee" }} />
                 <br /><br />
