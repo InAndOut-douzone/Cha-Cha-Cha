@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -181,15 +182,18 @@ public class LeavesService {
 			toDate.setTime(leaveEntity.getToDate());
 
 			while(fromDate.compareTo(toDate) != 1) {
-				fromDate.add(Calendar.MINUTE,3);
+				
+				// System.out.println("***************from date"+fromDate);
+				// fromDate.add(Calendar.MINUTE, 3);
 				OnOff onOffEntity = new OnOff();
-				Date d = new Date(fromDate.getTimeInMillis());
+				Date d = fromDate.getTime();
 				
 				onOffEntity.setUser(leaveEntity.getUser());
 				onOffEntity.setDate(d);
 				onOffEntity.setState(leaveEntity.getCategory());
 				onOffEntity.setLeaves(leaveEntity);
 				onOffRepository.save(onOffEntity);
+				
 				fromDate.add(Calendar.DATE,1);
 			}
 			
