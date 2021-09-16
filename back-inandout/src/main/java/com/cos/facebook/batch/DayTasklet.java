@@ -93,7 +93,7 @@ public class DayTasklet implements Tasklet, StepExecutionListener {
 				work.setUser(userRepository.findById2(id));
 				work.setDate(new Date());
 				onOffRepository.save(work);
-				System.out.println("3e3333333333"+work);
+				// System.out.println("3e3333333333"+work);
 			}
 			
 		}
