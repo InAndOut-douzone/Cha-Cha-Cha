@@ -17,7 +17,7 @@ const Message = () => {
         $websocket.current.sendMessage ('/Template'); 
     };
 
-    const no = localStorage.getItem('userNo');
+    const no = sessionStorage.getItem('userNo');
 
     return (
         <div> 
@@ -33,8 +33,8 @@ const Message = () => {
                 onMessage={msg => { console.log (msg); }} 
                 ref={$websocket} />
             <button onClick={handleClickSendTo}>SendTo</button> 
-            {localStorage.getItem('userNo')}
-            {localStorage.getItem('userRole')}
+            {sessionStorage.getItem('userNo')}
+            {sessionStorage.getItem('userRole')}
             <button onClick={handleClickSendTemplate}>SendTemplate</button> 
         </div>
         

@@ -11,7 +11,7 @@ import { Chart } from "react-google-charts";
 const { RangePicker } = DatePicker
 const header = {
     headers: {
-        Authorization: "Bearer " + localStorage.getItem("Authorization")
+        Authorization: "Bearer " + sessionStorage.getItem("Authorization")
     }
 };
 
@@ -143,7 +143,7 @@ const Work = () => {
                 <br />
 
                 <div className="chart" style={{display:"flex", alignSelf:"center"}}>
-                    {localStorage.getItem("userRole") === 'ROLE_ADMIN' ? 
+                    {sessionStorage.getItem("userRole") === 'ROLE_ADMIN' ? 
                         null : 
                         <Chart
                         width={"300px"}

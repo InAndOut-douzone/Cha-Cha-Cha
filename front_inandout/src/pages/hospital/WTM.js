@@ -31,7 +31,7 @@ const WTM = () => {
 
   const header = {
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
       "Content-Type": "application/json; charset=utf-8"
     },
   };
@@ -189,7 +189,7 @@ const WTM = () => {
           <Text>* 시간 선택 시</Text> <Text type="danger">자동 저장</Text> <Text>됩니다 .</Text>
           <br /><br />
           {
-            localStorage.getItem("userRole") === "ROLE_ADMIN"
+            sessionStorage.getItem("userRole") === "ROLE_ADMIN"
               ?
               <Form name="time_related_controls" {...formItemLayout}>
                 {time.map((time) => (<FormItem key={time.no} time={time} onChange={Monday} />))}
@@ -204,7 +204,7 @@ const WTM = () => {
           <br /><br /><br/><br/>
 
           {
-            localStorage.getItem("userRole") === "ROLE_ADMIN"
+            sessionStorage.getItem("userRole") === "ROLE_ADMIN"
               ?
               <Form
               name="basic"

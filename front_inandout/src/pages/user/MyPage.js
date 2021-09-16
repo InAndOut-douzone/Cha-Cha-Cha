@@ -47,7 +47,7 @@ const MyPage = () => {
     const header = {
         headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: "Bearer " + localStorage.getItem("Authorization")
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization")
         }
     };
 

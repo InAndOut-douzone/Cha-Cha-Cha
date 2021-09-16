@@ -3,10 +3,10 @@ import { Route, Redirect } from 'react-router-dom';
 import isLogin from '../../utils/isLogin'; 
 
 const LogoutRoute = ({component: Component, ...rest}) => { 
-    localStorage.removeItem('userNo');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('Authorization');
-    localStorage.removeItem('username');
+    sessionStorage.removeItem('userNo');
+    sessionStorage.removeItem('userRole');
+    sessionStorage.removeItem('Authorization');
+    sessionStorage.removeItem('username');
 
     return ( 
         <Route {...rest} render={props => (     

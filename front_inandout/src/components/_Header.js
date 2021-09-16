@@ -84,7 +84,7 @@ const _Header = () => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
 
@@ -126,7 +126,7 @@ const _Header = () => {
     }
 
     const handleOk = async () => {
-        await axios.get("http://localhost:8080/api/onoff/" + localStorage.getItem("username"), header).then(res => {
+        await axios.get("http://localhost:8080/api/onoff/" + sessionStorage.getItem("username"), header).then(res => {
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
             setOnTime(moment(res.data.onTime).format("HH mm"));
         }).catch();
@@ -215,7 +215,7 @@ const _Header = () => {
     //
     const $websocket = useRef(null);
     const [count, setCount] = useState(0); // 알림 개수
-    const userNo = localStorage.getItem('userNo');
+    const userNo = sessionStorage.getItem('userNo');
     //
 
     return (
