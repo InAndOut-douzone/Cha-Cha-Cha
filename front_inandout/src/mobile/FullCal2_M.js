@@ -47,7 +47,7 @@ const FullCal2 = () => {
 
   const header = {
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
     },
   };
 

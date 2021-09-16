@@ -30,7 +30,7 @@ const Cal2 = () => {
 
   const header = {
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
       "Content-Type": "application/json; charset=utf-8"
     },
   };

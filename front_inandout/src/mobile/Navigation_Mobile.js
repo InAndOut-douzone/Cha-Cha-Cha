@@ -14,7 +14,7 @@ const { SubMenu } = Menu;
 
 const Navigation = (name) => {
 
-    const role = localStorage.getItem('userRole');
+    const role = sessionStorage.getItem('userRole');
 
     // const [collapsed, setCollapsed] = useState();
     const [user,setUser] = useState();
@@ -26,7 +26,7 @@ const Navigation = (name) => {
 
     const header = {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+          Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
       };
 

@@ -21,7 +21,7 @@ const Cell = styled.div`
     `;
 const header = {
     headers: {
-        Authorization: "Bearer " + localStorage.getItem("Authorization")
+        Authorization: "Bearer " + sessionStorage.getItem("Authorization")
     }
 };
 
@@ -40,7 +40,7 @@ const Notice = (props) => {
         ab();
         bb();
 
-        setUser(localStorage.getItem('username'));
+        setUser(sessionStorage.getItem('username'));
     }, [no])
 
     const ab = async () => { // 페이지 로딩시작하면 공지사항 가져오기

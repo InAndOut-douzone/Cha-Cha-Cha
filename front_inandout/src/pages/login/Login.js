@@ -74,16 +74,16 @@ export default function Login({ history, location }) {
       config
     ).then(async res => {
       if (res.status === 200) {
-        localStorage.setItem("Authorization", res.headers.authorization);
+        sessionStorage.setItem("Authorization", res.headers.authorization);
         const header = {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
           },
         };
         await axios.get("http://localhost:8080/api/user", header).then(res => {
-          localStorage.setItem('userNo', res.data.id);
-          localStorage.setItem('userRole', res.data.roles);
-          localStorage.setItem('username', res.data.username);
+          sessionStorage.setItem('userNo', res.data.id);
+          sessionStorage.setItem('userRole', res.data.roles);
+          sessionStorage.setItem('username', res.data.username);
           window.location.replace("/")
         }).catch(err => {
           console.log(err);

@@ -57,7 +57,7 @@ const HIM = () => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
 

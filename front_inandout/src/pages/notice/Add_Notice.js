@@ -23,7 +23,7 @@ const Container = styled.div`
 
 const header = {
     headers: {
-        Authorization: "Bearer " + localStorage.getItem("Authorization")
+        Authorization: "Bearer " + sessionStorage.getItem("Authorization")
     }
 };
 
