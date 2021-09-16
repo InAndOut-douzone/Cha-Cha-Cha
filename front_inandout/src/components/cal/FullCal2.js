@@ -68,6 +68,11 @@ const FullCal2 = () => {
 
   const onClose = () => {
     setVisible(false);
+    formRef.current.setFieldsValue({
+      category: "",
+      content: "",
+      date: "",
+    });
   };
 
   const handleDateClick2 = (eventClick) => {
