@@ -68,7 +68,11 @@ public class OnOffService {
 			if( !onOffEntity.getOnTime().after(onTime) && onOffEntity.getState()!=null) {
 				// 오늘요일의 출근시간과 현재 출근시간 비교해서 휴가가 없으면 지각처리
 				onOffEntity.setState("지각");
+			} else if(!onOffEntity.getOnTime().after(onTime) && onOffEntity.getState().equals("오후 반차")) {
+				
+				onOffEntity.setState("오후반차&&지각");
 			}
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -103,6 +107,9 @@ public class OnOffService {
 			if( !onOffEntity.getOffTime().before(offTime) && onOffEntity.getState()==null) {
 				
 				onOffEntity.setState("조퇴");
+			} else if(onOffEntity.getOffTime().before(offTime) && onOffEntity.getState() == "오전 반차") {
+				
+				onOffEntity.setState("오전반차&&조퇴");
 			} else if (onOffEntity.getOffTime().before(offTime) && onOffEntity.getState()== null) {
 				onOffEntity.setState("정상");
 			}

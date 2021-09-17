@@ -3,7 +3,10 @@ package com.cos.facebook.repository;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.cos.facebook.model.OnOff;
@@ -49,7 +52,12 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 	@Query(value="select count(*) from OnOff where userId =:id and date like CONCAT(:dated,'%')", nativeQuery = true)
 	Double workYear(long id, String dated); // 1년간의 일해야하는 날 데이터 갯수 구하기
 	
-	@Query(value="select count(*) from OnOff where (state= '조퇴' or state= '결근')"
-			+ "and userId =:id and date like CONCAT(:dated,'%')", nativeQuery = true)
+	@Query(value="select count(*) from OnOff where (state='지각' or state='조퇴' or state='결근' or "
+			+ "state='오전반차&&조퇴' or state= '오후반차&&지각')and userId =:id and date like CONCAT(:dated,'%')", nativeQuery = true)
 	Double offYear(long id, String dated); // 1년간의 결근 데이터 갯수 구하기
+
+	@Modifying
+	@Transactional
+	@Query(value="delete from OnOff where leaveId = :id")
+	void deleteByLeaveId(int id);
 }
