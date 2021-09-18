@@ -427,7 +427,7 @@ const _Header = () => {
                                                 notification.open({
                                                     message: msg.user.name,
                                                     description:
-                                                        msg.category + ' 일정이 변경되었습니다.',
+                                                        msg.category + ' 일정이 변경되었습니다zz.',
                                                     onClick: () => {
                                                         console.log('알림 클릭함!');
                                                     },
@@ -503,10 +503,13 @@ const _Header = () => {
                                         <div>
                                             <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                         </div>} key={al.no}>
-                                    {user.position === '간호사' ?
-                                        <p>{al.message + "신청이 승인 되었습니다."}</p> :
-                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                    }
+                                        {user.position === '간호사' ?
+                                        al.message === '출장' || al.message === '외근' ?
+                                        <p>{al.message + " 일정이 변경 되었습니다."}</p> :
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p>
+                                        :
+                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
 
                                 </Card>
                                 :
@@ -518,7 +521,10 @@ const _Header = () => {
                                                 <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                             </div>} key={al.no}>
                                         {user.position === '간호사' ?
-                                            <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                        al.message === '출장' || al.message === '외근' ?
+                                        <p>{al.message + " 일정이 변경 되었습니다."}</p> :
+                                        <p>{al.message + "신청이 승인 되었습니다."}</p>
+                                        :
                                             <p>{al.message + "신청을 등록 하였습니다."}</p>
                                         }
                                     </Card>
@@ -536,9 +542,10 @@ const _Header = () => {
                                             </div>} key={al.no}>
                                         {user.position === '간호사' ?
                                             <p>{al.message + "신청이 승인 되었습니다."}</p> :
-                                            <p>{al.message + " 일정이 변경 되었습니다."}</p>
+                                            <p>{al.message === '출장' || al.message === '외근' ?
+                                                <p>{al.message + " 일정이 변경 되었습니다."}</p> :
+                                                <p>{al.message + "신청을 등록 하였습니다."}</p>}</p>
                                         }
-
                                     </Card>
                                 </Link>
                                 :
@@ -550,10 +557,12 @@ const _Header = () => {
                                                 <div>
                                                     <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                                 </div>} key={al.no}>
-                                            {user.position === '간호사' ?
-                                                <p>{al.message + "신청이 승인 되었습니다."}</p> :
-                                                <p>{al.message + " 일정이 변경 되었습니다."}</p>
-                                            }
+                                                {user.position === '간호사' ?
+                                            <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                            al.message === '출장' || al.message === '외근' ?
+                                                <p>{al.message + " 일정이 변경 되었습니다."}</p> :
+                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
                                         </Card>
                                     </Link>
                                 </Card2>

@@ -81,8 +81,6 @@ const Add_Employee = () => {
                 }}
             >
                 <Option value="82">+82</Option>
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
             </Select>
         </Form.Item>
     );
@@ -217,6 +215,7 @@ const Add_Employee = () => {
                                     width: '100%',
                                 }}
                                 placeholder="전화번호를 입력해주세요"
+                                // maxLength="13"
                             />
                         </Form.Item>
                         <Form.Item
