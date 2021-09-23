@@ -24,13 +24,13 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 	
 	@Query(value = "select no, date, onTime, offTime," // id값으로 일한 날 전체 데이터 불러오기
 			+ "date_format(date,'%y년 %m월 %d일') as 'strDate', date_format(onTime,'%H시 %i분 %s초') as 'strOn',"
-			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId"
+			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId, leaveId"
 			+ " from OnOff where userId=:id order by date", nativeQuery = true)
 	List<OnOff> findAllById(long id);
 	
 	@Query(value = "select no, date, onTime, offTime," // 기간날짜동안 일한 날 데이터 불러오기
 			+ "date_format(date,'%y년 %m월 %d일') as 'strDate', date_format(onTime,'%H시 %i분 %s초') as 'strOn',"
-			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId"
+			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId, leaveId"
 			+ " from OnOff where userId=:id and date between :start and :end order by date", nativeQuery = true)
 	List<OnOff> findAllByDate(long id, Date start, Date end);
 	
@@ -60,4 +60,5 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 	@Transactional
 	@Query(value="delete from OnOff where leaveId = :id")
 	void deleteByLeaveId(int id);
+
 }

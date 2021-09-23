@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -222,7 +221,7 @@ public class LeavesService {
 	}
 
 	public void update(LeavesReqDto leavesReqDto) {
-		// System.out.println("여기 실행됐난ㅁㅇㄹㄴㅁㅇㄹ");
+		// 연차 수정
 		Leaves leavesEntity = leavesRepository.findById(leavesReqDto.getId()).get();
 		leavesEntity.setCategory(leavesReqDto.getCategory());
 		leavesEntity.setContent(leavesReqDto.getContent());
@@ -230,6 +229,32 @@ public class LeavesService {
 		leavesEntity.setToDate(leavesReqDto.getToDate());
 		leavesRepository.save(leavesEntity);
 		
+		// OnOff 삭제 후 수정
+		onOffRepository.deleteByLeaveId(leavesEntity.getNo());
+
+		Calendar fromDate = Calendar.getInstance();
+		fromDate.setTime(leavesEntity.getFromDate());
+		
+		Calendar toDate = Calendar.getInstance();
+		toDate.setTime(leavesEntity.getToDate());
+
+		while(fromDate.compareTo(toDate) != 1) {
+			
+			// System.out.println("***************from date"+fromDate);
+			// fromDate.add(Calendar.MINUTE, 3);
+			OnOff onOffEntity = new OnOff();
+			Date d = fromDate.getTime();
+			
+			onOffEntity.setUser(leavesEntity.getUser());
+			onOffEntity.setDate(d);
+			onOffEntity.setState(leavesEntity.getCategory());
+			onOffEntity.setLeaves(leavesEntity);
+			onOffRepository.save(onOffEntity);
+			
+			fromDate.add(Calendar.DATE,1);
+		}
+		
+		// 알람 실행
 		alarmController.SendTemplateMessage2(leavesEntity);
 		Alarm alarmEntitiy = new Alarm();
 		alarmEntitiy.setMessage(leavesEntity.getCategory());

@@ -60,7 +60,8 @@ public class MonthTasklet implements Tasklet, StepExecutionListener {
 			List<OnOff> works = onOffRepository.findByIdAndDateList(id, month);
 			
 			for(OnOff work : works) {
-				if(work.getState()=="지각" || work.getState()=="결근") { // 저번달에 지각이나 결근이 있었다면 월차지급 = false
+				if(work.getState()=="지각" || work.getState()=="결근" || 
+						work.getState()=="오후반차&&지각" || work.getState()=="오전반차&&조퇴") { // 저번달에 지각이나 결근이 있었다면 월차지급 = false
 					leave = false;
 					break;
 				}
@@ -68,6 +69,9 @@ public class MonthTasklet implements Tasklet, StepExecutionListener {
 			
 			if(leave && user.getALeave()==null) { // 저번달 만근하고 연차가 없는 직원 일 경우
 				user.setMLeave(1.0); // 월차 1로 지급 ( 안쓰면 사라지기때문에 이전 데이터 상관없음 )
+				userRepository.save(user);
+			} else if(!leave) {
+				user.setMLeave(0.0);
 				userRepository.save(user);
 			}
 		}
