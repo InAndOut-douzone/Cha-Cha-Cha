@@ -65,11 +65,12 @@ public class OnOffService {
 		try {
 			onTime = dateTo.parse(hospitalTime.getOnTime());
 			
-			if( !onOffEntity.getOnTime().after(onTime) && onOffEntity.getState()!=null) {
+			if( onOffEntity.getOnTime().after(onTime) && onOffEntity.getState()==null) {
 				// 오늘요일의 출근시간과 현재 출근시간 비교해서 휴가가 없으면 지각처리
 				onOffEntity.setState("지각");
-			} else if(!onOffEntity.getOnTime().after(onTime) && onOffEntity.getState().equals("오후 반차")) {
-				
+			}
+			if(onOffEntity.getOnTime().after(onTime) && onOffEntity.getState().equals("오후 반차")) {
+				// System.out.println("&*&*&*&*&****&*&*&**&*&*&*&*&*&*&*&*"+onOffEntity.getState());
 				onOffEntity.setState("오후반차&&지각");
 			}
 			
