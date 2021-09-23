@@ -31,4 +31,8 @@ spring:
       
   batch:
     job:
+<<<<<<< HEAD
       enabled: false  
+=======
+      enabled: false
+>>>>>>> 71b29da7858f9f8ec763690e9937828f0a12da43

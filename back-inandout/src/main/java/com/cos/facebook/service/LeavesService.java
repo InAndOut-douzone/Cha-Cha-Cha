@@ -2,6 +2,7 @@ package com.cos.facebook.service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,7 @@ public class LeavesService {
 	// 휴가 삭제 시 휴가 개수 복구
 	public void delete(int id) {
 		Leaves leavesEntity = leavesRepository.findById(id).get();
-		// System.out.println("leavesEntity : " + leavesEntity);
+		onOffRepository.deleteByLeaveId(id);
 		
 		long leaveTime = leavesEntity.getToDate().getTime() - leavesEntity.getFromDate().getTime(); 
 		long leaveDay = leaveTime / (24 *60*60*1000);
@@ -178,7 +179,7 @@ public class LeavesService {
 			
 			Calendar toDate = Calendar.getInstance();
 			toDate.setTime(leaveEntity.getToDate());
-			
+
 			while(fromDate.compareTo(toDate) != 1) {
 				
 				// System.out.println("***************from date"+fromDate);
@@ -189,6 +190,7 @@ public class LeavesService {
 				onOffEntity.setUser(leaveEntity.getUser());
 				onOffEntity.setDate(d);
 				onOffEntity.setState(leaveEntity.getCategory());
+				onOffEntity.setLeaves(leaveEntity);
 				onOffRepository.save(onOffEntity);
 				
 				fromDate.add(Calendar.DATE,1);
