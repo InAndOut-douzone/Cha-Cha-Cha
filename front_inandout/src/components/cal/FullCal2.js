@@ -546,7 +546,7 @@ const FullCal2 = () => {
                             },
                           ]}
                         >
-                          {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
+                          {/* <textarea value={content1} rows={4} /> */}
                           <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                         </Form.Item>
 
