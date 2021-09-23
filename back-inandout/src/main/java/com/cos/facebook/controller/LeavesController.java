@@ -69,6 +69,7 @@ public class LeavesController {
 	
 	@PutMapping("/leave")
 	public ResponseEntity<?> updateLeave(@RequestBody LeavesReqDto leavesReqDto){
+		System.out.println("LeavesReqDto : " + leavesReqDto);
 		leavesService.update(leavesReqDto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}	
