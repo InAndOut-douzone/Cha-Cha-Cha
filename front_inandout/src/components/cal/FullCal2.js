@@ -275,8 +275,8 @@ const FullCal2 = () => {
     id: leave.no,
     title: '[' + leave.user.name + '] ' + leave.category,
     color: leave.category === "연차" ? "skyblue" :
-      leave.category === "오후 반차" ? "#ff9aa3" :
-        leave.category === "오전 반차" ? "lightgrey" :
+      leave.category === "오후 반차" ? "#cb9ffd" :
+        leave.category === "오전 반차" ? "#ff9aa3" :
           leave.category === "출장" ? "yellowgreen" : "gold",
 
     start: leave.fromDate,
@@ -546,7 +546,7 @@ const FullCal2 = () => {
                             },
                           ]}
                         >
-                          {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
+                          {/* <textarea value={content1} rows={4} /> */}
                           <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
                         </Form.Item>
 
