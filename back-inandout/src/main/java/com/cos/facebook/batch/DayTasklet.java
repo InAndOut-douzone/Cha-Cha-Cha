@@ -51,7 +51,7 @@ public class DayTasklet implements Tasklet, StepExecutionListener {
 		}
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		today = LocalDateTime.now().format(formatter); // 오늘날짜 string으로 변
+		today = LocalDateTime.now().format(formatter); // 오늘날짜 string으로 변환
 
 	}
 
