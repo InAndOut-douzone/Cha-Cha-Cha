@@ -52,7 +52,7 @@ public class AlarmController {
 	@MessageMapping("/Template") 
 	public void SendTemplateMessage(Leaves leaves) { 
 		int no = (int) leaves.getFromUser().getId();
-		System.out.println(no);
+		// System.out.println(no);
 		webSocket.convertAndSend("/topics/template"+no, leaves); 
 	}
 	
