@@ -75,24 +75,55 @@ const _Drawer = () => {
       fromDate: value.date[0],
       state: "wait",
       fromUser: value.name
-    }
+    }    
+
     if(value.category === "연차"){
       // 두 기간간의 일 수     
       const day = moment.duration(value.date[1].diff(value.date[0])).asDays()+1;
-      if(user.aleave >= day ){
-        leavePost(data);
-      } else{
-        alert("휴가가 부족합니다.");
+      console.log("두기간 차이 : " + day)
+      // 월차가 있을 경우
+      if(user.aleave == null) {
+        if(user.mleave >= day ){
+          leavePost(data);
+        } else{
+          alert("휴가가 부족합니다.");
+        }  
       }
-    } else {
+      // 월차가 없을 경우
+      else {
+        if(user.aleave >= day ){
+          leavePost(data);
+        } else{
+          alert("휴가가 부족합니다.");
+        }
+      }
+    }
+
+    // 반차 신청
+    else {
       const day = moment.duration(value.date[1].diff(value.date[0])).asDays()+0.5;
-      if(moment.duration(value.date[1].diff(value.date[0])).asDays() > 0){
-        alert("반차는 하루만 신청해주세요.");
-      } else if (user.aleave >= day ) {
-        leavePost(data);
-      } else {
-        alert("휴가가 부족합니다.");
-      } 
+
+      // 월차가 있을 경우
+      if(user.mleave > 0) {
+        if(moment.duration(value.date[1].diff(value.date[0])).asDays() > 0){
+          alert("반차는 하루만 신청해주세요.");
+        } else if (user.mleave >= day ) {
+          leavePost(data);
+        } else {
+          alert("휴가가 부족합니다.");
+        } 
+      }
+
+      // 월차가 없을 경우
+      else {
+        if(moment.duration(value.date[1].diff(value.date[0])).asDays() > 0){
+          alert("반차는 하루만 신청해주세요.");
+        } else if (user.aleave >= day ) {
+          leavePost(data);
+        } else {
+          alert("휴가가 부족합니다.");
+        } 
+      }
     }
   }
 
@@ -163,7 +194,7 @@ const _Drawer = () => {
                 name="Number_of_days"
                 label="남은 휴가 일수"
               >
-                {user.aleave}
+                {user.aleave === null ? user.mleave : user.aleave}
               </Form.Item>
             </Col>
           </Row>

@@ -56,11 +56,11 @@ public class AlarmController {
 		webSocket.convertAndSend("/topics/template"+no, leaves); 
 	}
 	
+	// 휴가 신청을 한 해당 유저에게 알림
 	@MessageMapping("/Template2") 
 	public void SendTemplateMessage2(Leaves leaves) { 
 		
 		int no = (int) leaves.getUser().getId();
-		System.out.println("no는 뭐냐ㅑㅑㅏ" + no);
 		webSocket.convertAndSend("/topics/template2"+no, leaves);
 	}
 	

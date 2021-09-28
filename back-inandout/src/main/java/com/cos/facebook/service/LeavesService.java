@@ -174,6 +174,26 @@ public class LeavesService {
 		
 		if(leaveUpdateReqDto.getState().equals("success")) {
 			
+			if(leaveEntity.getCategory().equals("연차")) {
+				
+				// 두 기간의 차이 구하기
+				long leaveTime = leaveEntity.getToDate().getTime() - leaveEntity.getFromDate().getTime(); 
+				long leaveDay = leaveTime / (24 *60*60*1000);
+				
+				// 월차를 사용할 경우
+				if(leaveEntity.getUser().getALeave() == null) {
+					leaveEntity.getUser().setMLeave(leaveEntity.getUser().getMLeave()-(leaveDay+1));
+				}
+				else {
+					leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-(leaveDay+1));
+				}
+			} 
+			// 반차
+			else {
+				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-0.5);
+			}
+			
+			
 			Calendar fromDate = Calendar.getInstance();
 			fromDate.setTime(leaveEntity.getFromDate());
 			
@@ -194,17 +214,6 @@ public class LeavesService {
 				onOffRepository.save(onOffEntity);
 				
 				fromDate.add(Calendar.DATE,1);
-			}
-			
-			if(leaveEntity.getCategory().equals("연차")) {
-				
-				// 두 기간의 차이 구하기
-				long leaveTime = leaveEntity.getToDate().getTime() - leaveEntity.getFromDate().getTime(); 
-				long leaveDay = leaveTime / (24 *60*60*1000);
-				System.out.println("leaveDay : " +leaveDay);
-				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-(leaveDay+1));
-			} else {
-				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-0.5);
 			}
 		}
 
