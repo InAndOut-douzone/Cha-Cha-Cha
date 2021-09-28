@@ -93,13 +93,27 @@ public class LeavesService {
 		User userEntity = userRepository.findById(leavesEntity.getUser().getId()).get();
 				
 		if(leavesEntity.getCategory().equals("연차")) {
-			userEntity.setALeave(userEntity.getALeave() + (leaveDay+1));
+			if(userEntity.getALeave() == null) {
+				userEntity.setMLeave(userEntity.getMLeave() + (leaveDay+1));
+			} else {
+				userEntity.setALeave(userEntity.getALeave() + (leaveDay+1));	
+			}
 		}
 		if(leavesEntity.getCategory().equals("오전 반차")) {
-			userEntity.setALeave(userEntity.getALeave() + (leaveDay+0.5));
+			if(userEntity.getALeave()  == null) {
+				userEntity.setMLeave(userEntity.getMLeave() + (leaveDay+0.5));
+			}
+			else {
+				userEntity.setALeave(userEntity.getALeave() + (leaveDay+0.5));
+			}
 		}
 		if(leavesEntity.getCategory().equals("오후 반차")) {
-			userEntity.setALeave(userEntity.getALeave() + (leaveDay+0.5));
+			if(userEntity.getALeave()  == null) {
+				userEntity.setMLeave(userEntity.getMLeave() + (leaveDay+0.5));
+			}
+			else {
+				userEntity.setALeave(userEntity.getALeave() + (leaveDay+0.5));
+			}
 		}
 		
 		userRepository.save(userEntity);
