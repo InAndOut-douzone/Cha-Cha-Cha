@@ -190,9 +190,13 @@ public class LeavesService {
 			} 
 			// 반차
 			else {
-				leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-0.5);
+				if(leaveEntity.getUser().getALeave() == null) {
+					leaveEntity.getUser().setMLeave(leaveEntity.getUser().getMLeave()-0.5);
+				}
+				else {
+					leaveEntity.getUser().setALeave(leaveEntity.getUser().getALeave()-0.5);
+				}
 			}
-			
 			
 			Calendar fromDate = Calendar.getInstance();
 			fromDate.setTime(leaveEntity.getFromDate());
