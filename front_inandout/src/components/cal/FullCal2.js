@@ -263,9 +263,9 @@ const FullCal2 = () => {
     체크박스(내일정, 연차, 출장, e.target.checked);
   }
 
-  function asd(e) {
-    setCategory1(e.target.value);
-  }
+  // function asd(e) {
+  //   setCategory1(e.target.value);
+  // }
 
   let data = []; // 연차
   leaves.map((leave) => data.push({

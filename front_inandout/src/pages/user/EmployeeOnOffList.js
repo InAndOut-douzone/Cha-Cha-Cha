@@ -68,7 +68,6 @@ const EmployeeOnOffList = () => {
           onMessage={
               (msg) => { 
                 getOnUser();
-                console.log("msg : " + msg);
               }
           }
           ref={$websocket} />

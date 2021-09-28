@@ -65,6 +65,7 @@ const MyPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // 프로필 수정
     const dataUpdate = (e) => {
 
         let userData = {

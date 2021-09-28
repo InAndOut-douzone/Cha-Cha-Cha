@@ -70,7 +70,7 @@ public class OnOffService {
 				onOffEntity.setState("지각");
 			}
 			if(onOffEntity.getOnTime().after(onTime) && onOffEntity.getState().equals("오후 반차")) {
-				// System.out.println("&*&*&*&*&****&*&*&**&*&*&*&*&*&*&*&*"+onOffEntity.getState());
+				
 				onOffEntity.setState("오후반차&&지각");
 			}
 			
