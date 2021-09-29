@@ -91,7 +91,7 @@ const Work = () => {
     ]
 
     nurse.map((nurse) => nurses.push([
-        nurse.name,nurse.aleave
+        nurse.name,nurse.aleave+nurse.mleave
     ]));
 
     const dateHandler = (value, dateString) => {
@@ -152,8 +152,8 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["사용 연차", 15-user.aleave],
-                        ["남은 연차", user.aleave],
+                        ["사용 연차", 15-user.aleave+user.mleave],
+                        ["남은 연차", user.aleave+user.mleave],
                         
                         ]}
                         options={{

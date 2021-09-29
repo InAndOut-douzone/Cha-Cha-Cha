@@ -94,11 +94,10 @@ const NoticeModify = (props) => {
         }
         
         axios.post("http://localhost:8080/api/notice/update/"+no, notice, header).then((res) => {
-            alert("수정 하였습니다.")
+            alert("수정 하였습니다.");
+            window.location.href="/notice/"+no
         });
-        // window.location.href="/notice/"+no;
     }
-
 
     // useEffect(() => {
     
