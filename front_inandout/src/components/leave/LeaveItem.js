@@ -20,12 +20,12 @@ const LeaveItem = (props) => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
 
     const $websocket = useRef (null); 
-    const userNo = localStorage.getItem('userNo');
+    const userNo = sessionStorage.getItem('userNo');
 
     const success = async () => {
         let data = {

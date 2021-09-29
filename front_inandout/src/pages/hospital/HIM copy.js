@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Layout, Breadcrumb, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import { InputGroup, FormControl, Image } from 'react-bootstrap';
-import SiteLayout from './SiteLayout';
+import SiteLayout from '../SiteLayout';
 
 const HIM = () => {
     const [hospital, setHospital] = useState({});
@@ -56,7 +57,7 @@ const HIM = () => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
 

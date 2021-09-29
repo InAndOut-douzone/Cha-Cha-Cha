@@ -14,6 +14,7 @@ const { Text } = Typography;
 const LeaveManagementLayout = styled.div`
   .ant-card-bordered{ margin-bottom: 40px }
   .ant-table-cell { text-align:center }
+  // .react-reveal { text-align:center }
 `
 const Pagi = styled.div`
     .ant-pagination { margin-right:100px}
@@ -67,7 +68,7 @@ const Leave_Management = () => {
 
   const header = {
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
     },
   };
 
@@ -75,7 +76,7 @@ const Leave_Management = () => {
   const [leaves, setLeaves] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/user/list", header).then(res => {
+    axios.get("http://localhost:8080/api/user/nurse", header).then(res => {
       setUsers(res.data);
     }).catch();
     getLeaves();
@@ -107,14 +108,16 @@ const Leave_Management = () => {
           <br /><br />
           <Fade bottom>
           <div style={{ textAlign: "center" }}>
-            사원들의 연차 현황을 볼 수 있고, 사원들의 연차 승인, 거절을 할 수 있습니다.
+            사원(간호사)들의 연차 현황을 볼 수 있고, 사원들의 연차 승인, 거절을 할 수 있습니다.
           </div>
           <br /><br />
           <Pagi>
             <Table style={{ textAlign: "center" }} dataSource={data} columns={columns}
             pagination={{position:['bottomCenter']}}/><br /><br /><br />
           </Pagi>
-          <Text style={{ textAlign: "center" }}>현재 의원님한테 들어온 휴가신청 목록 입니다.  <button onClick={getLeaves} style={{ border: "0px", background: "white", color: "cadetblue" }}>*새로 고침*</button></Text><br /><br />
+          <div style={{ textAlign:"center" }}>
+            <Text style={{ textAlign: "center" }}>현재 의원님한테 들어온 휴가신청 목록 입니다.  <button onClick={getLeaves} style={{ border: "0px", background: "white", color: "cadetblue" }}>*새로 고침*</button></Text><br /><br />
+          </div>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>
             {leaves.map((leave) => (<LeaveItem key={leave.no} leave={leave} onClick={getLeaves} />))}
           </div>

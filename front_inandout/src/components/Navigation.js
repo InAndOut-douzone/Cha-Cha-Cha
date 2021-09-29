@@ -15,10 +15,10 @@ const { Sider } = Layout;
 
 const Navigation = (name) => {
 
-    const role = localStorage.getItem('userRole');
+    const role = sessionStorage.getItem('userRole');
 
     // const [collapsed, setCollapsed] = useState();
-    const [user,setUser] = useState();
+    const [user, setUser] = useState();
     const [profileState, setProfileState] = useState();
 
     // const toggleCollapsed = () => {
@@ -27,17 +27,17 @@ const Navigation = (name) => {
 
     const header = {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
-      };
+    };
 
-    useEffect(()=>{
-        axios.get("http://localhost:8080/api/user", header).then(res=>{            
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/user", header).then(res => {
             setUser(res.data);
             setProfileState(!!res.data.profile)
         }).catch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     // const [openKeys, setOpenkeys] = useState(); //펼쳐져 있을 메뉴
     // sessionStorage.setItem('ok', JSON.stringify(openKeys));
@@ -52,9 +52,9 @@ const Navigation = (name) => {
             // <Provider store={store}>
             <Sider width={200} className="site-layout-background2">
                 {/* <Image style={{ borderRadius: "0%", width: '100%', height: '100%', padding: '10px', marginTop: '-10px' }} */}
-                <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
+                <Image style={{ borderRadius: "0%", width: '100%', height: '100%' }}
                     width={200} height={220}
-                    src={profileState ? '/images/'+user.profile : DefaultProfile}
+                    src={profileState ? '/images/' + user.profile : DefaultProfile}
                 />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
                 <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>
@@ -64,11 +64,10 @@ const Navigation = (name) => {
                 </Button> */}
 
                 <Menu
-                    // inlineCollapsed={collapsed}
                     // selectedKeys={['1', 'sub2']}
                     mode="inline"
                     // defaultSelectedKeys={['1']}
-                    style={{ height: '100%', borderRight: 0 }}
+                    style={{ height: '110%', borderRight: 0 }}
                     // openKeys={openKeys}
                     // openKeys={openKeys}
                     // selectedKeys={selectedKeys}
@@ -82,11 +81,11 @@ const Navigation = (name) => {
                         <Menu.Item key="5"><Link to="/mypage">프로필 수정</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub3" icon={<LaptopOutlined />} title="내 근무">
-                        <Menu.Item key="6"><Drawer /></Menu.Item>
+                        {/* <Menu.Item key="6"><Drawer /></Menu.Item> */}
                         <Menu.Item key="7"><Link to="/work">근무 현황</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub4" icon={<FileSearchOutlined />} title="의원 관리">
-                        <Menu.Item key="8"><Link to="/him">의원 정보 수정</Link></Menu.Item>
+                        <Menu.Item key="8"><Link to="/him">의원 정보 관리</Link></Menu.Item>
                         <Menu.Item key="9"><Link to="/wtm">근무시간 관리</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub5" icon={<IdcardOutlined />} title="사원 관리">
@@ -103,9 +102,9 @@ const Navigation = (name) => {
             // </Provider>
             :
             <Sider width={200} className="site-layout-background2">
-                <Image style={{ borderRadius: "0%", width: '100%', height: '100%'}}
+                <Image style={{ borderRadius: "0%", width: '100%', height: '100%' }}
                     width={200} height={220}
-                    src={profileState ? 'images/'+user.profile : DefaultProfile}
+                    src={profileState ? '/images/' + user.profile : DefaultProfile}
                 />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
                 <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>

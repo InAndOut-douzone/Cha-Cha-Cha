@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Layout, Button, Modal, Card, Drawer, Badge, notification } from 'antd';
-import { HomeOutlined, LogoutOutlined, BellOutlined, NotificationOutlined, LaptopOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, BellOutlined, NotificationOutlined } from '@ant-design/icons';
 // import Clock from 'react-live-clock';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -67,6 +67,7 @@ const _Header = () => {
     const [alarm, setAlarm] = useState([]);
     const [onTime, setOnTime] = useState("IN");
     const [offTime, setOffTime] = useState("OUT");
+    const [user, setUser] = useState({});
 
     const showDrawer = () => { // 알림창 열기
         alarm_fatch()
@@ -82,7 +83,7 @@ const _Header = () => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
 
@@ -116,8 +117,15 @@ const _Header = () => {
         });
     }
 
+    const alarmAllDelete = async () => { // 알림 모두 삭제
+        await axios.delete("http://localhost:8080/api/alarm", header).then((res) => {
+            alert("알림이 모두 삭제되었습니다.");
+            alarm_fatch()
+        });
+    }
+
     const handleOk = async () => {
-        await axios.get("http://localhost:8080/api/onoff/" + localStorage.getItem("username"), header).then(res => {
+        await axios.get("http://localhost:8080/api/onoff/" + sessionStorage.getItem("username"), header).then(res => {
             // moment 사용해서 데이터 포멧 2021-08-23T07:20:44.326+00:00 => 
             setOnTime(moment(res.data.onTime).format("HH mm"));
         }).catch();
@@ -154,7 +162,7 @@ const _Header = () => {
         setIsModalVisible2(false);
     };
 
-    const [notice, setNotice] = useState([]);
+    // const [notice, setNotice] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/getonoff", header).then(res => {
@@ -178,19 +186,18 @@ const _Header = () => {
                     title: res.data[i].title
                 })
             }
-            setNotice(title);
+            // setNotice(title);
         })
 
         axios.get("http://localhost:8080/api/alarm/count", header).then(res => { // 알림 개수 찾아오기
             setCount(res.data);
         })
 
-        alarm_fatch()
-
-        axios.get("http://localhost:8080/api/user", header).then(res=>{            
+        axios.get("http://localhost:8080/api/user", header).then(res => { // 알림 개수 찾아오기
             setUser(res.data);
-            setProfileState(!!res.data.profile)
-        }).catch();
+        })
+
+        alarm_fatch()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -201,26 +208,26 @@ const _Header = () => {
         ...alarm
     }))
 
-    const noticeList = notice.map((title, index) =>
-        <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
+    // const noticeList = notice.map((title, index) =>
+    //     <p key={title.no}><Link to={"/notice/" + title.no}>{title.title}</Link></p>);
 
     //
     const $websocket = useRef(null);
     const [count, setCount] = useState(0); // 알림 개수
-    const userNo = localStorage.getItem('userNo');
-    const [profileState, setProfileState] = useState();
-    const [user,setUser] = useState();
+    const userNo = sessionStorage.getItem('userNo');
+    // const [profileState, setProfileState] = useState();
+    // const [user,setUser] = useState();
     //
 
     return (
         <DIV>
-            <Header className="header" style={{width: '100%', padding: '0'}}>
-            <div style={{ paddingLeft:'10px', width: "10px", display: "inline-block", background: "#001529", color: "silver", fontSize: "15px", fontStyle: "oblique" }}><Button style={buttonStyle} className="inbutton" type="primary"><Link to="/">In&Out</Link></Button></div>
+            <Header className="header" style={{ width: '100%', padding: '0' }}>
+                <div style={{ paddingLeft: '10px', width: "10px", display: "inline-block", background: "#001529", color: "silver", fontSize: "15px", fontStyle: "oblique" }}><Button style={buttonStyle} className="inbutton" type="primary"><Link to="/">In&Out</Link></Button></div>
                 {/* <Image style={{ borderRadius: "80%", width: '100%', height: '100%' }}
                     height='90%' width='50px'
                     src={profileState ? '/images/' + user.profile : DefaultProfile}
                 /> */}
-                <div style={{ paddingRight:'15px', width: "100%", textAlign: "right" }}>
+                <div style={{ paddingRight: '15px', width: "100%", textAlign: "right" }}>
 
                     <Button style={buttonStyle} className="inbutton" type="primary" onClick={showModalOn}>
                         <div>{onTime}</div>
@@ -283,18 +290,56 @@ const _Header = () => {
                                 alarm_fatch()
                                 setCount(count + 1)
                                 msg.state === "success" ?
+                                    msg.category === '출장' || msg.category === '외근' ?
+                                        notification.open({
+                                            message: msg.user.name,
+                                            description:
+                                                msg.category + ' 일정이 변경되었습니다.',
+                                            onClick: () => {
+                                                console.log('알림 클릭함!');
+                                            },
+                                        }) :
+                                        notification.open({
+                                            message: msg.user.name,
+                                            description:
+                                                msg.category + '가 승인되었습니다.',
+                                            onClick: () => {
+                                                console.log('알림 클릭함!');
+                                            },
+                                        }) :
+                                    notification.open({
+                                        message: msg.user.name + "님",
+                                        description:
+                                            msg.category + ' 신청이 반려되었습니다.',
+                                        onClick: () => {
+                                            window.location.replace("/leavemanagement")
+                                            console.log('알림 클릭함!');
+                                        },
+                                    })
+                            }
+                        }
+                        ref={$websocket} />
+
+                    <SockJsClient
+                        url="http://localhost:8080/webSocket"
+                        topics={[`/topics/template3${userNo}`]}
+                        onMessage={
+                            (msg) => {
+                                alarm_fatch()
+                                setCount(count + 1)
+                                msg.category === '출장' || msg.category === '외근' ?
                                     notification.open({
                                         message: msg.user.name,
                                         description:
-                                            '승인되었습니다.',
+                                            msg.category + ' 일정이 삭제되었습니다.',
                                         onClick: () => {
                                             console.log('알림 클릭함!');
                                         },
                                     }) :
                                     notification.open({
-                                        message: msg.user.name + "님",
+                                        message: msg.user.name,
                                         description:
-                                            msg.category + ' 신청이 반려되었습니다.',
+                                            msg.category + '가 삭제되었습니다.',
                                         onClick: () => {
                                             console.log('알림 클릭함!');
                                         },
@@ -311,28 +356,74 @@ const _Header = () => {
                         onClose={onClose}
                         visible={visible}
                     >
-                        {alarm.map((al) =>
-                            al.state === true ?
-                                <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
-                                    size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
-                                    extra={
-                                        <div>
-                                            <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
-                                        </div>} key={al.no}>
-                                    <p>{al.message + "신청을 등록 하였습니다."}</p>
-                                </Card>
-                                :
-                                <Card2>
-                                    <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                            <button onClick={() => alarmAllDelete()} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>모두 삭제</button>
+                        </div>
+                        {user.position === '간호사' ?
+                            alarm.map((al) =>
+                                al.state === true ?
+                                    <Card style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
                                         size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
                                         extra={
                                             <div>
                                                 <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                             </div>} key={al.no}>
-                                        <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        {user.position === '간호사' ?
+                                            <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                            <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                        }
+
                                     </Card>
-                                </Card2>
-                        )}
+                                    :
+                                    <Card2 key={al.no}>
+                                        <Card style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                            extra={
+                                                <div>
+                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                </div>} key={al.no}>
+                                            {user.position === '간호사' ?
+                                                <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                                <p>{al.message + "신청을 등록 하였습니다."}</p>
+                                            }
+                                        </Card>
+                                    </Card2>
+                            )
+                            :
+                            alarm.map((al) =>
+                                al.state === true ?
+                                    <Link to="/leaveManagement">
+                                        <Card hoverable style={{ border: "1px solid darkgray", width: "100%", marginBottom: "10px", color: "black", borderRadius: "10px" }}
+                                            size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                            extra={
+                                                <div>
+                                                    <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                </div>} key={al.no}>
+                                            {user.position === '간호사' ?
+                                                <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                                <p>{al.message + " 일정이 변경 되었습니다."}</p>
+                                            }
+
+                                        </Card>
+                                    </Link>
+                                    :
+                                    <Card2 key={al.no}>
+                                        <Link to="/leaveManagement">
+                                            <Card hoverable style={{ width: "100%", marginBottom: "10px", color: "lightgray", borderRadius: "10px" }}
+                                                size="small" title={al.fromUser.name + "　" + moment(al.regDate).format("YYYY-MM-DD HH:mm")}
+                                                extra={
+                                                    <div>
+                                                        <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
+                                                    </div>} key={al.no}>
+                                                {user.position === '간호사' ?
+                                                    <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                                    <p>{al.message + " 일정이 변경 되었습니다."}</p>
+                                                }
+                                            </Card>
+                                        </Link>
+                                    </Card2>
+                            )
+                        }
                         <br />
                     </Drawer>
                 </div>

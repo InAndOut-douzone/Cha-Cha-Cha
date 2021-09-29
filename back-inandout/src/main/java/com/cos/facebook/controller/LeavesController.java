@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.facebook.config.auth.PrincipalDetails;
-import com.cos.facebook.dto.AlarmAddReqDto;
 import com.cos.facebook.dto.LeavesReqDto;
 import com.cos.facebook.dto.leave.LeaveAddReqDto;
 import com.cos.facebook.dto.leave.LeaveUpdateReqDto;
@@ -48,8 +47,8 @@ public class LeavesController {
 	@PostMapping("/leave")
 	public ResponseEntity<?> addLeave(@RequestBody LeaveAddReqDto leaveAddReqDto, Authentication authentication){
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println("principal : " + principal.getUser().getUsername());
-		System.out.println("leaveAddReqDto" + leaveAddReqDto);
+		// System.out.println("principal : " + principal.getUser().getUsername());
+		// System.out.println("leaveAddReqDto" + leaveAddReqDto);
 	
 		return new ResponseEntity<>(leavesService.add(leaveAddReqDto,principal.getUser().getUsername()), HttpStatus.OK);
 	}
@@ -70,6 +69,7 @@ public class LeavesController {
 	
 	@PutMapping("/leave")
 	public ResponseEntity<?> updateLeave(@RequestBody LeavesReqDto leavesReqDto){
+		System.out.println("LeavesReqDto : " + leavesReqDto);
 		leavesService.update(leavesReqDto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}	

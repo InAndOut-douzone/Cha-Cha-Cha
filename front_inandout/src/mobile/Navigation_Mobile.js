@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Image } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined, FileSearchOutlined, IdcardOutlined } from '@ant-design/icons';
+import { Menu, Image } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, FileSearchOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import DefaultProfile from '../assets/images/defaultProfile.png';
 import Drawer from '../components/_Drawer';
@@ -11,11 +11,10 @@ import axios from 'axios';
 // import store from '../redux/store';
 
 const { SubMenu } = Menu;
-const { Sider } = Layout;
 
 const Navigation = (name) => {
 
-    const role = localStorage.getItem('userRole');
+    const role = sessionStorage.getItem('userRole');
 
     // const [collapsed, setCollapsed] = useState();
     const [user,setUser] = useState();
@@ -27,7 +26,7 @@ const Navigation = (name) => {
 
     const header = {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("Authorization"),
+          Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
       };
 

@@ -43,19 +43,32 @@ public class AlarmController {
 		webSocket.convertAndSend("/topics/sendTo","sendTo"); 
 	} 
 	
+	// 드래그해서 수정을 하면 전원 달력 최신화 시키는 소켓
+	@MessageMapping("/sendTo2") 
+	public void SendToMessage2() { 
+		webSocket.convertAndSend("/topics/sendTo2","sendTo"); 
+	} 
+	
 	@MessageMapping("/Template") 
 	public void SendTemplateMessage(Leaves leaves) { 
 		int no = (int) leaves.getFromUser().getId();
-		System.out.println(no);
+		// System.out.println(no);
 		webSocket.convertAndSend("/topics/template"+no, leaves); 
 	}
 	
+	// 휴가 신청을 한 해당 유저에게 알림
 	@MessageMapping("/Template2") 
 	public void SendTemplateMessage2(Leaves leaves) { 
 		
 		int no = (int) leaves.getUser().getId();
-		System.out.println("no는 뭐냐ㅑㅑㅏ" + no);
 		webSocket.convertAndSend("/topics/template2"+no, leaves);
+	}
+	
+	@MessageMapping("/Template3") 
+	public void SendTemplateMessage3(Leaves leaves) { 
+		
+		int no = (int) leaves.getUser().getId();
+		webSocket.convertAndSend("/topics/template3"+no, leaves);
 	}
 	
 	@RequestMapping(value="/api") 
@@ -82,8 +95,14 @@ public class AlarmController {
 		return new ResponseEntity<>(alarmService.findCount(principal.getUser().getId()),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/api/alarm/{no}")
+	@DeleteMapping("/api/alarm/{no}") // 알림 하나 삭제
 	public void alarmDelete(@PathVariable int no) {
 		alarmService.alarmDelete(no);
+	}
+	
+	@DeleteMapping("/api/alarm") // 알림 모두 삭제
+	public void alarmAllDelete(Authentication authentication) {
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		alarmService.alarmAllDelete(principal.getUser().getId());
 	}
 }

@@ -40,7 +40,7 @@ public class OnOffService {
 		if(onOffRepository.findByIdAndDate(id,dated) != null) { // 오늘날짜의 데이터가 있는지 없는지 검색
 			onOffEntity = onOffRepository.findByIdAndDate(id,dated);
 			onOffEntity.setOnTime(new Date());
-		}else {													// 오늘 데이터가 없으면 오늘날짜와 출근시간으로 데이터 생
+		}else {													// 오늘 데이터가 없으면 오늘날짜와 출근시간으로 데이터 생성
 			onOffEntity = new OnOff();
 			onOffEntity.setDate(new Date());
 			onOffEntity.setOnTime(new Date());
@@ -49,7 +49,7 @@ public class OnOffService {
 		
 		SimpleDateFormat week = new SimpleDateFormat("E");  // 오늘 요일 받아오기
 		String strWeek = week.format(onOffEntity.getDate());
-		if(strWeek.equals("목")) { strWeek = "Thu"; } 
+		if (strWeek.equals("목")) { strWeek = "Thu"; } 
 		if (strWeek.equals("월")) { strWeek = "Mon"; }
 		if (strWeek.equals("화")) { strWeek = "Tue"; }
 		if (strWeek.equals("수")) { strWeek = "Wed"; }
@@ -65,10 +65,15 @@ public class OnOffService {
 		try {
 			onTime = dateTo.parse(hospitalTime.getOnTime());
 			
-			if( !onOffEntity.getOnTime().after(onTime) && onOffEntity.getState()==null) {
+			if( onOffEntity.getOnTime().after(onTime) && onOffEntity.getState()==null) {
 				// 오늘요일의 출근시간과 현재 출근시간 비교해서 휴가가 없으면 지각처리
 				onOffEntity.setState("지각");
 			}
+			if(onOffEntity.getOnTime().after(onTime) && onOffEntity.getState().equals("오후 반차")) {
+				
+				onOffEntity.setState("오후반차&&지각");
+			}
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -103,6 +108,9 @@ public class OnOffService {
 			if( !onOffEntity.getOffTime().before(offTime) && onOffEntity.getState()==null) {
 				
 				onOffEntity.setState("조퇴");
+			} else if(onOffEntity.getOffTime().before(offTime) && onOffEntity.getState() == "오전 반차") {
+				
+				onOffEntity.setState("오전반차&&조퇴");
 			} else if (onOffEntity.getOffTime().before(offTime) && onOffEntity.getState()== null) {
 				onOffEntity.setState("정상");
 			}

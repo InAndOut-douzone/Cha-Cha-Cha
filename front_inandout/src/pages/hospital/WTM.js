@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Breadcrumb, Form, Image } from 'antd';
+import { Layout, Breadcrumb, Form, Image, DatePicker, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import image from "../../assets/images/double-right.jpg";
@@ -10,7 +10,9 @@ import TimeItem from '../../components/HospitalOnOff/TimeItem'
 import FormItem from '../../components/HospitalOnOff/FormItem'
 import SiteLayout from '../SiteLayout';
 import Fade from 'react-reveal/Fade';
-
+import HolidayItem from '../../components/holiday/HolidayItem'
+import { Timeline } from 'antd';
+import moment from 'moment'
 
 const { Title, Text } = Typography;
 
@@ -29,12 +31,14 @@ const WTM = () => {
 
   const header = {
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
       "Content-Type": "application/json; charset=utf-8"
     },
   };
 
   const [time, setTime] = useState([]);
+  const [formRef] = Form.useForm();
+  const [holidays, setHolidays] = useState([]);
 
   const updateApi = async (week, moment) => {
     let data = {
@@ -54,7 +58,6 @@ const WTM = () => {
   const fetch = () => {
     axios.get("http://localhost:8080/api/hospitalOnOff", header).then(res => {
       setTime(res.data);
-      console.log(res);
     }).catch(err => {
       console.log("err :" + err);
     });
@@ -62,6 +65,7 @@ const WTM = () => {
 
   useEffect(() => {
     fetch();
+    holidayAll();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -72,6 +76,24 @@ const WTM = () => {
   // const Friday = (moment) => { updateApi("Friday", moment); }
   // const Saturday = (moment) => { updateApi("Saturday", moment); }
   // const Sunday = (moment) => { updateApi("Sunday", moment); }
+
+  const onFinish = (moment) => {
+    axios.post("/api/holiday", moment,header).then(res => {
+      alert("추가 되었습니다.")
+      formRef.current.setFieldsValue({
+          content: "",
+          holiday: "",
+      });
+    }).catch(err => {
+      console.log("err :" + err);
+    });
+  }
+
+  const holidayAll = async () => {
+    await axios.get("http://localhost:8080/api/holiday/all",header).then(res => {console.log(res.data); setHolidays(res.data);}).catch(err => {});
+  }
+
+  const today = moment().format("YYYY MM DD");
 
   return (
     <SiteLayout>
@@ -86,13 +108,25 @@ const WTM = () => {
         <br /><br />
 
         <Fade bottom>
-        <div style={{ textAlign: "center" }}>
-          <Title level={2}>현재 근무 시간</Title>
-          {time.map((time) => (<TimeItem key={time.no} time={time} />))}
-          <br />
-          <Text type="danger">주 52시간제</Text>
-          <Text>를 적용하고 있습니다.</Text>
+        <div style={{display:"flex", width:"100%"}}>
+          <div style={{ textAlign: "center", width:"50%" }}>
+            <Title level={2}>현재 근무 시간</Title>
+            {time.map((time) => (<TimeItem key={time.no} time={time} />))}
+            <br />
+            <Text type="danger">주 52시간제</Text>
+            <Text>를 적용하고 있습니다.</Text>
+          </div>
+          <div style={{marginLeft:"10%"}}>
+              <Title level={2}>휴무일 현황</Title>    
+              <Text>* 휴무일 현황을 볼 수 있습니다. ( {today} ~ {moment(today).add(30,'days').format("MM DD")} )</Text> <br/><br/><br/>
+              <div>
+                <Timeline>
+                    {holidays.map((holiday) => (<HolidayItem key={holiday.no} holiday={holiday}/>))}
+                  </Timeline>
+              </div>
+          </div>
         </div>
+
 
         <section id="about-fifty-two-hours-work-week">
           <div className="container">
@@ -155,15 +189,76 @@ const WTM = () => {
           <Text>* 시간 선택 시</Text> <Text type="danger">자동 저장</Text> <Text>됩니다 .</Text>
           <br /><br />
           {
-            localStorage.getItem("userRole") === "ROLE_ADMIN"
+            sessionStorage.getItem("userRole") === "ROLE_ADMIN"
               ?
               <Form name="time_related_controls" {...formItemLayout}>
                 {time.map((time) => (<FormItem key={time.no} time={time} onChange={Monday} />))}
               </Form>
               : " - 관리자만 변경 할 수 있습니다. - "
           }
+        </div> <br/><br/><br/><br/>
+        <div style={{ textAlign: "center" }}>
+          <Title level={3}>휴무일 관리</Title>
+          <Text>* 휴무일을 추가 할 수 있습니다.</Text> <br/>
+          <Text>* 해당 휴무일에 모든 사원은</Text> <Text type="danger">휴무 처리</Text> <Text>됩니다 .</Text>
+          <br /><br /><br/><br/>
+
+          {
+            sessionStorage.getItem("userRole") === "ROLE_ADMIN"
+              ?
+              <Form
+              name="basic"
+              ref={formRef}
+              labelCol={{
+                span: 8,
+              }}
+              wrapperCol={{
+                span: 16,
+              }}
+              onFinish={onFinish}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="휴무일"
+                name="holiday"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input holiday!',
+                  },
+                ]}
+              >
+                <DatePicker />
+              </Form.Item>
+  
+              <Form.Item
+                label="사유"
+                name="content"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input content',
+                  },
+                ]}
+              >
+                <Input style={{width:"150px"}}/>
+              </Form.Item>
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+              <Button type="primary" htmlType="submit">
+                  추가
+                </Button>
+              </Form.Item>
+            </Form>
+              : " - 관리자만 변경 할 수 있습니다. - "
+          }          
         </div>
         </Fade>
+        
       </Layout>
     </SiteLayout>
   );

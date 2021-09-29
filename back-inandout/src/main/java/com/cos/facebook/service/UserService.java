@@ -70,6 +70,10 @@ public class UserService {
 		return userRepository.findAllLive();
 	}
 	
+	public List<User> findAllNurse() {
+		return userRepository.findAllNurse();
+	}
+	
 	public List<User> findLeaveUser() {
 		return userRepository.findLeaveUser();
 	}

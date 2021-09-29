@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import "../assets/css/loginForm.css"
+import '../../assets/css/loginForm.css'
 import styled from 'styled-components'
-import img from '../assets/images/hospital.jpg';
+import img from '../../assets/images/hospital.jpg';
+import Bounce from 'react-reveal/Bounce';
 
 const Container = styled.div`
   position: absolute;
@@ -73,16 +74,16 @@ export default function Login({ history, location }) {
       config
     ).then(async res => {
       if (res.status === 200) {
-        localStorage.setItem("Authorization", res.headers.authorization);
+        sessionStorage.setItem("Authorization", res.headers.authorization);
         const header = {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
           },
         };
         await axios.get("http://localhost:8080/api/user", header).then(res => {
-          localStorage.setItem('userNo', res.data.id);
-          localStorage.setItem('userRole', res.data.roles);
-          localStorage.setItem('username', res.data.username);
+          sessionStorage.setItem('userNo', res.data.id);
+          sessionStorage.setItem('userRole', res.data.roles);
+          sessionStorage.setItem('username', res.data.username);
           window.location.replace("/")
         }).catch(err => {
           console.log(err);
@@ -99,7 +100,7 @@ export default function Login({ history, location }) {
         layout="inline"
         onFinish={onfinish}
       >
-        <div style={{ width: '100%', textAlign: 'center', fontSize: '2em', marginBottom: '30px', fontFamily: 'system-ui', color: 'lightslategrey' }}>IN AND OUT</div>
+        <div style={{ width: '100%', textAlign: 'center', fontSize: '2em', marginBottom: '30px', fontFamily: 'system-ui', color: 'lightslategrey' }}><Bounce top cascade>IN AND OUT</Bounce></div>
         <Form.Item name="no">
           {/* <input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> */}
           <input style={{ width: '100%' }} maxLength="8" required placeholder="사원번호" prefix={<UserOutlined />} />

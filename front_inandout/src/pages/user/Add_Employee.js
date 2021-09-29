@@ -50,7 +50,7 @@ const Add_Employee = () => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
 
@@ -81,8 +81,6 @@ const Add_Employee = () => {
                 }}
             >
                 <Option value="82">+82</Option>
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
             </Select>
         </Form.Item>
     );
@@ -109,7 +107,7 @@ const Add_Employee = () => {
                     <div style={{ borderTop: "1px solid #eee" }} />
                     <br /><br />
                     <div style={{ textAlign: "center" }}>
-                        사원을 등록할 수 있는 화면입니다. 사원 번호는 임의로 줄 수 있고, 중복은 허용되지 않습니다. <br/> ( *사원번호는 입력 시 중복을 확인 합니다.) <br /><br /><br />
+                        사원을 등록할 수 있는 화면입니다. 사원 번호는 임의로 줄 수 있고, 중복은 허용되지 않습니다. <br/> ( *사원번호는 입력 시 중복을 확인합니다.) <br /><br /><br />
                     </div>
                     <Form
                         style={{ width: "350px", alignSelf: "center" }}
@@ -217,6 +215,7 @@ const Add_Employee = () => {
                                     width: '100%',
                                 }}
                                 placeholder="전화번호를 입력해주세요"
+                                // maxLength="13"
                             />
                         </Form.Item>
                         <Form.Item

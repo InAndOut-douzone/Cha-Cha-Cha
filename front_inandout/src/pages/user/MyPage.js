@@ -1,17 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Layout, Descriptions, Badge, Breadcrumb, Form, Button } from 'antd';
+import { Layout, Descriptions, Badge, Breadcrumb, Form, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
-import DefaultProfile from '../assets/images/defaultProfile.png';
-import SiteLayout from './SiteLayout';
+import DefaultProfile from '../../assets/images/defaultProfile.png';
+import SiteLayout from '../SiteLayout';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 
 const MyPageLayout = styled.div`
     .ant-descriptions-item-label { text-align:center }
-
 `
 
 const MyPage = () => {
@@ -19,10 +18,10 @@ const MyPage = () => {
     //const imgPath = "profiles/";
     const imgPath = "/images/";
     const [user, setUser] = useState({});
-    const [profile, setProfile] = useState({});
     const [email, setEmail] = useState({});
     const [phone, setPhone] = useState({});
     const [image, setimage] = useState({});
+    const [profile, setProfile] = useState({});
     const formData = new FormData();
 
     const profileHandler = (e) => {
@@ -48,7 +47,7 @@ const MyPage = () => {
     const header = {
         headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: "Bearer " + localStorage.getItem("Authorization")
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization")
         }
     };
 
@@ -66,6 +65,7 @@ const MyPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // 프로필 수정
     const dataUpdate = (e) => {
 
         let userData = {
@@ -97,7 +97,7 @@ const MyPage = () => {
                 <Fade bottom>
                 <Form style={{ width: '90%', textAlign:"center" }} onFinish={dataUpdate} >    
                     <div style={{ textAlign: "center" }}>
-                        프로필을 수정 할 수 있는 화면입니다. <br/> ( *이메일과 연락처만 수정 가능합니다.) <br /><br /><br />
+                        프로필을 수정할 수 있는 화면입니다. <br/> ( *사진, 이메일, 연락처만 수정 가능합니다.) <br /><br /><br />
                     </div>
                     <div style={{textAlign:"center"}}>
                         <img style={{width:"200px", height:"200px"}} src={profile === null ? DefaultProfile : profile} />
@@ -114,13 +114,13 @@ const MyPage = () => {
 
                         <Descriptions.Item label="이메일">
                             <Form.Item rules={[{ type: 'email', message: '이메일형식을 맞게 입력하세요.' }]}>
-                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={user.email} onChange={emailHandler} />
+                                <Input style={{border: "1px solid beige", textAlign: "center"}} value={email} onChange={emailHandler} />
                             </Form.Item>
                         </Descriptions.Item>
 
                         <Descriptions.Item label="연락처" span={2}>
                             <Form.Item rules={[{ required: true, message: '연락처를 입력하세요.' }]}>
-                                <input style={{border: "1px solid beige", textAlign: "center"}} defaultValue={user.phone} onChange={phoneHandler} />
+                                <Input style={{border: "1px solid beige", textAlign: "center"}} value={phone} onChange={phoneHandler} />
                             </Form.Item>
                         </Descriptions.Item>
                         <Descriptions.Item label="근무 상태" span={3}>

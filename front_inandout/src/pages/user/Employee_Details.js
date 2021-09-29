@@ -42,7 +42,7 @@ const Employee_Details = (props) => {
 
     const header = {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization"),
+            Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
     console.log(props);
@@ -126,7 +126,7 @@ const Employee_Details = (props) => {
                     <Descriptions.Item label="월차갯수">{user.mleave}</Descriptions.Item>
                     <Descriptions.Item label="연차갯수">{user.aleave}</Descriptions.Item>
                     <Descriptions.Item label="반차갯수"></Descriptions.Item>
-                    {localStorage.getItem("userRole") === "ROLE_ADMIN" ?
+                    {sessionStorage.getItem("userRole") === "ROLE_ADMIN" ?
                         <Form.Item
                             name="roles"
                             label="권한"

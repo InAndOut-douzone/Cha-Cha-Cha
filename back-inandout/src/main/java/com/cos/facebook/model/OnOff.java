@@ -30,4 +30,8 @@ public class OnOff {
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="leaveId")
+	private Leaves leaves;
 }

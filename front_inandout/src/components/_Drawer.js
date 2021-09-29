@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
+import SockJsClient from 'react-stomp';
 
 const { Option } = Select;
 
@@ -14,7 +15,7 @@ const _Drawer = () => {
 
   const header = {
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("Authorization"),
+      Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
     },
   };
 
@@ -55,8 +56,7 @@ const _Drawer = () => {
       formRef.current.setFieldsValue({
         category: "",
         content: "",
-        toDate: "",
-        fromDate: "",
+        date: "",
         name: ""
       });
       // window.location.replace("/")
@@ -75,29 +75,71 @@ const _Drawer = () => {
       fromDate: value.date[0],
       state: "wait",
       fromUser: value.name
-    }
+    }    
+
     if(value.category === "연차"){
       // 두 기간간의 일 수     
       const day = moment.duration(value.date[1].diff(value.date[0])).asDays()+1;
-      if(user.aleave >= day ){
-        leavePost(data);
-      } else{
-        alert("휴가가 부족합니다.");
+      console.log("두기간 차이 : " + day)
+      // 월차가 있을 경우
+      if(user.aleave == null) {
+        if(user.mleave >= day ){
+          leavePost(data);
+        } else{
+          alert("휴가가 부족합니다.");
+        }  
       }
-    } else {
+      // 월차가 없을 경우
+      else {
+        if(user.aleave >= day ){
+          leavePost(data);
+        } else{
+          alert("휴가가 부족합니다.");
+        }
+      }
+    }
+
+    // 반차 신청
+    else {
       const day = moment.duration(value.date[1].diff(value.date[0])).asDays()+0.5;
-      if(moment.duration(value.date[1].diff(value.date[0])).asDays() > 0){
-        alert("반차는 하루만 신청해주세요.");
-      } else if (user.aleave >= day ) {
-        leavePost(data);
-      } else {
-        alert("휴가가 부족합니다.");
-      } 
+
+      // 월차가 있을 경우
+      if(user.mleave > 0) {
+        if(moment.duration(value.date[1].diff(value.date[0])).asDays() > 0){
+          alert("반차는 하루만 신청해주세요.");
+        } else if (user.mleave >= day ) {
+          leavePost(data);
+        } else {
+          alert("휴가가 부족합니다.");
+        } 
+      }
+
+      // 월차가 없을 경우
+      else {
+        if(moment.duration(value.date[1].diff(value.date[0])).asDays() > 0){
+          alert("반차는 하루만 신청해주세요.");
+        } else if (user.aleave >= day ) {
+          leavePost(data);
+        } else {
+          alert("휴가가 부족합니다.");
+        } 
+      }
     }
   }
 
+  const $websocket = useRef(null);
+
   return (
     <div>
+      <SockJsClient
+        url="http://localhost:8080/webSocket"
+        topics={['/topics/sendTo2']}
+        onMessage={
+            (msg) => {
+              getUser();
+            }
+        }
+        ref={$websocket} />
       <div type="primary" onClick={showDrawer}>
         {/* <Link to="/" style={{color:'currentcolor'}}>휴가 등록</Link> */}
         휴가 등록
@@ -152,7 +194,7 @@ const _Drawer = () => {
                 name="Number_of_days"
                 label="남은 휴가 일수"
               >
-                {user.aleave}
+                {user.aleave === null ? user.mleave : user.aleave}
               </Form.Item>
             </Col>
           </Row>
