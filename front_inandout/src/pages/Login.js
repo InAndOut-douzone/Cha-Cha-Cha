@@ -98,11 +98,11 @@ export default function Login({ history, location }) {
         name="global_state"
         layout="inline"
         onFinish={onfinish}
-        >
-        <div style={{width:'100%', textAlign:'center', fontSize:'2em', marginBottom:'30px', fontFamily: 'system-ui', color: 'lightslategrey'}}>IN AND OUT</div>
+      >
+        <div style={{ width: '100%', textAlign: 'center', fontSize: '2em', marginBottom: '30px', fontFamily: 'system-ui', color: 'lightslategrey' }}>IN AND OUT</div>
         <Form.Item name="no">
           {/* <input type="number" maxLength="8" required placeholder="사원번호 (숫자만 입력가능)" prefix={<UserOutlined />} /> */}
-          <input style={{width:'100%'}} maxLength="8" required placeholder="사원번호" prefix={<UserOutlined />} />
+          <input style={{ width: '100%' }} maxLength="8" required placeholder="사원번호" prefix={<UserOutlined />} />
         </Form.Item>
         <button className="btn1" type='Primary' htmlType="submit">LOGIN</button>
       </Form>
