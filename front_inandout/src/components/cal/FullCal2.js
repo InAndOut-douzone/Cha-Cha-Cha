@@ -494,7 +494,7 @@ const FullCal2 = () => {
 
 
               <Form.Item>
-                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // 이벤트 주인 (userRole)
+                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // userRole : 이벤트 주인
                   <>
                     <Row gutter={16}>
                       <Col span={12}>
@@ -512,11 +512,10 @@ const FullCal2 = () => {
                       </Col>
                       <Col span={12}>
                         <Form.Item
-                          name="user"
                           label="대상"
                         // rules={[{ required: true, message: 'Please choose the user' }]}
                         >
-                          <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                          <Input value={username} readOnly />
                         </Form.Item>
                       </Col>
                     </Row>
@@ -579,11 +578,10 @@ const FullCal2 = () => {
                         </Col>
                         <Col span={12}>
                           <Form.Item
-                            name="user"
                             label="대상"
                           // rules={[{ required: true, message: 'Please choose the user' }]}
                           >
-                            <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                            <Input value={username} readOnly />
                           </Form.Item>
                         </Col>
                       </Row>
@@ -633,7 +631,6 @@ const FullCal2 = () => {
                           <Form.Item
                             name="category"
                             label="일정 구분"
-
                             rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                           >
                             <Input placeholder={category1} value={category1} initialvalues={category1} readOnly />
@@ -645,7 +642,7 @@ const FullCal2 = () => {
                             label="대상"
                           // rules={[{ required: true, message: 'Please choose the user' }]}
                           >
-                            <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                            <Input value={username} readOnly />
                           </Form.Item>
                         </Col>
                       </Row>
