@@ -49,6 +49,17 @@ const FullCal2 = () => {
   const [startDate, setStartDate] = useState();
   const [holidays, setHolidays] = useState();
 
+  const CAL_category = (e) => {
+    setCategory1(e);
+  }
+  const CAL_content = (e) => {
+    setContent1(e.target.value);
+  }
+  const CAL_date = (e) => {
+    setFromDate1(e[0]);
+    setToDate1(e[1]);
+  }
+
   const header = {
     headers: {
       Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
@@ -90,10 +101,6 @@ const FullCal2 = () => {
 
 
   const 드래그 = async (eventClick) => {
-    console.log(eventClick.event)
-    // console.log(eventClick.event.id)
-    console.log(eventClick.event.start)
-    console.log(eventClick.event.end)
     let data3 = {
       id: eventClick.event.id, // 수정할 이벤트 번호
       category: eventClick.event.extendedProps.category,
@@ -187,10 +194,12 @@ const FullCal2 = () => {
   const onUpdate = async (value) => { // 일정 수정
     let data3 = {
       id: no1, // 수정할 이벤트 번호
-      category: value.category,
-      content: value.content,
-      toDate: value.date[1],
-      fromDate: value.date[0],
+      category: category1,
+      content: content1,
+      // toDate: value.date[1],
+      // fromDate: value.date[0],
+      fromDate: fromDate1,
+      toDate: toDate1
     }
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
@@ -262,10 +271,6 @@ const FullCal2 = () => {
     외근체크(!외근);
     체크박스(내일정, 연차, 출장, e.target.checked);
   }
-
-  // function asd(e) {
-  //   setCategory1(e.target.value);
-  // }
 
   let data = []; // 연차
   leaves.map((leave) => data.push({
@@ -400,9 +405,6 @@ const FullCal2 = () => {
             <EmployeeOnOffList />
           </Fade>
 
-
-
-
           <Drawer
             title="일정 등록"
             width="40%"
@@ -487,14 +489,11 @@ const FullCal2 = () => {
             width="40%"
             onClose={onClose2}
             visible={visible2}
-            bodyStyle={{ paddingBottom: 80 }}
-          >
+            bodyStyle={{ paddingBottom: 80 }} >
 
             <Form layout="vertical" hideRequiredMark onFinish={onUpdate}>
-
-
               <Form.Item>
-                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // userRole : 이벤트 주인
+                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // userRole : 이벤트 주인, 어드민이 아니고 자신 일정
                   <>
                     <Row gutter={16}>
                       <Col span={12}>
@@ -502,7 +501,7 @@ const FullCal2 = () => {
                           label="일정 구분"
                           rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                         >
-                          <Select value={category1} >
+                          <Select value={category1} onChange={CAL_category}>
                             <Option value="출장">출장</Option>
                             <Option value="외근">외근</Option>
                           </Select>
@@ -511,7 +510,6 @@ const FullCal2 = () => {
                       <Col span={12}>
                         <Form.Item
                           label="대상"
-                        // rules={[{ required: true, message: 'Please choose the user' }]}
                         >
                           <Input value={username} readOnly />
                         </Form.Item>
@@ -520,13 +518,15 @@ const FullCal2 = () => {
                     <Row gutter={16}>
                       <Col span={24}>
                         <Form.Item
-                          name="date"
+                          // name="date"
                           label="일시"
                         >
                           <RangePicker
                             showTime={{ format: 'HH mm' }}
                             format="YYYY-MM-DD HH mm"
-                            placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                            // placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                            value={[moment(fromDate1), moment(toDate1)]}
+                            onChange={CAL_date}
                           />
                         </Form.Item>
                       </Col>
@@ -542,8 +542,7 @@ const FullCal2 = () => {
                             },
                           ]}
                         >
-                          {/* <textarea value={content1} rows={4} /> */}
-                          <Input.TextArea rows={4} value={content1} ></Input.TextArea>
+                          <Input.TextArea rows={4} value={content1} onChange={CAL_content} ></Input.TextArea>
                         </Form.Item>
 
                       </Col>  
@@ -557,7 +556,9 @@ const FullCal2 = () => {
                       </Button>
                     </div>
                   </>
+
                   : userId1 === user.id && category1 !== '연차' && category1 !== '오전 반차' && category1 !== '오후 반차' ?
+
                     <>
                       <Row gutter={16}>
                         <Col span={12}>
@@ -565,7 +566,7 @@ const FullCal2 = () => {
                             label="일정 구분"
                             rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                           >
-                            <Select defaultValue={category1}>
+                            <Select value={category1} onChange={CAL_category}>
                               <Option value="출장">출장</Option>
                               <Option value="외근">외근</Option>
                             </Select>
@@ -583,13 +584,15 @@ const FullCal2 = () => {
                       <Row gutter={16}>
                         <Col span={24}>
                           <Form.Item
-                            name="date"
+                            // name="date"
                             label="일시"
                           >
                             <RangePicker
                               showTime={{ format: 'HH mm' }}
                               format="YYYY-MM-DD HH mm"
-                              placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                              // placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                              value={[moment(fromDate1), moment(toDate1)]}
+                              onChange={CAL_date}
                             />
                           </Form.Item>
                         </Col>
@@ -606,7 +609,7 @@ const FullCal2 = () => {
                             ]}
                           >
                             {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
-                            <Input.TextArea rows={4} value={content1} ></Input.TextArea>
+                            <Input.TextArea rows={4} value={content1} onChange={CAL_content} ></Input.TextArea>
                           </Form.Item>
 
                         </Col>
@@ -619,7 +622,9 @@ const FullCal2 = () => {
                           삭제
                         </Button>
                       </div>
+
                     </> : <>
+
                       <Row gutter={16}>
                         <Col span={12}>
                           <Form.Item
@@ -642,14 +647,15 @@ const FullCal2 = () => {
                       <Row gutter={16}>
                         <Col span={24}>
                           <Form.Item
-                            name="date"
+                            // name="date"
                             label="일시"
                           >
                             <RangePicker
                               disabled
                               showTime={{ format: 'HH mm' }}
                               format="YYYY-MM-DD HH mm"
-                              placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                              // placeholder={[moment(fromDate1).format("YYYY-MM-DD HH"), moment(toDate1).format("YYYY-MM-DD HH")]}
+                              value={[moment(fromDate1), moment(toDate1)]}
                             />
                           </Form.Item>
                         </Col>
