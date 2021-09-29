@@ -427,7 +427,7 @@ const _Header = () => {
                                                 notification.open({
                                                     message: msg.user.name,
                                                     description:
-                                                        msg.category + ' 일정이 변경되었습니다zz.',
+                                                        msg.category + ' 일정이 변경되었습니다.',
                                                     onClick: () => {
                                                         console.log('알림 클릭함!');
                                                     },
