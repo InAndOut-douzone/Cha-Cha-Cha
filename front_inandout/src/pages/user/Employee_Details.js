@@ -48,7 +48,8 @@ const Employee_Details = (props) => {
     console.log(props);
     const { id } = props.match.params;
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+    });
     const [works, setWorks] = useState([]);
     // const [state, setState] = useState(true);
 
@@ -78,8 +79,8 @@ const Employee_Details = (props) => {
 
     works.map((work, index) => data.push({
         key: index + 1,
-        date: moment(work.date).format("yyyy MM DD"),
-        onTime: moment(work.onTime).format("HH : mm"),
+        date: moment(work.date).format("yyyy-MM-DD"),
+        onTime: moment(work.onTime).format("HH : mm")  !== "Invalid date" ? moment(work.offTime).format("HH : mm") : "",
         offTime: moment(work.offTime).format("HH : mm") !== "Invalid date" ? moment(work.offTime).format("HH : mm") : "",
         state: work.state
     }));
