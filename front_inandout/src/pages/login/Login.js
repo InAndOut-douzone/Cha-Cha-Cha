@@ -4,7 +4,6 @@ import { Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import '../../assets/css/loginForm.css'
 import styled from 'styled-components'
-import img from '../../assets/images/hospital.jpg';
 import Bounce from 'react-reveal/Bounce';
 
 
