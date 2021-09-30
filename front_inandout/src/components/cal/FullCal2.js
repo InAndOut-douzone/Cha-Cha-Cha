@@ -494,17 +494,15 @@ const FullCal2 = () => {
 
 
               <Form.Item>
-                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // 이벤트 주인 (userRole)
+                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // userRole : 이벤트 주인
                   <>
                     <Row gutter={16}>
                       <Col span={12}>
                         <Form.Item
-                          name="category"
                           label="일정 구분"
-
                           rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                         >
-                          <Select value={category1} placeholder={category1}>
+                          <Select value={category1} >
                             <Option value="출장">출장</Option>
                             <Option value="외근">외근</Option>
                           </Select>
@@ -515,7 +513,7 @@ const FullCal2 = () => {
                           label="대상"
                         // rules={[{ required: true, message: 'Please choose the user' }]}
                         >
-                          <Input value={username} />
+                          <Input value={username} readOnly />
                         </Form.Item>
                       </Col>
                     </Row>
@@ -536,7 +534,6 @@ const FullCal2 = () => {
                     <Row gutter={16}>
                       <Col span={24}>
                         <Form.Item
-                          name="content"
                           label="일정 내용"
                           rules={[
                             {
@@ -546,7 +543,7 @@ const FullCal2 = () => {
                           ]}
                         >
                           {/* <textarea value={content1} rows={4} /> */}
-                          <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
+                          <Input.TextArea rows={4} value={content1} ></Input.TextArea>
                         </Form.Item>
 
                       </Col>  
@@ -565,12 +562,10 @@ const FullCal2 = () => {
                       <Row gutter={16}>
                         <Col span={12}>
                           <Form.Item
-                            name="category"
                             label="일정 구분"
-
                             rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                           >
-                            <Select value={category1} placeholder={category1}>
+                            <Select defaultValue={category1}>
                               <Option value="출장">출장</Option>
                               <Option value="외근">외근</Option>
                             </Select>
@@ -578,11 +573,10 @@ const FullCal2 = () => {
                         </Col>
                         <Col span={12}>
                           <Form.Item
-                            name="user"
                             label="대상"
                           // rules={[{ required: true, message: 'Please choose the user' }]}
                           >
-                            <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                            <Input value={username} readOnly />
                           </Form.Item>
                         </Col>
                       </Row>
@@ -603,7 +597,6 @@ const FullCal2 = () => {
                       <Row gutter={16}>
                         <Col span={24}>
                           <Form.Item
-                            name="content"
                             label="일정 내용"
                             rules={[
                               {
@@ -613,7 +606,7 @@ const FullCal2 = () => {
                             ]}
                           >
                             {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
-                            <Input.TextArea rows={4} placeholder={content1} ></Input.TextArea>
+                            <Input.TextArea rows={4} value={content1} ></Input.TextArea>
                           </Form.Item>
 
                         </Col>
@@ -630,12 +623,10 @@ const FullCal2 = () => {
                       <Row gutter={16}>
                         <Col span={12}>
                           <Form.Item
-                            name="category"
                             label="일정 구분"
-
                             rules={[{ required: true, message: '일정 구분을 선택해주세요' }]}
                           >
-                            <Input placeholder={category1} value={category1} initialvalues={category1} readOnly />
+                            <Input value={category1} readOnly />
                           </Form.Item>
                         </Col>
                         <Col span={12}>
@@ -644,7 +635,7 @@ const FullCal2 = () => {
                             label="대상"
                           // rules={[{ required: true, message: 'Please choose the user' }]}
                           >
-                            <Input placeholder={username} value={username} initialvalues={username} readOnly />
+                            <Input value={username} readOnly />
                           </Form.Item>
                         </Col>
                       </Row>
@@ -666,7 +657,6 @@ const FullCal2 = () => {
                       <Row gutter={16}>
                         <Col span={24}>
                           <Form.Item
-                            name="content"
                             label="일정 내용"
                             rules={[
                               {
@@ -676,7 +666,7 @@ const FullCal2 = () => {
                             ]}
                           >
                             {/* <Input.TextArea value={content1} rows={4} placeholder="일정 내용을 입력해주세요" /> */}
-                            <Input.TextArea readOnly rows={4} placeholder={content1} ></Input.TextArea>
+                            <Input.TextArea readOnly rows={4} value={content1} ></Input.TextArea>
                           </Form.Item>
 
                         </Col>
