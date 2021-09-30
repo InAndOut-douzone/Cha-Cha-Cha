@@ -638,7 +638,6 @@ const FullCal2 = () => {
                         </Col>
                         <Col span={12}>
                           <Form.Item
-                            name="user"
                             label="대상"
                           // rules={[{ required: true, message: 'Please choose the user' }]}
                           >
