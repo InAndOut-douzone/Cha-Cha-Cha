@@ -17,18 +17,17 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
 public class HospitalInfoController {
 
 	private final HospitalService hospitalService;
 	
-	@GetMapping("/hospital2")
+	@GetMapping("/api/hospital2")
 	public ResponseEntity<?> getHospital() {
 		return new ResponseEntity<>(hospitalService.findById(),HttpStatus.OK);
 	}
 	
 	@CrossOrigin(origins = {"http://localhost:3000"})
-	@PostMapping("/hospital2")
+	@PostMapping("/api/hospital2")
 	public ResponseEntity<Object> updateHospital(HttpServletRequest request, MultipartFile file, String hospitalData) {
 		
 		hospitalService.update(request, file, hospitalData);
@@ -38,6 +37,12 @@ public class HospitalInfoController {
 //		Date date = sdf.parse(hospitalReqDto.getOnTime());
 		 
 		return new ResponseEntity<Object>("Success",HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/hospital2")
+	public ResponseEntity<?> getHospital2() {
+		return new ResponseEntity<>(hospitalService.findById(),HttpStatus.OK);
 	}
 	
 
