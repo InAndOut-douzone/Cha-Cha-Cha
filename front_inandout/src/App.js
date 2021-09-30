@@ -32,17 +32,17 @@ export default function App() {
         <PrivateRoute component={First} path="/" exact={true} />
         <PrivateRoute component={MyPage} path="/mypage" exact={true} />
         <PrivateRoute component={Work} path="/work" exact={true} />
-        <PrivateRoute component={HIM} path="/him" exact={true} />
+        <PrivateRoute component={HIM} path="/him" exact={true} admin={true} />
         <PrivateRoute component={HI} path="/hi" exact={true} />
         <PrivateRoute component={WTM} path="/wtm" exact={true} />
-        <PrivateRoute component={Add_Employee} path="/addemployee" exact={true} />
-        <PrivateRoute component={Employee_Management} path="/employeemanagement" exact={true} />
-        <PrivateRoute component={Leave_Management} path="/leavemanagement" exact={true} />
-        <PrivateRoute component={Add_Notice} path="/addnotice" exact={true} />
+        <PrivateRoute component={Add_Employee} path="/addemployee" exact={true} admin={true} />
+        <PrivateRoute component={Employee_Management} path="/employeemanagement" exact={true} admin={true} />
+        <PrivateRoute component={Leave_Management} path="/leavemanagement" exact={true} admin={true} />
+        <PrivateRoute component={Add_Notice} path="/addnotice" exact={true} admin={true} />
         <PrivateRoute component={NoticeList} path="/notice" exact={true} />
         <PrivateRoute component={Notice} path="/notice/:no" exact={true} />
-        <PrivateRoute component={NoticeModi} path="/notice/modi/:no" exact={true} />
-        <PrivateRoute component={Employee_Details} path="/employeedetails/:id" exact={true} />
+        <PrivateRoute component={NoticeModi} path="/notice/modi/:no" exact={true} admin={true} />
+        <PrivateRoute component={Employee_Details} path="/employeedetails/:id" exact={true} admin={true} />
         <LogoutRoute component={Login} path="/logout" exact={true} />
         <Route component={Message} path="/message" exact={true} />
         {/* 매칭되는 페이지가 없을 때 실행됨 switch가 있기에 가능 */}
