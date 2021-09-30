@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.cos.facebook.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
+	
+	@Query( value = "select * from User where username = :username and leaveDate is null", nativeQuery = true)
 	public User findByUsername(String username);
 
 	public List<User> findByRoles(String roles);
