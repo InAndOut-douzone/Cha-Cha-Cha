@@ -47,7 +47,7 @@ export default function Login({ history, location }) {
         })
       }
     }).catch(err => {
-      alert('없는 사원번호 입니다.');
+      alert('없는 사원번호이거나 퇴사자 입니다.');
     });
   }
 
