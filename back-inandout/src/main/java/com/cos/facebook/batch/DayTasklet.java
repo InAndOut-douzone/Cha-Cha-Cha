@@ -78,7 +78,7 @@ public class DayTasklet implements Tasklet, StepExecutionListener {
 		
 		HospitalOnOff hospitalHoliday = hospitalOnOffRepository.findByWeek(strWeek);
 		
-		if( hospitalHoliday.getOnTime() == hospitalHoliday.getOffTime()) { // 오늘이 병원 휴무일이면 holiday = false
+		if( hospitalHoliday.getOnTime() == hospitalHoliday.getOffTime()) { // 오늘이 병원 휴무일이면 (주말같은 경우) holiday = false
 			holiday = true;
 		}
 		
