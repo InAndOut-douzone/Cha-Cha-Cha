@@ -107,7 +107,8 @@ const FullCal2 = () => {
       content: eventClick.event.extendedProps.content,
       fromDate: eventClick.event.start,
       roles: eventClick.event.extendedProps.roles,
-      toDate: eventClick.event.extendedProps.category === "연차" ? moment(eventClick.event.end).add(-1, 'd').toDate() : eventClick.event.end,
+      toDate: (eventClick.event.extendedProps.category === "연차" || eventClick.event.extendedProps.category === "오전 반차" || 
+      eventClick.event.extendedProps.category === "오후 반차") ? moment(eventClick.event.end).add(-1, 'd').toDate() : eventClick.event.end,
     }
 
     eventClick.event.end !== null ?
@@ -199,7 +200,8 @@ const FullCal2 = () => {
       // toDate: value.date[1],
       // fromDate: value.date[0],
       fromDate: fromDate1,
-      toDate: toDate1
+      // toDate: moment(toDate1).add(-1, 'd')
+      toDate: (category1 === "연차" || category1 === "오전 반차" || category1 === "오후 반차") ? moment(toDate1).add(-1, 'd').toDate() : toDate1,
     }
 
     await axios.put("http://localhost:8080/api/leave", data3, header).then(res => {
@@ -286,7 +288,7 @@ const FullCal2 = () => {
 
     start: leave.fromDate,
     // end: leave.toDate,
-    end: leave.category === "연차" ? moment(leave.toDate).add(1, 'd').toDate() : leave.toDate,
+    end: (leave.category === "연차" || leave.category === "오전 반차" || leave.category === "오후 반차" ) ? moment(leave.toDate).add(1, 'd').toDate() : leave.toDate,
     category: leave.category,
     content: leave.content,
     allDay: leave.category === "연차" ? 1 : leave.category === "오후 반차" ? 1 : leave.category === "오전 반차" ? 1 : 0
@@ -448,7 +450,7 @@ const FullCal2 = () => {
                       //   moment(startDate, "YYYY-MM-DD HH mm"),
                       //   moment("2022-01-01", "YYYY-MM-DD HH mm")
                       // ]}
-                      placeholder={[startDate, null]}
+                      placeholder={[moment(startDate).format("YYYY-MM-DD 00 00"), moment(startDate).format("YYYY-MM-DD 23 59")]}
                       showTime={{ format: 'HH mm' }}
                       format="YYYY-MM-DD HH mm"
                     />
@@ -493,7 +495,7 @@ const FullCal2 = () => {
 
             <Form layout="vertical" hideRequiredMark onFinish={onUpdate}>
               <Form.Item>
-                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // userRole : 이벤트 주인, 어드민이 아니고 자신 일정
+                {user.roles === 'ROLE_ADMIN' && userRole !== 'ROLE_ADMIN' ? // userRole : 이벤트 주인, 어드민이고 이벤트주인이 어드민이 아닌 일정
                   <>
                     <Row gutter={16}>
                       <Col span={12}>
