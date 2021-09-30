@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import isLogin from '../../utils/isLogin'; 
 import { useLocation } from "react-router-dom";
 
-const PrivateRoute = ({component: Component, ...rest}) => { 
+const PrivateRoute = ({admin, component: Component, ...rest}) => { 
 
     const { pathname } = useLocation();
 
@@ -15,8 +15,12 @@ const PrivateRoute = ({component: Component, ...rest}) => {
         <Route
         {...rest} render={props => (     
             isLogin() ? 
-                <Component {...props} /> : 
-                <Redirect to="/login" /> )} 
+                window.sessionStorage.getItem("userRole") === "ROLE_ADMIN" ?
+                <Component {...props} /> :
+                admin ?
+                <Redirect to="/" /> :
+                <Component {...props} />
+                : <Redirect to="/login" /> )}
         /> 
     ); 
 }; 
