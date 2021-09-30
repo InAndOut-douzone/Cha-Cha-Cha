@@ -60,8 +60,8 @@ public class MonthTasklet implements Tasklet, StepExecutionListener {
 			List<OnOff> works = onOffRepository.findByIdAndDateList(id, month);
 			
 			for(OnOff work : works) {
-				if(work.getState()=="지각" || work.getState()=="결근" || 
-						work.getState()=="오후반차&&지각" || work.getState()=="오전반차&&조퇴") { // 저번달에 지각이나 결근이 있었다면 월차지급 = false
+				if(work.getState().equals("지각") || work.getState().equals("결근") || work.getState().equals("조퇴") ||
+						work.getState().equals("오후반차&&지각") || work.getState().equals("오전반차&&조퇴")) { // 저번달에 지각이나 결근이 있었다면 월차지급 = false
 					leave = false;
 					break;
 				}
