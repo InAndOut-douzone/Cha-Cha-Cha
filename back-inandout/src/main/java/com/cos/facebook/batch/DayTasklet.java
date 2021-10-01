@@ -82,19 +82,25 @@ public class DayTasklet implements Tasklet, StepExecutionListener {
 			holiday = true;
 		}
 		
-		for(Long id : ids) { // 각 사원마다 for문 실
+		for(Long id : ids) { // 각 사원마다 for문 실행
 			// work = onOffRepository.findByIdAndDate(id, today);
 			OnOff work = new OnOff();
 			
-			if((onOffRepository.findByIdAndDate(id, today) == null
-					|| (onOffRepository.findByIdAndDate(id, today).getOffTime() == null && onOffRepository.findByIdAndDate(id, today).getState() == null))
-					&& !holiday) { // 병원지정 휴일이 아니고, 사원의 근무기록이 없을때 결근처리
-				work.setState("결근");
-				work.setUser(userRepository.findById2(id));
-				work.setDate(new Date());
-				onOffRepository.save(work);
-				// System.out.println("3e3333333333"+work);
-			}
+			if(onOffRepository.findByIdAndDate(id, today) == null) { // 출석 데이터가 아예없고 병원지정휴일이 아니면 
+				
+				if(!holiday) {
+					work.setState("결근");
+					work.setUser(userRepository.findById2(id));
+					work.setDate(new Date());
+					onOffRepository.save(work);
+				}
+			} else if((onOffRepository.findByIdAndDate(id, today).getOffTime() == null && onOffRepository.findByIdAndDate(id, today).getState() == null)
+					&& !holiday) { // 퇴근데이터가 없고 병원 지정휴일이 아니면
+				
+					work = onOffRepository.findByIdAndDate(id,today);
+					work.setState("조퇴");
+					onOffRepository.save(work);
+				}
 			
 		}
 		
