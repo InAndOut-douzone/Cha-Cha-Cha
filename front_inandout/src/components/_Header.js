@@ -30,7 +30,7 @@ const DIV = styled.div`
         }
         
         .animation{
-            animation:text-scroll 20s linear infinite;
+            animation:text-scroll 6s linear infinite;
         }
         .animation a {
             color:white;
