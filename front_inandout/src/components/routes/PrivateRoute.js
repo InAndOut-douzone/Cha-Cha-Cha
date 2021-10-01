@@ -15,13 +15,12 @@ const PrivateRoute = ({admin, component: Component, ...rest}) => {
         <Route
         {...rest} render={props => (     
             isLogin() ? 
-                sessionStorage.getItem("userRole") === "ROLE_ADMIN" ?
-                <Component {...props} /> : 
-                    admin ? 
-                    <Redirect to="/" /> : 
-                    <Component {...props} /> 
-                :
-                <Redirect to="/login" /> )} 
+                window.sessionStorage.getItem("userRole") === "ROLE_ADMIN" ?
+                <Component {...props} /> :
+                admin ?
+                <Redirect to="/" /> :
+                <Component {...props} />
+                : <Redirect to="/login" /> )}
         /> 
     ); 
 }; 
