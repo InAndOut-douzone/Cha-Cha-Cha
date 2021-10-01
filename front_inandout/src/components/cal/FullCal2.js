@@ -87,7 +87,6 @@ const FullCal2 = () => {
   };
 
   const handleDateClick2 = (eventClick) => {
-    console.log(eventClick)
     setNo1(eventClick.event.id);
     setUserId1(eventClick.event.extendedProps.userId);
     setCategory1(eventClick.event.extendedProps.category);

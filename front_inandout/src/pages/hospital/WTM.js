@@ -48,7 +48,6 @@ const WTM = () => {
     }
 
     await axios.put("http://localhost:8080/api/hospitalOnOff", JSON.stringify(data), header).then(res => {
-      console.log(res);
       fetch();
     }).catch(error => {
       console.log("error" + error);
@@ -90,7 +89,7 @@ const WTM = () => {
   }
 
   const holidayAll = async () => {
-    await axios.get("http://localhost:8080/api/holiday/all",header).then(res => {console.log(res.data); setHolidays(res.data);}).catch(err => {});
+    await axios.get("http://localhost:8080/api/holiday/all",header).then(res => {setHolidays(res.data);}).catch(err => {});
   }
 
   const today = moment().format("YYYY MM DD");

@@ -102,7 +102,6 @@ const Work = () => {
         }
 
         axios.post("/api/workdate", data, header).then((res) => {
-            console.log(res.data);
             setOnoff(res.data);
         });
     }

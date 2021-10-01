@@ -26,8 +26,6 @@ const DateTest = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(e.target.value)
-    console.log(123);
   }
   return (
     <div>
