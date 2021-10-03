@@ -26,24 +26,34 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		
 		Calendar calendar = Calendar.getInstance(); // 달력 가져오기
 		
+		SimpleDateFormat weekformat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+		
 		calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY); // 이번주 월요일 날짜 구하기
 		calendar.set(Calendar.HOUR_OF_DAY,00);
 		calendar.set(Calendar.MINUTE, 01);
 		Date start = calendar.getTime();
+		String strStart=weekformat.format(start);
+		
 		calendar.add(calendar.DATE,6);
 		calendar.set(Calendar.HOUR_OF_DAY,23);
 		calendar.set(Calendar.MINUTE, 59);
 		Date end = calendar.getTime();
+		String strEnd = weekformat.format(end);
 		
-		return workRepository.findAllByDate(id, start, end);
+		return workRepository.findAllByDate(id, strStart, strEnd);
 	}
 	
 	public List<OnOff> findByDate(long id, OnOff data){ // 날짜 선택시 데이터 가져오기
 		
+		SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
+		
 		Date start = data.getOnTime();
 		Date end = data.getOffTime();
 		
-		return workRepository.findAllByDate(id, start, end);
+		String strStart = format.format(start);
+		String strEnd = format.format(end);
+		
+		return workRepository.findAllByDate(id, strStart, strEnd);
 		}
 
 	public List<String> getWorkTime(long id) { //기본 이번주 일한 시간 구하기
@@ -52,11 +62,13 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		user = userRepository.findById(id).get();
 		
 		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat weekformat = new java.text.SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dayformat = new java.text.SimpleDateFormat("yy년 MM월 dd일");
 		SimpleDateFormat timeformat = new java.text.SimpleDateFormat("HH시 mm분");
 		
+		
 		calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
-		calendar.set(Calendar.HOUR_OF_DAY,00);
+		calendar.set(Calendar.HOUR_OF_DAY,01);
 		calendar.set(Calendar.MINUTE, 01);
 		Date mon = calendar.getTime();
 		String strMon = dayformat.format(mon);
@@ -65,16 +77,18 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		calendar.set(Calendar.HOUR_OF_DAY,23);
 		calendar.set(Calendar.MINUTE, 59);
 		Date sun = calendar.getTime();
-		String strSun = dayformat.format(sun);
+		String strSun = dayformat.format(sun); 
 		
-		Date time = workRepository.workTime(id,mon,sun); // 일주일 일한 시간
+		String strStart = weekformat.format(mon);
+		String strEnd = weekformat.format(sun);
+		String time = workRepository.workTime(id,strStart,strEnd); // 일주일 일한 시간
 		
 		String hour = "";
 		if (time == null) {
 			hour = "0";
 		}
 		else {
-			hour = timeformat.format(time).substring(0,2); // 일주일 일한 시간 string으로 시간만 나오게 정리
+			hour = time;
 		}
 		
 		String percent = String.format("%.2f",(Double.parseDouble(hour)/52)*100); // percent로 계산

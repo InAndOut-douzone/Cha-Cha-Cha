@@ -32,7 +32,7 @@ public class Schedule {
 	@Autowired
 	private final YearBatchConfig yearBatch;
 	
-    @Scheduled(cron="00 24 17 * * *") // 매일 00초 57분 23시 마다 실행됨  
+    @Scheduled(cron="00 12 11 * * *") // 매일 00초 57분 23시 마다 실행됨  
     public void dayJob () {
     	
     	 Map<String, JobParameter> confMap = new HashMap<>();
@@ -50,7 +50,7 @@ public class Schedule {
   
     }
     
-    @Scheduled(cron="00 34 17 L * *") // 매달 마지막 날 00초 57분 23시 마다 실행됨  
+    @Scheduled(cron="00 57 23 L * *") // 매달 마지막 날 00초 57분 23시 마다 실행됨  
     public void monthJob () {
     	
     	 Map<String, JobParameter> confMap = new HashMap<>();

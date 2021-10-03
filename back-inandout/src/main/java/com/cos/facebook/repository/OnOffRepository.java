@@ -32,7 +32,7 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 			+ "date_format(date,'%y년 %m월 %d일') as 'strDate', date_format(onTime,'%H시 %i분 %s초') as 'strOn',"
 			+ "date_format(offTime,'%H시 %i분 %s초') as 'strOff', state, userId, leaveId"
 			+ " from OnOff where userId=:id and date between :start and :end order by date", nativeQuery = true)
-	List<OnOff> findAllByDate(long id, Date start, Date end);
+	List<OnOff> findAllByDate(long id, String start, String end);
 	
 	@Query(value = "select " //현재시간 기준으로 월요일, 일요일 날짜구하기
 			+ "	ADDDATE( CURDATE(), - WEEKDAY(CURDATE()) + 0 ) AS MONDAY, "
@@ -40,9 +40,9 @@ public interface OnOffRepository extends JpaRepository<OnOff, Integer>{
 			+ "from DUAL",nativeQuery = true)
 	List<Date> findWeek();
 	
-	@Query(value = " select sec_to_time(sum(time_to_sec(timediff(offTime,onTime)))) " // 이번주 일했던 시간 구하기
-			+ " from OnOff where userId=:id and date between :start and :end",nativeQuery = true)
-	Date workTime(long id, Date start, Date end);
+	@Query(value = "select SUBSTRING_INDEX(sec_to_time(sum(time_to_sec(timediff(offTime,onTime)))),\":\",1)"
+			+ "from OnOff where userId=:id and date between :start and :end ",nativeQuery = true)
+	String workTime(long id, String start, String end);
 
 //	
 //	@Query(value = "select * from OnOff where date like CONCAT('2021-08-26%') order by offTime asc", nativeQuery = true)
