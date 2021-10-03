@@ -61,7 +61,7 @@ const Navigation = (name) => {
                     src={profileState ? '/images/' + user.profile : DefaultProfile}
                     />
                 {/* <div style={{ backgroundColor:'#001529', color:'#fff', marginTop: '-6px', textAlign: 'center' }} className="profile_name">이재성</div> */}
-                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user && user.name}</div>
+                <div style={{ marginTop: '-6px', textAlign: 'center' }} className="profile_name">{user ? user.name : '　'}</div>
 
                 {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
