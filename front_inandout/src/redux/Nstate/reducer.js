@@ -8,7 +8,7 @@ const nstateReducer = (state=initialState, action) => {
         case NSTATE:
             return {
                 ...state,
-                openKeys: state.count + 1
+                openKeys:['1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6']
             }
         default: return state
     }

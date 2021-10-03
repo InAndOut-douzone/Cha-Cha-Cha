@@ -58,10 +58,12 @@ const Work = () => {
 
         axios.get("/api/wokrpercent", header).then((res) => {
             setData(res.data);
+            console.log(res.data)
         });
 
         axios.get("/api/work", header).then((res) => {
             setOnoff(res.data);
+            console.log(res.data)
         });
 
         // 현재 로그인한 사람 데이터 가져오기
