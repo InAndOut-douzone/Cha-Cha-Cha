@@ -1,5 +1,5 @@
 import { createStore } from 'redux'
-import nstateReducer from './Nstate/reducer'
-const store = createStore(nstateReducer);
+import reducer from './Nstate/reducer'
+const store = createStore(reducer);
 
 export default store;
