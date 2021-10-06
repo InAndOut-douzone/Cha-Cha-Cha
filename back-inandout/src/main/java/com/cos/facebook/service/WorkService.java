@@ -35,6 +35,9 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		calendar.set(Calendar.MINUTE, 59);
 		Date end = calendar.getTime();
 		
+		System.out.println("mon2 :" + start);
+		System.out.println("sun2 :" + end);
+		
 		return workRepository.findAllByDate(id, start, end);
 	}
 	
@@ -67,7 +70,11 @@ public List<OnOff> findById(long id) { // 기본 일주일 데이터 가져오�
 		Date sun = calendar.getTime();
 		String strSun = dayformat.format(sun);
 		
+		
+		System.out.println("mon :" + mon);
+		System.out.println("sun :" + sun);
 		Date time = workRepository.workTime(id,mon,sun); // 일주일 일한 시간
+		System.out.println("time :" + time);
 		
 		String hour = "";
 		if (time == null) {
