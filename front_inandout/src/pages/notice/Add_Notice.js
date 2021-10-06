@@ -46,19 +46,14 @@ const MyBlock = styled.div`
 
 const Add_Notice = () => {
 
-    console.log("asdfasdfasdfsadf")
-
     const baa = (value) => {        
         // editorState의 현재 contentState 값을 원시 JS 구조로 변환시킨뒤, HTML 태그로 변환시켜준다.
-        console.log("onEditorStateChange : " +  draftToHtml(convertToRaw(editorState.getCurrentContent())));
 
         let notice = {
             title: value.title,
             contents: draftToHtml(convertToRaw(editorState.getCurrentContent()))
         }
-        console.log(notice);
         axios.post("http://localhost:8080/api/notice/add", notice, header).then((res) => {
-            console.log(res);
             window.location.href="/notice";
         }).catch((err) => {alert("이미지를 올릴 수 없습니다.")})
         

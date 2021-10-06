@@ -47,7 +47,6 @@ const Notice = (props) => {
         await axios.get("http://localhost:8080/api/notice/" + no, header).then((res) => {
             setNotice(res.data);
             // setHtmlToEditor(`${res.data.contents}`);
-            // console.log(notice.user.username);
         })
     }
 

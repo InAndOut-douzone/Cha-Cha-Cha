@@ -15,9 +15,6 @@ const ApiTest = () => {
             setLoading(true);
             setTimeout(() => {
                 setLoading(false);
-                console.log(1, res);
-                console.log(2, res.data);
-                console.log(3, res.data.name);
 
                 setUser(res.data.name);
             }, 500);

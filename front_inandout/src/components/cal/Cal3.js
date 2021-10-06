@@ -5,7 +5,6 @@ import '../../assets/css/Cal.css';
 
 function getListData(value) {
     let listData;
-    console.log(123,value.month());
     if(value.month() === 7 && value.date() === 8){
         listData = [
         { type: 'warning', content: '김정현 휴가', no: 1, color:"#fce876" },
