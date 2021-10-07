@@ -77,7 +77,7 @@ const Employee_Details = (props) => {
     works.map((work, index) => data.push({
         key: index + 1,
         date: moment(work.date).format("yyyy-MM-DD"),
-        onTime: moment(work.onTime).format("HH : mm")  !== "Invalid date" ? moment(work.offTime).format("HH : mm") : "",
+        onTime: moment(work.onTime).format("HH : mm")  !== "Invalid date" ? moment(work.onTime).format("HH : mm") : "",
         offTime: moment(work.offTime).format("HH : mm") !== "Invalid date" ? moment(work.offTime).format("HH : mm") : "",
         state: work.state
     }));
