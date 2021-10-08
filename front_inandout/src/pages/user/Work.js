@@ -153,7 +153,7 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["사용 연차", 15-user.aleave+user.mleave],
+                        ["사용 연차", user.mleave === 0 ? 1 : 15-user.aleave+user.mleave],
                         ["남은 연차", user.aleave+user.mleave],
                         
                         ]}
