@@ -80,7 +80,6 @@ const _Drawer = () => {
     if(value.category === "연차"){
       // 두 기간간의 일 수     
       const day = moment.duration(value.date[1].diff(value.date[0])).asDays()+1;
-      console.log("두기간 차이 : " + day)
       // 월차가 있을 경우
       if(user.aleave == null) {
         if(user.mleave >= day ){

@@ -11,7 +11,6 @@ const Cal = () => {
     console.log(value.format('YYYY-MM-DD'), mode);
   }
   const select = (e) => {
-    console.log(e);
     setState(!state);
   }
 

@@ -58,10 +58,12 @@ const Work = () => {
 
         axios.get("/api/wokrpercent", header).then((res) => {
             setData(res.data);
+            console.log(res.data)
         });
 
         axios.get("/api/work", header).then((res) => {
             setOnoff(res.data);
+            console.log(res.data)
         });
 
         // 현재 로그인한 사람 데이터 가져오기
@@ -102,7 +104,6 @@ const Work = () => {
         }
 
         axios.post("/api/workdate", data, header).then((res) => {
-            console.log(res.data);
             setOnoff(res.data);
         });
     }
@@ -152,7 +153,7 @@ const Work = () => {
                         loader={<div>Loading Chart</div>}
                         data={[
                         ["Task", "Hours per Day"],
-                        ["사용 연차", 15-user.aleave+user.mleave],
+                        ["사용 연차", user.mleave === 0 ? 1 : 15-user.aleave+user.mleave],
                         ["남은 연차", user.aleave+user.mleave],
                         
                         ]}

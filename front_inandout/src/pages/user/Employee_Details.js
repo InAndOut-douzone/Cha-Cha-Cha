@@ -45,7 +45,6 @@ const Employee_Details = (props) => {
             Authorization: "Bearer " + sessionStorage.getItem("Authorization"),
         },
     };
-    console.log(props);
     const { id } = props.match.params;
 
     const [user, setUser] = useState({
@@ -61,7 +60,6 @@ const Employee_Details = (props) => {
     const userFetch = () => {
         axios.get("http://localhost:8080/api/user/" + id, header).then(res => {
             setUser(res.data);
-            console.log(res.data)
             // if(res.data.leaveDate !== null) {
             //     setState(false);
             // }
@@ -71,7 +69,6 @@ const Employee_Details = (props) => {
     const data = [];
     const workFetch = async () => {
         await axios.get("http://localhost:8080/api/getwork/" + id, header).then(res => {
-            console.log(res.data);
             setWorks(res.data);
 
         }).catch();

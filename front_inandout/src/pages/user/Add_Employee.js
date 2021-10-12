@@ -17,10 +17,6 @@ const Add_Employee = () => {
             alert("사원번호가 중복되었습니다. ")
             return;
         } else {
-            // console.log(values.birthday);
-            // console.log(values.birthday.format('YYYY MM DD'));
-            // console.log(values.birthday.toDate());
-
             axios.post("http://localhost:8080/api/user/add", values, header).then(res => {
                 alert(res.data.name + " 사원 등록이 완료되었습니다. (사원번호 : " + res.data.username + ")");
                 setUsernameCheckState(false);

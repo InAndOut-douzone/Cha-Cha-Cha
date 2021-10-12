@@ -45,7 +45,6 @@ const HIM = () => {
     };
 
     // const normFile = (e) => {
-    //     console.log('Upload event:', e);
 
     //     if (Array.isArray(e)) {
     //         return e;
@@ -101,7 +100,6 @@ const HIM = () => {
         formData.append('hospitalData', JSON.stringify(hospitalData));
         
         axios.post("http://localhost:8080/api/hospital2", formData, header).then((res) => {
-            // console.log("수정완료");    
             alert("수정 되었습니다.");
         });
     }

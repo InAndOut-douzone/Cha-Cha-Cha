@@ -7,7 +7,6 @@ const FormItem = (props) => {
     const onChange = props.onChange;
 
     const weekUpdate = (moment) => {
-        console.log("weekUpdate" + week);
         onChange(moment, week)
     }
 

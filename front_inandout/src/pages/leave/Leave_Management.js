@@ -51,6 +51,11 @@ const columns = [
       dataIndex: 'aleave',
       key: 'aleave',
   },
+  {
+    title: '남은 월차',
+    dataIndex: 'mleave',
+    key: 'mleave',
+  },
   // {
   //     title: 'Details',
   //     dataIndex: 'username',

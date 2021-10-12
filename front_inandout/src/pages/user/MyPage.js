@@ -29,7 +29,6 @@ const MyPage = () => {
         const imageFile = e.target.files[0];
         const imageUrl = URL.createObjectURL(imageFile);
 
-        console.log(imageUrl);
         setimage(imageFile); // formdata에 선택된 이미지 파일을 넣기 위해 저장
         setProfile(imageUrl);// 프로필 미리보기를 출력하기 위해 이미지 url 저장
     };

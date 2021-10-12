@@ -76,9 +76,6 @@ const FullCal2 = () => {
     setVisible2(true);
   };
   const 드래그 = async (eventClick) => {
-    console.log(eventClick.event)
-    console.log(eventClick.event.id)
-    console.log(eventClick.event.start)
     let data3 = {
       id: eventClick.event.id, // 수정할 이벤트 번호
       category: eventClick.event.extendedProps.category,

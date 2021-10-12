@@ -70,7 +70,7 @@ const _Header = () => {
     const [user, setUser] = useState({});
 
     const showDrawer = () => { // 알림창 열기
-        alarm_fatch()
+        alarm_fetch()
         setVisible(true);
         setCount(0);
     };
@@ -113,14 +113,14 @@ const _Header = () => {
     const alarmDelete = async (no) => { // 알림 삭제
         await axios.delete("http://localhost:8080/api/alarm/" + no, header).then((res) => {
             alert("알림이 삭제되었습니다.");
-            alarm_fatch()
+            alarm_fetch()
         });
     }
 
     const alarmAllDelete = async () => { // 알림 모두 삭제
         await axios.delete("http://localhost:8080/api/alarm", header).then((res) => {
             alert("알림이 모두 삭제되었습니다.");
-            alarm_fatch()
+            alarm_fetch()
         });
     }
 
@@ -144,7 +144,7 @@ const _Header = () => {
         }
     };
 
-    const alarm_fatch = async () => { // 알림 데이터 받아오기
+    const alarm_fetch = async () => { // 알림 데이터 받아오기
         await axios.get("http://localhost:8080/api/alarm", header).then((res) => {
             setAlarm(res.data);
         })
@@ -197,7 +197,7 @@ const _Header = () => {
             setUser(res.data);
         })
 
-        alarm_fatch()
+        alarm_fetch()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -264,8 +264,7 @@ const _Header = () => {
                         // onMessage={msg => { setCount(count + 1) }}
                         onMessage={
                             (msg) => {
-                                console.log(msg)
-                                alarm_fatch()
+                                alarm_fetch()
                                 setCount(count + 1)
                                 notification.open({
                                     message: msg.user.name,
@@ -273,7 +272,6 @@ const _Header = () => {
 
                                         '연차신청을 등록하였습니다.',
                                     onClick: () => {
-                                        console.log('알림 클릭함!');
                                     },
                                 })
                             }
@@ -286,8 +284,7 @@ const _Header = () => {
                         // onMessage={msg => { setCount(count + 1) }}
                         onMessage={
                             (msg) => {
-                                console.log(msg)
-                                alarm_fatch()
+                                alarm_fetch()
                                 setCount(count + 1)
                                 msg.state === "success" ?
                                     msg.category === '출장' || msg.category === '외근' ?
@@ -296,7 +293,6 @@ const _Header = () => {
                                             description:
                                                 msg.category + ' 일정이 변경되었습니다.',
                                             onClick: () => {
-                                                console.log('알림 클릭함!');
                                             },
                                         }) :
                                         notification.open({
@@ -304,7 +300,6 @@ const _Header = () => {
                                             description:
                                                 msg.category + '가 승인되었습니다.',
                                             onClick: () => {
-                                                console.log('알림 클릭함!');
                                             },
                                         }) :
                                     notification.open({
@@ -313,7 +308,6 @@ const _Header = () => {
                                             msg.category + ' 신청이 반려되었습니다.',
                                         onClick: () => {
                                             window.location.replace("/leavemanagement")
-                                            console.log('알림 클릭함!');
                                         },
                                     })
                             }
@@ -325,7 +319,7 @@ const _Header = () => {
                         topics={[`/topics/template3${userNo}`]}
                         onMessage={
                             (msg) => {
-                                alarm_fatch()
+                                alarm_fetch()
                                 setCount(count + 1)
                                 msg.category === '출장' || msg.category === '외근' ?
                                     notification.open({
@@ -333,7 +327,6 @@ const _Header = () => {
                                         description:
                                             msg.category + ' 일정이 삭제되었습니다.',
                                         onClick: () => {
-                                            console.log('알림 클릭함!');
                                         },
                                     }) :
                                     notification.open({
@@ -341,7 +334,6 @@ const _Header = () => {
                                         description:
                                             msg.category + '가 삭제되었습니다.',
                                         onClick: () => {
-                                            console.log('알림 클릭함!');
                                         },
                                     })
                             }

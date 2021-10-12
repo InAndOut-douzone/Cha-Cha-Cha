@@ -7,9 +7,6 @@ const DoctorItem = (props) => {
 
     const { address } = props.doctor;
 
-    console.log("닥터아이템입니ㅏ다");
-    console.log(props);
-
     return (
         <Option value={address}>12</Option>
     );
