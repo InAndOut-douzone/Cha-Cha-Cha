@@ -361,7 +361,7 @@ const _Header = () => {
                                                 <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                             </div>} key={al.no}>
                                         {user.position === '간호사' ?
-                                            <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                            <p>{al.message + " 일정이 변경 되었습니다."}</p> :
                                             <p>{al.message + "신청을 등록 하였습니다."}</p>
                                         }
 
@@ -375,7 +375,7 @@ const _Header = () => {
                                                     <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                                 </div>} key={al.no}>
                                             {user.position === '간호사' ?
-                                                <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                                <p>{al.message + " 일정이 변경 되었습니다."}</p> :
                                                 <p>{al.message + "신청을 등록 하였습니다."}</p>
                                             }
                                         </Card>
@@ -392,7 +392,7 @@ const _Header = () => {
                                                     <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                                 </div>} key={al.no}>
                                             {user.position === '간호사' ?
-                                                <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                                <p>{al.message + " 일정이 변경 되었습니다."}</p> :
                                                 <p>{al.message + " 일정이 변경 되었습니다."}</p>
                                             }
 
@@ -408,7 +408,7 @@ const _Header = () => {
                                                         <button onClick={() => alarmDelete(al.no)} style={{ color: "#4EAFFF", background: "white", border: "0px" }}>삭제</button>
                                                     </div>} key={al.no}>
                                                 {user.position === '간호사' ?
-                                                    <p>{al.message + "신청이 승인 되었습니다."}</p> :
+                                                    <p>{al.message + " 일정이 변경 되었습니다."}</p> :
                                                     <p>{al.message + " 일정이 변경 되었습니다."}</p>
                                                 }
                                             </Card>
